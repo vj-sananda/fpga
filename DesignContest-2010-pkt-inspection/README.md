@@ -1,4 +1,4 @@
-### Packet inspection verilog code under: pcores/kraaken_dpi_v3_00_a/hdl/verilog
+### Packet Inspection Accelerator, verilog code under: pcores/kraaken_dpi_v3_00_a/hdl/verilog
 
 ![1](images/2010_Deep_Packet_Inspection-01.png)
 ![1](images/2010_Deep_Packet_Inspection-02.png)
