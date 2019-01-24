@@ -32,7 +32,7 @@
    valid_dout => active high, signals valid data on output bus
  
  Author: VJ Sananda
- Copyright. ZettaChipWorks Inc. All Rights Reserved
+
 ---------------------------------------------------------- */
 
 module gdp (/*AUTOARG*/

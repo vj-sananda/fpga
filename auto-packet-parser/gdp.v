@@ -20,7 +20,6 @@
  outputs:
   
  Author: VJ Sananda
- Copyright. ZettaChipWorks Inc. All Rights Reserved
 ---------------------------------------------------------- */
 
 `include "gdp.vh"
