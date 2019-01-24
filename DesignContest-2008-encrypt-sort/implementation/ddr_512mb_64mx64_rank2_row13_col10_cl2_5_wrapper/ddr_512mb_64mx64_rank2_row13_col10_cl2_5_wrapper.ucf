@@ -1,3 +1,0 @@
-NET "PLB_Clk" TNM_NET = "PLB_Clk_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5";
-NET "Clk90_in" TNM_NET = "Clk90_in_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5";
-TIMESPEC "TSCLK2CLK90_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5" = FROM "PLB_Clk_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5" TO "Clk90_in_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5" 2.5 ns;
