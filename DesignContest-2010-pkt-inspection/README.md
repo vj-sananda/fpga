@@ -1,5 +1,11 @@
 ### Packet Inspection Accelerator, verilog code under: pcores/kraaken_dpi_v3_00_a/hdl/verilog
 
+http://asim.csail.mit.edu/redmine/projects/memocode2010/wiki/Results
+
+Invited each year after winning prize (for “elegant design”) in 2008
+
+http://memocode.irisa.fr/2008/designcontest08/everybodywins/index.html
+
 ![1](images/2010_Deep_Packet_Inspection-01.png)
 ![1](images/2010_Deep_Packet_Inspection-02.png)
 ![1](images/2010_Deep_Packet_Inspection-03.png)
