@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>The LWP Class Model (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch03_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:40:43 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch03_01' class='lwp lwp_ch03_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 3. The LWP Class Model</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-3-SECT-1">The Basic Classes</a><br />
+<a href="ch03_02.htm">Programming with LWP Classes</a><br />
+<a href="ch03_03.htm">Inside the do_GET and do_POST Functions</a><br />
+<a href="ch03_04.htm">User Agents</a><br />
+<a href="ch03_05.htm">HTTP::Response Objects</a><br />
+<a href="ch03_06.htm">LWP Classes: Behind the Scenes</a><br /></p></div><p>For full access to every part of an HTTP transaction&#x2014;request
+headers and body, response status line, headers and body&#x2014;you
+have to go beyond LWP::Simple, to the object-oriented modules that
+form the heart of the LWP suite. This chapter introduces the classes
+that LWP uses to represent browser objects (which you use for making
+requests) and response objects (which are the result of making a
+request). You'll learn the basic mechanics of
+customizing requests and inspecting responses, which
+we'll use in later chapters for cookies, language
+selection, spidering, and more.
+</p><div class="sect1"><a name="perllwp-CHP-3-SECT-1"></a>
+<h2 class="sect1">3.1. The Basic Classes</h2>
+
+<p>In LWP's object model, <a name="INDEX-99" class="ipoint"
+></a><a name="INDEX-100" class="ipoint"
+></a>you perform GET, HEAD, and POST requests
+via a browser object (a.k.a. a user agent object) of
+<a name="INDEX-101" class="ipoint"
+></a><a name="INDEX-102" class="ipoint"
+></a>class
+LWP::UserAgent, and the result is an HTTP response of the aptly
+<a name="INDEX-103" class="ipoint"
+></a><a name="INDEX-104" class="ipoint"
+></a>named
+class HTTP::Response. These are the two main classes, with other
+incidental classes providing features such as cookie management and
+user agents that act as spiders. Still more classes deal with
+non-HTTP aspects of the Web, such as HTML. In this chapter,
+we'll deal with the classes needed to perform web
+requests.
+</p>
+
+<p>The classes can be loaded individually:</p>
+
+<pre class="code">use LWP::UserAgent;
+use HTTP::Response;</pre>
+
+<p>But it's easiest to simply use the LWP convenience
+class, which loads LWP::UserAgent and HTTP::Response for you:
+</p>
+
+<pre class="code">use LWP;               # same as previous two lines</pre>
+
+<p>If you're familiar with object-oriented programming
+in Perl, the LWP classes will hold few real surprises for you. All
+you need is to learn the names of the basic classes and accessors. If
+you're not familiar with object-oriented programming
+in any language, you have some catching up to do. <a href="appg_01.htm">Appendix G, "User's View of Object-Oriented Modules"</a> will give you a bit of conceptual background
+on the object-oriented approach to things. To learn more (including
+information on how to write your own classes), check out
+<em class="emphasis"><a href="http://www.oreilly.com/catalog/pperl3/">Programming Perl</a></em> (O'Reilly).
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

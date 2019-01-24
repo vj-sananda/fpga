@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>HTTP::Response Objects (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch03_05"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:47:22 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch03_05' class='lwp lwp_ch03_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">3.5. HTTP::Response Objects</h2>
+
+<p>You have to manually create <a name="INDEX-162" class="ipoint"
+></a><a name="INDEX-163" class="ipoint"
+></a>most
+objects your programs work with by calling an explicit constructor,
+with the syntax
+<em class="replaceable"><tt>ClassName</tt></em><tt class="literal">-&gt;new(&#160;)</tt>.
+HTTP::Response objects are a notable exception. You never need to
+call <tt class="literal">HTTP::Response-&gt;new(&#160;)</tt> to make them;
+instead, you just get them back as the result of a request made with
+one of the request methods (<tt class="literal">get(&#160;)</tt>, <tt class="literal">post(
+)</tt>, and <tt class="literal">head(&#160;)</tt>).
+</p>
+
+<p>That is, when writing web clients, you never need to create a
+response yourself. Instead, a user agent creates it for you, to
+encapsulate the results of a request it made. You do, however,
+interrogate a response object's attributes. For
+example, the <tt class="literal">code(&#160;)</tt> method returns the HTTP
+status code:
+</p>
+
+<pre class="code">print "HTTP status: ", $response-&gt;code( ), "\n";
+<b class="emphasis-bold">HTTP status: 404</b></pre>
+
+<p>HTTP::Response objects also have convenience methods. For example,
+<tt class="literal">is_success(&#160;)</tt> returns a true value if the response
+had a successful HTTP status code, or false if it
+didn't (e.g., 404, 403, 500, etc.). Always check
+your responses, like so:
+</p>
+
+<pre class="code">die "Couldn't get the document"
+  unless $response-&gt;is_success( );</pre>
+
+<p>You might prefer something a bit more verbose, like this:</p>
+
+<pre class="code"># Given $response and $url ...
+die "Error getting $url\n", $response-&gt;status_line
+  unless $response-&gt;is_success( );</pre>
+
+<a name="perllwp-CHP-3-SECT-5.1"></a><div class="sect2">
+<h3 class="sect2">3.5.1. Status Line</h3>
+
+<p>The <tt class="literal">status_line(&#160;)</tt> method returns
+<a name="INDEX-164" class="ipoint"
+></a><a name="INDEX-165" class="ipoint"
+></a>the entire HTTP status line:
+</p>
+
+<pre class="code">$sl = $response-&gt;status_line( );</pre>
+
+<p>This includes both the numeric code and the explanation. For example:</p>
+
+<pre class="code">$response = $browser-&gt;get("http://www.cpan.org/nonesuch");
+print $response-&gt;status_line( );
+<b class="emphasis-bold">404 Not Found</b></pre>
+
+<p>To get only the status code, use the <tt class="literal">code(&#160;)</tt>
+method:
+</p>
+
+<pre class="code">$code = $response-&gt;code( );</pre>
+
+<p>To access only the explanatory message, use the <tt class="literal">message(
+)</tt> method:
+</p>
+
+<pre class="code">$msg = $response-&gt;message( );</pre>
+
+<p>For example:</p>
+
+<pre class="code">$response = $browser-&gt;get("http://www.cpan.org/nonesuch");
+print $response-&gt;code(), " (that means ", $response-&gt;message( ), " )\n";
+<b class="emphasis-bold">404 (that means Not Found)</b></pre>
+
+<p>Four methods test for types of status codes in the response:
+<tt class="literal">is_error(&#160;)</tt>, <tt class="literal">is_success(&#160;)</tt>,
+<tt class="literal">is_redirect(&#160;)</tt>, and <tt class="literal">is_info(&#160;)</tt>.
+They return true if the status code corresponds to an error, a
+successful fetch, a redirection, or informational (e.g.,
+"102 Processing").
+</p>
+
+<pre class="code">$boolean = $response-&gt;is_error( );
+$boolean = $response-&gt;is_success( );
+$boolean = $response-&gt;is_redirect( );
+$boolean = $response-&gt;is_info( );</pre>
+
+<p>Exactly what codes count as what sort of status, is explained in
+greater detail in <a href="appb_01.htm">Appendix B, "HTTP Status Codes"</a>.
+</p>
+
+</div>
+<a name="perllwp-CHP-3-SECT-5.2"></a><div class="sect2">
+<h3 class="sect2">3.5.2. Content</h3>
+
+<p>Most responses contain content <a name="INDEX-166" class="ipoint"
+></a><a name="INDEX-167" class="ipoint"
+></a><a name="INDEX-168" class="ipoint"
+></a>after their headers. This content is
+accessible with the <tt class="literal">content(&#160;)</tt> method:
+</p>
+
+<pre class="code">$the_file_data = $response-&gt;content( );</pre>
+
+<p>In some cases, it's easier (and more efficient) to
+get a scalar reference to the content, instead of the value of the
+content itself. For that, use the <tt class="literal">content_ref(&#160;)</tt>
+method:
+</p>
+
+<pre class="code">$data_ref = $response-&gt;content_ref( );</pre>
+
+<p>For example in <a href="ch07_01.htm">Chapter 7, "HTML Processing with Tokens"</a>, we use a class called
+HTML::TokeParser that parses HTML starting with a reference to a big
+block of HTML source. We could use that module to parse the HTML in
+an HTTP::Response object by using <tt class="literal">do{</tt>
+<tt class="literal">my</tt> <tt class="literal">$x</tt> <tt class="literal">=</tt>
+<tt class="literal">$response-&gt;content( );</tt> <tt class="literal">\$x}</tt>,
+but we could avoid the unnecessary copying by just using
+<tt class="literal">$response-&gt;content_ref(&#160;)</tt>.
+</p>
+
+</div>
+<a name="perllwp-CHP-3-SECT-5.3"></a><div class="sect2">
+<h3 class="sect2">3.5.3. Headers</h3>
+
+<p>To fetch the value of <a name="INDEX-169" class="ipoint"
+></a><a name="INDEX-170" class="ipoint"
+></a><a name="INDEX-171" class="ipoint"
+></a>an HTTP header in the response, use the
+<tt class="literal">header(&#160;)</tt> method:
+</p>
+
+<pre class="code">$value = $response-&gt;header(<em class="replaceable"><tt>header_name</tt></em>);</pre>
+
+<p>For example, if you know there will be useful data in a header called
+<tt class="literal">Description</tt>, access it as
+<tt class="literal">$response-&gt;header('Description')</tt>. The
+<tt class="literal">header(&#160;)</tt> method returns <tt class="literal">undef</tt>
+if there is no such header in this response.
+</p>
+
+<p>HTTP::Response provides some methods for accessing the most commonly
+used header fields:
+</p>
+
+<pre class="code">$type = $response-&gt;content_type( );</pre>
+
+<p>The <tt class="literal">Content-Type</tt> header contains the MIME type of
+the body. This is "text/html" for
+HTML files, "image/jpeg" for JPEG
+files, and so on. <a href="appc_01.htm">Appendix C, "Common MIME Types"</a> contains a list of
+common MIME types.
+</p>
+
+<pre class="code">$length = $response-&gt;content_length( );</pre>
+
+<p>The <tt class="literal">Content-Length</tt> header contains the size of the
+body (in bytes) sent from the browser but is not always present. If
+you need the real length of the response, use
+<tt class="literal">length($response-&gt;content)</tt>.
+</p>
+
+<pre class="code">$lm = $response-&gt;last_modified( );</pre>
+
+<p>The <tt class="literal">Last-Modified</tt> header contains a timestamp
+indicating when the content was last modified, but it is sometimes
+not present.
+</p>
+
+<pre class="code">$encoding = response-&gt;content_encoding( );</pre>
+
+<p>The <tt class="literal">Content-Encoding</tt> header contains the name of
+the character set this document is declared as using. The most common
+value is <tt class="literal">iso-8859-1</tt> meaning Latin-1. An
+increasingly common runner-up is <tt class="literal">utf-8</tt>, meaning
+Unicode expressed in the UTF-8 encoding. Less-common encodings are
+listed in <a href="appe_01.htm">Appendix E, "Common Content Encodings"</a>. But be warned: this header is
+occasionally inaccurate, in cases where content is clearly in one
+encoding, but the document fails to declare it as such. For example,
+a document might be in Chinese in the <tt class="literal">big5</tt>
+encoding but might erroneously report itself as being in
+<tt class="literal">iso-8859-1</tt>.
+</p>
+
+<p>This brings us to a regrettably even less-used header:</p>
+
+<pre class="code">$language = $response-&gt;content_language( );</pre>
+
+<p>Rarely present, the <tt class="literal">Content-Language</tt> header
+contains the language tag(s) for the document's
+content. <a href="appd_01.htm">Appendix D, "Language Tags"</a> lists common language tags.
+</p>
+
+<p>If you want to get all the headers as one string, call
+<tt class="literal">$response-&gt;headers_as_string</tt>. This is useful
+for debugging, as in:
+</p>
+
+<pre class="code">print "Weird response!!\n",
+  $response-&gt;headers_as_string, "\n\n"
+unless $response-&gt;content_type( );</pre>
+
+</div>
+<a name="perllwp-CHP-3-SECT-5.4"></a><div class="sect2">
+<h3 class="sect2">3.5.4. Expiration Times</h3>
+
+<p>Most servers send <a name="INDEX-172" class="ipoint"
+></a>a
+<tt class="literal">Date</tt> header as well as an
+<tt class="literal">Expires</tt> or <tt class="literal">Last-Modified</tt> header
+with their responses. Four methods on HTTP::Response objects use
+these headers to calculate the age of the document and various
+caching statistics.
+</p>
+
+<p>The <tt class="literal">current_age(&#160;)</tt> method
+<a name="INDEX-173" class="ipoint"
+></a><a name="INDEX-174" class="ipoint"
+></a>returns the number of seconds since the
+server sent the document:
+</p>
+
+<pre class="code">$age = $response-&gt;current_age( );</pre>
+
+<p>For example:</p>
+
+<pre class="code">$age = $response-&gt;current_age( );
+$days  = int($age/86400);       $age -= $days * 86400;
+$hours = int($age/3600);        $age -= $hours * 3600;
+$mins  = int($age/60);          $age -= $mins    * 60;
+$secs  = $age;
+print "The document is $days days, $hours hours, $mins minutes, and $secs
+seconds old.\n";
+<b class="emphasis-bold">The document is 0 days, 0 hours, 5 minutes, and 33</b>
+<b class="emphasis-bold">seconds old</b>.</pre>
+
+<p>The <tt class="literal">freshness_lifetime(&#160;)</tt> method returns
+<a name="INDEX-175" class="ipoint"
+></a><a name="INDEX-176" class="ipoint"
+></a>the number of seconds until the document
+expires:
+</p>
+
+<pre class="code">$lifetime = $response-&gt;freshness_lifetime( );</pre>
+
+<p>For example:</p>
+
+<pre class="code">$time = $response-&gt;freshness_lifetime( );
+$days  = int($time/86400);       $time -= $days * 86400;
+$hours = int($time/3600);        $time -= $hours * 3600;
+$mins  = int($time/60);          $time -= $mins * 60;
+$secs  = int($time);
+print "The document expires in $days days, $hours hours, $mins minutes, and
+$secs seconds.\n";
+<b class="emphasis-bold">The document expires in 0 days, 23 hours, 6 minutes, and 15 seconds</b>.</pre>
+
+<p>The <tt class="literal">is_fresh(&#160;)</tt> method returns true if the
+document has not expired yet:
+</p>
+
+<pre class="code">$boolean = $response-&gt;is_fresh( );</pre>
+
+<p>If the document is not fresh, your program should reissue the request
+to the server. This is an issue only if your program runs for a long
+time and you keep responses for later interrogation.
+</p>
+
+<p>The <tt class="literal">fresh_until(&#160;)</tt> entry returns the time when the
+document expires:
+</p>
+
+<pre class="code">$expires = $response-&gt;fresh_until( );</pre>
+
+<p>For example:</p>
+
+<pre class="code">$expires = $response-&gt;fresh_until( );
+print "This document is good until ", scalar(localtime($expires)), "\n";
+<b class="emphasis-bold">This document is good until Tue Feb 26 07:36:08 2004</b></pre>
+
+</div>
+<a name="perllwp-CHP-3-SECT-5.5"></a><div class="sect2">
+<h3 class="sect2">3.5.5. Base for Relative URLs</h3>
+
+<p>An HTML document can
+<a name="INDEX-177" class="ipoint"
+></a><a name="INDEX-178" class="ipoint"
+></a>have
+relative URLs in it. For example:
+</p>
+
+<pre class="code">&lt;img src="my_face.gif"&gt;</pre>
+
+<p>This generally refers to the <em class="emphasis">my_face.gif</em>
+that's located in the same directory as the HTML
+page. Turning these relative URLs into absolute URLs that can be
+requested via LWP is covered in the next chapter. To do that, you
+must know the URL of the current page.
+</p>
+
+<p>The <tt class="literal">base(&#160;)</tt> method returns the URL of the document
+in the response.
+</p>
+
+<pre class="code">$url = $response-&gt;base( );</pre>
+
+<p>This base URL is normally the URL you requested but can sometimes
+differ: if there was a redirection (which LWP normally follows
+through on), the URL of the final response isn't the
+same as the requested URL. Moreover, the <tt class="literal">Base</tt>,
+<tt class="literal">Content-Base</tt>, and
+<tt class="literal">Content-Location</tt> headers in a response specify the
+address against which you resolve relative URLs. And finally, if the
+response content is an HTML document and has a <tt class="literal">&lt;base
+href="..."&gt;</tt> tag in its head, that definitively sets the
+base URL.
+</p>
+
+</div>
+<a name="perllwp-CHP-3-SECT-5.6"></a><div class="sect2">
+<h3 class="sect2">3.5.6. Debugging</h3>
+
+<p>When an
+<a name="INDEX-179" class="ipoint"
+></a><a name="INDEX-180" class="ipoint"
+></a>error
+occurs (as indicated by the <tt class="literal">is_error(&#160;)</tt> method),
+<tt class="literal">error_as_HTML(&#160;)</tt> returns an error page in HTML:
+</p>
+
+<pre class="code">$error_page = $response-&gt;error_as_HTML( );
+print "The server said:\n&lt;blockquote&gt;$error_page&lt;/blockquote&gt;\n";</pre>
+
+<p>Because a user agent can follow redirections and automatically answer
+authentication challenges, the request you gave to the user agent
+object might not be the request represented by your object. That is,
+you could have said to get one URL, but that could have directed to
+another, which could have redirected to another, producing not one
+response but a chain of responses. For the sake of simplicity, you
+get back only the one <tt class="literal">$response</tt> object, which is
+the last in the chain. But if you need to, you can work your way
+back, using the <tt class="literal">previous(&#160;)</tt> method:
+</p>
+
+<pre class="code">$previous_response = $response-&gt;previous( );</pre>
+
+<p>The <tt class="literal">previous(&#160;)</tt> method returns
+<tt class="literal">undef</tt> when there is no previous method (i.e., on
+the response to the request you gave the user agent, at the head of
+the chain). Moreover, each response stores the HTTP::Request object
+that LWP used for making the request, and you can access it with the
+<tt class="literal">$response-&gt;request(&#160;)</tt>. HTTP::Request objects
+support most of the same methods as HTTP::Response objects, notably
+<tt class="literal">$request-&gt;as_string</tt>, which is useful in
+debugging.
+</p>
+
+<p>From each response, you can get the corresponding request and
+recreate the HTTP dialog. For example:
+</p>
+
+<pre class="code">$last = $response;
+while ($response) {
+  print $response-&gt;code( ), " after ";
+    # Or you could print even dump the whole
+    #   thing, with $response-&gt;as_string( )
+ 
+  $last = $response;
+  $response = $response-&gt;previous( );
+}
+print "the original request, which was:\n",
+  $last-&gt;request-&gt;as_string;
+ 
+<b class="emphasis-bold">200 after 401 after 301 after the original request, which was</b>:
+<b class="emphasis-bold">GET http://some.crazy.redirector.int/thing.html</b>
+<b class="emphasis-bold">User-Agent: libwww-perl/5.5394</b></pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

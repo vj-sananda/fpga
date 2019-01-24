@@ -1,0 +1,3 @@
+set ADucfFile {llist_fifo.ucf}
+set ADbmmFile {}
+set ADcdcFile {}

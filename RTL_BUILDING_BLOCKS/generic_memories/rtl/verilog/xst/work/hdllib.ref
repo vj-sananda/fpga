@@ -1,0 +1,2 @@
+MO xilinx_ram_dp NULL ./generic_dpram.v vlg02/xilinx__ram__dp.bin 1211569096
+MO generic_dpram NULL ./generic_dpram.v vlg34/generic__dpram.bin 1211569096

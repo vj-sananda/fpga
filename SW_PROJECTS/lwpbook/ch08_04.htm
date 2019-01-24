@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>First Code (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_04' class='lwp lwp_ch08_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">8.4. First Code</h2>
+
+<p>Because we want links, let's get links, like this:</p>
+
+<pre class="code">use strict;
+use HTML::TokeParser;
+parse_fresh_stream(
+  HTML::TokeParser-&gt;new('fresh1.html') || die $!
+);
+
+sub parse_fresh_stream {
+  my($stream) = @_;
+  while(my $a_tag = $stream-&gt;get_tag('a')) {
+    my $text = $stream-&gt;get_trimmed_text('/a');
+    printf "%s\n  %s\n", $text, $a_tag-&gt;[1]{'href'} || '??';
+  }
+  return;
+}</pre>
+
+<p>But this outputs:</p>
+
+<pre class="code">Fresh Air Online
+  index.cfm
+Listen to Current Show
+  http://www.npr.org/ramfiles/fa/20011011.fa.ram
+[...]
+NPR Online
+  http://www.npr.org
+FreshAir@whyy.org
+  mailto:freshair@whyy.org
+Listen to Monday - July 2, 2001
+  http://www.npr.org/ramfiles/fa/20010702.fa.ram
+Listen to Editor and writer Walter Kirn
+  http://www.npr.org/ramfiles/fa/20010702.fa.01.ram
+Walter Kirn
+  http://freshair.npr.org/guestInfoFA.cfm?name=walterkirn
+Listen to Casting director and actress Joanna Merlin
+  http://www.npr.org/ramfiles/fa/20010702.fa.02.ram
+Joanna Merlin
+  http://freshair.npr.org/guestInfoFA.cfm?name=joannamerlin
+Previous show
+  dayFA.cfm?todayDate=06%2F29%2F2001
+Next show
+  dayFA.cfm?todayDate=07%2F03%2F2001</pre>
+
+<p>We got what we wanted (those three "Listen
+to" links are in there), but it's
+buried in other stuff. You see, the navigation bar on the left does
+consist of image links, whose <tt class="literal">ALT</tt> content shows up
+when we call <tt class="literal">get_trimmed_text(&#160;)</tt> or
+<tt class="literal">get_text(&#160;)</tt>. We also get the
+<tt class="literal">mailto:</tt> link from the bottom of the navigation
+bar, the bio links for the guests from the paragraphs describing each
+segment, and the "Previous Show"
+and "Next Show" links.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

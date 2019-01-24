@@ -1,0 +1,314 @@
+Release 7.1.01i - xst H.42
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "system_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/system.ngc"
+
+---- Source Options
+Top Module Name                    : system
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+RTL Output                         : YES
+Hierarchy Separator                : /
+
+=========================================================================
+
+WARNING:Xst:29 - Optimization Effort not specified
+The following parameters have been added:
+Optimization Effort                : 1
+
+=========================================================================
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" in Library work.
+Entity <system> compiled.
+Entity <system> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <system> (Architecture <STRUCTURE>).
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2012: Generating a Black Box for component <IBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2018: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2024: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2030: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2036: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2042: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2048: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2054: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2060: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2066: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2072: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2078: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2084: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2090: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2096: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2102: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2108: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2114: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2120: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2126: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2132: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2138: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2144: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2150: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2156: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2162: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2168: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2174: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2180: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2186: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2192: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2198: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2204: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2210: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2216: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2224: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2232: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2240: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2248: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2256: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2264: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2272: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2280: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2288: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2296: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2304: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2312: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2320: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2328: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2336: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2344: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2352: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2360: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2368: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2376: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2384: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2392: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2400: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2408: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2416: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2424: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2432: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2440: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2448: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2456: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2464: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2472: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2480: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2488: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2496: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2504: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2512: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2520: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2528: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2536: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2544: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2552: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2560: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2568: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2576: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2584: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2592: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2600: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2608: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2616: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2624: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2632: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2640: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2648: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2656: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2664: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2672: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2680: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2688: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2696: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2704: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2712: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2720: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2728: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2736: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2744: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2752: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2760: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2768: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2776: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2784: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2792: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2798: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2804: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2810: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2816: Generating a Black Box for component <IBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2822: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2828: Generating a Black Box for component <IBUFG>.
+WARNING:Xst:766 - "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd" line 2834: Generating a Black Box for component <IBUF>.
+Entity <system> analyzed. Unit <system> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <system>.
+    Related source file is "f:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/system.vhd".
+WARNING:Xst:646 - Signal <pgassign2<3>> is assigned but never used.
+WARNING:Xst:646 - Signal <pgassign3<0>> is assigned but never used.
+Unit <system> synthesized.
+
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:/Xilinx.
+
+Optimizing unit <system> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : ../implementation/system.ngr
+Top Level Output File Name         : ../implementation/system.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 114
+
+Cell Usage :
+# BELS                             : 2
+#      GND                         : 1
+#      VCC                         : 1
+# IO Buffers                       : 114
+#      IBUF                        : 3
+#      IBUFG                       : 1
+#      IOBUF                       : 72
+#      OBUF                        : 38
+# Others                           : 18
+#      accel_sort_plb_0_wrapper    : 1
+#      clk90_inv_wrapper           : 1
+#      dcm_0_wrapper               : 1
+#      dcm_1_wrapper               : 1
+#      ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper: 1
+#      ddr_clk90_inv_wrapper       : 1
+#      iocm_cntlr_wrapper          : 1
+#      iocm_wrapper                : 1
+#      isocm_bram_wrapper          : 1
+#      jtagppc_0_wrapper           : 1
+#      opb_wrapper                 : 1
+#      plb2opb_wrapper             : 1
+#      plb_wrapper                 : 1
+#      ppc405_0_wrapper            : 1
+#      ppc405_1_wrapper            : 1
+#      reset_block_wrapper         : 1
+#      rs232_uart_1_wrapper        : 1
+#      sysclk_inv_wrapper          : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of bonded IOBs:                114  out of    556    20%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+No clock signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: No path found
+   Maximum combinational path delay: 2.924ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 2243 / 2171
+-------------------------------------------------------------------------
+Delay:               2.924ns (Levels of Logic = 1)
+  Source:            ddr_512mb_64mx64_rank2_row13_col10_cl2_5:DDR_DQS_O<1> (PAD)
+  Destination:       fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS_pin<1> (PAD)
+
+  Data Path: ddr_512mb_64mx64_rank2_row13_col10_cl2_5:DDR_DQS_O<1> to fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS_pin<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper:DDR_DQS_O<1>    1   0.000   0.332  ddr_512mb_64mx64_rank2_row13_col10_cl2_5 (fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS_O<1>)
+     IOBUF:I->IO               2.592          iobuf_35 (fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS_pin<1>)
+    ----------------------------------------
+    Total                      2.924ns (2.592ns logic, 0.332ns route)
+                                       (88.7% logic, 11.3% route)
+
+=========================================================================
+CPU : 18.73 / 18.90 s | Elapsed : 18.00 / 18.00 s
+ 
+--> 
+
+Total memory usage is 161464 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  118 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

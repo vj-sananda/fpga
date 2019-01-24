@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>LWP and GET Requests (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_02"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 23:13:34 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_02' class='lwp lwp_ch05_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">5.2. LWP and GET Requests</h2>
+
+<p>The way you submit <a name="INDEX-278" class="ipoint"
+></a><a name="INDEX-279" class="ipoint"
+></a>form data with LWP depends on whether
+the form's action is GET or POST. If
+it's a GET form, you construct a URL with encoded
+form data (possibly using the <tt class="literal">$url-&gt;query_form(
+)</tt> method) <a name="INDEX-280" class="ipoint"
+></a><a name="INDEX-281" class="ipoint"
+></a>and call <tt class="literal">$browser-&gt;get(
+)</tt>. If it's a POST form, you call
+<tt class="literal">$browser-&gt;post(&#160;)</tt> and <a name="INDEX-282" class="ipoint"
+></a><a name="INDEX-283" class="ipoint"
+></a>pass a reference to an array of form
+parameters. We cover POST later in this chapter.
+</p>
+
+<a name="perllwp-CHP-5-SECT-2.1"></a><div class="sect2">
+<h3 class="sect2">5.2.1. GETting Fixed URLs</h3>
+
+<p>If you know everything about <a name="INDEX-284" class="ipoint"
+></a><a name="INDEX-285" class="ipoint"
+></a><a name="INDEX-286" class="ipoint"
+></a>the GET form ahead of time, and you know
+everything about what you'd be typing (as if
+you're always searching on the name
+"Dulce"), you know the URL! Because
+the same data from the same GET form always makes for the same URL,
+you can just hardcode that:
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(
+  'http://www.census.gov/cgi-bin/gazetteer?city=Dulce&amp;state=&amp;zip='
+);</pre>
+
+<p>And if there is a great big URL in which only one thing ever changes,
+you could just drop in the value, after URL-encoding it:
+</p>
+
+<pre class="code">use URI::Escape ('uri_escape');
+$resp = $browser-&gt;get(
+  'http://www.census.gov/cgi-bin/gazetteer?city=' . 
+  uri_escape($city) .
+  '&amp;state=&amp;zip='
+);</pre>
+
+<p>Note that you should not simply interpolate a raw unencoded value,
+like this:
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(
+  'http://www.census.gov/cgi-bin/gazetteer?city=' . 
+  $city .     <tt class="userinput"><b># wrong!</b></tt>
+  '&amp;state=&amp;zip='
+);</pre>
+
+<p>The problem with doing it that way is that you have no real assurance
+that <tt class="literal">$city</tt>'s value
+doesn't need URL encoding. You may
+"know" that no unencoded town name
+ever needs escaping, but it's better to escape it
+anyway.
+</p>
+
+<p>If you're piecing together the parts of URLs and you
+<a name="INDEX-287" class="ipoint"
+></a><a name="INDEX-288" class="ipoint"
+></a>find yourself calling
+<tt class="literal">uri_escape</tt> more than once per URL, then you should
+use the next method, <tt class="literal">query_form</tt>, which is simpler
+for URLs with lots of variable data.
+</p>
+
+<blockquote class='aside'><a name="aside-utf8urlenc"></a>Since this
+book went to press, we have a new wrinkle on URL-encoding.  The old
+system I've described here (encoding character 0-255 using two hex
+digits, %xx) still works, but it provided no answer to the question
+"what if I want to use a character above 255, like &#8364;, or
+&#x398;?".  The solution is now: If the form's page is in UTF8, then
+when we go to encode the form data, encoding for characters 0-127
+works the same; but above that, you don't encode the character number
+as %xx, but instead you UTF8-encode the character, which will produce
+two or more bytes, and then you %xx-encode those bytes.
+
+<br><br>So: <a href= "appf_01.htm" >"Appendix F: ASCII Table"</a>
+tells us that &#8364; UTF8-encodes to the three bytes 0xE2,0x82,0xAC.  So,
+assuming the originating page is UTF8 (as opposed to being in
+the default Latin-1, for example), we encode a &#8364; as "%E2%82%AC".
+Similarly, a &#x398; UTF8-encodes to the two bytes 0xCE,0x98, so it
+URL-encodes as "%CE%98".  And note that, under this system, &#xe9;
+encodes not as "%E9", but instead as "%C3%A9".
+
+<br><br>That's the backstory.  Here's how to handle it in Perl--
+You can UTF8 URL-encode things with:
+
+<pre>use URI::Escape qw( uri_escape_utf8 );
+$esc = uri_escape_utf8( <i>some string value</i> )</pre>
+
+If need to <em>de</em>code data that was encoded this way
+(or that even <em>might</em> have been), you can use this following
+subroutine:
+
+<pre>sub smartdecode {
+  use URI::Escape qw( uri_unescape );
+  use utf8;
+  my $x = my $y = uri_unescape($_[0]);
+  return $x if utf8::decode($x);
+  return $y;
+}</pre>
+
+and then use <code>$decoded = smartdecode( <i>some string
+value</i> )</code>
+
+
+</blockquote>
+
+
+</div>
+<a name="perllwp-CHP-5-SECT-2.2"></a><div class="sect2">
+<h3 class="sect2">5.2.2. GETting a query_form( ) URL</h3>
+
+<p>The tidiest way to <a name="INDEX-289" class="ipoint"
+></a><a name="INDEX-290" class="ipoint"
+></a>submit GET form data is to make a new URI
+object, then add in the form pairs using the
+<tt class="literal">query_form</tt> method, before performing a
+<tt class="literal">$browser-&gt;get($url)</tt> request:
+</p>
+
+<pre class="code">$url-&gt;query_form(<em class="replaceable"><tt>name</em> =&gt; <em class="replaceable">value</em>, <em class="replaceable">name</em> =&gt; <em class="replaceable">value</tt></em>, ...);</pre>
+
+<p>For example:</p>
+
+<pre class="code">use URI;
+my $url = URI-&gt;new( 'http://www.census.gov/cgi-bin/gazetteer' );
+my($city,$state,$zip) = ("<tt class="userinput"><b>Some City</b></tt>","<tt class="userinput"><b>Some State</b></tt>","<tt class="userinput"><b>Some Zip</b></tt>");
+<tt class="userinput"><b>$url-&gt;query_form</b></tt>(
+  # All form pairs:
+  'city'  =&gt; $city,
+  'state' =&gt; $state,
+  'zip'   =&gt; $zip,
+);
+
+print $url, "\n"; # so we can see it</pre>
+
+<p>Prints:</p>
+
+<pre class="code">http://www.census.gov/cgi-bin/gazetteer?city=<tt class="userinput"><b>Some+City</b></tt>&amp;state=<tt class="userinput"><b>Some+State</b></tt>&amp;zip=<tt class="userinput"><b>Some+Zip</b></tt></pre>
+
+<p>From this, it's easy to write a small program (shown
+in <a href="ch05_02.htm#perllwp-CHP-5-EX-1">Example 5-1</a>) to perform a request on this URL and
+use some <a name="INDEX-291" class="ipoint"
+></a><a name="INDEX-292" class="ipoint"
+></a>simple regexps to extract the data
+from the HTML.
+</p>
+
+<a name="perllwp-CHP-5-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 5-1. gazetteer.pl </h4>
+<pre class="code">#!/usr/bin/perl -w
+# gazetteer.pl - query the US Cenus Gazetteer database
+
+use strict;
+use URI;
+use LWP::UserAgent;
+
+die "Usage: $0 \"That Town\"\n" unless @ARGV == 1;
+my $name = $ARGV[0];
+my $url = <tt class="userinput"><b>URI-&gt;new</b></tt>('http://www.census.gov/cgi-bin/gazetteer');
+$url-&gt;<tt class="userinput"><b>query_form</b></tt>( 'city' =&gt; $name, 'state' =&gt; '', 'zip' =&gt; '');
+print $url, "\n";
+
+my $response = LWP::UserAgent-&gt;new-&gt;<tt class="userinput"><b>get</b></tt>( $url );
+die "Error: ", $response-&gt;status_line unless $response-&gt;is_success;
+extract_and_sort($response-&gt;content);
+
+sub extract_and_sort {  # A simple data extractor routine
+  die "No &lt;ul&gt;...&lt;/ul&gt; in content" unless $_[0] =~ m{&lt;ul&gt;(.*?)&lt;/ul&gt;}s;
+  my @pop_and_town;
+  foreach my $entry (split /&lt;li&gt;/, $1) {
+    next unless $entry =~ m{^&lt;strong&gt;(.*?)&lt;/strong&gt;(.*?)&lt;br&gt;}s;
+    my $town = "$1 $2";
+    next unless $entry =~ m{^Population \(.*?\): (\d+)&lt;br&gt;}m;
+    push @pop_and_town, sprintf "%10s %s\n", $1, $town;
+  }
+  print reverse sort @pop_and_town;
+}</pre>
+</div>
+
+<p>Then run it from a prompt:</p>
+
+<pre class="code">% perl gazetteer.pl Dulce
+<tt class="userinput"><b>http://www.census.gov/cgi-bin/gazetteer?city=Dulce&amp;state=&amp;zip=</b></tt>
+<tt class="userinput"><b>      2438 Dulce, NM  (cdp)</b></tt>
+<tt class="userinput"><b>       794 Agua Dulce, TX  (city)</b></tt>
+<tt class="userinput"><b>       136 Guayabo Dulce Barrio, PR  (county subdivision)</b></tt>
+ 
+% perl gazetteer.pl IEG
+<tt class="userinput"><b>http://www.census.gov/cgi-bin/gazetteer?city=IEG&amp;state=&amp;zip=</b></tt>
+<tt class="userinput"><b>   2498016 San Diego County, CA  (county)</b></tt>
+<tt class="userinput"><b>   1886748 San Diego Division, CA  (county subdivision)</b></tt>
+<tt class="userinput"><b>   1110549 San Diego, CA  (city)</b></tt>
+<tt class="userinput"><b>     67229 Boca Ciega Division, FL  (county subdivision)</b></tt>
+<tt class="userinput"><b>      6977 Rancho San Diego, CA  (cdp)</b></tt>
+<tt class="userinput"><b>      6874 San Diego Country Estates, CA  (cdp)</b></tt>
+<tt class="userinput"><b>      5018 San Diego Division, TX  (county subdivision)</b></tt>
+<tt class="userinput"><b>      4983 San Diego, TX  (city)</b></tt>
+<tt class="userinput"><b>      1110 Diego Herna]Ndez Barrio, PR  (county subdivision)</b></tt>
+<tt class="userinput"><b>       912 Riegelsville, PA  (county subdivision)</b></tt>
+<tt class="userinput"><b>       912 Riegelsville, PA  (borough)</b></tt>
+<tt class="userinput"><b>       298 New Riegel, OH  (village</b></tt>)</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,576 @@
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_0 );
+    count[count_ALL_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_1 );
+    count[count_ALL_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_2 );
+    count[count_ALL_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_3 );
+    count[count_ALL_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_4 );
+    count[count_ALL_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_finger_0 );
+    count[count_finger_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_0 );
+    count[count_ftp_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_0 );
+    count[count_http_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_0 );
+    count[count_imap_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_0 );
+    count[count_netbios_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_0 );
+    count[count_nntp_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_0 );
+    count[count_pop3_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_rlogin_0 );
+    count[count_rlogin_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_0 );
+    count[count_smtp_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_0 );
+    count[count_telnet_0]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_finger );
+    count[count_CATEGORY_finger]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_ftp );
+    count[count_CATEGORY_ftp]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_http );
+    count[count_CATEGORY_http]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_imap );
+    count[count_CATEGORY_imap]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_netbios );
+    count[count_CATEGORY_netbios]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_nntp );
+    count[count_CATEGORY_nntp]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_pop3 );
+    count[count_CATEGORY_pop3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_rlogin );
+    count[count_CATEGORY_rlogin]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_smtp );
+    count[count_CATEGORY_smtp]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_telnet );
+    count[count_CATEGORY_telnet]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_5 );
+    count[count_ALL_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_6 );
+    count[count_ALL_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_7 );
+    count[count_ALL_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_8 );
+    count[count_ALL_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_9 );
+    count[count_ALL_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_10 );
+    count[count_ALL_10]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_11 );
+    count[count_ALL_11]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_12 );
+    count[count_ALL_12]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_13 );
+    count[count_ALL_13]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ALL_14 );
+    count[count_ALL_14]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_finger_1 );
+    count[count_finger_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_finger_2 );
+    count[count_finger_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_finger_3 );
+    count[count_finger_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_finger_4 );
+    count[count_finger_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_finger_5 );
+    count[count_finger_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_1 );
+    count[count_ftp_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_2 );
+    count[count_ftp_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_3 );
+    count[count_ftp_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_4 );
+    count[count_ftp_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_5 );
+    count[count_ftp_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_6 );
+    count[count_ftp_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_7 );
+    count[count_ftp_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_8 );
+    count[count_ftp_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_ftp_9 );
+    count[count_ftp_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_1 );
+    count[count_http_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_2 );
+    count[count_http_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_3 );
+    count[count_http_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_4 );
+    count[count_http_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_5 );
+    count[count_http_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_6 );
+    count[count_http_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_7 );
+    count[count_http_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_8 );
+    count[count_http_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_http_9 );
+    count[count_http_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_1 );
+    count[count_imap_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_2 );
+    count[count_imap_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_3 );
+    count[count_imap_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_4 );
+    count[count_imap_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_5 );
+    count[count_imap_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_6 );
+    count[count_imap_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_7 );
+    count[count_imap_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_8 );
+    count[count_imap_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_imap_9 );
+    count[count_imap_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_1 );
+    count[count_netbios_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_2 );
+    count[count_netbios_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_3 );
+    count[count_netbios_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_4 );
+    count[count_netbios_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_5 );
+    count[count_netbios_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_6 );
+    count[count_netbios_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_7 );
+    count[count_netbios_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_8 );
+    count[count_netbios_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_netbios_9 );
+    count[count_netbios_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_1 );
+    count[count_nntp_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_2 );
+    count[count_nntp_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_3 );
+    count[count_nntp_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_4 );
+    count[count_nntp_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_5 );
+    count[count_nntp_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_6 );
+    count[count_nntp_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_7 );
+    count[count_nntp_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_8 );
+    count[count_nntp_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_nntp_9 );
+    count[count_nntp_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_1 );
+    count[count_pop3_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_2 );
+    count[count_pop3_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_3 );
+    count[count_pop3_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_4 );
+    count[count_pop3_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_5 );
+    count[count_pop3_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_6 );
+    count[count_pop3_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_7 );
+    count[count_pop3_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_8 );
+    count[count_pop3_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_pop3_9 );
+    count[count_pop3_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_rlogin_1 );
+    count[count_rlogin_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_rlogin_2 );
+    count[count_rlogin_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_rlogin_3 );
+    count[count_rlogin_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_rlogin_4 );
+    count[count_rlogin_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_rlogin_5 );
+    count[count_rlogin_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_1 );
+    count[count_smtp_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_2 );
+    count[count_smtp_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_3 );
+    count[count_smtp_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_4 );
+    count[count_smtp_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_5 );
+    count[count_smtp_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_6 );
+    count[count_smtp_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_7 );
+    count[count_smtp_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_8 );
+    count[count_smtp_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_smtp_9 );
+    count[count_smtp_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_1 );
+    count[count_telnet_1]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_2 );
+    count[count_telnet_2]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_3 );
+    count[count_telnet_3]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_4 );
+    count[count_telnet_4]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_5 );
+    count[count_telnet_5]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_6 );
+    count[count_telnet_6]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_7 );
+    count[count_telnet_7]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_8 );
+    count[count_telnet_8]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_telnet_9 );
+    count[count_telnet_9]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_aim );
+    count[count_CATEGORY_aim]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_bittorrent );
+    count[count_CATEGORY_bittorrent]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_cvs );
+    count[count_CATEGORY_cvs]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_dhcp );
+    count[count_CATEGORY_dhcp]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_directconnect );
+    count[count_CATEGORY_directconnect]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_dns );
+    count[count_CATEGORY_dns]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_fasttrack );
+    count[count_CATEGORY_fasttrack]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_tor );
+    count[count_CATEGORY_tor]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_vnc );
+    count[count_CATEGORY_vnc]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_worldofwarcraft );
+    count[count_CATEGORY_worldofwarcraft]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_x11 );
+    count[count_CATEGORY_x11]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_yahoo );
+    count[count_CATEGORY_yahoo]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_freenet );
+    count[count_CATEGORY_freenet]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_gnutella );
+    count[count_CATEGORY_gnutella]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_gopher );
+    count[count_CATEGORY_gopher]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_irc );
+    count[count_CATEGORY_irc]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_jabber );
+    count[count_CATEGORY_jabber]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_msn );
+    count[count_CATEGORY_msn]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_napster );
+    count[count_CATEGORY_napster]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_sip );
+    count[count_CATEGORY_sip]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_snmp );
+    count[count_CATEGORY_snmp]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_socks );
+    count[count_CATEGORY_socks]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_ssh );
+    count[count_CATEGORY_ssh]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_ssl );
+    count[count_CATEGORY_ssl]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_subversion );
+    count[count_CATEGORY_subversion]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_subversion );
+    count[count_CATEGORY_subversion]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+
+
+    KRAAKEN_DPI_mWriteReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG2_OFFSET, count_CATEGORY_subversion );
+    count[count_CATEGORY_subversion]= KRAAKEN_DPI_mReadReg(Kraaken_Dpi_Baseaddr, KRAAKEN_DPI_SLV_REG3_OFFSET);
+

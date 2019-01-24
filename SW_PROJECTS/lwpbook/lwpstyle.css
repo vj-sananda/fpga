@@ -1,0 +1,429 @@
+/*   Time-stamp: "2007-04-16 02:40:22 AKDT sburke@cpan.org"               m*/
+
+                           .hide { display: none; }
+@media        screen { .noscreen { display: none; } }
+@media print         {  .noprint { display: none; } }
+
+@media print {
+  #nav, .nav, .navbar, .htmltoc, .indextop, .indexbottom, .morelink { display: none }
+  h1,h2,h3,h4,h5,h6,dd  { page-break-after: avoid; page-break-inside: avoid; }
+  ul,ol,dl              { page-break-before: avoid; }
+  .keeptogether  { page-break-inside: avoid; }
+  * {
+    color: black !important;
+    background-color: white !important;
+    border-color: black !important;
+  }
+
+  pre { border-color: white !important; }
+  body, td {
+    font-size: 12pt;
+    font-family: "Georgia", "Times New Roman", "Times", 	serif;
+  }
+  p,dt,dd { max-width: 32em; }
+  /* TODO: make a better print stylesheet! */
+
+  .update, .aside {
+    border-left: thin black double !important;
+    font-family: "Verdana", "Arial", "Helvetica", 		sans-serif;
+  }
+}
+
+@media screen {
+ body {
+   background-color: #f0f0f0;
+   color: #000000;
+ }
+ a         { color: #000; }
+ a:link    { color: #00f; }
+ a:visited { color: #808; }
+ a:link:active  { color: #f00; }
+
+ a:link:hover,  a:visited:hover  { background-color: #dff; }
+}
+
+/*======================================================================*/
+
+
+table {  /* Yes, center every table */
+  margin-left:  auto;
+  margin-right: auto;
+}
+
+dl { margin-left: 1em; }
+dd { margin-top: .15em; margin-bottom: .75em; }
+ /* otherwise it's just too tight */
+
+
+/*======================================================================*/
+
+.navbar {
+  width: 100%;
+  margin: 0;
+}
+
+.navbar td {
+  width: 33%;
+  vertical-align: top;
+}
+
+/* .navbar td:hover { background-color: #ddd; } */
+
+.navbar .prevlink { text-align: left  ; padding-top: .6em; padding-right: 2em; }
+.navbar   .uplink { text-align: center; padding-top:    0; }
+.navbar .nextlink { text-align: right ; padding-top: .6em; padding-left:  2em; }
+
+.navbar td, p.morelink {
+  font-family: "Verdana", "Arial", "Helvetica", 		sans-serif;
+  font-size: smaller;
+  background-color: #fff;
+}
+
+p.morelink {
+  clear: both;
+  border-top: thin black solid;
+  margin: 3em .2em .2em 4em;
+  text-align: right;
+  font-style: italic;
+}
+
+/*======================================================================*/
+
+.Bigindex    a[href="idx_0.htm"],
+.indextop    a[href="idx_0.htm"],
+.indexbottom a[href="idx_0.htm"] {
+  font-size: 80%;
+  display: none;
+}
+
+
+a[href="idx_j.htm"], a[href="idx_k.htm"], a[href="idx_y.htm"], a[href="idx_z.htm"] {
+  font-size: 70%;
+  color: #aaa;
+}
+
+
+.bigindex, .indextop, .indexbottom {
+  text-align: center;
+  background-color: #fff;
+  color: #fff;
+}
+
+
+.indextop, .indexbottom {
+  font-size: smaller;
+  border: thin #ccc solid;
+}
+
+.indexbottom {
+  margin-top: 3em;
+}
+
+
+.bigindex {
+  font-size: 130%;
+  border: thin black solid;
+  margin: 1em;
+  padding: 1em;
+}
+
+h1 {
+  margin-top: 0;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+body.lwp_Indexical h2 {
+  color: white;
+  background-color: #555;
+  padding-left: .4em;
+}
+
+body.lwp_Indexical dl { margin-left: 0; }
+
+body.lwp_Indexical dt {
+  margin-top: .6em;
+  margin-left: 1em;
+  text-indent: -.7em;
+  margin-bottom: 0;
+}
+
+body.lwp_Indexical dd dt {
+  margin-top: 0 !important;
+}
+
+/*
+body.lwp_Indexical dd dt:before {
+  content: "* ";
+}
+*/
+
+/* A horrid hack to get sub-entries */
+body.lwp_Indexical dd dt a[name]:before {
+  content: "\00b7 ";
+}
+
+/*======================================================================*/
+
+div.htmltoc {
+  /* font-size: smaller; */
+  margin:  0 0 0 .7em;
+  padding-left: .7em;
+  background-color: white;
+  border: thin #aaa solid;
+}
+
+div.htmltoc p { margin-top: .3em }
+
+div.htmltoc h4 {
+  font-weight:  bold;
+  font-style:   italic;
+  font-variant: small-caps;
+  margin: 0 0 0  -.5em;
+}
+
+.update, .aside {
+  padding-top:    .2em;
+  padding-bottom: .2em;
+  margin-left: 22%;
+  margin-right: 0;
+  border-left: 3px #fcc dashed;
+  padding-left: 7px;
+  background-color: #ffe9e9;
+  color: black;
+}
+
+.sitesearchbox {
+  display: block;
+  width: 20em;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*======================================================================*/
+
+body.lwp_appa_01 td { vertical-align: top; }
+
+/*======================================================================*/
+
+body.lwp_index ul {
+  list-style-type: none;
+  margin: 1em 0 0 .2em;
+}
+
+body.lwp_index li {
+  margin: .4em 0 0 0;
+}
+body.lwp_index li.ahem {
+  margin-top: 1.5em;
+}
+
+
+body.lwp_index ul.comprehensive {
+  font-size: smaller;
+  display: none;
+  margin: 0;
+}
+body.lwp_index ul.comprehensive li {
+  margin: 0;
+  display: inline;
+}
+ul.comprehensive li + li:before {
+  content: "~";
+  color: #888;
+  padding-left: .2em;
+  padding-right:  .2em;
+}
+
+body.lwp_index .tagline {
+  font-style: italic;
+  text-align: center;
+  margin-top: .1em;
+}
+
+body.lwp_index .author {
+  font-size: larger;
+  margin-top: 0;
+  padding-bottom: .3em;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+body.lwp_index .bookinfo {
+  margin-left: 50%;
+  font-size: smaller;
+}
+
+body.lwp_index h1, body.lwp_index .author {
+  margin-top: 0;
+  margin-bottom: 0; 
+  padding: .2em;
+}
+
+body.lwp_index .download {
+  float: right;
+  margin: 0;
+  padding-right: 1em;
+  font-size: smaller;
+}
+
+
+.mastertoc {
+  display: block;
+  margin:  1em 0 0 0;
+  padding-left: .7em;
+  background-color: white;
+  border: thin #aaa solid;
+  padding-bottom: 1em;
+}
+
+/*======================================================================*/
+
+p.coverpic {
+  float: left;
+  padding: 0 1em 1em 0;
+  margin: 0;
+}
+
+p.coverpic img {
+  border: 3px blue dashed;
+}
+p.coverpic {
+  float: left;
+  padding: 0 1em 1em 0;
+  margin: 0;
+}
+
+p.coverpic img { border: none; }
+p.coverpic2 {
+  margin-top: 3em;
+  float: right;
+}
+
+body.lwp_colophon {
+}
+
+/*======================================================================*/
+
+#ascii {
+  empty-cells: show;
+  border: none;
+}
+
+#ascii td, #ascii th {
+  padding: 3px;
+  border-bottom: none;
+  border-left:   none;
+  border-top:    thin #888 solid;
+  border-right:  thin #888 solid;
+}
+
+#ascii td {
+  vertical-align: top;
+}
+
+#ascii th {
+  font-size: 80%;
+  vertical-align: bottom;
+  border-top: none;
+}
+
+#ascii th.raw   { font-size: 60%; }
+
+#ascii td.dn, #ascii td.hn, #ascii td.oct, #ascii td.raw  { text-align: right; }
+#ascii td.oct { font-style: italic; padding-right: .3em; }
+#ascii td.bytes  { text-align: center; font-size: 80%;}
+#ascii td.hn, #ascii td.oct, #ascii td.raw, #ascii td.bytes  {
+ font-family: "Courier New", "Courier", "Luxi Mono", 	monospace;
+}
+#ascii td.dsc { 
+ font-family: "Verdana", "Arial", "Helvetica", 		sans-serif;
+}
+
+#ascii .dsc { border-right: none; }
+
+#ascii td.c { font-size: larger; text-align: center; }
+#ascii td.ent { padding-left: .2em; font-size: larger; }
+
+.exfig, #ascii img {
+  border: thin #2a2 solid;
+  padding: 2px;
+  vertical-align: baseline;
+}
+
+
+/*======================================================================*/
+
+.footnotylink {
+  vertical-align: super;
+  font-size: 80%;
+  font-family: "Verdana", "Arial", "Helvetica", 		sans-serif;
+}
+
+.footnote {
+  font-size: smaller;  
+}
+
+.footnote p:first-child:before  {
+  font-style: italic;
+  content: "Footnote ";
+  color: #888;
+  padding-right: .2em;
+}
+
+.figure {
+  background-color: #fff;
+  padding: 1em;
+  text-align: center;
+}
+
+.emphasis-reverse {
+  color: white;
+  background-color: black;
+}
+
+span.navtitle {
+  font-family: "Verdana", "Arial", "Helvetica", sans-serif;
+  font-weight: bold;
+}
+
+
+.objtitle {
+  color: #666;
+  margin-bottom: .2em;
+  font-size:    smaller;
+  font-weight:  normal;
+  text-align:   center;
+  font-style:   italic;
+}
+
+.objtitle:before { content: "\2014"; color: #888; padding-right: 1em; }
+.objtitle:after  { content: "\2014"; color: #888; padding-left:  1em; }
+
+.objtitle + pre { margin-top: 0; }
+.figure + .objtitle { margin-top: 0; }
+
+pre {
+  margin-left: 1em;
+  padding: .2em 0 .2em .1em;
+  background-color: #e4f0e4;
+  border-top:  1px #d0d0d0 solid;
+  border-left: 1px #d0d0d0 solid;
+  /* overflow: scroll; */
+}
+
+pre.programlisting {
+  margin-left: 2em;
+}
+
+/* guh:
+pre b { background-color: #ffffc5; }
+pre b.emphasis-bold { background-color: #ffc5c5; }
+*/
+pre b { background-color: #ffffc5; }
+
+
+/* TODO: "media print" niceness */
+
+/* End */

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Inspecting the HTML (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_03' class='lwp lwp_ch08_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">8.3. Inspecting the HTML</h2>
+
+<p>The first step to getting some code working is to save a file
+locally. This is so you can look at the source in an editor, and
+secondly so you can initially test your data extractor on that local
+file. It may take a good deal of hit-and-miss before you get it
+working right, and there's no point in making each
+trial run go and get the same page across the network, especially to
+<em class="emphasis">Fresh Air</em>'s occasionally quite
+busy server. Saving the above URL as 
+<em>fresh1.html</em> gives us a 12K file. While
+there's only about 1K of text shown on the screen,
+the other 11K are mostly whitespace that indents the HTML, some
+JavaScript, plus all the table code needed to make the navigation bar
+on the left and the search form on the right. We can completely
+ignore all that code and just try to figure out how to extract the
+"Listen..." links. Sifting through
+the HTML source, we see that those links are represented with this
+code (note that most lines begin with at least two spaces):
+</p>
+
+<pre class="code">...
+  &lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.ram"&gt;
+    &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#FFCC00" SIZE="2"&gt;
+      Listen to &lt;B&gt;Monday - July 2, 2001&lt;/B&gt;
+    &lt;/FONT&gt;
+  &lt;/A&gt;
+ 
+...
+ 
+   &lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.01.ram"&gt;Listen to
+   &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="3"&gt;
+   &lt;B&gt; Editor and writer Walter Kirn                            &lt;/B&gt;
+   &lt;/FONT&gt;&lt;/A&gt;
+ 
+ &lt;BR&gt;
+ &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="2"&gt;
+ &lt;BLOCKQUOTE&gt;Editor and writer &lt;A
+ HREF="http://freshair.npr.org/guestInfoFA.cfm?name=walterkirn"&gt;Walter
+ Kirn&lt;/A&gt;'s new novel &lt;I&gt;Up in the Air&lt;/I&gt; (Doubleday) is about
+...
+ &lt;/BLOCKQUOTE&gt;&lt;/FONT&gt;
+ &lt;BR&gt;
+ 
+   &lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.02.ram"&gt;Listen to
+   &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="3"&gt;
+   &lt;B&gt; Casting director and actress Joanna Merlin             &lt;/B&gt;
+   &lt;/FONT&gt;&lt;/A&gt;
+ 
+ &lt;BR&gt;
+ &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="2"&gt;
+ &lt;BLOCKQUOTE&gt;Casting director and actress &lt;A
+ HREF="http://freshair.npr.org/guestInfoFA.cfm?name=joannamerlin"&gt;Joanna
+ Merlin&lt;/A&gt; has written a new guide for actors, &lt;I&gt;Auditioning: An
+...
+ &lt;/BLOCKQUOTE&gt;&lt;/FONT&gt;
+ &lt;BR&gt;
+...</pre>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

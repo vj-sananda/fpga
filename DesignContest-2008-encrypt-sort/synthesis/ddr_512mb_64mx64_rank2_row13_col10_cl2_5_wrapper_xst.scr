@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper
+-ifmt MIXED
+-ifn ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper_xst.prj
+-ofn ../implementation/ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper/ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper}

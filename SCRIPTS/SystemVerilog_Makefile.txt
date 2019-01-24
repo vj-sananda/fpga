@@ -1,0 +1,52 @@
+####################################################################
+#SV_CLASSES = ./*.svc
+
+SV_MAIN = program_main.svm
+
+VLOG_MODULES = *.v
+
+VLOG_INC_DIR = +incdir+./+../../share/vincl
+
+VCS_PLI_OPTS += -P ${NOVAS_HOME}/share/PLI/vcsd/LINUX/vcsd.tab \
+		${NOVAS_HOME}/share/PLI/vcsd/LINUX/pli.a +vcsd 
+
+VCS_COMPILE_PARMS += -Mupdate -y ./ +libext+.v +v2k -sverilog -ntb_opts svp -cm cond+line+tgl+fsm -cm_line assigntgl 
+
+#SV_INCLUDE_FILES = ./*.svh
+
+#From Make command line: test=NOTEST
+ifndef test
+ test = NOTEST ;
+endif
+
+####################################################################
+#  Targets
+####################################################################
+
+run: simv
+	./simv -l sim.log -cm cond+line+tgl+fsm -cm_line assigntgl +seed=`date +%N` +test=${test}
+	vcs -cov_text_report _root.db
+
+program.sv: ${SV_CLASSES} ${SV_MAIN} ${SV_INCLUDE_FILES}
+	build_sv.pl file.list pci_xp
+
+#-ntb_opts svp : allows you to declare classes globally
+#so can be used in modules, else only in program blocks
+simv: program.sv ${VLOG_MODULES}
+	vcs $(VCS_COMPILE_PARMS) $(VCS_PLI_OPTS) -f vlog.f -f files.f ${VLOG_MODULES}  program.sv
+
+####################################################################
+deb:
+	verdi -f files.f -f vlog.f tb.v $(VLOG_INC_DIR)
+
+clean:
+	rm -rf simv*.daidir
+	rm -rf simv*
+	rm -rf csrc*
+	rm -rf core
+	rm -rf *.bck
+	rm -rf sim.log
+	rm -rf *.fsdb
+	rm -rf verdiLog
+	rm -rf program.sv
+	rm -rf vc_hdrs.h

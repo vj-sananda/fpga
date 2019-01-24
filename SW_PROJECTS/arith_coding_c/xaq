@@ -1,0 +1,106 @@
+tats[ i ].counts = 0;
+    }
+    new_table = (CONTEXT *) calloc( sizeof( CONTEXT ), 1 );
+    if ( new_table == NULL )
+        error_exit( "Failure #8: allocating new table" );
+    new_table->max_index = -1;
+    table->links[ i ].next = new_table;
+    new_table->lesser_context = lesser_context;
+    return( new_table );
+}
+
+/*
+ * This routine is called to increment the counts for the current
+ * contexts.  It is called after a character has been encoded or
+ * decoded.  All it does is call update_table for each of the
+ * current contexts, which does the work of incrementing the count.
+ * This particular version of update_model() practices update exclusion,
+ * which means that if lower order models weren't used to encode
+ * or decode the character, they don't get their counts updated.
+ * This seems to improve compression performance quite a bit.
+ * To disable update exclusion, the loop would be changed to run
+ * from 0 to max_order, instead of current_order to max_order.
+ */
+void update_model( int symbol )
+{
+    int i;
+    int local_order;
+
+    if ( current_order < 0 )
+        local_order = 0;
+    else
+        local_order = current_order;
+    if ( symbol >= 0 )
+    {
+        while ( local_order <= max_order )
+        {
+            if ( symbol >= 0 )
+                update_table( contexts[ local_order ], (unsigned char) symbol );
+            local_order++;
+        }
+    }
+    current_order = max_order;
+    for ( i = 0 ; i < 256 ; i++ )
+        scoreboard[ i ] = 0;
+}
+/*
+ * This routine is called to update the count for a particular symbol
+ * in a particular table.  The table is one of the current contexts,
+ * and the symbol is the last symbol encoded or decoded.  In principle
+ * this is a fairly simple routine, but a couple of complications make
+ * things a little messier.  First of all, the given table may not
+ * already have the symbol defined in its statistics table.  If it
+ * doesn't, the stats table has to grow and have the new guy added
+ * to it.  Secondly, the symbols are kept in sorted order by count
+ * in the table so as that the table can be trimmed during the flush
+ * operation.  When this symbol is incremented, it might have to be moved
+ * up to reflect its new rank.  Finally, since the counters are only
+ * bytes, if the count reaches 255, the table absolutely must be rescaled
+ * to get the counts back down to a reasonable level.
+ */
+void update_table( CONTEXT *table, unsigned char symbol )
+{
+    int i;
+    int index;
+    unsigned char temp;
+    CONTEXT *temp_ptr;
+    unsigned int new_size;
+/*
+ * First, find the symbol in the appropriate context table.  The first
+ * symbol in the table is the most active, so start there.
+ */
+    index = 0;
+    while ( index <= table->max_index &&
+            table->stats[index].symbol != symbol )
+        index++;
+    if ( index > table->max_index )
+    {
+        table->max_index++;
+        new_size = sizeof( LINKS );
+        new_size *= table->max_index + 1;
+        if ( current_order < max_order )
+        {
+            if ( table->max_index == 0 )
+                table->links = (LINKS __handle *) handle_calloc( new_size );
+            else
+                table->links = (LINKS __handle *)
+                   handle_realloc( (char __handle *) table->links, new_size );
+            if ( table->links == NULL )
+                error_exit( "Error #9: reallocating table space!" );
+            table->links[ index ].next = NULL;
+        }
+        new_size = sizeof( STATS );
+        new_size *= table->max_index + 1;
+        if (table->max_index==0)
+            table->stats = (STATS __handle *) handle_calloc( new_size );
+        else
+            table->stats = (STATS __handle *)
+                handle_realloc( (char __handle *) table->stats, new_size );
+        if ( table->stats == NULL )
+            error_exit( "Error #10: reallocating table space!" );
+        table->stats[ index ].symbol = symbol;
+        table->stats[ index ].counts = 0;
+    }
+/*
+ * Now I move the symbol to the front of its list.
+ 

@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top dcm_0_wrapper
+-ifmt MIXED
+-ifn dcm_0_wrapper_xst.prj
+-ofn ../implementation/dcm_0_wrapper/dcm_0_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/dcm_0_wrapper}

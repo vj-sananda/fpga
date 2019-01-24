@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Cookies, Authentication, and Advanced Requests (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch11_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:40:43 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch11_01' class='lwp lwp_ch11_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 11. Cookies, Authentication, and Advanced Requests</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-11-SECT-1">Cookies</a><br />
+<a href="ch11_02.htm">Adding Extra Request Header Lines</a><br />
+<a href="ch11_03.htm">Authentication</a><br />
+<a href="ch11_04.htm">An HTTP Authentication Example:The Unicode Mailing Archive</a><br /></p></div>
+<p>Not every document can be fetched with a simple GET or POST request.
+Many pages require authentication before you can access them, some
+use cookies to keep track of the different users, and still others
+want special values in the <tt class="literal">Referer</tt> or
+<tt class="literal">User-Agent</tt> headers. This chapter shows you how to
+set arbitrary headers, manage cookies, and even authenticate using
+LWP. You'll be able to make your LWP programs appear
+to be Netscape or Internet Explorer, log in to a protected site, and
+work with sites that use cookies.
+</p>
+
+<p>For example, suppose you're automating a web-based
+purchasing system. The server requires you to log in, then issues you
+a cookie to prove you've been authenticated. You
+must then send this cookie back to the server with every request you
+make.
+</p>
+
+<p>Or, more mundanely, suppose you're extracting
+information from one of the many web sites that check the
+<tt class="literal">User-Agent</tt> header in your requests. If your
+<tt class="literal">User-Agent</tt> doesn't identify yours
+as a recent version of Netscape or Internet Explorer, the server
+sends you back an "Upgrade your
+browser" page. You need to set the
+<tt class="literal">User-Agent</tt> header to make it appear that you are
+using Netscape or Internet Explorer.
+</p>
+<div class="sect1"><a name="perllwp-CHP-11-SECT-1"></a>
+<h2 class="sect1">11.1. Cookies</h2>
+
+<p>HTTP was originally
+<a name="INDEX-612" class="ipoint"
+></a>designed as a
+stateless protocol, meaning that each request is totally independent
+of other requests. But web site designers felt the need for something
+to help them identify the user of a particular session. The mechanism
+that does this is called a <em class="firstterm">cookie</em>. This
+section gives some background on cookies so you know what LWP is
+doing for you.
+</p>
+
+<p>An HTTP cookie is a string that an HTTP server can send to a client,
+which the client is supposed to put in the headers of any future
+requests that it makes to that server. Suppose a client makes a
+request to a given server, and the response headers consist of this:
+</p>
+
+<pre class="code">Date: Thu, 28 Feb 2002 04:29:13 GMT
+Server: Apache/1.3.23 (Win32)
+Content-Type: text/html
+Set-Cookie: foo=bar; expires=Thu, 20 May 2010 01:23:45 GMT; path=/</pre>
+
+<p>This means that the server wants all further requests from this
+client to anywhere on this site (i.e., under <tt class="literal">/</tt>) to
+be accompanied by this header line:
+</p>
+
+<pre class="code">Cookie: foo=bar</pre>
+
+<p>That header should be present in all this browser's
+requests to this site, until May 20, 2010 (at 1:23:45 in the
+morning), after which time the client should never send that cookie
+again.
+</p>
+
+<p>A <tt class="literal">Set-Cookie</tt> line can fail to
+<a name="INDEX-613" class="ipoint"
+></a><a name="INDEX-614" class="ipoint"
+></a>specify an expiration time, in which case
+this cookie ends at the end of this
+"session," where
+"session" is generally seen as
+ending when the user closes all browser windows. Moreover, the path
+can be something more specific than <tt class="literal">/</tt>. It can be,
+for example, <em class="filename">/dahut/</em>, in which case a cookie
+will be sent only for URLs that begin
+<em class="emphasis">htt</em><em class="filename">p://thishost/dahut/</em>.
+Finally, a cookie can specify that this site is not just on this one
+host, but also on all other hosts in this subdomain, so that if this
+host is <em class="filename">search.mybazouki.com</em>, cookies should be
+sent to any hostname under <em class="filename">mybazouki.com</em>,
+including <em class="filename">images.mybazouki.com</em>,
+<em class="filename">ads.mybazouki.com</em>,
+<em class="filename">extra.stuff.mybazouki.com</em>, and so on.
+</p>
+
+<p>All those details are handled by LWP, and you need
+<a name="INDEX-615" class="ipoint"
+></a>only make a
+few decisions for a given LWP::UserAgent object:
+</p>
+
+<ul><li>
+<p>Should it implement cookies at all? If not, it will just ignore any
+<tt class="literal">Set-Cookie:</tt> headers from the server and will never
+send any <tt class="literal">Cookie:</tt> headers.
+</p>
+</li><li>
+<p>Should it load cookies when it starts up? If not, it will start out
+with no cookies.
+</p>
+</li><li>
+<p>Should it save cookies to some file when the browser object is
+destroyed? If not, whatever cookies it has accumulated will be lost.
+</p>
+</li><li>
+<p>What format should the cookies file be in? Currently the choices are
+either a format particular to LWP, or Netscape cookies files.
+</p>
+</li></ul>
+<a name="perllwp-CHP-11-SECT-1.1"></a><div class="sect2">
+<h3 class="sect2">11.1.1. Enabling Cookies</h3>
+
+<p>By default, an LWP::UserAgent object
+<a name="INDEX-616" class="ipoint"
+></a><a name="INDEX-617" class="ipoint"
+></a>doesn't
+implement cookies. To make an LWP::UserAgent object that implements
+cookies is as simple as this:
+</p>
+
+<pre class="code">my $browser = LWP::UserAgent-&gt;new( );
+$browser-&gt;cookie_jar( {} );</pre>
+
+<p>However, that browser object's cookie jar (as we
+call its HTTP cookie database) will start out empty, and its contents
+won't be saved anywhere when the object is
+destroyed. Incidentally, the above code is a convenient shortcut for
+what one previously had to do:
+</p>
+
+<pre class="code"># Load LWP class for "cookie jar" objects
+use HTTP::Cookies;
+my $browser = LWP::UserAgent-&gt;new( );
+my $cookie_jar = HTTP::Cookies-&gt;new( );
+$browser-&gt;cookie_jar( $cookie_jar );</pre>
+
+<p>There's not much point to using the long form when
+you could use the short form instead, but the longer form becomes
+preferable when you're adding options to the cookie
+jar.
+</p>
+
+</div>
+<a name="perllwp-CHP-11-SECT-1.2"></a><div class="sect2">
+<h3 class="sect2">11.1.2. Loading Cookies from a File</h3>
+
+<p>To start the cookie jar by
+<a name="INDEX-618" class="ipoint"
+></a><a name="INDEX-619" class="ipoint"
+></a><a name="INDEX-620" class="ipoint"
+></a><a name="INDEX-621" class="ipoint"
+></a>loading from a particular file,
+use the <tt class="literal">file</tt> option to the
+<tt class="literal">HTTP::Cookies</tt> <tt class="literal">new</tt> method:
+</p>
+
+<pre class="code">use HTTP::Cookies;
+my $cookie_jar = HTTP::Cookies-&gt;new(
+   file     =&gt; "/some/where/cookies.lwp",
+);
+my $browser = LWP::UserAgent-&gt;new;
+$browser-&gt;cookie_jar( $cookie_jar );</pre>
+
+<p>In that case, the file is read when the cookie jar is created, but
+it's never updated with any new cookies that the
+<tt class="literal">$browser</tt> object will have accumulated.
+</p>
+
+<p>To read the cookies from a Netscape cookies file instead
+<a name="INDEX-622" class="ipoint"
+></a><a name="INDEX-623" class="ipoint"
+></a>of
+from an LWP-format cookie file, use a different class,
+HTTP::Cookies::Netscape, which is just like HTTP::Cookies, except for
+the format that it reads and writes:
+</p>
+
+<pre class="code">use HTTP::Cookies::Netscape;
+my $cookie_jar = HTTP::Cookies::Netscape-&gt;new(
+   file =&gt; "c:/program files/netscape/users/shazbot/cookies.txt",
+);
+my $browser = LWP::UserAgent-&gt;new;
+$browser-&gt;cookie_jar( $cookie_jar );</pre>
+
+</div>
+<a name="perllwp-CHP-11-SECT-1.3"></a><div class="sect2">
+<h3 class="sect2">11.1.3. Saving Cookies to a File</h3>
+
+<p>To make LWP write out its
+<a name="INDEX-624" class="ipoint"
+></a>potentially changed cookie jar to a file
+when the object is no longer in use, add an <tt class="literal">autosave =&gt;
+1</tt> parameter:
+</p>
+
+<pre class="code">use HTTP::Cookies;
+my $cookie_jar = HTTP::Cookies-&gt;new(
+   file     =&gt; "/some/where/cookies.lwp",
+   autosave =&gt; 1,
+);
+my $browser = LWP::UserAgent-&gt;new;
+$browser-&gt;cookie_jar( $cookie_jar );</pre>
+
+<p>At time of this writing, using <tt class="literal">autosave</tt>
+<tt class="literal">=&gt;</tt> <tt class="literal">1</tt> with
+HTTP::Cookies::Netscape has not been sufficiently tested and is not
+recommended.
+</p>
+
+</div>
+<a name="perllwp-CHP-11-SECT-1.4"></a><div class="sect2">
+<h3 class="sect2">11.1.4. Cookies and the New York Times Site</h3>
+
+<p>Suppose that you have felt
+<a name="INDEX-625" class="ipoint"
+></a><a name="INDEX-626" class="ipoint"
+></a><a name="INDEX-627" class="ipoint"
+></a>personally emboldened and empowered by
+all the previous chapters' examples of pulling data
+off of news sites, especially the examples of simplifying HTML in
+<a href="ch10_01.htm">Chapter 10, "Modifying HTML with Trees"</a>. You decide that a great test of your
+skill would be to write LWP code that downloads the stories off
+various newspapers' web sites and saves them all in
+a format (either plain text, highly simplified HTML, or even WML, if
+you have an <tt class="literal">html2wml</tt> tool around) that your
+ancient but trusty 2001-era PDA can read. Thus, you can spend your
+commute time on the train (or bus, tube, el, metro, jitney, T, etc.)
+merrily flipping through the day's news stories from
+papers all over the world.
+</p>
+
+<p>Suppose also that you have the basic HTML-simplifying code in place
+(so we shall not discuss it further), and the LWP code that downloads
+stories from all the newspapers is working fine&#x2014;except for the
+<em class="emphasis">New York Times</em> site. And you
+can't imagine why it's not working!
+You have a simple HTML::TokeParser program
+<a name="INDEX-628" class="ipoint"
+></a>that gets the main page,
+finds all the URLs to stories in it, and downloads them one at a
+time. You verify that those routines are working fine. But when you
+look at the files that it claims to be successfully fetching and
+saving (<tt class="literal">$response-&gt;is_success</tt> returns true and
+everything!), all you see for each one is a page that says
+"Welcome to the New York Times on the Web! Already a
+member? Log in!" When you look at the exact same URL
+in Netscape, you don't see that page at all, but
+instead you see the news story that you want your LWP program to be
+accessing.
+</p>
+
+<p>Then it hits you: years ago, the first time you accessed the
+<em class="emphasis">New York Times</em> site, it wanted you to register
+with an email address and a password. But you
+haven't seen that screen again, because of... HTTP
+cookies! You riffle through your Netscape HTTP cookies file, and lo,
+there you find:
+</p>
+
+<pre class="code">.nytimes.com TRUE / FALSE 1343279235 RMID 809ac0ad1cff9a6b</pre>
+
+<p>Whatever this means to the <em class="emphasis">New York Times</em> site,
+it's apparently what differentiates your copy of
+Netscape when it's accessing a story URL, from your
+LWP program when it's accessing that URL.
+</p>
+
+<p>Now, you could simply hardwire that cookie into the headers of the
+<tt class="literal">$browser-&gt;get(&#160;)</tt> request's
+headers, but that involves recalling exactly how lines in Netscape
+cookie databases translate into headers in HTTP request. The
+optimally lazy solution is to simply enable cookie support in this
+LWP::UserAgent object and have it read your Netscape cookie database.
+So just after where you started off the program with this:
+</p>
+
+<pre class="code">use LWP;
+my $browser = LWP::UserAgent-&gt;new( );</pre>
+
+<p>Add this:</p>
+
+<pre class="code">use <tt class="userinput"><b>HTTP::Cookies::Netscape</b></tt>;
+my $cookie_jar = HTTP::Cookies::Netscape-&gt;new(
+ <tt class="userinput"><b>'file' =&gt;</b></tt> 'c:/program files/netscape/users/me/cookies.txt'
+);
+$browser-&gt;cookie_jar($cookie_jar);</pre>
+
+<p>With those five lines of code added, your LWP
+program's requests to the <em class="emphasis">New York
+Times</em>'s server will carry the cookie that
+says that you're a registered user. So instead of
+giving your LWP program the "Log
+in!" page ad infinitum, the <em class="emphasis">New York
+Times</em>'s server now merrily serves your
+program the news stories. Success!
+</p>
+
+</div>
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

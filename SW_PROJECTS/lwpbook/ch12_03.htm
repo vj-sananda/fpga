@@ -1,0 +1,1048 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: A Link-Checking Spider (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch12_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:52:32 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch12_03' class='lwp lwp_ch12_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">12.3. Example: A Link-Checking Spider</h2>
+
+<p>So far in the book, we've <a name="INDEX-672" class="ipoint"
+></a><a name="INDEX-673" class="ipoint"
+></a>produced little single-use programs that
+are for specific tasks. In this section, we will diverge from that
+approach by walking through the development of a Type Three Requester
+robot whose internals are modular enough that with only minor
+modification, it could be used as any sort of Type Three or Type Four
+Requester.
+</p>
+
+<a name="perllwp-CHP-12-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">12.3.1. The Basic Spider Logic</h3>
+
+<p>The specific task for our program is checking all the links in a
+given web site. This means spidering the site, i.e., requesting every
+page in the site. To do that, we request a page in the site (or a few
+pages), then consider each link on that page. If
+it's a link to somewhere offsite, we should just
+check it. If it's a link to a URL
+that's in this site, we will not just check that the
+URL is retrievable, but in fact retrieve it and see what links
+<em class="emphasis">it</em> has, and so on, until we have gotten every
+page on the site and checked every link.
+</p>
+
+<p>So, for example, if I start the spider out at <em class="emphasis">http://www.mybalalaika.com/oggs/</em>, it will
+request that page, get back HTML, and analyze that HTML for links.
+Suppose that page contains only three links:
+</p>
+
+<pre class="code">http://bazouki-consortium.int/
+http://www.mybalalaika.com/oggs/studio_credits.html
+http://www.mybalalaika.com/oggs/plinky.ogg</pre>
+
+<p>We can tell that the first URL is not part of this site; in fact, we
+will define "site" in terms of
+URLs, so a URL is part of this site if starts with this
+site's URL. So because <em class="emphasis">http://bazouki-consortium.int</em>
+doesn't start with <em class="emphasis">http://www.mybalalaika.com/oggs/</em>,
+it's not part of this site. As such, we can
+<a name="INDEX-674" class="ipoint"
+></a>check it (via an
+HTTP HEAD request), but we won't actually look at
+its contents for links. However, the second URL, which is <em class="emphasis">http://www.mybalalaika.com/oggs/studio_credits.html</em>,
+actually does start with <em class="emphasis">http://www.mybalalaika.com/oggs/</em>, so
+it's part of this site and can be retrieved and
+scanned for links. Similarly, the third link, <em class="emphasis">http://www.mybalalaika.com/oggs/plinky.ogg</em>,
+does start with <em class="emphasis">http://www.mybalalaika.com/oggs/</em>, so
+it's part of this site and can be retrieved, and its
+HTML checked for links.
+</p>
+
+<p>But I happen to know that <em class="emphasis">http://www.mybalalaika.com/oggs/plinky.ogg</em> is
+a 90-megabyte Ogg Vorbis (compressed audio) file of
+<a name="INDEX-675" class="ipoint"
+></a>a 50-minute long balalaika solo, and it
+would be a very bad idea for our user agent to go getting this file,
+much less to try scanning it as HTML! So the way
+we'll save our robot from this bother is by having
+it HEAD any URLs before it GETs them. If HEAD reports that the URL is
+gettable (i.e., doesn't have an error status, nor a
+redirect) <em class="emphasis">and</em> that its
+<tt class="literal">Content-Type</tt> header says it's
+HTML (<tt class="literal">text/html</tt>), only then will we actually get
+it and scan its HTML for links.
+</p>
+
+<p>We could always hardcode a list of strings such as
+<em class="filename">.gif</em>, <em class="filename">.jpg</em>, etc., including
+<em class="filename">.ogg</em>, such that any URL ending in any such
+string will be assumed to not be HTML. However, we could never know
+that our list is complete, so we must carefully avoid the possibility
+of ever downloading a massive binary file that our suffix list just
+didn't happen to catch.
+</p>
+
+<p>Now, what to do if we check (or try to get) a URL, and we get an
+error status? We will have to make note of this in some way. Now, at
+bare minimum we could do something like have a hash called
+<tt class="literal">%notable_url_error</tt>, and when we see an error, we
+could do:
+</p>
+
+<pre class="code">$notable_url_error{$url} = $response-&gt;status_code;</pre>
+
+<p>In fact, we will be a bit more ambitious in our program, by also
+making note of what links to what, so that in the end, instead of
+saying "something links to <em class="emphasis">http://somebadurl.int</em>, but
+it's 404 Not Found," we can list
+the URLs that link to it, so that those links can be fixed.
+</p>
+
+<p>Incidentally, when we get <em class="emphasis">http://www.mybalalaika.com/oggs/studio_credits.html</em>
+and scan its HTML, suppose it contains a link to <em class="emphasis">http://www.mybalalaika.com/oggs/</em>. We
+shouldn't go and request that URL, because
+we've already been there. So we'll
+need to keep track of what we've already seen. This
+is as simple as having a hash <tt class="literal">%seen_url_before</tt>,
+and when we see a URL, if we see
+<tt class="literal">$seen_url_before{$url}</tt> is true,
+we'll skip it. But if it's false,
+we know we haven't dealt with this URL before, so we
+can set <tt class="literal">$seen_url_before{$url} = 1</tt> and go deal
+with it, for what we can be sure will be the only time this session.
+</p>
+
+</div>
+<a name="perllwp-CHP-12-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">12.3.2. Overall Design in the Spider</h3>
+
+<p>Now that we've settled on the basic logic behind the
+spider, we can start coding. For example, our idea of how to process
+a URL is expressed as this simple routine:
+</p>
+
+<pre class="code">sub process_url {
+  my $url = $_[0];
+  if( near_url($url) )   { process_near_url($url) }
+  else                   { process_far_url($url) }
+  return;
+}</pre>
+
+<p>This is the first of the two dozen routines (mostly small) that make
+up this spider framework, and clearly it requires us to
+<a name="INDEX-676" class="ipoint"
+></a><a name="INDEX-677" class="ipoint"
+></a><a name="INDEX-678" class="ipoint"
+></a><a name="INDEX-679" class="ipoint"
+></a><a name="INDEX-680" class="ipoint"
+></a><a name="INDEX-681" class="ipoint"
+></a>write three more routines,
+<tt class="literal">near_url(&#160;)</tt>, <tt class="literal">process_near_url(
+)</tt>, and <tt class="literal">process_far_url(&#160;)</tt>. But before we
+go further, we must consider the question of how we would interact
+with the program. Ideally, we can just write it as a command-line
+utility that we start up and let run, and in the end it will email
+us. So, <em class="emphasis">in theory</em>, we could call it like so:
+</p>
+
+<pre class="code">% thatdarnedbot http://mybazouki.com/ | mail $USER &amp;</pre>
+
+<p>Then we don't have to think about it again until the
+program finishes and the report it generates comes to our mailbox.
+But that is like tightrope-walking without a net, because suppose we
+get email from someone saying "Hey, wassamatta you?
+A bot from your host just spent a solid hour hammering my server,
+checking the same links over and over again! Fix
+it!" But if all we have is a bad links report,
+we'll have no idea why the bot visited his site,
+whether it did indeed request "the same
+links" over and over, or even what URLs it visited
+(aside from the ones we see in our bad links report), so
+we'd have no idea how to fix the problem.
+</p>
+
+<p>To avoid that situation, we must build logging into the spider right
+from the beginning. We'll implement this with
+<a name="INDEX-682" class="ipoint"
+></a><a name="INDEX-683" class="ipoint"
+></a><a name="INDEX-684" class="ipoint"
+></a><a name="INDEX-685" class="ipoint"
+></a>two basic routines: <tt class="literal">say(
+)</tt>, used for important messages, and <tt class="literal">mutter(
+)</tt>, used for less important messages. When we have a part of
+the program call <tt class="literal">say(&#160;)</tt>, like so:
+</p>
+
+<pre class="code">say("HEADing $url\n");</pre>
+
+<p>That is a message that we'll save in a log file, as
+well as write to STDOUT for the edification of the user
+who's watching the process. We can call
+<tt class="literal">mutter(&#160;)</tt>, like so:
+</p>
+
+<pre class="code">mutter("  That was hit #$hit_count\n");</pre>
+
+<p>That message will be saved to the log file (in case we need it), but
+isn't considered important enough to send to STDOUT,
+unless of course the user is running this program with a switch that
+means "say everything to STDOUT, no matter how
+trivial."
+</p>
+
+<p>And because it's helpful to know not just what
+happened but when, we'll make <tt class="literal">say(
+)</tt> and <tt class="literal">mutter(&#160;)</tt> emit a timestamp, unless
+it's the same time as the last thing we said or
+muttered. Here are the routines:
+</p>
+
+<pre class="code">my $last_time_anything_said;
+sub say {
+  # Add timestamps as needed:
+  unless(time( ) == ($last_time_anything_said || 0)) {
+    $last_time_anything_said = time( );
+    unshift @_, "[T$last_time_anything_said = " .
+      localtime($last_time_anything_said) . "]\n";
+  }
+  print LOG @_ if $log;
+  print @_;
+}
+
+my $last_time_anything_muttered;
+sub mutter {
+  # Add timestamps as needed:
+  unless(time( ) == ($last_time_anything_muttered || 0)) {
+    $last_time_anything_muttered = time( );
+    unshift @_, "[T$last_time_anything_muttered = " .
+      localtime($last_time_anything_muttered) . "]\n";
+  }
+  print LOG @_ if $log;
+  print @_ if $verbose;
+}</pre>
+
+<p>This relies on a flag <tt class="literal">$log</tt> (indicating whether
+we're logging), a filehandle <tt class="literal">LOG</tt>
+(open on our log file, if we are logging), and a flag
+<tt class="literal">$verbose</tt> that signals whether
+<tt class="literal">mutter</tt> messages should go to STDOUT too. These
+variables will be set by code that you'll see in the
+complete listing at the end of this chapter, which simply gets those
+values from <tt class="literal">@ARGV</tt> using the standard Perl module
+Getopt::Std.
+</p>
+
+<p>With those two logging routines in place, we can return to our first
+substantial routine, here repeated:
+</p>
+
+<pre class="code">sub process_url {
+  my $url = $_[0];
+  if (near_url($url))   { process_near_url($url) }
+  else                  { process_far_url($url) }
+  return;
+}</pre>
+
+<p>Not only does this implicate <tt class="literal">near_url()</tt>,
+<tt class="literal">process_near_url()</tt>, and
+<tt class="literal">process_far_url()</tt>, but it also begs the question:
+what will actually call <tt class="literal">process_url()</tt>? We will
+implement the basic control of this program in terms of a schedule
+(or queue) of URLs that need to be processed. Three things need to be
+done with the schedule: we need a way to see how many entries there
+are in it (at least so we can know when it's empty);
+we need to be able to pull a URL from it, to be processed now; and we
+need a way to feed a URL into the schedule. Call those
+<a name="INDEX-686" class="ipoint"
+></a><a name="INDEX-687" class="ipoint"
+></a><a name="INDEX-688" class="ipoint"
+></a><a name="INDEX-689" class="ipoint"
+></a>functions <tt class="literal">schedule_count(
+)</tt>, <tt class="literal">next_scheduled_url(&#160;)</tt>, and
+<tt class="literal">schedule($url)</tt> (with code that
+we'll define later on), and we're
+in business. We can now write the main loop of this spider:
+</p>
+
+<pre class="code">my $QUIT_NOW;
+ # a flag we can set to indicate that we stop now!
+ 
+sub main_loop {
+  while(
+    schedule_count( )
+    and $hit_count &lt; $hit_limit
+    and time( ) &lt; $expiration
+    and ! $QUIT_NOW
+  ) {
+    process_url( next_scheduled_url( ) );
+  }
+  return;
+}</pre>
+
+<p>This assumes we've set <tt class="literal">$hit_limit</tt>
+(a maximum number of hits that this bot is allowed to perform on the
+network) and <tt class="literal">$expiration</tt> (a time after which this
+bot must stop running), and indeed our <tt class="literal">@ARGV</tt>
+processing will get those from the command line. But once we know
+that's the program's main loop, we
+know that the program's main code will just be the
+processing of switches in <tt class="literal">@ARGV</tt>, followed by this
+code:
+</p>
+
+<pre class="code">initialize( );
+process_starting_urls(@ARGV);
+main_loop( );
+report( ) if $hit_count;
+say("Quitting.\n");
+exit;</pre>
+
+<p>And from this point on, the design of the program is strictly
+top-down stepwise refinement, just fleshing out the details of the
+remaining routines that we have mentioned but not yet defined.
+</p>
+
+</div>
+<a name="perllwp-CHP-12-SECT-3.3"></a><div class="sect2">
+<h3 class="sect2">12.3.3. HEAD Response Processing</h3>
+
+<p>Consider our basic <a name="INDEX-690" class="ipoint"
+></a>routine, repeated again:
+</p>
+
+<pre class="code">sub process_url {
+  my $url = $_[0];
+  if( near_url($url) )   { process_near_url($url) }
+  else                   { process_far_url($url) }
+  return;
+}</pre>
+
+<p>The first thing this needs in a function that, given a URL, can tell
+whether it's
+"near" or not, i.e., whether
+it's part of this site. Because
+we've decided that a URL is part of this site only
+if it starts with any of the URLs with which we started this program,
+just as <em class="emphasis">http://www.mybalalaika.com/oggs/studio_credits.html</em>
+starts with <em class="emphasis">http://www.mybalalaika.com/oggs/</em>, but
+<em class="emphasis">http://bazouki-consortium.int/</em>
+doesn't. This is a simple matter of using
+<tt class="literal">substr(&#160;)</tt>:
+</p>
+
+<pre class="code">my @starting_urls;
+
+sub near_url {   # Is the given URL "near"?
+  my $url = $_[0];
+  foreach my $starting_url (@starting_urls) {
+    if( substr($url, 0, length($starting_url))
+     eq $starting_url
+     # We assume that all URLs are in canonical form!
+    ) {
+      mutter("  So $url is near\n");
+      return 1;
+    }
+  }
+  mutter("  So $url is far\n");
+  return 0;
+}</pre>
+
+<p>We will have to have fed things into
+<tt class="literal">@starting_urls</tt> first, and we can do that in the
+<tt class="literal">process_starting_urls(&#160;)</tt> routine that gets called
+right before we start off the program's main loop.
+That routine needn't do anything more than this:
+</p>
+
+<pre class="code">sub process_starting_urls {
+  foreach my $url (@_) {
+    my $u = URI-&gt;new($url)-&gt;canonical;
+    schedule($u);
+    push @starting_urls, $u;
+  }
+  return;
+}</pre>
+
+<p>Note that we feed URLs through the <tt class="literal">canonical</tt>
+method, which converts a URL to its single most
+"proper" form; i.e., turning any
+capital letters in the hostname into lowercase, removing a redundant
+<tt class="literal">:80</tt> port specification at the end of the hostname,
+and so on. We'll use the
+<tt class="literal">canonical</tt> method throughout this program when
+dealing with URLs. If we had failed to use the
+<tt class="literal">canonical</tt> method, we would, for example, not know
+that <tt class="literal">http://nato.int</tt>,
+<tt class="literal">http://NATO.int/</tt> and
+<tt class="literal">http://nato.int:80/</tt> all certainly denote the same
+thing, in that they all translate to exactly the same request to
+exactly the same server.
+</p>
+
+<p>To get <tt class="literal">process_url(&#160;)</tt> fleshed out fully, we need
+to define <tt class="literal">process_near_url($url)</tt> and
+<tt class="literal">process_far_url($url)</tt>. We'll
+start with the first and simplest one. Processing a
+"far" URL (one
+that's not part of any site we're
+spidering, but is instead a URL we're merely
+checking the validity of), is a simple matter of HEADing the URL.
+</p>
+
+<pre class="code">my $robot;
+
+sub process_far_url {
+  my $url = $_[0];
+  say("HEADing $url\n");
+  ++$hit_count;
+  my $response = $robot-&gt;head($url, refer($url));
+  mutter("  That was hit #$hit_count\n");
+  consider_response($response);  # that's all we do!
+  return;
+}</pre>
+
+<p>The minor routine <tt class="literal">refer($url)</tt> should generate a
+<tt class="literal">Referer</tt> header for this request (or no header at
+all, if none can be generated). This is so if our request produces a
+404 and this shows up in the remote server's hit
+logs, that server's webmaster won't
+be left wondering "What on Earth links to that
+broken URL?" This routine merely checks the
+hash-of-hashes <tt class="literal">$points_to{$url}{$any_from_url}</tt>,
+and either returns empty list (for no header) if
+there's no entry for <tt class="literal">$url</tt>, or
+<tt class="literal">Referer</tt> <tt class="literal">=&gt;</tt>
+<tt class="literal">$some_url</tt> if there is an entry.
+</p>
+
+<pre class="code">my %points_to;
+
+sub refer {
+  # Generate a good Referer header for requesting this URL.
+  my $url = $_[0];
+  my $links_to_it = $points_to{$url};
+   # the set (hash) of all things that link to $url
+  return( ) unless $links_to_it and keys %$links_to_it;
+
+  my @urls = keys %$links_to_it; # in no special order!
+  mutter "  For $url, Referer =&gt; $urls[0]\n";
+  return "Referer" =&gt; $urls[0];
+}</pre>
+
+<p>The more important routine <tt class="literal">consider_response(&#160;)</tt> is
+where <a name="INDEX-691" class="ipoint"
+></a><a name="INDEX-692" class="ipoint"
+></a>we will have to mull over the results of
+<tt class="literal">process_far_url(&#160;)</tt>'s having
+headed the given URL. This routine should decide what HTTP statuses
+are errors, and not all errors are created equal. Some are merely
+"405 Method Not Allowed" errors
+from servers or CGIs that don't understand HEAD
+requests; these apparent errors should presumably not be reported to
+the user as broken links. We could just define this routine like so:
+</p>
+
+<pre class="code">sub consider_response {
+  # Return 1 if it's successful, otherwise return 0
+  my $response = $_[0];
+  mutter("  ", $response-&gt;status_line, "\n");
+  return 1 if $response-&gt;is_success;
+  note_error_response($response);
+  return 0;
+}</pre>
+
+<p>We then further break down the task of deciding what errors are
+worthy of reporting and delegate that to
+<a name="INDEX-693" class="ipoint"
+></a><a name="INDEX-694" class="ipoint"
+></a>a <tt class="literal">note_error_response(&#160;)</tt>
+routine:
+</p>
+
+<pre class="code">my %notable_url_error;  # URL =&gt; error message
+
+sub note_error_response {
+  my $response = $_[0];
+  return unless $response-&gt;is_error;
+
+  my $code = $response-&gt;code;
+  my $url = URI-&gt;new( $response-&gt;request-&gt;uri )-&gt;canonical;
+
+  if(  $code == 404 or $code == 410 or $code == 500  ) {
+    mutter(sprintf "Noting {%s} error at %s\n",
+           $response-&gt;status_line, $url );
+    $notable_url_error{$url} = $response-&gt;status_line;
+  } else {
+    mutter(sprintf "Not really noting {%s} error at %s\n",
+           $response-&gt;status_line, $url );
+  }
+  return;
+}</pre>
+
+<p>This <tt class="literal">note_error_response(&#160;)</tt> only really notes (in
+<tt class="literal">%notable_url_error</tt>) error messages that are 404
+"Not Found", 410
+"Gone", or 500 (which could be any
+number of things, from LWP having been unable to DNS the hostname, to
+the server actually reporting a real 500 error on a CGI). Among the
+errors that this is meant to avoid reporting is the 403
+"Forbidden" error, which is what
+LWP::RobotUA generates if we try accessing a URL that we are
+forbidden from accessing by that server's
+<em class="filename">robots.txt</em> file. In practice, if you base a
+spider on this code, you should routinely consult the logs (as
+generated by the above calls to <tt class="literal">mutter</tt>) to see
+what errors are being noted, versus what kinds of errors are being
+"not really noted." This is an
+example of how each will show up in the log:
+</p>
+
+<pre class="code">[T1017138941 = Tue Mar 26 03:35:41 2002]
+  For http://www.altculture.com/aentries/a/absolutely.html, Referer \
+  =&gt; http://www.speech.cs.cmu.edu/~sburke/
+[T1017139042 = Tue Mar 26 03:37:22 2002]
+  That was hit #10
+  500 Can't connect to www.altculture.com:80 (Timeout)
+Noting {500 Can't connect to www.altculture.com:80 (Timeout)} error \
+  at http://www.altculture.com/aentries/a/absolutely.html
+[T1017139392 = Tue Mar 26 03:43:12 2002]
+HEADing http://www.amazon.com/exec/obidos/ASIN/1565922840
+  For http://www.amazon.com/exec/obidos/ASIN/1565922840, Referer \
+  =&gt; http://www.speech.cs.cmu.edu/~sburke/pub/perl.html
+[T1017139404 = Tue Mar 26 03:43:24 2002]
+That was hit #51
+405 Method Not Allowed
+Not really noting {405 Method Not Allowed} error at \
+  http://www.amazon.com/exec/obidos/ASIN/1565922840</pre>
+
+</div>
+<a name="perllwp-CHP-12-SECT-3.4"></a><div class="sect2">
+<h3 class="sect2">12.3.4. Redirects</h3>
+
+<p>Implicit in our <tt class="literal">consider_request(&#160;)</tt> function,
+above, is
+<a name="INDEX-695" class="ipoint"
+></a>the idea that something either
+succeeded or was an error. However, there is an important and
+frequent middle-ground in HTTP status codes: redirection status
+codes.
+</p>
+
+<p>Normally, these are handled internally by the
+LWP::UserAgent/LWP::RobotUA object, assuming that we have left that
+object with its default setting of following redirects wherever
+possible. But do we want it following redirects at all?
+There's a big problem with such automatic redirect
+processing: if we request a URL with options appropriate for a
+"far" URL, and it redirects to a
+URL that's part of our site, we've
+done the wrong thing. Or, going the other way, if we GET a URL
+that's part of our site, and it redirects to a
+"far" URL, we'll
+have broken our policy of never GETting
+"far" URLs.
+</p>
+
+<p>The solution is to turn off automatic redirect following for the
+<tt class="literal">$robot</tt> that we use for HEADing and GETting (by
+calling <tt class="literal">$robot-&gt;requests_redirectable([])</tt> when
+we initialize it), and to deal with
+<a name="INDEX-696" class="ipoint"
+></a><a name="INDEX-697" class="ipoint"
+></a>redirects ourselves, in an expanded
+<tt class="literal">consider_response(&#160;)</tt> routine, like so:
+</p>
+
+<pre class="code">sub consider_response {
+  # Return 1 if it's successful, otherwise return 0
+  my $response = $_[0];
+  mutter("  ", $response-&gt;status_line, "\n");
+  return 1 if $response-&gt;is_success;
+
+  if($response-&gt;is_redirect) {
+    my $to_url = $response-&gt;header('Location');
+    if(defined $to_url and length $to_url and 
+      $to_url !~ m/\s/
+    ) {
+      my $from_url = $response-&gt;request-&gt;uri;
+      $to_url = URI-&gt;new_abs($to_url, $from_url);
+      mutter("Noting redirection\n  from $from_url\n",
+        "    to $to_url\n");
+      note_link_to( $from_url =&gt; $to_url );
+    }
+  } else {
+    note_error_response($response);
+  }
+
+  return 0;
+}</pre>
+
+<p>By now we have completely fleshed out <tt class="literal">process_url(
+)</tt> and everything it calls, except for
+<tt class="literal">process_near_url(&#160;)</tt> and the less-important
+<tt class="literal">note_link_to(&#160;)</tt> routine. Processing
+"near" (in-site) URLs is just an
+elaboration of what we do to "far"
+URLs. As discussed earlier, we will HEAD this URL, and if
+it's a successful URL (as shown by the return value
+of <tt class="literal">consider_response(&#160;)</tt>, remember!), and if it
+will contain HTML, we GET it and scan its content for links. The
+fully defined function seems long, but only because of our many calls
+to <tt class="literal">say(&#160;)</tt> and <tt class="literal">mutter(&#160;)</tt>, and
+all our sanity checking, such as not bothering to GET the URL if the
+HEAD actually returned content, as happens now and then.
+</p>
+
+<pre class="code">sub process_near_url {
+  my $url = $_[0];
+  mutter("HEADing $url\n");
+  ++$hit_count;
+  my $response = $robot-&gt;head($url, refer($url));
+  mutter("  That was hit #$hit_count\n");
+  return unless consider_response($response);
+
+  if($response-&gt;content_type ne 'text/html') {
+    mutter("  HEAD-response says it's not HTML!  Skipping ",
+        $response-&gt;content_type, "\n");
+    return;
+  }
+  if(length ${ $response-&gt;content_ref }) {
+    mutter("  Hm, that had content!  Using it...\n" );
+    say("Using head-gotten $url\n");
+  } else {
+    mutter("It's HTML!\n");
+    say("Getting $url\n");
+    ++$hit_count;
+    $response = $robot-&gt;get($url, refer($url));
+    mutter("  That was hit #$hit_count\n");
+    return unless consider_response($response);
+  }
+  if($response-&gt;content_type eq 'text/html') {
+    mutter("  Scanning the gotten HTML...\n");
+    extract_links_from_response($response);
+  } else {
+    mutter("  Skipping the gotten non-HTML (",
+      $response-&gt;content_type, ") content.\n");
+  }
+  return;
+}</pre>
+
+<p>All the routines this uses are already familiar, except
+<tt class="literal">extract_links_from_response(&#160;)</tt>.
+</p>
+
+</div>
+<a name="perllwp-CHP-12-SECT-3.5"></a><div class="sect2">
+<h3 class="sect2">12.3.5. Link Extraction</h3>
+
+<p>Our <tt class="literal">extract_links_from_response(&#160;)</tt> routine
+<a name="INDEX-698" class="ipoint"
+></a><a name="INDEX-699" class="ipoint"
+></a>has to take
+a successful HTTP::Response object containing HTML and extract the
+URLs from the links in it. But in practice,
+"link" can be an imprecise term.
+Clearly, this constitutes a link:
+</p>
+
+<pre class="code">&lt;a href="pie.html"&gt;I like pie!&lt;/a&gt;</pre>
+
+<p>But what about the <tt class="literal">area</tt> element here?</p>
+
+<pre class="code">&lt;map&gt;
+ ...
+<tt class="userinput"><b> &lt;area</b></tt> shape="rect" <tt class="userinput"><b>href="pie.html"</b></tt> coords="0,0,80,21"&gt;
+ ...
+&lt;/map&gt;</pre>
+
+<p>Or what about the <tt class="literal">frame</tt> element here?</p>
+
+<pre class="code">&lt;frameset rows="*,76"&gt;
+ ...
+<tt class="userinput"><b> &lt;frame src="pie.html" </b></tt>name="eat_it"&gt;
+ ...
+&lt;/frameset&gt;</pre>
+
+<p>And what about the <tt class="literal">background</tt> attribute value here?</p>
+
+<pre class="code">&lt;body bgcolor="#000066" <tt class="userinput"><b>background="images/bg.gif"</b></tt> ... &gt;</pre>
+
+<p>You will have to decide for each kind of spider task what sort of
+links it should be interested in and implement a different
+<tt class="literal">extract_links_from_response(&#160;)</tt> accordingly. For
+purposes of simplicity, we'll consider only
+<tt class="literal">&lt;a href="..."&gt;</tt> tags to be links. This is
+easy to implement using the HTML::TokeParser approach we covered in
+<a href="ch07_01.htm">Chapter 7, "HTML Processing with Tokens"</a> and using the URI class we covered in
+<a href="ch04_01.htm">Chapter 4, "URLs"</a>.
+</p>
+
+<pre class="code">use HTML::TokeParser;
+use URI;
+
+sub extract_links_from_response {
+  my $response = $_[0];
+
+  my $base = URI-&gt;new( $response-&gt;base )-&gt;canonical;
+    # "canonical" returns it in the one "official" tidy form
+
+  my $stream = HTML::TokeParser-&gt;new( $response-&gt;content_ref );
+  my $page_url = URI-&gt;new( $response-&gt;request-&gt;uri );
+
+  mutter( "Extracting links from $page_url\n" );
+
+  my($tag, $link_url);
+  while( $tag = $stream-&gt;get_tag('a') ) {
+    next unless defined($link_url = $tag-&gt;[1]{'href'});
+    next if $link_url =~ m/\s/; # If it's got whitespace, it's a bad URL.
+    next unless length $link_url; # sanity check!
+  
+    $link_url = URI-&gt;new_abs($link_url, $base)-&gt;canonical;
+    next unless $link_url-&gt;scheme eq 'http'; # sanity
+  
+    $link_url-&gt;fragment(undef); # chop off any "#foo" part
+    note_link_to($page_url =&gt; $link_url)
+      unless $link_url-&gt;eq($page_url); # Don't note links to itself!
+  }
+  return;
+}</pre>
+
+<p>This does lots of sanity checking on the <tt class="literal">href</tt>
+attribute value but ends up feeding to <tt class="literal">note_link_to(
+)</tt> new (absolute) URI objects for URLs such as <em class="emphasis">http://bazouki-consortium.int/</em> or <em class="emphasis">http://www.mybalalaika.com/oggs/studio_credits.html</em>,
+while skipping non-HTTP URLs such as <em class="emphasis">mailto:info@mybalalaika.com</em>, as well as
+invalid URLs that might arise from parsing bad HTML.
+</p>
+
+<p>This is about as complex as our spider code gets, and
+it's easy from here on.
+</p>
+
+</div>
+<a name="perllwp-CHP-12-SECT-3.6"></a><div class="sect2">
+<h3 class="sect2">12.3.6. Fleshing Out the URL Scheduling</h3>
+
+<p>So far we've used a <tt class="literal">note_link_to(
+)</tt> routine twice. That <a name="INDEX-700" class="ipoint"
+></a>routine
+need only do a bit of accounting to update the
+<tt class="literal">%points_to</tt> hash we mentioned earlier and schedule
+this URL to be visited.
+</p>
+
+<pre class="code">sub note_link_to {
+  my($from_url =&gt; $to_url) = @_;
+  $points_to{ $to_url }{ $from_url } = 1;
+  mutter("Noting link\n  from $from_url\n    to $to_url\n");
+  schedule($to_url);
+  return;
+}</pre>
+
+<p>That leaves routines such as <tt class="literal">schedule(&#160;)</tt> left to
+write. As a reminder, three things need to be done with the schedule
+(as we're calling the big set of URLs that need to
+be visited). We need a way to see how many entries there are in it
+with <tt class="literal">schedule_count(&#160;)</tt> (at least so
+<tt class="literal">main_loop(&#160;)</tt> can know when it's
+empty). We'll need to pull a URL from the schedule
+with <tt class="literal">next_scheduled_url()</tt>, so
+<tt class="literal">main_loop()</tt> can feed it to
+<tt class="literal">process_url()</tt>. And we need a way to feed a URL
+into the schedule, with <tt class="literal">schedule($url)</tt>, as called
+from <tt class="literal">note_link_to(&#160;)</tt> and
+<tt class="literal">process_starting_urls(&#160;)</tt>.
+</p>
+
+<p>A simple Perl array is a perfectly sufficient data structure for our
+schedule, so we can write <tt class="literal">schedule_count(&#160;)</tt> like
+so:
+</p>
+
+<pre class="code">my @schedule;
+sub schedule_count     { return scalar @schedule }</pre>
+
+<p>The implementation of <tt class="literal">next_scheduled_url(&#160;)</tt>
+depends on exactly what we mean by
+"next." If our
+<tt class="literal">@schedule</tt> is a proper stack, scheduling a URL
+means we <tt class="literal">push</tt> <tt class="literal">@schedule, $url</tt>,
+and <tt class="literal">next_scheduled_url(&#160;)</tt> is just a matter of
+<tt class="literal">$url = pop @schedule</tt>. If our
+<tt class="literal">@schedule</tt> is a proper queue, then scheduling a URL
+means we <tt class="literal">push</tt> <tt class="literal">@schedule, $url</tt>,
+and <tt class="literal">next_scheduled_url(&#160;)</tt> is just a matter of
+<tt class="literal">$url = shift</tt> <tt class="literal">@schedule</tt>.
+</p>
+
+<p>Both of these approaches make our spider quite predictable, in the
+sense that when run on the same site, it will always do the same
+things in the same order. This could theoretically be an advantage
+for debugging, and would be a necessary feature if we were trying to
+debug without the benefit of the logging we've
+written into the spider.
+</p>
+
+<p>However, that predictability is also a problem: if the spider happens
+on a page with dozens of slow-responding URLs, it could spend the
+rest of its life trying to check those links; i.e., until
+<tt class="literal">main_loop(&#160;)</tt> quits because
+<tt class="literal">$hit_count</tt> reaches <tt class="literal">$hit_limit</tt>
+or because <tt class="literal">time(&#160;)</tt> reaches
+<tt class="literal">$expiration</tt>. In practice, this problem is greatly
+alleviated (although not completely eliminated) by pulling URLs not
+from the beginning or end of <tt class="literal">@schedule</tt>, but
+instead from a random point in it:
+</p>
+
+<pre class="code">sub next_scheduled_url {
+  my $url = splice @schedule, rand(@schedule), 1;
+
+  mutter("\nPulling from schedule: ", $url || "[nil]",
+    "\n  with ", scalar(@schedule),
+    " items left in schedule.\n");
+  return $url;
+}</pre>
+
+<p>This leaves us with the <tt class="literal">schedule($url)</tt> routine to
+flesh out. It would be as simple as:
+</p>
+
+<pre class="code">sub schedule {
+  my $url = $_[0];
+  push @schedule, URI-&gt;new($url);
+  return;
+}</pre>
+
+<p>However, we don't do much sanity checking on URLs
+everywhere else, so we need to do lots of it all here. First off, we
+need to make sure we don't schedule a URL that
+we've scheduled before. Not only does this keep
+there from being duplicates in <tt class="literal">@schedule</tt> at any
+one time, it means we never process the same URL twice in any given
+session.
+</p>
+
+<p>Second off, we want to skip non-HTTP URLs, because other schemes
+(well, except HTTPS) aren't HEADable and
+don't have MIME types, two things our whole spider
+logic depends on. Moreover, we probably want to skip URLs that have
+queries (<em class="emphasis">http://foo.bar/thing?baz</em>) because those
+are usually CGIs, which typically don't understand
+HEAD requests. Moreover, we probably want to skip HTTP URLs that
+inexplicably have userinfo components
+(<em class="emphasis">http://joeschmo@foo.bar/thing</em>), which are
+typically typos for FTP URLs, besides just being bizarre.
+</p>
+
+<p>We also want to regularize the hostname, so we won't
+think <em class="emphasis">http://www.Perl.com/</em>,
+<em class="emphasis">http://www.perl.com/</em>, and
+<em class="emphasis">http://www.perl.com./</em> are all
+different hosts, to be visited separately. We also want to skip URLs
+that are too "deep," such as
+<em class="emphasis">http://www.foo.int/docs/docs/docs/docs/docs/docs/about.html</em>,
+which are typically a sign of a wild symlink or some other similar
+problem. We also want to skip unqualified hostnames, such as
+<em class="emphasis">http://www/</em> or <em class="emphasis">http://mailhost/</em>, and URLs with path
+weirdness, such as <em class="emphasis">http://thing.com/./././//foo.html</em>. Then we
+chop off any <em class="emphasis">#foo</em> fragment at the
+end of the URL, and finally add the URL to
+<tt class="literal">@schedule</tt> if it's new.
+</p>
+
+<p>All that sort of sanity checking adds up to this:</p>
+
+<pre class="code">my %seen_url_before;
+
+sub schedule {
+  # Add these URLs to the schedule
+  foreach my $url (@_) {
+    my $u = ref($url) ? $url : URI-&gt;new($url);
+    $u = $u-&gt;canonical;  # force canonical form
+ 
+    next unless 'http' eq ($u-&gt;scheme || '');
+    next if defined $u-&gt;query;
+    next if defined $u-&gt;userinfo;
+
+    $u-&gt;host( regularize_hostname( $u-&gt;host( ) ) );
+    return unless $u-&gt;host( ) =~ m/\./;
+
+    next if url_path_count($u) &gt; 6;
+    next if $u-&gt;path =~ m&lt;//&gt; or $u-&gt;path =~ m&lt;/\.+(/|$)&gt;;
+
+    $u-&gt;fragment(undef);
+
+    if( $seen_url_before{ $u-&gt;as_string }++ ) {
+      mutter("  Skipping the already-seen $u\n");
+    } else {
+      mutter("  Scheduling $u\n");
+      push @schedule, $u;
+    }
+  }
+  return;
+}</pre>
+
+<p>All we need is the routine that regularizes a given hostname:</p>
+
+<pre class="code">sub regularize_hostname {
+  my $host = lc $_[0];
+  $host =~ s/\.+/\./g; # foo..com =&gt; foo.com
+  $host =~ s/^\.//;    # .foo.com =&gt; foo.com
+  $host =~ s/\.$//;    # foo.com. =&gt; foo.com
+  return 'localhost' if $host =~ m/^0*127\.0+\.0+\.0*1$/;
+  return $host;
+}</pre>
+
+<p>then a routine that counts the number of
+<tt class="literal">/</tt>-separated parts in the URL path:
+</p>
+
+<pre class="code">sub url_path_count {
+  # Return 4 for "http://foo.int/fee/fie/foe/fum"
+  #                               1   2   3   4
+  my $url = $_[0];
+  my @parts = $url-&gt;path_segments;
+  shift @parts if @parts and $parts[ 0] eq '';
+  pop   @parts if @parts and $parts[-1] eq '';
+  return scalar @parts;
+}</pre>
+
+</div>
+<a name="perllwp-CHP-12-SECT-3.7"></a><div class="sect2">
+<h3 class="sect2">12.3.7. The Rest of the Code</h3>
+
+<p>That's a fully functioning checker-spider&#x2014;at
+least once you add in the boring switch processing,
+<tt class="literal">initialize(&#160;)</tt>, and the <tt class="literal">report(
+)</tt> that dumps the contents of
+<tt class="literal">%notable_url_error</tt>, which are as follows:
+</p>
+
+<pre class="code">use strict;
+use warnings;
+use URI;
+use LWP;
+ 
+<b class="emphasis-bold"># Switch processing</b>:
+my %option;
+use Getopt::Std;
+getopts('m:n:t:l:e:u:t:d:hv', \%option) || usage_quit(1);
+usage_quit(0) if $option{'h'} or not @ARGV;
+ 
+<b class="emphasis-bold">sub usage_quit {</b>
+  # Emit usage message, then exit with given error code.
+  print &lt;&lt;"END_OF_MESSAGE"; exit($_[0] || 0);
+Usage:
+$0  [switches]  [urls]
+  This will spider for bad links, starting at the given URLs.
+   
+Switches:
+ -h        display this help message
+ -v        be verbose in messages to STDOUT  (default off)
+ -m 123    run for at most 123 minutes.  (default 20)
+ -n 456    cause at most 456 network hits.  (default 500)
+ -d 7      delay for 7 seconds between hits.  (default 10)
+ -l x.log  log to text file x.log. (default is to not log)
+ -e y\@a.b  set bot admin address to y\@a.b  (no default!)
+ -u Xyz    set bot name to Xyz.  (default: Verifactrola)
+ -t 34     set request timeout to 34 seconds.  (default 15)
+ 
+END_OF_MESSAGE
+}
+ 
+my $expiration = ($option{'m'} ||  20) * 60 + time( );
+my $hit_limit  =  $option{'n'} || 500;
+my $log        =  $option{'l'};
+my $verbose    =  $option{'v'};
+my $bot_name   =  $option{'u'} || 'Verifactrola/1.0';
+my $bot_email  =  $option{'e'} || '';
+my $timeout    =  $option{'t'} || 15;
+my $delay      =  $option{'d'} || 10;
+die "Specify your email address with -e\n"
+  unless $bot_email and $bot_email =~ m/\@/;
+ 
+my $hit_count = 0;
+my $robot;  # the user-agent itself
+ 
+<b class="emphasis-bold"># Then the top-level code we've already seen</b>:
+initialize( );
+process_starting_urls(@ARGV);
+main_loop( );
+report( ) if $hit_count;
+say("Quitting.\n");
+exit;
+ 
+<b class="emphasis-bold">sub initialize {</b>
+  init_logging( );
+  init_robot( );
+  init_signals( );
+  return;
+}
+ 
+<b class="emphasis-bold">sub init_logging {</b>
+  my $selected = select(STDERR);
+  $| = 1; # Make STDERR unbuffered.
+  if($log) {
+    open LOG, "&gt;&gt;$log" or die "Can't append-open $log: $!";
+    select(LOG);
+    $| = 1; # Make LOG unbuffered
+  }
+  select($selected);
+  print "Logging to $log\n" if $log;
+  return;
+}
+ 
+<b class="emphasis-bold">sub init_robot {</b>
+  use LWP::RobotUA;
+  $robot = LWP::RobotUA-&gt;new($bot_name, $bot_email);
+  $robot-&gt;delay($delay/60); # "/60" to do seconds-&gt;minutes
+  $robot-&gt;timeout($timeout);
+  $robot-&gt;requests_redirectable([]);
+    # don't follow any sort of redirects
+  $robot-&gt;protocols_allowed(['http']);  # disabling all others
+  say("$bot_name ($bot_email) starting at ", scalar(localtime), "\n");
+  return;
+}
+ 
+<tt class="userinput"><b>sub init_signals {</b></tt>  # catch control-C's
+  $SIG{'INT'} = sub { $QUIT_NOW = 1; return;};
+   # That might not be emulated right under MSWin.
+  return;
+}
+ 
+ 
+<tt class="userinput"><b>sub report {</b></tt>  # This gets run at the end.
+  say(
+    "\n\nEnding at ", scalar(localtime),
+    " after ", time( ) - $^T,
+    "s of runtime and $hit_count hits.\n\n",
+  );
+  unless(keys %notable_url_error) {
+    say( "\nNo bad links seen!\n" );
+    return;
+  }
+ 
+  say( "BAD LINKS SEEN:\n" );
+  foreach my $url (sort keys %notable_url_error) {
+    say( "\n$url\n  Error: $notable_url_error{$url}\n" );
+    foreach my $linker (sort keys %{ $points_to{$url} } ) {
+      say( "  &lt; $linker\n" );
+    }
+  }
+  return;
+}</pre>
+
+<p>And that's all <a name="INDEX-701" class="ipoint"
+></a><a name="INDEX-702" class="ipoint"
+></a>of it!
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

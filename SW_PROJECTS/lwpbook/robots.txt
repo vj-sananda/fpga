@@ -1,0 +1,26 @@
+
+# See http://www.robotstxt.org/
+#    Time-stamp: "2007-03-27 19:22:10 AKDT sburke@cpan.org"
+
+User-agent: ZyBorg
+Disallow: /
+
+User-agent: jyte_feed_fetcher
+Disallow: /
+
+User-agent: Wget
+Disallow: /
+
+# Useless bot:
+# See http://www.kahunaburger.com/blog/archives/000117.html
+
+User-Agent: lmspider (lmspider@scansoft.com)
+Disallow: /
+
+User-Agent: lmspider lmspider@scansoft.com
+Disallow: /
+
+# Then, as a fallthru, allow all
+User-agent:  *
+Disallow:
+

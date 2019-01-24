@@ -1,0 +1,16 @@
+F:\fpga\proj\huffman_decode\implementation\system.ngc 1114373102
+F:/fpga/proj/huffman_decode/implementation/huffman_decoder_0_wrapper.ngc 1114373086
+F:/fpga/proj/huffman_decode/implementation/dcm_0_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/plb_bram_if_cntlr_1_bram_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/plb_bram_if_cntlr_1_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/reset_block_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/jtagppc_0_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/ppc405_1_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/ppc405_0_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/dipsws_4bit_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/leds_4bit_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/rs232_uart_1_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/plb2opb_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/opb_wrapper.ngc 1114372989
+F:/fpga/proj/huffman_decode/implementation/plb_wrapper.ngc 1114372989
+OK

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Relative URLs (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch04_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch04_02' class='lwp lwp_ch04_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">4.2. Relative URLs</h2>
+
+<p>URL paths are either <a name="INDEX-251" class="ipoint"
+></a><a name="INDEX-252" class="ipoint"
+></a>absolute
+or relative. An absolute URL starts with a scheme, then has whatever
+data this scheme requires. For an HTTP URL, this means a hostname and
+a path:
+</p>
+
+<pre class="code">http://phee.phye.phoe.fm/thingamajig/stuff.html</pre>
+
+<p>Any URL that doesn't start with
+<a name="INDEX-253" class="ipoint"
+></a><a name="INDEX-254" class="ipoint"
+></a>a scheme
+is relative. To interpret a relative URL, you need a base URL that is
+absolute (just as you don't know the GPS coordinates
+of "800 miles west of here" unless
+you know the GPS coordinates of
+"here").
+</p>
+
+<p>A relative URL leaves <a name="INDEX-255" class="ipoint"
+></a><a name="INDEX-256" class="ipoint"
+></a>some information implicit, which
+you look to its base URL for. For example, if your base URL is
+<em class="emphasis">http://phee.phye.phoe.fm/thingamajig/stuff.html</em>,
+and you see a relative URL of <em class="emphasis">/also.html</em>, then
+the implicit information is "with the same scheme
+(<tt class="literal">http</tt>)" and "on
+the same host
+(<em class="emphasis">phee.phye.phoe.fm</em>)," and the
+explicit information is "with the path
+<em class="emphasis">/also.html</em>." So this is
+equivalent to an absolute URL of:
+</p>
+
+<pre class="code">http://phee.phye.phoe.fm/also.html</pre>
+
+<p>Some kinds of relative URLs require information from the path of the
+base URL in a way that closely mirrors relative filespecs in Unix
+filesystems, where
+"<tt class="literal">..</tt>" means
+"up one level",
+"<tt class="literal">.</tt>" means
+"in this level", and anything else
+means "in this directory". So a
+relative URL of just <em class="emphasis">zing.xml</em> interpreted
+relative to
+<em class="emphasis">http://phee.phye.phoe.fm/thingamajig/stuff.html</em>
+yields this absolute URL:
+</p>
+
+<pre class="code">http://phee.phye.phoe.fm/thingamajig/zing.xml</pre>
+
+<p>That is, we use all but the last bit of the absolute
+URL's path, then append the new component.
+</p>
+
+<p>Similarly, a relative URL of <em class="emphasis">../hi_there.jpg</em>
+interpreted against the absolute URL
+<em class="emphasis">http://phee.phye.phoe.fm/thingamajig/stuff.html</em>
+gives us this URL:
+</p>
+
+<pre class="code">http://phee.phye.phoe.fm/hi_there.jpg</pre>
+
+<p>In figuring this out, start with
+<em class="emphasis">http://phee.phye.phoe.fm/thingamajig/</em> and the
+"<tt class="literal">..</tt>" tells us to
+go up one level, giving us
+<em class="emphasis">http://phee.phye.phoe.fm/</em>. Append
+<em class="emphasis">hi_there.jpg</em> giving us the URL you see above.
+</p>
+
+<p>There's a third kind of relative URL, which consists
+entirely of a fragment, such as <em class="emphasis">#endnotes</em>. This
+is commonly met with in HTML documents, in code like so:
+</p>
+
+<pre class="code">&lt;a href="#endnotes"&gt;See the endnotes for the full citation&lt;/a&gt;</pre>
+
+<p>Interpreting a fragment-only relative URL
+<a name="INDEX-257" class="ipoint"
+></a><a name="INDEX-258" class="ipoint"
+></a><a name="INDEX-259" class="ipoint"
+></a>involves
+taking the base URL, stripping off any fragment
+that's already there, and adding the new one. So if
+the base URL is this:
+</p>
+
+<pre class="code">http://phee.phye.phoe.fm/thingamajig/stuff.html</pre>
+
+<p>and the relative URL is <em class="emphasis">#endnotes</em>, then the new
+absolute URL is this:
+</p>
+
+<pre class="code">http://phee.phye.phoe.fm/thingamajig/stuff.html#endnotes</pre>
+
+<p>We've looked at relative URLs from the perspective
+of starting with a relative URL and an absolute base, and getting the
+equivalent absolute URL. But you can also look at it the other way:
+starting with an absolute URL and asking "what is
+the relative URL that gets me there, relative to an absolute base
+URL?". This is best explained by putting the URLs
+one on top of the other:
+</p>
+
+<pre class="code">Base: http://phee.phye.phoe.fm/thingamajig/<tt class="userinput"><b>stuff.xml</b></tt>
+Goal: http://phee.phye.phoe.fm/thingamajig/<tt class="userinput"><b>zing.html</b></tt></pre>
+
+<p>To get from the base to the goal, the shortest relative URL is simply
+<em class="emphasis">zing.xml</em>. However, if the goal is a directory
+higher:
+</p>
+
+<pre class="code">Base: http://phee.phye.phoe.fm/thingamajig/<tt class="userinput"><b>stuff.xml</b></tt>
+Goal: http://phee.phye.phoe.fm/<tt class="userinput"><b>hi_there.jpg</b></tt></pre>
+
+<p>then a relative path is <em class="emphasis">../hi_there.jpg</em>. And in
+this case, simply starting from the document root and having a
+relative path of <em class="emphasis">/hi_there.jpg</em> would also get
+you there.
+</p>
+
+<p>The logic behind parsing relative URLs and converting between them
+and absolute URLs is not simple and is very easy to get wrong. The
+fact that the URI class provides functions for doing it all for us is
+one of its greatest benefits. You are likely to have two kinds of
+dealings with relative URLs: wanting to turn an absolute URL into a
+relative URL and wanting to turn a relative URL into an absolute URL.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

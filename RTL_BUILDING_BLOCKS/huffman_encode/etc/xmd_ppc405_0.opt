@@ -1,0 +1,1 @@
+connect ppc hw -cable type xilinx_platformusb port USB2 frequency 6000000 -debugdevice cpunr 1

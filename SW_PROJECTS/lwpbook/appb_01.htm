@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>HTTP Status Codes (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appb_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:31:53 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appb_01' class='lwp lwp_appb_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Appendix B. HTTP Status Codes</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-APP-B-SECT-1">100s: Informational</a><br />
+<a href="appb_02.htm">200s: Successful</a><br />
+<a href="appb_03.htm">300s: Redirection</a><br />
+<a href="appb_04.htm">400s: Client Errors</a><br />
+<a href="appb_05.htm">500s: Server Errors</a><br /></p></div><p>You can find a detailed explanation of each status code in RFC 2616
+<em class="emphasis">(Hypertext Transfer Protocol&#x2014;HTTP/1.1)</em> at
+<a href="http://www.rfc-editor.org">http://www.rfc-editor.org</a>.
+</p><div class="sect1"><a name="perllwp-APP-B-SECT-1"></a>
+<h2 class="sect1">B.1. 100s: Informational</h2>
+
+<p>If an LWP request gets either of these rarely used codes,
+<tt class="literal">$response-&gt;is_info</tt> will be true. For all other
+status codes, <tt class="literal">$response-&gt;is_info</tt> will be false.
+</p>
+
+<pre class="code">100 Continue
+101 Switching Protocols</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

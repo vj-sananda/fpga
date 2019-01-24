@@ -1,0 +1,454 @@
+Release 9.1.03i - xst J.33
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "synth.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "synth"
+Output Format                      : NGC
+Target Device                      : xc2vp30-7-ff896
+
+---- Source Options
+Top Module Name                    : freelist
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Equivalent register Removal        : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Convert Tristates To Logic         : Yes
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : auto
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Library Search Order               : synth.lso
+Keep Hierarchy                     : NO
+Global Optimization                : AllClockNets
+RTL Output                         : Yes
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Verilog 2001                       : YES
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "./freelist.v" in library work
+Module <freelist> compiled
+Module <tb> compiled
+No errors in compilation
+Analysis of file <"synth.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <freelist> in library <work> with parameters.
+	awidth = "00000000000000000000000000001000"
+	dwidth = "00000000000000000000000000001000"
+	dwidth_1s = "11111111"
+	initialize = "00000000000000000000000000000011"
+	read_nxt_head = "00000000000000000000000000000010"
+	wait_for_req = "00000000000000000000000000000000"
+	write_update_tail = "00000000000000000000000000000001"
+
+Analyzing hierarchy for module <dpmem> in library <work> with parameters.
+	awidth = "00000000000000000000000000001000"
+	dwidth = "00000000000000000000000000001000"
+	size = "00000000000000000000000100000000"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <freelist>.
+	awidth = 32'sb00000000000000000000000000001000
+	dwidth = 32'sb00000000000000000000000000001000
+	dwidth_1s = 8'b11111111
+	initialize = 32'sb00000000000000000000000000000011
+	read_nxt_head = 32'sb00000000000000000000000000000010
+	wait_for_req = 32'sb00000000000000000000000000000000
+	write_update_tail = 32'sb00000000000000000000000000000001
+WARNING:Xst:905 - "./freelist.v" line 97: The signals <din1_rc> are missing in the sensitivity list of always block.
+Module <freelist> is correct for synthesis.
+ 
+Analyzing module <dpmem> in library <work>.
+	awidth = 32'sb00000000000000000000000000001000
+	dwidth = 32'sb00000000000000000000000000001000
+	size = 32'sb00000000000000000000000100000000
+WARNING:Xst:1464 - "./dpmem.v" line 35: Exactly equal expression will be synthesized as an equal expression, simulation mismatch is possible.
+Module <dpmem> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <dpmem>.
+    Related source file is "./dpmem.v".
+    Found 256x8-bit dual-port RAM <Mram_mem> for signal <mem>.
+    Found 8-bit register for signal <dout1>.
+    Found 8-bit register for signal <dout2>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred  16 D-type flip-flop(s).
+Unit <dpmem> synthesized.
+
+
+Synthesizing Unit <freelist>.
+    Related source file is "./freelist.v".
+WARNING:Xst:653 - Signal <addr2> is used but never assigned. Tied to value 00000000.
+WARNING:Xst:646 - Signal <wr1_rc> is assigned but never used.
+WARNING:Xst:646 - Signal <addr1_rc> is assigned but never used.
+WARNING:Xst:646 - Signal <dout2> is assigned but never used.
+WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
+    Found 8-bit 4-to-1 multiplexer for signal <addr1_wc>.
+    Found 1-bit register for signal <alloc_ack_rc>.
+    Found 8-bit register for signal <alloc_id_rc>.
+    Found 1-bit register for signal <alloc_pending_rc>.
+    Found 1-bit register for signal <dealloc_ack_rc>.
+    Found 1-bit register for signal <dealloc_pending_rc>.
+    Found 8-bit register for signal <din1_rc>.
+    Found 8-bit 4-to-1 multiplexer for signal <din1_wc>.
+    Found 2-bit register for signal <flist_cs>.
+    Found 8-bit comparator not equal for signal <flist_cs$cmp_ne0000> created at line 155.
+    Found 2-bit 4-to-1 multiplexer for signal <flist_ns>.
+    Found 8-bit register for signal <head_rc>.
+    Found 1-bit register for signal <init_done_rc>.
+    Found 8-bit register for signal <tail_rc>.
+    Found 1-bit 4-to-1 multiplexer for signal <wr1_wc>.
+    Summary:
+	inferred  39 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+	inferred  19 Multiplexer(s).
+Unit <freelist> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 256x8-bit dual-port RAM                               : 1
+# Adders/Subtractors                                   : 1
+ 8-bit adder                                           : 1
+# Registers                                            : 12
+ 1-bit register                                        : 5
+ 2-bit register                                        : 1
+ 8-bit register                                        : 6
+# Comparators                                          : 1
+ 8-bit comparator not equal                            : 1
+# Multiplexers                                         : 4
+ 1-bit 4-to-1 multiplexer                              : 1
+ 2-bit 4-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 2
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Loading device for application Rf_Device from file '2vp30.nph' in environment C:\Xilinx91i.
+INFO:Xst:2691 - Unit <dpmem> : The RAM <Mram_mem> will be implemented as a BLOCK RAM, absorbing the following register(s): <dout1> <dout2>.
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 256-word x 8-bit                    |          |
+    |     mode           | no-change                           |          |
+    |     clkA           | connected to signal <clk1>          | rise     |
+    |     weA            | connected to signal <wr1>           | high     |
+    |     addrA          | connected to signal <addr1>         |          |
+    |     diA            | connected to signal <din1>          |          |
+    |     doA            | connected to signal <dout1>         |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 256-word x 8-bit                    |          |
+    |     mode           | write-first                         |          |
+    |     clkB           | connected to signal <clk2>          | rise     |
+    |     addrB          | connected to signal <addr2>         |          |
+    |     doB            | connected to signal <dout2>         |          |
+    -----------------------------------------------------------------------
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 256x8-bit dual-port block RAM                         : 1
+# Adders/Subtractors                                   : 1
+ 8-bit adder                                           : 1
+# Registers                                            : 39
+ Flip-Flops                                            : 39
+# Comparators                                          : 1
+ 8-bit comparator not equal                            : 1
+# Multiplexers                                         : 4
+ 1-bit 4-to-1 multiplexer                              : 1
+ 2-bit 4-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 2
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <freelist> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block freelist, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 39
+ Flip-Flops                                            : 39
+
+=========================================================================
+
+=========================================================================
+*                          Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : synth.ngr
+Top Level Output File Name         : synth
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 23
+
+Cell Usage :
+# BELS                             : 115
+#      GND                         : 1
+#      INV                         : 1
+#      LUT2                        : 9
+#      LUT2_D                      : 4
+#      LUT3                        : 5
+#      LUT3_D                      : 1
+#      LUT4                        : 66
+#      LUT4_D                      : 2
+#      LUT4_L                      : 14
+#      MUXF5                       : 11
+#      VCC                         : 1
+# FlipFlops/Latches                : 39
+#      FDE                         : 8
+#      FDR                         : 20
+#      FDRS                        : 1
+#      FDS                         : 10
+# RAMS                             : 1
+#      RAMB16_S9_S9                : 1
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 22
+#      IBUF                        : 11
+#      OBUF                        : 11
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                      53  out of  13696     0%  
+ Number of Slice Flip Flops:            39  out of  27392     0%  
+ Number of 4 input LUTs:               102  out of  27392     0%  
+ Number of IOs:                         23
+ Number of bonded IOBs:                 23  out of    556     4%  
+ Number of BRAMs:                        1  out of    136     0%  
+ Number of GCLKs:                        1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 40    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 3.684ns (Maximum Frequency: 271.433MHz)
+   Minimum input arrival time before clock: 4.018ns
+   Maximum output required time after clock: 3.340ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 3.684ns (frequency: 271.433MHz)
+  Total number of paths / destination ports: 751 / 57
+-------------------------------------------------------------------------
+Delay:               3.684ns (Levels of Logic = 4)
+  Source:            head_rc_4 (FF)
+  Destination:       flist_cs_1 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: head_rc_4 to flist_cs_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              4   0.370   0.549  head_rc_4 (head_rc_4)
+     LUT4:I0->O            1   0.275   0.430  flist_cs_cmp_ne000065 (flist_cs_cmp_ne0000_map21)
+     LUT4:I1->O           18   0.275   0.611  flist_cs_cmp_ne0000164 (flist_cs_cmp_ne0000)
+     LUT4:I2->O            2   0.275   0.416  Mmux_addr1_wc12 (alloc_ack_wc)
+     LUT4:I3->O            1   0.275   0.000  Mmux_flist_ns21 (flist_ns<1>)
+     FDS:D                     0.208          flist_cs_1
+    ----------------------------------------
+    Total                      3.684ns (1.678ns logic, 2.006ns route)
+                                       (45.5% logic, 54.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 137 / 86
+-------------------------------------------------------------------------
+Offset:              4.018ns (Levels of Logic = 4)
+  Source:            dealloc_req (PAD)
+  Destination:       freemem/Mram_mem (RAM)
+  Destination Clock: clk rising
+
+  Data Path: dealloc_req to freemem/Mram_mem
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            16   0.878   0.766  dealloc_req_IBUF (dealloc_req_IBUF)
+     LUT4:I0->O            7   0.275   0.601  Mmux_din1_wc841 (dealloc_ack_wc)
+     LUT2:I0->O            1   0.275   0.369  Mmux_din1_wc67_SW0 (N325)
+     LUT4:I3->O            2   0.275   0.378  Mmux_din1_wc616 (din1_wc<5>)
+     RAMB16_S9_S9:DIA5         0.200          freemem/Mram_mem
+    ----------------------------------------
+    Total                      4.018ns (1.903ns logic, 2.115ns route)
+                                       (47.4% logic, 52.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 11 / 11
+-------------------------------------------------------------------------
+Offset:              3.340ns (Levels of Logic = 1)
+  Source:            init_done_rc (FF)
+  Destination:       init_done (PAD)
+  Source Clock:      clk rising
+
+  Data Path: init_done_rc to init_done
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRS:C->Q             2   0.370   0.378  init_done_rc (init_done_rc)
+     OBUF:I->O                 2.592          init_done_OBUF (init_done)
+    ----------------------------------------
+    Total                      3.340ns (2.962ns logic, 0.378ns route)
+                                       (88.7% logic, 11.3% route)
+
+=========================================================================
+CPU : 14.78 / 15.30 s | Elapsed : 15.00 / 16.00 s
+ 
+--> 
+
+Total memory usage is 193944 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    7 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

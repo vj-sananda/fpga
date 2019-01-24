@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top iocm_cntlr_wrapper
+-ifmt MIXED
+-ifn iocm_cntlr_wrapper_xst.prj
+-ofn ../implementation/iocm_cntlr_wrapper/iocm_cntlr_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/iocm_cntlr_wrapper}

@@ -1,0 +1,4 @@
+MO user_logic NULL F:\fpga\proj\huffman_encode\pcores\huffman_encode_testharness_v1_00_a/hdl/verilog/user_logic.v vlg08/user__logic.bin 1113114806
+AR huffman_encode_testharness imp F:/fpga/proj/huffman_encode/pcores/huffman_encode_testharness_v1_00_a/hdl/vhdl/huffman_encode_testharness.vhd sub00/vhpl01 1122082450
+EN huffman_encode_testharness NULL F:/fpga/proj/huffman_encode/pcores/huffman_encode_testharness_v1_00_a/hdl/vhdl/huffman_encode_testharness.vhd sub00/vhpl00 1122082449
+MO huffman_encode NULL F:\fpga\proj\huffman_encode\pcores\huffman_encode_testharness_v1_00_a/hdl/verilog/huffman_encode.v vlg3E/huffman__encode.bin 1113114806

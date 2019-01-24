@@ -1,0 +1,401 @@
+Release 9.1.03i - xst J.33
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "synth.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "synth"
+Output Format                      : NGC
+Target Device                      : xc2vp30-7-ff896
+
+---- Source Options
+Top Module Name                    : mkGCD
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Equivalent register Removal        : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Convert Tristates To Logic         : Yes
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : auto
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Library Search Order               : synth.lso
+Keep Hierarchy                     : NO
+Global Optimization                : AllClockNets
+RTL Output                         : Yes
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Verilog 2001                       : YES
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "./mkGCD.v" in library work
+Module <mkGCD> compiled
+Module <tb> compiled
+No errors in compilation
+Analysis of file <"synth.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <mkGCD> in library <work>.
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <mkGCD>.
+"./mkGCD.v" line 108: Found Parallel Case directive in module <mkGCD>.
+Module <mkGCD> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <mkGCD>.
+    Related source file is "./mkGCD.v".
+WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
+    Found 32-bit subtractor for signal <MUX_y$write_1__VAL_3>.
+    Found 32-bit register for signal <x>.
+    Found 32-bit comparator lessequal for signal <x_SLE_y___d3>.
+    Found 32-bit register for signal <y>.
+    Summary:
+	inferred  64 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <mkGCD> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 1
+ 32-bit subtractor                                     : 1
+# Registers                                            : 2
+ 32-bit register                                       : 2
+# Comparators                                          : 1
+ 32-bit comparator lessequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Loading device for application Rf_Device from file '2vp30.nph' in environment C:\Xilinx91i.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 1
+ 32-bit subtractor                                     : 1
+# Registers                                            : 64
+ Flip-Flops                                            : 64
+# Comparators                                          : 1
+ 32-bit comparator lessequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <mkGCD> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block mkGCD, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 64
+ Flip-Flops                                            : 64
+
+=========================================================================
+
+=========================================================================
+*                          Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : synth.ngr
+Top Level Output File Name         : synth
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 101
+
+Cell Usage :
+# BELS                             : 337
+#      GND                         : 1
+#      INV                         : 2
+#      LUT2                        : 65
+#      LUT3                        : 64
+#      LUT4                        : 65
+#      LUT4_L                      : 11
+#      MUXCY                       : 71
+#      MUXF5                       : 25
+#      VCC                         : 1
+#      XORCY                       : 32
+# FlipFlops/Latches                : 64
+#      FDE                         : 32
+#      FDRE                        : 32
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 100
+#      IBUF                        : 66
+#      OBUF                        : 34
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                     107  out of  13696     0%  
+ Number of Slice Flip Flops:            64  out of  27392     0%  
+ Number of 4 input LUTs:               207  out of  27392     0%  
+ Number of IOs:                        101
+ Number of bonded IOBs:                101  out of    556    18%  
+ Number of GCLKs:                        1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+CLK                                | BUFGP                  | 64    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 5.174ns (Maximum Frequency: 193.269MHz)
+   Minimum input arrival time before clock: 3.254ns
+   Maximum output required time after clock: 5.494ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'CLK'
+  Clock period: 5.174ns (frequency: 193.269MHz)
+  Total number of paths / destination ports: 13016 / 128
+-------------------------------------------------------------------------
+Delay:               5.174ns (Levels of Logic = 35)
+  Source:            y_0 (FF)
+  Destination:       y_25 (FF)
+  Source Clock:      CLK rising
+  Destination Clock: CLK rising
+
+  Data Path: y_0 to y_25
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             4   0.370   0.549  y_0 (y_0)
+     LUT2:I0->O            1   0.275   0.000  Mcompar_x_SLE_y___d3_lut<0> (N37)
+     MUXCY:S->O            1   0.334   0.000  Mcompar_x_SLE_y___d3_cy<0> (Mcompar_x_SLE_y___d3_cy<0>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<1> (Mcompar_x_SLE_y___d3_cy<1>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<2> (Mcompar_x_SLE_y___d3_cy<2>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<3> (Mcompar_x_SLE_y___d3_cy<3>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<4> (Mcompar_x_SLE_y___d3_cy<4>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<5> (Mcompar_x_SLE_y___d3_cy<5>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<6> (Mcompar_x_SLE_y___d3_cy<6>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<7> (Mcompar_x_SLE_y___d3_cy<7>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<8> (Mcompar_x_SLE_y___d3_cy<8>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<9> (Mcompar_x_SLE_y___d3_cy<9>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<10> (Mcompar_x_SLE_y___d3_cy<10>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<11> (Mcompar_x_SLE_y___d3_cy<11>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<12> (Mcompar_x_SLE_y___d3_cy<12>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<13> (Mcompar_x_SLE_y___d3_cy<13>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<14> (Mcompar_x_SLE_y___d3_cy<14>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<15> (Mcompar_x_SLE_y___d3_cy<15>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<16> (Mcompar_x_SLE_y___d3_cy<16>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<17> (Mcompar_x_SLE_y___d3_cy<17>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<18> (Mcompar_x_SLE_y___d3_cy<18>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<19> (Mcompar_x_SLE_y___d3_cy<19>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<20> (Mcompar_x_SLE_y___d3_cy<20>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<21> (Mcompar_x_SLE_y___d3_cy<21>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<22> (Mcompar_x_SLE_y___d3_cy<22>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<23> (Mcompar_x_SLE_y___d3_cy<23>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<24> (Mcompar_x_SLE_y___d3_cy<24>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<25> (Mcompar_x_SLE_y___d3_cy<25>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<26> (Mcompar_x_SLE_y___d3_cy<26>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<27> (Mcompar_x_SLE_y___d3_cy<27>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<28> (Mcompar_x_SLE_y___d3_cy<28>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<29> (Mcompar_x_SLE_y___d3_cy<29>)
+     MUXCY:CI->O           1   0.036   0.000  Mcompar_x_SLE_y___d3_cy<30> (Mcompar_x_SLE_y___d3_cy<30>)
+     MUXCY:CI->O          41   0.415   0.684  Mcompar_x_SLE_y___d3_cy<31> (x_SLE_y___d3)
+     MUXF5:S->O            1   0.539   0.430  y_D_IN<31>22_SW0 (N518)
+     LUT3:I1->O            1   0.275   0.000  y_D_IN<31>23 (y_D_IN<31>)
+     FDRE:D                    0.208          y_31
+    ----------------------------------------
+    Total                      5.174ns (3.511ns logic, 1.663ns route)
+                                       (67.9% logic, 32.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
+  Total number of paths / destination ports: 320 / 160
+-------------------------------------------------------------------------
+Offset:              3.254ns (Levels of Logic = 4)
+  Source:            EN_start (PAD)
+  Destination:       y_24 (FF)
+  Destination Clock: CLK rising
+
+  Data Path: EN_start to y_24
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           114   0.878   0.886  EN_start_IBUF (EN_start_IBUF)
+     LUT4:I1->O            1   0.275   0.000  y_D_IN<31>22_SW0_F (N542)
+     MUXF5:I0->O           1   0.303   0.430  y_D_IN<31>22_SW0 (N518)
+     LUT3:I1->O            1   0.275   0.000  y_D_IN<31>23 (y_D_IN<31>)
+     FDRE:D                    0.208          y_31
+    ----------------------------------------
+    Total                      3.254ns (1.939ns logic, 1.315ns route)
+                                       (59.6% logic, 40.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
+  Total number of paths / destination ports: 96 / 34
+-------------------------------------------------------------------------
+Offset:              5.494ns (Levels of Logic = 10)
+  Source:            y_22 (FF)
+  Destination:       RDY_result (PAD)
+  Source Clock:      CLK rising
+
+  Data Path: y_22 to RDY_result
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             4   0.370   0.549  y_22 (y_22)
+     LUT4:I0->O            1   0.275   0.000  RDY_result1_wg_lut<0> (N310)
+     MUXCY:S->O            1   0.334   0.000  RDY_result1_wg_cy<0> (RDY_result1_wg_cy<0>)
+     MUXCY:CI->O           1   0.036   0.000  RDY_result1_wg_cy<1> (RDY_result1_wg_cy<1>)
+     MUXCY:CI->O           1   0.036   0.000  RDY_result1_wg_cy<2> (RDY_result1_wg_cy<2>)
+     MUXCY:CI->O           1   0.036   0.000  RDY_result1_wg_cy<3> (RDY_result1_wg_cy<3>)
+     MUXCY:CI->O           1   0.036   0.000  RDY_result1_wg_cy<4> (RDY_result1_wg_cy<4>)
+     MUXCY:CI->O           1   0.036   0.000  RDY_result1_wg_cy<5> (RDY_result1_wg_cy<5>)
+     MUXCY:CI->O           1   0.036   0.000  RDY_result1_wg_cy<6> (RDY_result1_wg_cy<6>)
+     MUXCY:CI->O          80   0.415   0.739  RDY_result1_wg_cy<7> (RDY_result_OBUF)
+     OBUF:I->O                 2.592          RDY_result_OBUF (RDY_result)
+    ----------------------------------------
+    Total                      5.494ns (4.205ns logic, 1.289ns route)
+                                       (76.5% logic, 23.5% route)
+
+=========================================================================
+CPU : 12.91 / 12.98 s | Elapsed : 13.00 / 13.00 s
+ 
+--> 
+
+Total memory usage is 194328 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

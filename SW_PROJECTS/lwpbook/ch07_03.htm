@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Individual Tokens (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch07_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 21:02:50 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch07_03' class='lwp lwp_ch07_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">7.3. Individual Tokens</h2>
+
+<p>Now that you know the
+<a name="INDEX-428" class="ipoint"
+></a><a name="INDEX-429" class="ipoint"
+></a>composition of the various types of
+tokens, let's see how to use HTML::TokeParser to
+write useful programs. Many problems are quite simple and require
+only one token at a time. Programs to solve these problems consist of
+a loop over all the tokens, with an <tt class="literal">if</tt> statement
+<a name="INDEX-430" class="ipoint"
+></a><a name="INDEX-431" class="ipoint"
+></a>in the
+body of the loop identifying the interesting parts of the HTML:
+</p>
+
+<pre class="code">use HTML::TokeParser;
+my $stream = HTML::TokeParser-&gt;new($filename)
+  || die "Couldn't read HTML file $filename: $!";
+# For a string: HTML::TokeParser-&gt;new( \$string_of_html );
+
+while (my $token = $stream-&gt;get_token) {
+   if ($token-&gt;[0] eq 'T') { # text
+     # process the text in $token-&gt;[1]
+
+   } elsif ($token-&gt;[0] eq 'S') { # start-tag
+     my($tagname, $attr) = @$token[1,2];
+     # consider this start-tag...
+
+   } elsif ($token-&gt;[0] eq 'E') {
+     my $tagname = $token-&gt;[1];
+     # consider this end-tag
+   }
+
+   # ignoring comments, declarations, and PIs
+}</pre>
+
+<a name="perllwp-CHP-7-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">7.3.1. Checking Image Tags</h3>
+
+<p><a href="ch07_03.htm#perllwp-CHP-7-EX-1">Example 7-1</a> complains about
+<a name="INDEX-432" class="ipoint"
+></a><a name="INDEX-433" class="ipoint"
+></a><a name="INDEX-434" class="ipoint"
+></a><a name="INDEX-435" class="ipoint"
+></a>any <tt class="literal">img</tt> tags in a
+document that are missing <tt class="literal">alt</tt>,
+<tt class="literal">height</tt>, or <tt class="literal">width</tt> attributes:
+</p>
+
+<a name="perllwp-CHP-7-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 7-1. Check &lt;img&gt; tags </h4>
+<pre class="code">while(my $token = $stream-&gt;get_token) {
+  if($token-&gt;[0] eq 'S' and $token-&gt;[1] eq 'img') {
+    my $i = $token-&gt;[2]; # attributes of this img tag
+    my @lack = grep !exists $i-&gt;{$_}, qw(alt height width);
+    print "Missing for ", $i-&gt;{'src'} || "????", ": @lack\n" if @lack;
+  }
+}</pre>
+</div>
+
+<p>When run on an HTML stream (whether from a file or a string), this
+outputs:
+</p>
+
+<pre class="code"><b class="emphasis-bold">Missing for liza.jpg: height width</b>
+<b class="emphasis-bold">Missing for aimee.jpg: alt</b>
+<b class="emphasis-bold">Missing for laurie.jpg: alt height width</b></pre>
+
+<p>Identifying images has many applications: making HEAD requests to
+ensure the URLs are valid, or making a GET request to fetch the image
+and using Image::Size from CPAN to check or insert the
+<tt class="literal">height</tt> and <tt class="literal">width</tt> attributes.
+</p>
+
+</div>
+<a name="perllwp-CHP-7-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">7.3.2. HTML Filters</h3>
+
+<p>A similar <tt class="literal">while</tt> loop <a name="INDEX-436" class="ipoint"
+></a><a name="INDEX-437" class="ipoint"
+></a>can use
+HTML::TokeParser as a simple code filter. You just pass through the
+<tt class="literal">$source</tt> from each token you don't
+mean to alter. Here's one that passes through every
+tag that it sees (by just printing its source as HTML::TokeParser
+passes it in), except for <tt class="literal">img</tt> start-tags, which
+get replaced with the content of their <tt class="literal">alt</tt>
+attributes:
+</p>
+
+<pre class="code">while (my $token = $stream-&gt;get_token) {
+  if ($token-&gt;[0] eq 'S') {
+    if ($token-&gt;[1] eq 'img') {
+      print $token-&gt;[2]{'alt'} || '';
+    } else {
+      print $token-&gt;[4];
+    }
+  }
+  elsif($token-&gt;[0] eq 'E' ) { print $token-&gt;[2] }
+  elsif($token-&gt;[0] eq 'T' ) { print $token-&gt;[1] }
+  elsif($token-&gt;[0] eq 'C' ) { print $token-&gt;[1] }
+  elsif($token-&gt;[0] eq 'D' ) { print $token-&gt;[1] }
+  elsif($token-&gt;[0] eq 'PI') { print $token-&gt;[2] }
+}</pre>
+
+<p>So, for example, a document consisting just of this:</p>
+
+<pre class="code">&lt;!-- new entry --&gt;
+&lt;p&gt;Dear Diary,
+&lt;br&gt;This is me &amp;amp; my balalaika, at BalalaikaCon 1998:
+&lt;img src="mybc1998.jpg" alt="BC1998!  WHOOO!"&gt; Rock on!&lt;/p&gt;</pre>
+
+<p>is then spat out as this:</p>
+
+<pre class="code">&lt;!-- new entry --&gt;
+&lt;p&gt;Dear Diary,
+&lt;br&gt;This is me &amp;amp; my balalaika, at BalalaikaCon 1998:
+BC1998!  WHOOO! Rock on!&lt;/p&gt;</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

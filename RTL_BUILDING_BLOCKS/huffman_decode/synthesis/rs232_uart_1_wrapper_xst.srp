@@ -1,0 +1,495 @@
+Release 7.1.01i - xst H.40
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "rs232_uart_1_wrapper_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/rs232_uart_1_wrapper/rs232_uart_1_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : rs232_uart_1_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Effort                : 2
+Optimization Goal                  : speed
+RTL Output                         : YES
+Hierarchy Separator                : /
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" in Library opb_uartlite_v1_00_b.
+Entity <SRL_FIFO> compiled.
+Entity <SRL_FIFO> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/baudrate.vhd" in Library opb_uartlite_v1_00_b.
+Entity <Baud_Rate> compiled.
+Entity <Baud_Rate> (Architecture <VHDL_RTL>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" in Library opb_uartlite_v1_00_b.
+Entity <OPB_UARTLITE_RX> compiled.
+Entity <OPB_UARTLITE_RX> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" in Library opb_uartlite_v1_00_b.
+Entity <OPB_UARTLITE_TX> compiled.
+Entity <OPB_UARTLITE_TX> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/common_v1_00_a/hdl/vhdl/pselect.vhd" in Library common_v1_00_a.
+Entity <pselect> compiled.
+Entity <pselect> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" in Library opb_uartlite_v1_00_b.
+Entity <OPB_UARTLITE_Core> compiled.
+Entity <OPB_UARTLITE_Core> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite.vhd" in Library opb_uartlite_v1_00_b.
+Entity <OPB_UARTLITE> compiled.
+Entity <OPB_UARTLITE> (Architecture <IMP>) compiled.
+Compiling vhdl file "F:/fpga/proj/huffman_decode/synthesis/../hdl/rs232_uart_1_wrapper.vhd" in Library work.
+Entity <rs232_uart_1_wrapper> compiled.
+Entity <rs232_uart_1_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <rs232_uart_1_wrapper> (Architecture <STRUCTURE>).
+    Set user-defined property "X_CORE_INFO =  opb_uartlite_v1_00_b" for unit <rs232_uart_1_wrapper>.
+Instantiating component <opb_uartlite> from Library <opb_uartlite_v1_00_b>.
+Entity <rs232_uart_1_wrapper> analyzed. Unit <rs232_uart_1_wrapper> generated.
+
+Analyzing generic Entity <opb_uartlite> (Architecture <imp>).
+	C_BASEADDR = <u>01000000011000000000000000000000
+	C_HIGHADDR = <u>01000000011000001111111111111111
+	C_OPB_DWIDTH = 32
+	C_OPB_AWIDTH = 32
+	C_DATA_BITS = 8
+	C_CLK_FREQ = 100000000
+	C_BAUDRATE = 9600
+	C_USE_PARITY = 0
+	C_ODD_PARITY = 0
+Instantiating component <pselect> from Library <Common_v1_00_a>.
+Entity <opb_uartlite> analyzed. Unit <opb_uartlite> generated.
+
+Analyzing generic Entity <pselect> (Architecture <imp>).
+	C_AB = 16
+	C_AW = 32
+	C_BAR = <u>01000000011000000000000000000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/common_v1_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/common_v1_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/common_v1_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/common_v1_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect> analyzed. Unit <pselect> generated.
+
+Analyzing generic Entity <OPB_UARTLITE_Core> (Architecture <imp>).
+	C_DATA_BITS = 8
+	C_CLK_FREQ = 100000000
+	C_BAUDRATE = 9600
+	C_USE_PARITY = 0
+	C_ODD_PARITY = 0
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 241: Generating a Black Box for component <FDR>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 284: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 292: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 339: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd" line 372: Generating a Black Box for component <FDRE>.
+Entity <OPB_UARTLITE_Core> analyzed. Unit <OPB_UARTLITE_Core> generated.
+
+Analyzing generic Entity <Baud_Rate> (Architecture <vhdl_rtl>).
+	C_RATIO = 651
+	C_INACCURACY = 20
+Entity <Baud_Rate> analyzed. Unit <Baud_Rate> generated.
+
+Analyzing generic Entity <OPB_UARTLITE_RX> (Architecture <imp>).
+	C_DATA_BITS = 8
+	C_USE_PARITY = 0
+	C_ODD_PARITY = 0
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 279: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 299: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 388: Generating a Black Box for component <FDSE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd" line 402: Generating a Black Box for component <FDRE>.
+Entity <OPB_UARTLITE_RX> analyzed. Unit <OPB_UARTLITE_RX> generated.
+
+Analyzing generic Entity <SRL_FIFO> (Architecture <imp>).
+	C_DATA_BITS = 8
+	C_DEPTH = 16
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 203: Generating a Black Box for component <MUXCY_L>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 211: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 217: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 203: Generating a Black Box for component <MUXCY_L>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 211: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 217: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 203: Generating a Black Box for component <MUXCY_L>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 211: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 217: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 211: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 217: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd" line 228: Generating a Black Box for component <SRL16E>.
+Entity <SRL_FIFO> analyzed. Unit <SRL_FIFO> generated.
+
+Analyzing generic Entity <OPB_UARTLITE_TX> (Architecture <imp>).
+	C_DATA_BITS = 8
+	C_USE_PARITY = 0
+	C_ODD_PARITY = 0
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 249: Generating a Black Box for component <SRL16E>.
+    Set user-defined property "INIT =  0001" for instance <DIV16_SRL16E> in unit <OPB_UARTLITE_TX>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 264: Generating a Black Box for component <FDRE>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 314: Generating a Black Box for component <MUXCY_L>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 322: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 314: Generating a Black Box for component <MUXCY_L>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 322: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 322: Generating a Black Box for component <XORCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 390: Generating a Black Box for component <MUXF5>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 397: Generating a Black Box for component <MUXF5>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd" line 404: Generating a Black Box for component <MUXF6>.
+Entity <OPB_UARTLITE_TX> analyzed. Unit <OPB_UARTLITE_TX> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <SRL_FIFO>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/srl_fifo.vhd".
+WARNING:Xst:1780 - Signal <addr_cy<4>> is never used or assigned.
+    Found 1-bit xor2 for signal <$n0007> created at line 199.
+    Found 1-bit xor2 for signal <$n0008> created at line 199.
+    Found 1-bit xor2 for signal <$n0009> created at line 199.
+    Found 1-bit xor2 for signal <$n0010> created at line 199.
+    Found 1-bit register for signal <data_Exists_I>.
+    Summary:
+	inferred   1 D-type flip-flop(s).
+Unit <SRL_FIFO> synthesized.
+
+
+Synthesizing Unit <OPB_UARTLITE_TX>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_tx.vhd".
+WARNING:Xst:1780 - Signal <parity> is never used or assigned.
+WARNING:Xst:1780 - Signal <cnt_cy<0>> is never used or assigned.
+WARNING:Xst:1780 - Signal <tx_Run1> is never used or assigned.
+WARNING:Xst:1780 - Signal <calc_Parity> is never used or assigned.
+    Found 1-bit register for signal <TX>.
+    Found 1-bit register for signal <fifo_Read>.
+    Found 3-bit register for signal <mux_sel>.
+    Found 1-bit register for signal <serial_Data>.
+    Found 1-bit register for signal <tx_DataBits>.
+    Found 1-bit register for signal <tx_Start>.
+    Summary:
+	inferred   8 D-type flip-flop(s).
+Unit <OPB_UARTLITE_TX> synthesized.
+
+
+Synthesizing Unit <OPB_UARTLITE_RX>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_rx.vhd".
+WARNING:Xst:1305 - Output <RX_Parity_Error> is never assigned. Tied to value 0.
+WARNING:Xst:1780 - Signal <parity> is never used or assigned.
+WARNING:Xst:1780 - Signal <calc_Parity> is never used or assigned.
+    Found 1-bit register for signal <FIFO_Write>.
+    Found 1-bit register for signal <previous_RX>.
+    Found 1-bit register for signal <running<0>>.
+    Found 1-bit register for signal <rx_1>.
+    Found 1-bit register for signal <rx_2>.
+    Found 1-bit register for signal <start_Edge_Detected<0>>.
+    Found 1-bit register for signal <stop_Bit_Position>.
+    Summary:
+	inferred   7 D-type flip-flop(s).
+Unit <OPB_UARTLITE_RX> synthesized.
+
+
+Synthesizing Unit <Baud_Rate>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/baudrate.vhd".
+    Found 1-bit register for signal <EN_16x_Baud>.
+    Found 10-bit down counter for signal <Count>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   1 D-type flip-flop(s).
+Unit <Baud_Rate> synthesized.
+
+
+Synthesizing Unit <OPB_UARTLITE_Core>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite_core.vhd".
+WARNING:Xst:646 - Signal <rx_Parity_Error> is assigned but never used.
+    Register <uart_CS_3> equivalent to <xfer_Ack> has been removed
+    Found 1-bit register for signal <Interrupt>.
+    Found 1-bit register for signal <enable_interrupts>.
+    Found 1-bit register for signal <opb_RNW_1>.
+    Found 1-bit register for signal <reset_RX_FIFO>.
+    Found 1-bit register for signal <reset_TX_FIFO>.
+    Found 1-bit register for signal <uart_CS_2>.
+    Found 1-bit register for signal <xfer_Ack>.
+    Summary:
+	inferred   7 D-type flip-flop(s).
+Unit <OPB_UARTLITE_Core> synthesized.
+
+
+Synthesizing Unit <pselect>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/common_v1_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<16:31>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<4>> is never used or assigned.
+Unit <pselect> synthesized.
+
+
+Synthesizing Unit <opb_uartlite>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_uartlite_v1_00_b/hdl/vhdl/opb_uartlite.vhd".
+WARNING:Xst:647 - Input <OPB_BE> is never used.
+WARNING:Xst:647 - Input <OPB_DBus<0:23>> is never used.
+WARNING:Xst:647 - Input <OPB_seqAddr> is never used.
+Unit <opb_uartlite> synthesized.
+
+
+Synthesizing Unit <rs232_uart_1_wrapper>.
+    Related source file is "F:/fpga/proj/huffman_decode/synthesis/../hdl/rs232_uart_1_wrapper.vhd".
+Unit <rs232_uart_1_wrapper> synthesized.
+
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Counters                         : 1
+ 10-bit down counter               : 1
+# Registers                        : 23
+ 1-bit register                    : 22
+ 3-bit register                    : 1
+# Xors                             : 8
+ 1-bit xor2                        : 8
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:/Xilinx.
+
+Optimizing unit <rs232_uart_1_wrapper> ...
+
+Optimizing unit <OPB_UARTLITE_TX> ...
+
+Optimizing unit <OPB_UARTLITE_Core> ...
+
+Optimizing unit <pselect> ...
+
+Optimizing unit <SRL_FIFO> ...
+
+Optimizing unit <Baud_Rate> ...
+
+Optimizing unit <OPB_UARTLITE_RX> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : ../implementation/rs232_uart_1_wrapper/rs232_uart_1_wrapper.ngr
+Top Level Output File Name         : ../implementation/rs232_uart_1_wrapper/rs232_uart_1_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 112
+
+Macro Statistics :
+# Registers                        : 33
+#      1-bit register              : 32
+#      3-bit register              : 1
+# Adders/Subtractors               : 1
+#      10-bit subtractor           : 1
+
+Cell Usage :
+# BELS                             : 130
+#      GND                         : 1
+#      INV                         : 14
+#      LUT1_L                      : 1
+#      LUT2                        : 2
+#      LUT2_L                      : 1
+#      LUT3                        : 7
+#      LUT3_L                      : 6
+#      LUT4                        : 23
+#      LUT4_D                      : 3
+#      LUT4_L                      : 26
+#      MUXCY                       : 13
+#      MUXCY_L                     : 8
+#      MUXF5                       : 2
+#      MUXF6                       : 1
+#      VCC                         : 1
+#      XORCY                       : 21
+# FlipFlops/Latches                : 64
+#      FDC                         : 11
+#      FDCE                        : 5
+#      FDP                         : 5
+#      FDPE                        : 3
+#      FDR                         : 8
+#      FDRE                        : 27
+#      FDS                         : 4
+#      FDSE                        : 1
+# Shifters                         : 19
+#      SRL16E                      : 19
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                      54  out of  13696     0%  
+ Number of Slice Flip Flops:            64  out of  27392     0%  
+ Number of 4 input LUTs:                88  out of  27392     0%  
+ Number of bonded IOBs:                112  out of    556    20%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+OPB_Clk                            | NONE                   | 83    |
+-----------------------------------+------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 4.262ns (Maximum Frequency: 234.659MHz)
+   Minimum input arrival time before clock: 3.067ns
+   Maximum output required time after clock: 0.370ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'OPB_Clk'
+  Clock period: 4.262ns (frequency: 234.659MHz)
+  Total number of paths / destination ports: 812 / 228
+-------------------------------------------------------------------------
+Delay:               4.262ns (Levels of Logic = 3)
+  Source:            rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I0 (FF)
+  Destination:       rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/serial_Data (FF)
+  Source Clock:      OPB_Clk rising
+  Destination Clock: OPB_Clk rising
+
+  Data Path: rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I0 to rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/serial_Data
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     SRL16E:CLK->Q         1   2.720   0.467  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I0 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/fifo_DOut<0>)
+     LUT3_L:I0->LO         1   0.275   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_011 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_01)
+     MUXF5:I0->O           1   0.303   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/MUX_F5_1 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_0123)
+     MUXF6:I0->O           1   0.288   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/MUXF6_I (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_Out)
+     FDC:D                     0.208          rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/serial_Data
+    ----------------------------------------
+    Total                      4.262ns (3.794ns logic, 0.467ns route)
+                                       (89.0% logic, 11.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'OPB_Clk'
+  Total number of paths / destination ports: 150 / 52
+-------------------------------------------------------------------------
+Offset:              3.067ns (Levels of Logic = 7)
+  Source:            OPB_ABus<28> (PAD)
+  Destination:       rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I3 (FF)
+  Destination Clock: OPB_Clk rising
+
+  Data Path: OPB_ABus<28> to rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT4:I0->O            6   0.275   0.463  rs232_uart_1/OPB_UARTLITE_Core_I/read_RX_FIFO1 (rs232_uart_1/OPB_UARTLITE_Core_I/read_RX_FIFO)
+     LUT4_L:I2->LO         1   0.275   0.118  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/valid_Write1 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/N0)
+     LUT3:I2->O            9   0.275   0.499  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/valid_Write2 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/valid_Write)
+     MUXCY_L:CI->LO        1   0.036   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/MUXCY_L_I0 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/addr_cy<1>)
+     MUXCY_L:CI->LO        1   0.036   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/MUXCY_L_I1 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/addr_cy<2>)
+     MUXCY_L:CI->LO        0   0.036   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/MUXCY_L_I2 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/addr_cy<3>)
+     XORCY:CI->O           1   0.708   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/XORCY_I3 (rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/sum_A<3>)
+     FDRE:D                    0.208          rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I3
+    ----------------------------------------
+    Total                      3.067ns (1.987ns logic, 1.080ns route)
+                                       (64.8% logic, 35.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'OPB_Clk'
+  Total number of paths / destination ports: 11 / 11
+-------------------------------------------------------------------------
+Offset:              0.370ns (Levels of Logic = 0)
+  Source:            rs232_uart_1/OPB_UARTLITE_Core_I/Interrupt (FF)
+  Destination:       Interrupt (PAD)
+  Source Clock:      OPB_Clk rising
+
+  Data Path: rs232_uart_1/OPB_UARTLITE_Core_I/Interrupt to Interrupt
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              0   0.370   0.000  rs232_uart_1/OPB_UARTLITE_Core_I/Interrupt (Interrupt)
+    ----------------------------------------
+    Total                      0.370ns (0.370ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+CPU : 10.20 / 10.37 s | Elapsed : 10.00 / 10.00 s
+ 
+--> 
+
+Total memory usage is 160424 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   70 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config version="3.0" date="1223928548841" transient="false">
+<site url="platform:/base/" enabled="true" updateable="true" policy="USER-EXCLUDE">
+<feature id="org.eclipse.platform" version="3.1.2" url="features/org.eclipse.platform_3.1.2/">
+</feature>
+<feature id="org.eclipse.sdk" version="3.1.2" url="features/org.eclipse.sdk_3.1.2/">
+</feature>
+<feature id="org.eclipse.cdt" version="3.0.2" url="features/org.eclipse.cdt_3.0.2/">
+</feature>
+<feature id="com.xilinx.mdt.edk" version="9.1.0" plugin-identifier="Xilinx Platform Studio SDK" url="features/com.xilinx.mdt.edk_9.1.0/">
+</feature>
+</site>
+</config>

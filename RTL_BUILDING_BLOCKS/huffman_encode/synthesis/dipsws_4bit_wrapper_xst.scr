@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top dipsws_4bit_wrapper
+-ifmt MIXED
+-ifn dipsws_4bit_wrapper_xst.prj
+-ofn ../implementation/dipsws_4bit_wrapper/dipsws_4bit_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/dipsws_4bit_wrapper}

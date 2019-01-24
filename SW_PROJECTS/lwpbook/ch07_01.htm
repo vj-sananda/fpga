@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>HTML Processing with Tokens (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch07_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 20:28:00 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch07_01' class='lwp lwp_ch07_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 7. HTML Processing with Tokens</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="ch07_01.htm">HTML as Tokens</a><br />
+<a href="ch07_02.htm">Basic HTML::TokeParser Use</a><br />
+<a href="ch07_03.htm">Individual Tokens</a><br />
+<a href="ch07_04.htm">Token Sequences</a><br />
+<a href="ch07_05.htm">More HTML::TokeParser Methods</a><br />
+<a href="ch07_06.htm">Using Extracted Text</a><br /></p></div>
+
+<p>Regular expressions are powerful, but they're a
+painfully low-level way of dealing with HTML. You're
+forced to worry about spaces and newlines, single and double quotes,
+HTML comments, and a lot more. The next step up from a regular
+expression is an HTML tokenizer. In this chapter,
+we'll
+<a name="INDEX-401" class="ipoint"
+></a><a name="INDEX-402" class="ipoint"
+></a>use
+HTML::TokeParser to extract information from HTML files. Using these
+techniques, you can extract information from any HTML file, and never
+again have to worry about character-level trivia of HTML markup.
+</p><div class="sect1"><a name="perllwp-CHP-7-SECT-1"></a>
+<h2 class="sect1">7.1. HTML as Tokens</h2>
+
+<p>Your experience with HTML code probably involves seeing raw text such
+as this:
+</p>
+
+<pre class="code">&lt;p&gt;Dear Diary,
+&lt;br&gt;I'm gonna be a superstar, because I'm learning to play
+the &lt;a href="http://MyBalalaika.com"&gt;balalaika&lt;/a&gt; &amp;amp; the &lt;a
+href='http://MyBazouki.com'&gt;bazouki&lt;/a&gt;!!!</pre>
+
+<p>The HTML::TokeParser module divides the HTML into units called
+<em class="emphasis">tokens</em>, which means units of parsing. The above
+source code is parsed as this series of tokens:
+</p>
+
+<dl>
+<dt><i>start-tag token</i></dt>
+<dd>
+<tt class="literal">p</tt> with no <a name="INDEX-403" class="ipoint"
+></a><a name="INDEX-404" class="ipoint"
+></a><a name="INDEX-405" class="ipoint"
+></a><a name="INDEX-406" class="ipoint"
+></a>attributes
+
+</dd>
+
+
+<dt><i>text token</i></dt>
+<dd>
+<tt class="literal">Dear Diary,\n</tt>
+</dd>
+
+
+<dt><i>start-tag token</i></dt>
+<dd>
+<tt class="literal">br</tt> with no attributes
+</dd>
+
+
+<dt><i>text token</i></dt>
+<dd>
+<tt class="literal">I'm gonna be a superstar, because I'm learning to
+play\nthe</tt>
+
+</dd>
+
+
+<dt><i>start-tag token</i></dt>
+<dd>
+<tt class="literal">a</tt>, with attribute <tt class="literal">href</tt> whose
+value is <tt class="literal">http://MyBalalaika.com</tt>
+
+</dd>
+
+
+<dt><i>text token</i></dt>
+<dd>
+<tt class="literal">balalaika</tt>
+</dd>
+
+
+<dt><i>end-tag token</i></dt>
+<dd>
+<tt class="literal">a</tt>
+</dd>
+
+
+<dt><i>text token</i></dt>
+<dd>
+<tt class="literal">&amp;amp; the</tt> , which <a name="INDEX-407" class="ipoint"
+></a><a name="INDEX-408" class="ipoint"
+></a>means <tt class="literal">&amp; the</tt>
+
+</dd>
+
+
+<dt><i>start-tag token</i></dt>
+<dd>
+<tt class="literal">a</tt>, with attribute <tt class="literal">href</tt> equals
+<tt class="literal">http://MyBazouki.com</tt>
+
+</dd>
+
+
+<dt><i>text token</i></dt>
+<dd>
+<tt class="literal">bazouki</tt>
+</dd>
+
+
+<dt><i>end-tag token</i></dt>
+<dd>
+<tt class="literal">a</tt>
+</dd>
+
+
+<dt><i>text token</i></dt>
+<dd>
+<tt class="literal">!!!\n</tt>
+</dd>
+
+</dl>
+
+<p>This representation of things is more abstract, focusing on markup
+concepts and not individual characters. So whereas the two
+<tt class="literal">&lt;a&gt;</tt> tags have different types of quotes
+around their attribute values in the raw HTML, as tokens each has a
+start-tag of type <tt class="literal">a</tt>, with an
+<tt class="literal">href</tt> attribute of a particular value. A program
+that extracts information by working with a stream of tokens
+doesn't have to worry about the idiosyncrasies of
+entity encoding, whitespace, quotes, and trying to work out where a
+tag ends.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

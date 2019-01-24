@@ -1,0 +1,2 @@
+verilog work "./../../../rtl/verilog/generic_fifo_sc_a.v"
+verilog work "./../../../../generic_memories/rtl/verilog/generic_dpram.v"

@@ -1,0 +1,27 @@
+NEWPROJECT .
+SETPROJECT .
+SET device=xc2vp2
+SET flowvendor=Other
+SET createndf=False
+SET formalverification=False
+SET speedgrade=-7
+SET removerpms=False
+SET devicefamily=virtex2p
+SET asysymbol=False
+SET simulationfiles=structural
+SET implementationfiletype=Ngc
+SET busformat=BusFormatAngleBracketNotRipped
+SET designentry=VHDL
+SET addpads=False
+SET foundationsym=False
+SET package=fg256
+SET vhdlsim=True
+SET verilogsim=False
+SELECT ICON_(ChipScope_Pro_-_Integrated_Controller) family Xilinx,_Inc. 1.03.a
+CSET number_control_ports=1
+CSET enable_jtag_bufg=true
+CSET component_name=icon_pro
+CSET user_scan_chain=USER1
+CSET use_unused_bscan=false
+CSET use_ext_bscan=false
+GENERATE

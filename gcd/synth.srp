@@ -1,0 +1,406 @@
+Release 9.1.03i - xst J.33
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "synth.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "synth"
+Output Format                      : NGC
+Target Device                      : xc2vp30-7-ff896
+
+---- Source Options
+Top Module Name                    : GCD_Perf
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Equivalent register Removal        : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Convert Tristates To Logic         : Yes
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : auto
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Library Search Order               : synth.lso
+Keep Hierarchy                     : NO
+Global Optimization                : AllClockNets
+RTL Output                         : Yes
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Verilog 2001                       : YES
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "./GCD_Perf.v" in library work
+Module <GCD_Perf> compiled
+Module <tb> compiled
+No errors in compilation
+Analysis of file <"synth.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <GCD_Perf> in library <work> with parameters.
+	s0 = "00000000000000000000000000000000"
+	s1 = "00000000000000000000000000000001"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <GCD_Perf>.
+	s0 = 32'sb00000000000000000000000000000000
+	s1 = 32'sb00000000000000000000000000000001
+Module <GCD_Perf> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <GCD_Perf>.
+    Related source file is "./GCD_Perf.v".
+WARNING:Xst:646 - Signal <result_wd> is assigned but never used.
+WARNING:Xst:653 - Signal <result_rd> is used but never assigned. Tied to value 00000000000000000000000000000000.
+WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
+    Found 1-bit register for signal <curr_state>.
+    Found 32-bit subtractor for signal <old_x_wd_1$addsub0000> created at line 99.
+    Found 32-bit comparator lessequal for signal <old_x_wd_1$cmp_le0000> created at line 96.
+    Found 32-bit subtractor for signal <old_y_wd_2$addsub0000> created at line 97.
+    Found 1-bit register for signal <RDY_result_rd>.
+    Found 1-bit register for signal <RDY_start_rd>.
+    Found 32-bit register for signal <x_rd>.
+    Found 32-bit register for signal <y_rd>.
+    Summary:
+	inferred  67 D-type flip-flop(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <GCD_Perf> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 32-bit subtractor                                     : 2
+# Registers                                            : 5
+ 1-bit register                                        : 3
+ 32-bit register                                       : 2
+# Comparators                                          : 1
+ 32-bit comparator lessequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Loading device for application Rf_Device from file '2vp30.nph' in environment C:\Xilinx91i.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 32-bit subtractor                                     : 2
+# Registers                                            : 67
+ Flip-Flops                                            : 67
+# Comparators                                          : 1
+ 32-bit comparator lessequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <GCD_Perf> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block GCD_Perf, actual ratio is 1.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 67
+ Flip-Flops                                            : 67
+
+=========================================================================
+
+=========================================================================
+*                          Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : synth.ngr
+Top Level Output File Name         : synth
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 101
+
+Cell Usage :
+# BELS                             : 516
+#      GND                         : 1
+#      INV                         : 1
+#      LUT2                        : 113
+#      LUT2_L                      : 2
+#      LUT3                        : 129
+#      LUT3_L                      : 6
+#      LUT4                        : 40
+#      LUT4_L                      : 1
+#      MUXCY                       : 94
+#      MUXF5                       : 64
+#      VCC                         : 1
+#      XORCY                       : 64
+# FlipFlops/Latches                : 67
+#      FDE                         : 65
+#      FDR                         : 1
+#      FDS                         : 1
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 100
+#      IBUF                        : 66
+#      OBUF                        : 34
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                     149  out of  13696     1%  
+ Number of Slice Flip Flops:            67  out of  27392     0%  
+ Number of 4 input LUTs:               292  out of  27392     1%  
+ Number of IOs:                        101
+ Number of bonded IOBs:                101  out of    556    18%  
+ Number of GCLKs:                        1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+CLK                                | BUFGP                  | 67    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 6.572ns (Maximum Frequency: 152.170MHz)
+   Minimum input arrival time before clock: 3.357ns
+   Maximum output required time after clock: 3.340ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'CLK'
+  Clock period: 6.572ns (frequency: 152.170MHz)
+  Total number of paths / destination ports: 19526 / 67
+-------------------------------------------------------------------------
+Delay:               6.572ns (Levels of Logic = 36)
+  Source:            x_rd_0 (FF)
+  Destination:       RDY_result_rd (FF)
+  Source Clock:      CLK rising
+  Destination Clock: CLK rising
+
+  Data Path: x_rd_0 to RDY_result_rd
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              6   0.370   0.581  x_rd_0 (x_rd_0)
+     LUT2:I0->O            1   0.275   0.000  Msub_old_x_wd_1_addsub0000_lut<0> (N37)
+     MUXCY:S->O            1   0.334   0.000  Msub_old_x_wd_1_addsub0000_cy<0> (Msub_old_x_wd_1_addsub0000_cy<0>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<1> (Msub_old_x_wd_1_addsub0000_cy<1>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<2> (Msub_old_x_wd_1_addsub0000_cy<2>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<3> (Msub_old_x_wd_1_addsub0000_cy<3>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<4> (Msub_old_x_wd_1_addsub0000_cy<4>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<5> (Msub_old_x_wd_1_addsub0000_cy<5>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<6> (Msub_old_x_wd_1_addsub0000_cy<6>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<7> (Msub_old_x_wd_1_addsub0000_cy<7>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<8> (Msub_old_x_wd_1_addsub0000_cy<8>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<9> (Msub_old_x_wd_1_addsub0000_cy<9>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<10> (Msub_old_x_wd_1_addsub0000_cy<10>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<11> (Msub_old_x_wd_1_addsub0000_cy<11>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<12> (Msub_old_x_wd_1_addsub0000_cy<12>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<13> (Msub_old_x_wd_1_addsub0000_cy<13>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<14> (Msub_old_x_wd_1_addsub0000_cy<14>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<15> (Msub_old_x_wd_1_addsub0000_cy<15>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<16> (Msub_old_x_wd_1_addsub0000_cy<16>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<17> (Msub_old_x_wd_1_addsub0000_cy<17>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<18> (Msub_old_x_wd_1_addsub0000_cy<18>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<19> (Msub_old_x_wd_1_addsub0000_cy<19>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<20> (Msub_old_x_wd_1_addsub0000_cy<20>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<21> (Msub_old_x_wd_1_addsub0000_cy<21>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<22> (Msub_old_x_wd_1_addsub0000_cy<22>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<23> (Msub_old_x_wd_1_addsub0000_cy<23>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<24> (Msub_old_x_wd_1_addsub0000_cy<24>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<25> (Msub_old_x_wd_1_addsub0000_cy<25>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<26> (Msub_old_x_wd_1_addsub0000_cy<26>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<27> (Msub_old_x_wd_1_addsub0000_cy<27>)
+     MUXCY:CI->O           1   0.036   0.000  Msub_old_x_wd_1_addsub0000_cy<28> (Msub_old_x_wd_1_addsub0000_cy<28>)
+     XORCY:CI->O           2   0.708   0.396  Msub_old_x_wd_1_addsub0000_xor<29> (old_x_wd_1_addsub0000<29>)
+     LUT3:I2->O            1   0.275   0.430  RDY_start_wd_or0000615 (RDY_start_wd_or0000_map164)
+     LUT4:I1->O            1   0.275   0.349  RDY_start_wd_or0000632 (RDY_start_wd_or0000_map166)
+     LUT4:I2->O            1   0.275   0.000  RDY_start_wd_or0000987_F (N1533)
+     MUXF5:I0->O           3   0.303   0.495  RDY_start_wd_or0000987 (RDY_start_wd_or0000)
+     LUT2:I1->O            1   0.275   0.000  RDY_result_wd1 (RDY_result_wd)
+     FDE:D                     0.208          RDY_result_rd
+    ----------------------------------------
+    Total                      6.572ns (4.320ns logic, 2.252ns route)
+                                       (65.7% logic, 34.3% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
+  Total number of paths / destination ports: 215 / 133
+-------------------------------------------------------------------------
+Offset:              3.357ns (Levels of Logic = 4)
+  Source:            EN_start (PAD)
+  Destination:       x_rd_31 (FF)
+  Destination Clock: CLK rising
+
+  Data Path: EN_start to x_rd_31
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            82   0.878   0.878  EN_start_IBUF (EN_start_IBUF)
+     LUT3:I0->O            1   0.275   0.429  x_wd<31>9_SW0 (N1575)
+     LUT4_L:I1->LO         1   0.275   0.138  x_wd<31>9 (x_wd<31>_map4)
+     LUT4:I3->O            1   0.275   0.000  x_wd<31>12 (x_wd<31>)
+     FDE:D                     0.208          x_rd_31
+    ----------------------------------------
+    Total                      3.357ns (1.911ns logic, 1.446ns route)
+                                       (56.9% logic, 43.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              3.340ns (Levels of Logic = 1)
+  Source:            RDY_start_rd (FF)
+  Destination:       RDY_start (PAD)
+  Source Clock:      CLK rising
+
+  Data Path: RDY_start_rd to RDY_start
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDS:C->Q              2   0.370   0.378  RDY_start_rd (RDY_start_rd)
+     OBUF:I->O                 2.592          RDY_start_OBUF (RDY_start)
+    ----------------------------------------
+    Total                      3.340ns (2.962ns logic, 0.378ns route)
+                                       (88.7% logic, 11.3% route)
+
+=========================================================================
+CPU : 18.02 / 18.11 s | Elapsed : 18.00 / 19.00 s
+ 
+--> 
+
+Total memory usage is 196952 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    3 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

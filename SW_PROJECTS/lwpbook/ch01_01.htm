@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Introduction to Web Automation (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch01_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 16:12:51 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch01_01' class='lwp lwp_ch01_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 1. Introduction to Web Automation</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-1-SECT-1">The Web as Data Source</a><br />
+<a href="ch01_02.htm">History of LWP</a><br />
+<a href="ch01_03.htm">Installing LWP</a><br />
+<a href="ch01_04.htm">Words of Caution</a><br />
+<a href="ch01_05.htm">LWP in Action</a><br /></p></div>
+
+<p>LWP (short for "Library for World Wide Web in
+Perl") is a set of Perl modules and object-oriented
+classes for getting data from the Web and for extracting information
+from HTML. This chapter provides essential background on the LWP
+suite. It describes the nature and history of LWP, which platforms it
+runs on, and how to download and install it. This chapter ends with a
+quick walkthrough of several LWP programs that illustrate common
+tasks, such as fetching web pages, extracting information using
+regular expressions, and submitting forms.
+</p><div class="sect1"><a name="perllwp-CHP-1-SECT-1"></a>
+<h2 class="sect1">1.1. The Web as Data Source</h2>
+
+<p>Most web sites are designed <a name="INDEX-4" class="ipoint"
+></a><a name="INDEX-5" class="ipoint"
+></a>for people. User Interface gurus consult
+for large sums of money to build HTML code that is easy to use and
+displays correctly on all browsers. User Experience gurus wag their
+fingers and tell web designers to study their users, so they know the
+human foibles and desires of the ape descendents who will be viewing
+the web site.
+</p>
+
+<p>Fundamentally, though, a web site is home to data and services. A
+stockbroker has stock prices and the value of your portfolio (data)
+and forms that let you buy and sell stock (services). Amazon has book
+ISBNs, titles, authors, reviews, prices, and rankings (data) and
+forms that let you order those books (services).
+</p>
+
+<p>It's assumed that the data and services will be
+accessed by people viewing the rendered HTML. But many a programmer
+has eyed those data sources and services on the Web and thought
+"I'd like to use those in a
+program!" For example, they could page you when your
+portfolio falls past a certain point or could calculate the
+"best" book on Perl based on the
+ratio of its price to its average reader review.
+</p>
+
+<p>LWP lets you do this kind <a name="INDEX-6" class="ipoint"
+></a>of <em class="emphasis">web
+automation</em>. With it, you can fetch web pages, submit
+forms, authenticate, and extract information from HTML. Once
+you've used it to grab news headlines or check
+links, you'll never view the Web in the same way
+again.
+</p>
+
+<p>As with everything in Perl, there's more than one
+way to automate accessing the Web. In this book,
+we'll show you everything from the basic way to
+access the Web (via the LWP::Simple module), through forms, all the
+way to the gory details of cookies, authentication, and other types
+of complex requests.
+</p>
+
+<a name="perllwp-CHP-1-SECT-1.1"></a><div class="sect2">
+<h3 class="sect2">1.1.1. Screen Scraping</h3>
+
+<p>Once you've tackled the fundamentals
+<a name="INDEX-7" class="ipoint"
+></a>of how to
+ask a web server for a particular page, you still have to find the
+information you want, buried in the HTML response. Most often you
+won't need more than regular expressions to achieve
+this. <a href="ch06_01.htm">Chapter 6, "Simple HTML Processing with Regular Expressions"</a> describes the art of extracting
+information from HTML using regular expressions, although
+you'll see the beginnings of it as early as <a href="ch02_01.htm">Chapter 2, "Web Basics"</a>, where we query AltaVista for a word, and use
+a regexp to match the number in the response that says
+"We found <em class="emphasis">[number]</em>
+results."
+</p>
+
+<p>The more discerning LWP connoisseur, however, treats the HTML
+document as a stream of
+<a name="INDEX-8" class="ipoint"
+></a>tokens (<a href="ch07_01.htm">Chapter 7, "HTML Processing with Tokens"</a>, with an extended example in <a href="ch08_01.htm">Chapter 8, "Tokenizing Walkthrough"</a>) or <a name="INDEX-9" class="ipoint"
+></a>as a parse tree (<a href="ch09_01.htm">Chapter 9, "HTML Processing with Trees"</a>). For example, you'll use a
+token view and a tree view to consider such tasks as how to catch
+<tt class="literal">&lt;img...&gt;</tt> tags that are missing some of their
+attributes, how to get the absolute URLs of all the headlines on the
+BBC News main page, and how to extract content from one web page and
+insert it into a different template.
+</p>
+
+<p>In the old days of 80x24 terminals, "screen
+scraping" referred to the art of programmatically
+extracting information from the screens of interactive applications.
+That term has been carried over to mean the act of automatically
+extracting data from the output of any system that was basically
+designed for interactive use. That's the term used
+for getting data out of HTML that was meant to be looked at in a
+browser, not necessarily extracted for your
+programs' use.
+</p>
+
+</div>
+<a name="perllwp-CHP-1-SECT-1.2"></a><div class="sect2">
+<h3 class="sect2">1.1.2. Brittleness</h3>
+
+<p>In some lucky cases,
+<a name="INDEX-10" class="ipoint"
+></a>your LWP-related
+task consists of downloading a file without requiring your program to
+parse it in any way. But most tasks involve having to extract a piece
+of data from some part of the returned document, using the
+screen-scraping tactics as mentioned earlier. An unavoidable problem
+is that the format of most web content can change at any
+<a name="INDEX-11" class="ipoint"
+></a><a name="INDEX-12" class="ipoint"
+></a>time. For
+example in <a href="ch08_01.htm">Chapter 8, "Tokenizing Walkthrough"</a>, I discuss the task of
+extracting data from the program listings at the web site for the
+radio show <em class="emphasis">Fresh Air</em>. The principle I
+demonstrate for that specific case is true for all extraction tasks:
+no pattern in the data is permanent and so any data-parsing program
+will be "brittle."
+</p>
+
+<p>For example, if you want to match text in section headings, you can
+write your program to depend on them being inside
+<tt class="literal">&lt;h2&gt;...&lt;/h2&gt;</tt> tags, but tomorrow the
+site's template could be redesigned, and headings
+could then be in <tt class="literal">&lt;h3
+class='hdln'&gt;...&lt;/h3&gt;</tt> tags, at which point your
+program won't see anything it considers a section
+heading. In practice, any given site's template
+won't change on a daily basis (nor even yearly, for
+most sites), but as you read this book and see examples of data
+extraction, bear in mind that each solution can't be
+<em class="emphasis">the</em> solution, but is just <em class="emphasis">a</em>
+solution, and a temporary and brittle one at that.
+</p>
+
+<p>As somewhat of a lesson in brittleness, in this book I show you data
+from various web sites (Amazon.com, the BBC News web site, and many
+others) and show how to write programs to extract data from them.
+However, that code is fragile. Some sites get redesigned only every
+few years; Amazon.com seems to change something every few weeks. So
+while I've made every effort to provide accurate
+code for the web sites as they exist at the time of this writing, I
+hope you will consider the programs in this book valuable as learning
+tools even after the sites will have changed beyond recognition.
+</p>
+
+</div>
+<a name="perllwp-CHP-1-SECT-1.3"></a><div class="sect2">
+<h3 class="sect2">1.1.3. Web Services</h3>
+
+<p>Programmers have begun to <a name="INDEX-13" class="ipoint"
+></a>realize the great value in automating
+transactions over the Web. There is now a booming industry in
+<em class="emphasis">web services</em>, which is the buzzword for data or
+services offered over the Web. What differentiates web services from
+web sites is that web services don't emit HTML for
+the ultimate reading pleasure of humans, they emit XML for programs.
+</p>
+
+<p>This removes the need to scrape information out of HTML, neatly
+solving the problem of ever-changing web sites made brittle by the
+fickle tastes of the web-browsing public. Some web
+<a name="INDEX-14" class="ipoint"
+></a>services
+<a name="INDEX-15" class="ipoint"
+></a>standards (SOAP and
+XML-RPC) even make the remote web service appear to be a set of
+functions you call from within your program&#x2014;if you use a SOAP
+or XML-RPC toolkit, you don't even have to parse
+XML!
+</p>
+
+<p>However, there will always be information on the Web that
+isn't accessible as a web service. For that
+information, screen scraping is the only choice.
+</p>
+
+<blockquote class='aside'><a name="aside-rss"></a>When I wrote the above, in
+2001 or so, RSS had been around for years, but hardly anyone actually
+used it for anything.  It was a sort of Catch-22: why generate an RSS
+when almost nobody had an RSS reader, so why make an RSS reader, if
+there's nothing interesting available as RSS?&nbsp;
+
+<br><br>Then, about 2001, Web services appeared and looked like they
+were going to be one of those "this time <em>for sure!</em>" solutions
+where we all get to have a glorious <a href=
+"http://www.tbray.org/ongoing/When/200x/2003/05/21/RDFNet" >Semantic
+Web</a> where you'd request and receive semantically marked-up
+information over some sort of web service protocol like XML-RPC.
+
+<br><br>Well, it so happened that XML-RPC went on to be a handy way
+for big programs to talk about their big data; but RSS lept ahead as
+the way for normal folks to get <a href=
+"http://feeds.sfgate.com/sfgate/rss/feeds/morford" >web</a> <a href=
+"http://www.theonion.com/content/feeds/horoscope/virgo" >data</a>.
+RSS might not be an <a href= "http://amazon.com/dp/0631205101"
+>ideal</a> of semantic-ness, but it's still much less encumbered than
+HTML.
+
+<br><br>Of course, solving one problem creates two more:
+
+<br><br>First, sometimes you then need to extract information from
+an RSS feed -- and at that point, just about
+everything I say in this book about extracting data from HTML applies
+just as well to RSS.  (Although, you may be tempted to use <a href=
+ "http://interglacial.com/rss/fresh_air_m3u.xsl"
+ >XSL</a>; it's worth a try, but I find the language an odd
+mix of concise and exasperating.)
+
+<br><br>And secondly, sometimes you need to get data <em>into</em> <a
+href= "http://interglacial.com/rss/" >RSS</a>, from <a href=
+"http://interglacial.com/rss/mcsweeneys.pl" >an HTML source</a> that
+for one reason or another doesn't have a CMS that can be goaded into
+"easily" producing an RSS feed.  At that point, you're right back into
+the topic of this book, harvesting and screen-scraping web pages, with
+just an extra step at the end where you <a href=
+"http://search.cpan.org/author/SBURKE/XML-RSS-SimpleGen/" >save your
+data as RSS</a>.
+
+<br><br>To abuse an expression, the more things stay the same, the
+more they stay the same.
+</blockquote>
+
+
+</div>
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

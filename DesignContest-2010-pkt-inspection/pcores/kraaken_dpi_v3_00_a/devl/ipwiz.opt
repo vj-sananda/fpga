@@ -1,0 +1,15 @@
+-batch 
+-create kraaken_dpi 
+-ver 3.00.a 
+-dir "E:\work\FPGA_PROJECTS\ML509\ml509_dpi" 
+-lang verilog 
+-bus plbv46 s 
+-burst s 32 
+-wfifo 1 128 
+-isc 1 
+-intrn 1 1 
+-reg 4 
+-wrbuf 16 
+-xps 
+-ise 
+-driver 

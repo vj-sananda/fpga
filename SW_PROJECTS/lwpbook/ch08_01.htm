@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Tokenizing Walkthrough (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:40:43 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_01' class='lwp lwp_ch08_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 8. Tokenizing Walkthrough</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-8-SECT-1">The Problem</a><br />
+<a href="ch08_02.htm">Getting the Data</a><br />
+<a href="ch08_03.htm">Inspecting the HTML</a><br />
+<a href="ch08_04.htm">First Code</a><br />
+<a href="ch08_05.htm">Narrowing In</a><br />
+<a href="ch08_06.htm">Rewrite for Features</a><br />
+<a href="ch08_07.htm">Alternatives</a><br /></p></div><p>So far, I've been showing examples of data in a
+particular format, then presenting code for extracting the data out
+of that format, as an illustration of newly introduced
+HTML::TokeParser methods. But in real life, you do not proceed tidily
+from the problem to an immediate and fully formed solution. And
+ideally, the task of data extraction is simple: identify patterns
+surrounding the data you're after and write a
+program that matches those patterns and extracts the embedded data.
+</p>
+
+<p>In practice, however, you write programs bit by bit and in fits and
+starts, and with data extraction specifically; this involves a good
+amount of trying one pattern, finding that its matching is too narrow
+or too broad, trying to amend it, possibly having to backtrack and
+try another pattern, and so on. Moreover, even equally effective
+patterns are not equal; some patterns are easier to capture in code
+than others, and some patterns are more temporary than others.
+</p>
+
+<p>In this section, I'll try to make these points by
+<a name="INDEX-472" class="ipoint"
+></a><a name="INDEX-473" class="ipoint"
+></a>walking
+though the implementation of a data extraction task, with all
+alternatives considered, and even a misstep or two.
+</p><div class="sect1"><a name="perllwp-CHP-8-SECT-1"></a>
+<h2 class="sect1">8.1. The Problem</h2>
+
+<p>As a starting point, consider the <a name="INDEX-474" class="ipoint"
+></a>task <a name="INDEX-475" class="ipoint"
+></a>of harvesting a month's
+worth of listings and corresponding RealAudio URLs from the web site
+of the National Public Radio program <em class="emphasis">Fresh Air</em>,
+at <a href="http://freshair.npr.org">http://freshair.npr.org</a>. <em class="emphasis">Fresh
+Air</em> is on NPR stations each weekday, and on every show,
+different guests are interviewed. The show's web
+site lists which guests appear on the show each day and has links to
+the RealAudio files for each segment of each show. If your particular
+weekday schedule doesn't have you listening to
+<em class="emphasis">Fresh Air</em> every night or afternoon, you would
+find it useful to have a program tell you who had been on in the past
+month, so you could make a point of listening to the RealAudio files
+for the guests you find interesting. Such a data-extraction program
+could be scheduled with crontab to run on the first or second day of
+every month, to harvest the past month's program
+data.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,230 @@
+Release 10.1.03 ngdbuild K.39 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+
+Command Line: ngdbuild -p xc2vp30ff896-7 -nt timestamp -bm system.bmm
+E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/system.ngc -uc
+system.ucf system.ngd
+
+Reading NGO file
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/system.ngc" ...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/ppc405_0_wrapper.ng
+c"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/ppc405_1_wrapper.ng
+c"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/jtagppc_0_wrapper.n
+gc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/reset_block_wrapper
+.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/plb_wrapper.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/opb_wrapper.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/plb2opb_wrapper.ngc
+"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/rs232_uart_1_wrappe
+r.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/leds_4bit_wrapper.n
+gc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/dipsws_4bit_wrapper
+.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/plb_bram_if_cntlr_1
+_wrapper.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/plb_bram_if_cntlr_1
+_bram_wrapper.ngc"...
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/dcm_0_wrapper.ngc".
+..
+Loading design module
+"E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/implementation/huffman_encode_test
+harness_0_wrapper.ngc"...
+Gathering constraint information from source properties...
+Done.
+
+Applying constraints in "system.ucf" to the design...
+Resolving constraint associations...
+Checking Constraint Associations...
+INFO:ConstraintSystem:178 - TNM 'sys_clk_pin', used in period specification
+   'TS_sys_clk_pin', was traced into DCM instance dcm_0/Using_Virtex.DCM_INST.
+   The following new TNM groups and period specifications were generated at the
+   DCM output(s): 
+   CLK0: <TIMESPEC TS_dcm_0_dcm_0_CLK0_BUF = PERIOD "dcm_0_dcm_0_CLK0_BUF"
+   TS_sys_clk_pin HIGH 50%>
+
+Done...
+Checking Partitions ...
+
+Processing BMM file ...
+
+Checking expanded design ...
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/GEN_SL
+   OW_MODE_BURSTXFER.I_ADDRESS_COUNTER/GEN_S_H_SIZE_REG[0].I_SIZE_S_H_REG' has
+   unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/GEN_SL
+   OW_MODE_BURSTXFER.I_ADDRESS_COUNTER/GEN_S_H_SIZE_REG[1].I_SIZE_S_H_REG' has
+   unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/GEN_S_H_ADDR_REG[0].I_ADDR_S_H_REG' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/GEN_S_H_ADDR_REG[1].I_ADDR_S_H_REG' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/GEN_S_H_ADDR_REG[2].I_ADDR_S_H_REG' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/GEN_BKEND_CE_REGISTERS[0].I_BKEND_CE_REG' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/GEN_BKEND_CE_REGISTERS[0].I_BKEND_RDCE_REG' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/GEN_BKEND_CE_REGISTERS[0].I_BKEND_WRCE_REG' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_CS_SIZE_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_CS_SIZE_REG1' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_CS_SIZE_REG2' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[0].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[1].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[2].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[3].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[4].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[5].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[6].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[7].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[8].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VAC
+   ANCY.I_VAC_CALC/I_ADDSUB_GEN[9].Counter_Bit_I/FDRE_I' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/OMIT_PACKET
+   _FEATURES.I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected
+   output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/OMIT_PACKET
+   _FEATURES.I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected
+   output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/OMIT_PACKET_FEAT
+   URES.I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/OMIT_PACKET_FEAT
+   URES.I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[9].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[8].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[7].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[6].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[5].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[4].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[3].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[2].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[1].Counter_Bit_I/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM
+   _I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/INCLUDE_VACANCY.
+   I_VAC_CALC/I_ADDSUB_GEN[0].Counter_Bit_I/FDRE_I' has unconnected output pin
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:  35
+
+Total memory usage is 105700 kilobytes
+
+Writing NGD file "system.ngd" ...
+
+Writing NGDBUILD log file "system.bld"...

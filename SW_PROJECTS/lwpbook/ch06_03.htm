@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Troubleshooting (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch06_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch06_03' class='lwp lwp_ch06_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">6.3. Troubleshooting</h2>
+
+<p>Both when developing and <a name="INDEX-381" class="ipoint"
+></a>maintaining
+data extraction programs, things can go wrong. Suddenly, instead of
+an article summary, you see a huge mass of HTML, or you
+don't get any output at all. Several things might
+cause this. For example, the web site's HTML
+changed, or your program wasn't flexible enough to
+deal with all the naturally occurring variations in the HTML.
+</p>
+
+<p>There are two basic types <a name="INDEX-382" class="ipoint"
+></a><a name="INDEX-383" class="ipoint"
+></a>of problems:
+false positives and false negatives. A false positive is when your
+regular expression identifies something it thinks is the information
+you're after, but it isn't really.
+For example, if the O'Reilly Network used the
+<tt class="literal">itemtemplate</tt> and summary format for things that
+aren't articles, the summary extraction program in
+<a href="ch06_02.htm#perllwp-CHP-6-EX-3">Example 6-3</a> would report headlines that
+aren't really headlines.
+</p>
+
+<p>There are two ways to deal with false positives. You can tighten your
+regular expression to prevent the uninteresting piece of HTML from
+matching. For example, matching text with
+<tt class="literal">/[^&lt;]*/</tt> instead of <tt class="literal">/.*?/</tt>
+ensures the text has no HTML. The other way to prevent a false
+positive is to inspect the results of the match to ensure
+they're relevant to your search. For example, in
+<a href="ch06_02.htm#perllwp-CHP-6-EX-3">Example 6-3</a>, we checked that the URL, title, and
+summary were found when we decomposed the chunk.
+</p>
+
+<p>A false negative is where your program fails to find information for
+which it is looking. There are also two ways to fix this. The first
+is to relax your regular expression. For example, replace a single
+space with <tt class="literal">/\s*/</tt> to allow for any amount of
+whitespace. The second way is to make another pass through the
+document with a separate regular expression or processing technique,
+to catch the data you missed the first time around. For example,
+extract into an array all the things that look like news headlines,
+then remove the first element from the array if you know
+it's always going to be an advertisement instead of
+an actual headline.
+</p>
+
+<p>Often the hardest part of
+<a name="INDEX-384" class="ipoint"
+></a><a name="INDEX-385" class="ipoint"
+></a>debugging
+a regular expression is locating which part isn't
+matching or is matching too much. There are some simple steps you can
+take to identify where your regular expression is going wrong.
+</p>
+
+<p>First, print the text you're matching against. Print
+it immediately before the match, so you are totally certain what the
+regular expression is being applied to. You'd be
+surprised at the number of subtle ways the page your program fetches
+can differ from the page for which you designed the regular
+expression.
+</p>
+
+<p>Second, put capturing parentheses around every chunk of the regular
+expression to see what's matching. This lets you
+find runaway matches, i.e., places where a quantifier matches too
+much. For example, the <tt class="literal">/.*/</tt> intended to skip just
+the formatting HTML might instead skip the formatting HTML, three
+entries, and another piece of formatting HTML. In such situations,
+it's typically because either the thing being
+quantified was too general (e.g., instead of the dot, we should have
+had <tt class="literal">/[^&lt;]/</tt> to avoid matching HTML), or because
+the literal text after the quantifier wasn't enough
+to identify the stop point. For example,
+<tt class="literal">/&lt;font/</tt> instead of <tt class="literal">/&lt;font
+size=-1/</tt> might make a minimal quantifier stop too soon (at
+the first <tt class="literal">font</tt> tag, instead of the correct
+<tt class="literal">font</tt> tag) or a greedy quantifier match too much
+(at the last <tt class="literal">font</tt> tag, instead of the last
+<tt class="literal">size=-1 font</tt> tag).
+</p>
+
+<p>If the regular expression you've created
+isn't matching at all, repeatedly take the last
+chunk off the regular expression until it does match. The last bit
+you removed was causing the match to fail, so inspect it to see why.
+</p>
+
+<p>For example, let's find out why this
+isn't matching:
+</p>
+
+<pre class="code">$text = qq(&lt;a href="file.html"&gt;&lt;b&gt;Dog&lt;/b&gt;&lt;/a&gt;Woof\nWoof&lt;/p&gt;);
+($file, $title, $summary) = 
+    $text =~ m{&lt;a href="(.*?)"&gt;&lt;b&gt;(.*?)&lt;/b&gt;&lt;/a&gt;\s*(.*?)&lt;/p&gt;};</pre>
+
+<p>Taking the last piece off yields this regular expression:</p>
+
+<pre class="code">&lt;a href="(.*?)"&gt;&lt;b&gt;(.*?)&lt;/b&gt;&lt;/a&gt;\s*(.*?)</pre>
+
+<p>This matches. This tells us that <tt class="literal">/&lt;/p&gt;/</tt>
+wasn't being found after <tt class="literal">/(.*?)/</tt>
+matched. We're not going to see much if we print
+<tt class="literal">$3</tt> at this point, as we're
+matching minimally, and without something forcing the quantifier to
+match more than 0, it'll be happy to match nothing.
+</p>
+
+<p>The way around this is to remove the minimal matching&#x2014;how much
+could it match?
+</p>
+
+<pre class="code">&lt;a href="(.*?)"&gt;&lt;b&gt;(.*?)&lt;/b&gt;&lt;/a&gt;\s*(.*)</pre>
+
+<p>Printing <tt class="literal">$3</tt> now show us that
+<tt class="literal">/.*/</tt> is matching only <tt class="literal">Woof</tt>,
+instead of <tt class="literal">Woof\nWoof</tt>. The newline should be the
+giveaway&#x2014;we need to add the <tt class="literal">/s</tt> modifier to
+the original regular expression (be sure to change the
+<tt class="literal">/.*/</tt> back to <tt class="literal">/.*?/</tt>!) to ensure
+that summaries with embedded newlines are correctly located.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

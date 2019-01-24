@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Limits on Forms (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_08"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_08' class='lwp lwp_ch05_08' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">5.8. Limits on Forms</h2>
+
+<p>The examples in this chapter
+<a name="INDEX-354" class="ipoint"
+></a>use
+approaches to form-data submission that work well for almost all form
+systems that you'd run into, namely, systems where
+the form data is meant to be keyed into HTML forms that do not
+change. Some form systems can't be treated with that
+approach because they contain JavaScript code that can do just about
+anything, such as manipulate the form data in arbitrary ways before
+sending it to the server. The best one can do in such cases is write
+Perl code that replicates what the JavaScript code does, as needed.
+</p>
+
+<p>Some form systems are problematic not because of JavaScript, but
+because the forms into which users are meant to key data are not
+always the same each time they're loaded. In most
+cases, the extent of change is merely a hidden form variable
+containing a session ID. These you can code around by using LWP to
+download the form, extracting the session ID or other hidden fields,
+and submitting those along with your other values.
+</p>
+
+<p>In a few remaining cases where the form in question is predictable
+enough for a program to manipulate it, but unpredictable enough that
+your program needs to carefully scrutinize its contents each time
+before choosing what form data to submit, you may be able put to good
+use either of the two CPAN modules that provide an abstracted
+interface to forms and the fields in them, HTML::Form and
+HTTP::Request::Form.
+</p>
+
+<p>HTML::Form is an LWP class for objects representing HTML forms. That
+is, it parses HTML source that you give it and builds an object for
+the form, each form containing an object for each input element in
+the form. HTML::Request::Form is quite similar, except it takes as
+input an HTML::TreeBuilder tree, not HTML source text. In practice,
+however, those modules are needed in very few cases, and the simpler
+strategies in this chapter will be enough for submitting just about
+any form on the Web and processing the result.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

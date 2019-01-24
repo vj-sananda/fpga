@@ -1,0 +1,12 @@
+-batch 
+-create huffman_encode_testharness 
+-ver 1.00.a 
+-dir F:\fpga\proj\huffman_encode 
+-lang verilog 
+-bus opb s 
+-rfifo 2 32 512 
+-wfifo 2 32 512 
+-regn 2 32 
+-xps 
+-ise 
+-driver 

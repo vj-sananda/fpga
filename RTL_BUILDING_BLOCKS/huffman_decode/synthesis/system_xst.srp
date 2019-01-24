@@ -1,0 +1,201 @@
+Release 7.1.01i - xst H.40
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "system_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/system.ngc"
+
+---- Source Options
+Top Module Name                    : system
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Effort                : 2
+Optimization Goal                  : speed
+RTL Output                         : YES
+Hierarchy Separator                : /
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" in Library work.
+Entity <system> compiled.
+Entity <system> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <system> (Architecture <STRUCTURE>).
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1725: Generating a Black Box for component <IBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1731: Generating a Black Box for component <OBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1737: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1745: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1753: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1761: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1769: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1777: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1785: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1793: Generating a Black Box for component <IOBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1801: Generating a Black Box for component <IBUF>.
+WARNING:Xst:766 - "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd" line 1807: Generating a Black Box for component <IBUF>.
+Entity <system> analyzed. Unit <system> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <system>.
+    Related source file is "f:/fpga/proj/huffman_decode/synthesis/../hdl/system.vhd".
+Unit <system> synthesized.
+
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:/Xilinx.
+
+Optimizing unit <system> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : ../implementation/system.ngr
+Top Level Output File Name         : ../implementation/system.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 12
+
+Cell Usage :
+# BELS                             : 2
+#      GND                         : 1
+#      VCC                         : 1
+# IO Buffers                       : 12
+#      IBUF                        : 3
+#      IOBUF                       : 8
+#      OBUF                        : 1
+# Others                           : 14
+#      dcm_0_wrapper               : 1
+#      dipsws_4bit_wrapper         : 1
+#      huffman_decoder_0_wrapper   : 1
+#      jtagppc_0_wrapper           : 1
+#      leds_4bit_wrapper           : 1
+#      opb_wrapper                 : 1
+#      plb2opb_wrapper             : 1
+#      plb_bram_if_cntlr_1_bram_wrapper: 1
+#      plb_bram_if_cntlr_1_wrapper : 1
+#      plb_wrapper                 : 1
+#      ppc405_0_wrapper            : 1
+#      ppc405_1_wrapper            : 1
+#      reset_block_wrapper         : 1
+#      rs232_uart_1_wrapper        : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of bonded IOBs:                 12  out of    556     2%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+No clock signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: No path found
+   Maximum combinational path delay: 2.924ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 1614 / 1606
+-------------------------------------------------------------------------
+Delay:               2.924ns (Levels of Logic = 1)
+  Source:            dipsws_4bit:GPIO_IO_O<0> (PAD)
+  Destination:       fpga_0_DIPSWs_4Bit_GPIO_IO_pin<0> (PAD)
+
+  Data Path: dipsws_4bit:GPIO_IO_O<0> to fpga_0_DIPSWs_4Bit_GPIO_IO_pin<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    dipsws_4bit_wrapper:GPIO_IO_O<0>    1   0.000   0.332  dipsws_4bit (fpga_0_DIPSWs_4Bit_GPIO_IO_O<0>)
+     IOBUF:I->IO               2.592          iobuf_6 (fpga_0_DIPSWs_4Bit_GPIO_IO_pin<0>)
+    ----------------------------------------
+    Total                      2.924ns (2.592ns logic, 0.332ns route)
+                                       (88.7% logic, 11.3% route)
+
+=========================================================================
+CPU : 16.04 / 16.20 s | Elapsed : 16.00 / 16.00 s
+ 
+--> 
+
+Total memory usage is 160424 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   13 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

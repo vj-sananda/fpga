@@ -1,0 +1,8 @@
+-batch 
+-create my_timer 
+-ver 1.00.a 
+-dir "C:\edk_projects\memo" 
+-lang verilog 
+-bus plbv46 s 
+-reg 4 
+-xps 

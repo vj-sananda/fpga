@@ -1,0 +1,4 @@
+EN huffman_decoder NULL F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd sub00/vhpl00 1122082449
+MO user_logic NULL F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/user_logic.v vlg08/user__logic.bin 1113115154
+MO huffman_decoder_v1 NULL F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/huffman_decoder_v1.v vlg00/huffman__decoder__v1.bin 1113115154
+AR huffman_decoder imp F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd sub00/vhpl01 1122082450

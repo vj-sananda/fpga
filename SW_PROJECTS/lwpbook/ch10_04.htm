@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Attaching in Another Tree (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch10_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch10_04' class='lwp lwp_ch10_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">10.4. Attaching in Another Tree</h2>
+
+<p>So far we've detached elements
+<a name="INDEX-590" class="ipoint"
+></a><a name="INDEX-591" class="ipoint"
+></a>from one part of a tree and
+attached them elsewhere in the same tree. But
+there's nothing stopping you from attaching them in
+other trees.
+</p>
+
+<p>For example, consider a case like the above example, where we extract
+the text in the <tt class="literal">&lt;td</tt> <tt class="literal">class="story"&gt;
+... &lt;/td&gt;</tt> element, but this time, instead of
+attaching it elsewhere in the same document tree,
+we're attaching it at a certain point in a different
+tree that we're using as a template. The template
+document looks like this:
+</p>
+
+<pre class="code">&lt;html&gt;&lt;head&gt;&lt;title&gt;Put the title here&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;!-- printable version --&gt;
+&lt;blockquote&gt;
+&lt;font size="-1"&gt;
+&lt;!-- start --&gt;
+...put the content here...
+&lt;!-- end --&gt;
+&lt;hr&gt;Copyright 2002.  Printed from the United Lies Syndicate web site.
+&lt;/font&gt;
+&lt;/blockquote&gt;
+&lt;/body&gt;&lt;/html&gt;</pre>
+
+<p>You'll note that the web designers have helpfully
+inserted comments to denote where the inserted content should start
+and end. But when you have HTML::TreeBuilder parse the document with
+default parse options and dump the tree, you don't
+see any sign of the comments:
+</p>
+
+<pre class="code">&lt;html&gt; @0
+  &lt;head&gt; @0.0
+    &lt;title&gt; @0.0.0
+      "Put the title here"
+  &lt;body&gt; @0.1
+    &lt;blockquote&gt; @0.1.0
+      &lt;font size="-1"&gt; @0.1.0.0
+        "  ...put the content here...  "
+        &lt;hr&gt; @0.1.0.0.1
+        "Copyright 2002. Printed from the United Lies Syndicate web site. "</pre>
+
+<a name="perllwp-CHP-10-SECT-4.1"></a><div class="sect2">
+<h3 class="sect2">10.4.1. Retaining Comments</h3>
+
+<p>However, storing comments
+<a name="INDEX-592" class="ipoint"
+></a><a name="INDEX-593" class="ipoint"
+></a>is controlled by an HTML::TreeBuilder parse
+option, <tt class="literal">store_comments(&#160;)</tt>, which is off by
+default. If we parse the file like so:
+</p>
+
+<pre class="code">use strict;
+use HTML::TreeBuilder;
+my $template_root = HTML::TreeBuilder-&gt;new;
+<tt class="userinput"><b>$template_root-&gt;store_comments(1);</b></tt>
+$template_root-&gt;parse_file('rewriters1/template1.html')
+ || die "Can't read template file: $!";
+ 
+$template_root-&gt;dump;</pre>
+
+<p>the comments now show up in the parse tree:</p>
+
+<pre class="code">&lt;html&gt; @0
+  &lt;head&gt; @0.0
+    &lt;title&gt; @0.0.0
+      "Put the title here"
+  &lt;body&gt; @0.1
+    &lt;!-- printable version --&gt; @0.1.0
+    &lt;blockquote&gt; @0.1.1
+      &lt;font size="-1"&gt; @0.1.1.0
+        &lt;!-- start --&gt; @0.1.1.0.0
+        " ...put the content here... "
+        &lt;!-- end --&gt; @0.1.1.0.2
+        &lt;hr&gt; @0.1.1.0.3
+        "Copyright 2002. Printed from the United Lies Syndicate web site. "</pre>
+
+</div>
+<a name="perllwp-CHP-10-SECT-4.2"></a><div class="sect2">
+<h3 class="sect2">10.4.2. Accessing Comments</h3>
+
+<p>What's left is to figure
+<a name="INDEX-594" class="ipoint"
+></a><a name="INDEX-595" class="ipoint"
+></a>out how to take out
+what's between the <tt class="literal">&lt;!-- start
+--&gt;</tt> and <tt class="literal">&lt;!-- end --&gt;</tt> comments,
+to insert whatever content needs to be put in there, then to write
+out the document. First we need to find the comments, and to do that
+we need to figure out how comments are stored in the tree, because so
+far we've only dealt with elements and bits of text.
+</p>
+
+<p>Mercifully, what we know about element objects in trees still
+applies, because that's how comments are stored: as
+element objects. But because comments aren't
+<a name="INDEX-596" class="ipoint"
+></a><a name="INDEX-597" class="ipoint"
+></a>actual elements, the
+HTML::Element documentation refers to them as
+<em class="emphasis">pseudoelements</em>, and they are given a tag name
+that no real element could have: <tt class="literal">~comment</tt>. The
+actual content of the comment ( <tt class="literal">start</tt> ) is stored
+as the value of the <tt class="literal">text</tt> attribute. In other
+words, <tt class="literal">&lt;!--</tt> <tt class="literal">start</tt>
+<tt class="literal">--&gt;</tt> is stored as if it were
+<tt class="literal">&lt;~comment</tt> <tt class="literal">text='</tt>
+<tt class="literal">start</tt> <tt class="literal">'&gt;&lt;/~comment&gt;</tt>.
+So finding comments is straightforward:
+</p>
+
+<pre class="code">foreach my $c ($template_root-&gt;find_by_tag_name('~comment')) {
+  print "A comment has text [", $c-&gt;attr('text'), "].\n";
+}</pre>
+
+<p>That prints this:</p>
+
+<pre class="code">A comment has text [ printable version ]
+A comment has text [ start ]
+A comment has text [ end ]</pre>
+
+<p>Finding the start and end comments is a matter of filtering those
+comments:
+</p>
+
+<pre class="code">use strict;
+use HTML::TreeBuilder;
+my $template_root = HTML::TreeBuilder-&gt;new;
+$template_root-&gt;store_comments(1);
+$template_root-&gt;parse_file('rewriters1/template1.html')
+ || die "Can't read template file: $!";
+ 
+my($start_comment, $end_comment);
+foreach my $c ($template_root-&gt;find_by_tag_name('~comment')) {
+  if($c-&gt;attr('text') =~ m/^\s*start\s*$/) {
+    $start_comment = $c;
+  } elsif($c-&gt;attr('text') =~ m/^\s*end\s*$/) {
+    $end_comment = $c;
+  }
+}
+die "Couldn't find template's 'start' comment!" unless $start_comment;
+die "Couldn't find template's 'end' comment!"   unless $end_comment;
+ 
+die "start and end comments don't have the same parent?!"
+  unless $start_comment-&gt;parent eq $end_comment-&gt;parent;
+# Make sure things are sane.</pre>
+
+</div>
+<a name="perllwp-CHP-10-SECT-4.3"></a><div class="sect2">
+<h3 class="sect2">10.4.3. Attaching Content</h3>
+
+<p>Once that's done, we need
+<a name="INDEX-598" class="ipoint"
+></a><a name="INDEX-599" class="ipoint"
+></a>some way of taking some new content
+(which we'll get elsewhere) and putting that in
+place of what's between the
+"start" comment and the
+"end" comment. There are many ways
+of doing this, but this is the most straightforward in terms of the
+methods we've already seen in this chapter:
+</p>
+
+<pre class="code">sub put_into_template {
+  my @to_insert = @_;
+  my $parent = $start_comment-&gt;parent;
+  my @old_content = $parent-&gt;detach_content;
+  my @new_content;
+
+  # Copy everything up to the $start_comment into @new_content,
+  # and then everything starting at $end_comment, and ignore
+  # everything inbetween and instead drop in things from @to_insert.
+
+  my $am_saving = 1;
+  foreach my $node (@old_content) {
+    if($am_saving) {
+      push @new_content, $node;
+      if($node eq $start_comment) {
+        push @new_content, @to_insert;
+        $am_saving = 0;   # and start ignoring nodes.
+      }
+    } else {  # I'm snipping out things to ignore
+      if($node eq $end_comment) {
+        push @new_content, $node;
+        $am_saving = 1;
+      } else {  # It's an element to ignore, and to destroy.
+        $node-&gt;delete if ref $node;
+      }
+    }
+  }
+  $parent-&gt;push_content(@new_content);  # attach new children
+  return;
+}</pre>
+
+<p>This seems a bit long, but it's mostly the work of
+just tracking whether we're in the mode of saving
+things from the old content list or ignoring (and in fact deleting)
+things from the old content list. With that subroutine in our
+program, we can test whether it works:
+</p>
+
+<pre class="code">put_into_template("Testing 1 2 3.");
+$template_root-&gt;dump;
+put_into_template("Is this mic on?");
+$template_root-&gt;dump;</pre>
+
+<p>That prints this:</p>
+
+<pre class="code">&lt;html&gt; @0
+  &lt;head&gt; @0.0
+    &lt;title&gt; @0.0.0
+      "Put the title here"
+  &lt;body&gt; @0.1
+    &lt;!-- printable version --&gt; @0.1.0
+    &lt;blockquote&gt; @0.1.1
+      &lt;font size="-1"&gt; @0.1.1.0
+        &lt;!-- start --&gt; @0.1.1.0.0
+        <tt class="userinput"><b>"Testing 1 2 3."</b></tt>
+        &lt;!-- end --&gt; @0.1.1.0.2
+        &lt;hr&gt; @0.1.1.0.3
+        "Copyright 2002. Printed from the United Lies Syndicate web site. "
+&lt;html&gt; @0
+  &lt;head&gt; @0.0
+    &lt;title&gt; @0.0.0
+      "Put the title here"
+  &lt;body&gt; @0.1
+    &lt;!-- printable version --&gt; @0.1.0
+    &lt;blockquote&gt; @0.1.1
+      &lt;font size="-1"&gt; @0.1.1.0
+        &lt;!-- start --&gt; @0.1.1.0.0
+        <tt class="userinput"><b>"Is this mic on?"</b></tt>
+        &lt;!-- end --&gt; @0.1.1.0.2
+        &lt;hr&gt; @0.1.1.0.3
+        "Copyright 2002. Printed from the United Lies Syndicate web site. "</pre>
+
+<p>This shows that not only did we manage to replace the
+template's original <tt class="literal">...put</tt>
+<tt class="literal">the content</tt> <tt class="literal">here...</tt> text node
+with a <tt class="literal">Testing</tt> <tt class="literal">1</tt>
+<tt class="literal">2</tt> <tt class="literal">3</tt>. node, but also
+<em class="emphasis">another</em> call to replace it with
+<tt class="literal">Is</tt> <tt class="literal">this</tt> <tt class="literal">mic</tt>
+<tt class="literal">on?</tt> worked too. From there, it's
+just a matter of adapting the code from the last section, which found
+the content in a file. Except this time we
+<a name="INDEX-600" class="ipoint"
+></a><a name="INDEX-601" class="ipoint"
+></a>use our new <tt class="literal">put_into_template(
+)</tt> function on that content:
+</p>
+
+<pre class="code"># Read an individual file for its content now.
+my $content_file_root = HTML::TreeBuilder-&gt;new;
+my $input_filespec = 'rewriters1/in002.html';   # or whatever input file
+$content_file_root-&gt;parse_file($input_filespec)
+ || die "Can't read input file $input_filespec: $!";
+ 
+# Find its real content:
+my $good_td = $content_file_root-&gt;look_down( '_tag', 'td',  'class', 'story', );
+die "No good td?!" unless $good_td;
+ 
+put_into_template( $good_td-&gt;content_list );
+$content_file_root-&gt;delete;  # We don't need it anymore.
+ 
+open(OUT, "&gt;rewriters1/out003a.html") || die "Can't write: $!";
+  # or whatever output filespec
+print OUT $template_root-&gt;as_HTML(undef, '  '); # two-space indent in output
+close(OUT);</pre>
+
+<p>When this runs, we see can see in the output file that the content
+was successfully inserted into the template and written out:
+</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Put the title here&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- printable version --&gt;
+    &lt;blockquote&gt;&lt;font size="-1"&gt;
+        <tt class="userinput"><b>&lt;!-- start --&gt;</b></tt>
+        &lt;h1&gt;Shatner and Kunis Sweep the Oscars&lt;/h1&gt;
+        &lt;p&gt;Stars of &lt;cite&gt;American Psycho II&lt;/cite&gt; walked away with four Academy
+           Awards...
+        <tt class="userinput"><b>&lt;!-- end --&gt;</b></tt>
+        &lt;hr&gt;Copyright 2002. Printed from the United Lies Syndicate web site.
+        &lt;/font&gt;&lt;/blockquote&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>All is well, except the title is no good. It still says
+"Put the title here". All
+that's left is to replace the content of the
+template's title with the content of the current
+file's title. We just find the
+<tt class="literal">title</tt> element in each, and swap content:
+</p>
+
+<pre class="code">my $template_title = $template_root-&gt;find_by_tag_name('title')
+  || die "No title in template?!";
+$template_title-&gt;delete_content;
+my $content_title = $content_file_root-&gt;find_by_tag_name('title');
+if($content_title) {
+<tt class="userinput"><b>  $template_title-&gt;push_content( $content_title-&gt;content_list );</b></tt>
+    # This method, like all methods, automatically detaches
+    #  elements from where they are currently, as necessary.
+} else {
+  $template_title-&gt;push_content( 'No title' );
+}</pre>
+
+<p>We put that code in our program anywhere between when we read the
+file into <tt class="literal">$content_file_root</tt> and when we destroy
+it; it works happily and puts the right content into the output
+file's title element:
+</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;<tt class="userinput"><b>Shatner and Kunis Sweep the Oscars</b></tt>&lt;/title&gt;
+  &lt;/head&gt;
+<em class="replaceable"><tt>[...]</tt></em></pre>
+
+<p>Because this works for a single given input file, and because we
+tested earlier to make sure our <tt class="literal">put_into_template( )
+ro</tt>utine works for all subsequent invocations as well as for
+the first, that means we have the main building block for a system
+that does template extraction and insertion for any number of files.
+All we have to do is turn that into a function, and call it as many
+times as needed. For example:
+</p>
+
+<pre class="code"># ...read in $template_root...
+# ...get names of files to change into @input_files...
+foreach my $input_filespec (@input_files) {
+  template_redo($input_filespec, "../printables/$input_filespec");
+}
+
+sub template_redo {
+  my($input_filespec, $output_filespec) = @_;
+  my $content_file_root = HTML::TreeBuilder-&gt;new;
+  $content_file_root-&gt;parse_file($input_filespec)
+   || die "Can't read input file $input_filespec: $!";
+
+  #  ...then extract content and put into the template tree, as above...
+
+  $content_file_root-&gt;delete;  # We don't need it anymore.
+  open(OUT, "&gt;$output_filespec") || die "Can't write $output_file: $!";
+  print OUT $template_root-&gt;as_HTML(undef, '  ');
+  close(OUT);
+}</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

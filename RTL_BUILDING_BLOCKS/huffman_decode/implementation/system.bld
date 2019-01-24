@@ -1,0 +1,210 @@
+Release 7.1.01i ngdbuild H.40
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+
+Command Line: ngdbuild -p xc2vp30ff896-7 -nt timestamp -bm system.bmm -uc
+system.ucf F:/fpga/proj/huffman_decode/implementation/system.ngc system.ngd 
+
+Reading NGO file 'F:/fpga/proj/huffman_decode/implementation/system.ngc' ...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/huffman_decoder_0_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/dcm_0_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/plb_bram_if_cntlr_1_bram_wrapper.ngc
+"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/plb_bram_if_cntlr_1_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/reset_block_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/jtagppc_0_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/ppc405_1_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/ppc405_0_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/dipsws_4bit_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/leds_4bit_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/rs232_uart_1_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/plb2opb_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/opb_wrapper.ngc"...
+Loading design module
+"F:/fpga/proj/huffman_decode/implementation/plb_wrapper.ngc"...
+
+Applying constraints in "system.ucf" to the design...
+
+Checking timing specifications ...
+INFO:XdmHelpers:851 - TNM "sys_clk_pin", used in period specification
+   "TS_sys_clk_pin", was traced into DCM instance "dcm_0/dcm_0/DCM_INST". The
+   following new TNM groups and period specifications were generated at the DCM
+   output(s):
+   CLK0: TS_dcm_0_dcm_0_CLK0_BUF=PERIOD dcm_0_dcm_0_CLK0_BUF
+TS_sys_clk_pin*1.000000 HIGH 50.000000%
+
+Processing BMM file ...
+
+Checking expanded design ...
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I6' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I0/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I7' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I3/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I2/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I1/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I9/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I8/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I7/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I6/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I5/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_VAC_CALC/Counter_Bit_I4/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I11' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I8' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I10' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I9' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I1' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I2' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I3' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I4' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_DELAY_MUX/FDRE_I5' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I1/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I0/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I9/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I8/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I7/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I6/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I5/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I4/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I3/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_VAC_CALC/Counter_Bit_I2/FDRE_I' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected output
+   pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTR
+   OLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected
+   output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected
+   output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected
+   output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_
+   CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT' has unconnected
+   output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDR
+   ESS_COUNTER/I_SIZE_S_H_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDR
+   ESS_COUNTER/I_SIZE_S_H_REG1' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_CS_SIZE_REG2' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_CS_SIZE_REG1' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_CS_SIZE_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_BKEND_WRCE_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_BKEND_RDCE_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_BKEND_CE_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_ADDR_S_H_REG1' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_ADDR_S_H_REG0' has unconnected output pin
+WARNING:NgdBuild:443 - SFF primitive
+   'plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECO
+   DER/I_ADDR_S_H_REG2' has unconnected output pin
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:  48
+
+Total memory usage is 82484 kilobytes
+
+Writing NGD file "system.ngd" ...
+
+Writing NGDBUILD log file "system.bld"...

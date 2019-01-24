@@ -1,0 +1,1 @@
+vcs "-sverilog" "+v2k" "com1a.v" "com1u.v" "dut_fifo_intf.v" "etl1.v" "ex_div.v" "ftl2.v" "gate.v" "jg_div_fpga.v" "jg_div_top.v" "mux2e.v" "mux4d.v" "tb.v" "user_logic.v" "-P" "/tool/cbar/apps/sim/verdi-2008.10/share/PLI/vcsd/LINUX/vcsd.tab" "/tool/cbar/apps/sim/verdi-2008.10/share/PLI/vcsd/LINUX/pli.a" "+vcsd" "+define+NOWAVES" "-o" "simv" "-l" "sim.log"

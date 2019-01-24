@@ -1,0 +1,15 @@
+##############################################################################
+## Filename:          E:\work\FPGA_PROJECTS\BLOCKS\integer_divider_v2/drivers/plb_dut_intf_v1_00_a/data/plb_dut_intf_v2_1_0.mdd
+## Description:       Microprocessor Driver Definition
+## Date:              Fri Dec 10 12:23:33 2010 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+OPTION psf_version = 2.1.0;
+
+BEGIN DRIVER plb_dut_intf
+
+  OPTION supported_peripherals = (plb_dut_intf);
+  OPTION depends = (common_v1_00_a);
+  OPTION copyfiles = all;
+
+END DRIVER

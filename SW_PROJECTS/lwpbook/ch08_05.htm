@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Narrowing In (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_05"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_05' class='lwp lwp_ch08_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">8.5. Narrowing In</h2>
+
+<p>Now, we could try excluding every kind of thing we know we
+don't want. We could exclude the
+<tt class="literal">mailto:</tt> link by excluding all URLs that start with
+<em class="emphasis">mailto</em>:; we could exclude the guest bio URLs by
+excluding URLs that contain <em class="emphasis">guestinfo</em>; we could
+exclude the "Previous" and
+"Next" links by ignoring any URLs
+with <em class="emphasis">dayFA</em> in them; and we could think of a way
+to exclude the image URLs. However, tomorrow the people at
+<em class="emphasis">Fresh Air</em> might add this to their general
+template:
+</p>
+
+<pre class="code">&lt;a href="buynow.html"&gt;&lt;img alt="Buy the Terry Gross mug"
+  src="/mug.jpg" width=450 weight=90&gt;&lt;/a&gt;</pre>
+
+<p>Because that isn't explicitly excluded, it would
+make its way through and appear as a segment link in every program
+listed.
+</p>
+
+<p>It is a valid approach to come up with criteria for the kinds of
+things we <em class="emphasis">don't</em> want to see,
+but it's usually easier to come up with criteria to
+capture what we <em class="emphasis">do</em> want to see. So this is what
+we'll do.
+</p>
+
+<p>We could characterize the links we're after in
+several ways:
+</p>
+
+<ol><li>
+<p>These links all contain a <tt class="literal">&lt;font...&gt; ...
+&lt;/font&gt;</tt> sequence and a <tt class="literal">&lt;b&gt; ...
+&lt;/b&gt;</tt> sequence.
+</p>
+</li><li>
+<p>They all have an <tt class="literal">&lt;a ...&gt;</tt> tag with an
+<tt class="literal">href</tt> attribute pointing to a URL.
+</p>
+</li><li>
+<p>The URL they point to looks like
+<em class="emphasis">http://www.npr.org/ramfiles/fa/20010702.fa.ram</em>. 
+</p>
+</li><li>
+<p>Notably, the URL's scheme is
+<tt class="literal">http</tt>, it's on the server
+<tt class="literal">www.npr.org</tt>, its path includes
+<tt class="literal">ramfiles</tt>, and it ends in <tt class="literal">.ram</tt>.
+</p>
+</li><li>
+<p>The (trimmed) link text up to <tt class="literal">/a</tt> always begins
+with <tt class="literal">Listen to</tt> .
+</p>
+</li></ol>
+<p>Now, of these, the first criterion is most reminiscent of the sort of
+things we did earlier with the BBC news extractor. But in this case,
+it's actually sort of a bother, because we
+can't specify that the next token after the
+<tt class="literal">&lt;a ...&gt;</tt> start-tag is a
+<tt class="literal">&lt;font...&gt;</tt> tag.
+</p>
+
+<p>If, by this first criterion, we simply mean that calling
+<tt class="literal">$x-&gt;get_tag('/a', 'font',</tt>
+<tt class="literal">'b')</tt> should give you
+<tt class="literal">&lt;font...&gt;</tt> or <tt class="literal">&lt;b&gt;</tt>
+before you hit <tt class="literal">&lt;/a&gt;</tt>, well, this is true. But
+in either case, you'll have skipped over all the
+tokens between the current point in the stream and the next tag you
+find, and once you've skipped them, you
+can't get them back. In this case, we can get away
+with throwing out the content of <tt class="literal">&lt;a
+...&gt;...&lt;/a&gt;</tt> sequences that don't
+meet this one criterion, but in many situations you run into, you
+won't have that luxury. Moreover, in jumping from
+the <tt class="literal">&lt;a ...&gt;</tt> start-tag to the first
+<tt class="literal">&lt;font...&gt;</tt> tag, we may be jumping over text
+that we want but will never be able to get.
+</p>
+
+<p>We could try implementing this all with the same approach we used
+with the BBC extractor in <a href="ch07_01.htm">Chapter 7, "HTML Processing with Tokens"</a>, where we cook
+up several patterns (such as an <tt class="literal">&lt;a</tt>
+<tt class="literal">href...&gt;</tt> start-tag, a text token
+<tt class="literal">Listen</tt> <tt class="literal">to</tt> , a
+<tt class="literal">&lt;font...&gt;</tt> start-tag, some whitespace, and a
+<tt class="literal">&lt;b&gt;</tt> start-tag) and base our pattern matcher
+on <tt class="literal">get_token(&#160;)</tt> so we can always
+<a name="INDEX-476" class="ipoint"
+></a><a name="INDEX-477" class="ipoint"
+></a><a name="INDEX-478" class="ipoint"
+></a><a name="INDEX-479" class="ipoint"
+></a>call <tt class="literal">unget_token(&#160;)</tt> on
+tokens that don't match the pattern. This is
+feasible, but it's sounding like the hardest of the
+criteria to formalize, at least under HTML::TokeParser. (But testing
+whether a tag sequence contains another is easy with
+HTML::TreeBuilder, as we see in later chapters.) So
+we'll try to make do without this one criterion and
+consider it a last resort.
+</p>
+
+<p>Winding irrevocably past things is a problem not just with
+<tt class="literal">get_tag(&#160;)</tt>. It's also a problem
+with <tt class="literal">get_text(&#160;)</tt> and <tt class="literal">get_trimmed_text(
+)</tt>. Once you use any of these methods to skip past tags
+and/or comments, they're gone for good. Unless you
+did something particularly perverse, such as read a huge chunk of the
+stream with <tt class="literal">get_token(&#160;)</tt> and then stuffed it back
+in with <tt class="literal">unget_token(&#160;)</tt> while still keeping a copy
+around. If you're even contemplating something like
+that, it's a definite sign that your program is
+outgrowing what you can do with HTML::TokeParser, and you should
+either write a new searcher method that's like
+<tt class="literal">get_text(&#160;)</tt> but that can restore tokens to the
+buffer, or more likely move on to a parsing model based on
+HTML::TreeBuilder.
+</p>
+
+<p>The next criteria (numbers 3 and 4 in the list above) are easy to
+formalize. These involve characteristics of the URL. We simply add a
+line to our <tt class="literal">while</tt> loop, like so:
+</p>
+
+<pre class="code">while(my $a_tag = $stream-&gt;get_tag('a')) {
+  my $url = $a_tag-&gt;[1]{'href'} || next;
+<b class="emphasis-bold">  next unless $url =~ m{^http:}s and $url =~ m/www\.npr\.org/i</b>
+   <b class="emphasis-bold">and $url =~ m{/ramfiles/} and $url =~ m/\.ram$/;</b>
+  #  (There's many other ways of doing the above.)
+  my $text = $stream-&gt;get_trimmed_text('/a');
+  printf "%s\n  %s\n", $text, $url;
+}</pre>
+
+<p>But this raises a point on which many programmers will, legitimately,
+diverge. Currently, we can say
+"it's interesting only if the URL
+ends in <em class="emphasis">.ram</em>," like so:
+</p>
+
+<pre class="code">next unless $url =~ m/\.ram$/;</pre>
+
+<p>It works! But what if, tomorrow, some code like the following is
+added to the normal template?
+</p>
+
+<pre class="code">&lt;a href="/stuff/holiday_greets.ram"&gt;Happy Holidays
+ from Terry Gross!&lt;/a&gt;
+&lt;!-- just a short RA file of Terry saying "Happy NATO Day!" --&gt;</pre>
+
+<p>We'll be annoyed we didn't make our
+link extractor check <tt class="literal">$url</tt> <tt class="literal">=~</tt>
+<tt class="literal">m/www\.npr\.org/i</tt> and <tt class="literal">$url</tt>
+<tt class="literal">=~</tt> <tt class="literal">m{/ramfiles/}</tt>. On the other
+hand, if we do check those additional facts about the URL, and
+tomorrow all the <em class="filename">.ram</em> files are moved off of
+<em class="emphasis">www.npr.org</em> and onto
+<em class="emphasis">archive.npr.org</em>, or onto
+<em class="emphasis">terrygross.com</em> or whatever, then
+it'll look like there were no links for this
+program! Then we'll be annoyed that we did make our
+link extractor check those additional things about the URL. Moreover,
+tomorrow NPR could switch to a better audio format than RealAudio,
+and all the <em class="emphasis">.ram</em> files could turn into something
+else, such that even <tt class="literal">m/\.ram$/</tt> is no longer true.
+It could even be something served across a protocol other than HTTP!
+In other words, no part of the URL is reliably stable. On one hand,
+National Public Radio is not normally characterized by lavish budgets
+for web design (and redesign, and re-redesign), so you can expect
+some measure of stability. But on the other hand, you never know!
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,4 @@
+verilog work "./aes_cipher_top.v"
+verilog work "./aes_key_expand_128.v"
+verilog work "./aes_sbox.v"
+verilog work "./aes_rcon.v"

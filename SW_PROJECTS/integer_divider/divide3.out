@@ -1,0 +1,89 @@
+Operation: 123456789 / 2
+Iter=1: Qi=46296295, m=30864199(m_msb=26,n_msb=1),Q=46296295
+Iter=2: Qi=11574074, m=7716051(m_msb=24,n_msb=1),Q=57870369
+Iter=3: Qi=2893519, m=1929013(m_msb=22,n_msb=1),Q=60763888
+Iter=4: Qi=723379, m=482255(m_msb=20,n_msb=1),Q=61487267
+Iter=5: Qi=180845, m=120565(m_msb=18,n_msb=1),Q=61668112
+Iter=6: Qi=45211, m=30143(m_msb=16,n_msb=1),Q=61713323
+Iter=7: Qi=11303, m=7537(m_msb=14,n_msb=1),Q=61724626
+Iter=8: Qi=2826, m=1885(m_msb=12,n_msb=1),Q=61727452
+Iter=9: Qi=706, m=473(m_msb=10,n_msb=1),Q=61728158
+Iter=10: Qi=177, m=119(m_msb=8,n_msb=1),Q=61728335
+Iter=11: Qi=44, m=31(m_msb=6,n_msb=1),Q=61728379
+Iter=12: Qi=11, m=9(m_msb=4,n_msb=1),Q=61728390
+Iter=13: Qi=3, m=3(m_msb=3,n_msb=1),Q=61728393
+PASS: Q=61728394 (exp=0x3ade68a) , R=1 (exp=0x1)
+Operation: 123456789 / 3
+Iter=1: Qi=30864197, m=30864198(m_msb=26,n_msb=1),Q=30864197
+Iter=2: Qi=7716049, m=7716051(m_msb=24,n_msb=1),Q=38580246
+Iter=3: Qi=1929012, m=1929015(m_msb=22,n_msb=1),Q=40509258
+Iter=4: Qi=482253, m=482256(m_msb=20,n_msb=1),Q=40991511
+Iter=5: Qi=120564, m=120564(m_msb=18,n_msb=1),Q=41112075
+Iter=6: Qi=30141, m=30141(m_msb=16,n_msb=1),Q=41142216
+Iter=7: Qi=7535, m=7536(m_msb=14,n_msb=1),Q=41149751
+Iter=8: Qi=1884, m=1884(m_msb=12,n_msb=1),Q=41151635
+Iter=9: Qi=471, m=471(m_msb=10,n_msb=1),Q=41152106
+Iter=10: Qi=117, m=120(m_msb=8,n_msb=1),Q=41152223
+Iter=11: Qi=30, m=30(m_msb=6,n_msb=1),Q=41152253
+Iter=12: Qi=7, m=9(m_msb=4,n_msb=1),Q=41152260
+Iter=13: Qi=2, m=3(m_msb=3,n_msb=1),Q=41152262
+PASS: Q=41152263 (exp=0x273ef07) , R=0 (exp=0x0)
+Operation: 123456789 / 4
+Iter=1: Qi=27006172, m=15432101(m_msb=26,n_msb=2),Q=27006172
+Iter=2: Qi=3375772, m=1929013(m_msb=23,n_msb=2),Q=30381944
+Iter=3: Qi=421971, m=241129(m_msb=20,n_msb=2),Q=30803915
+Iter=4: Qi=52746, m=30145(m_msb=17,n_msb=2),Q=30856661
+Iter=5: Qi=6594, m=3769(m_msb=14,n_msb=2),Q=30863255
+Iter=6: Qi=824, m=473(m_msb=11,n_msb=2),Q=30864079
+Iter=7: Qi=103, m=61(m_msb=8,n_msb=2),Q=30864182
+Iter=8: Qi=13, m=9(m_msb=5,n_msb=2),Q=30864195
+Iter=9: Qi=1, m=5(m_msb=3,n_msb=2),Q=30864196
+PASS: Q=30864197 (exp=0x1d6f345) , R=1 (exp=0x1)
+Operation: 123456789 / 5
+Iter=1: Qi=23148147, m=7716054(m_msb=26,n_msb=2),Q=23148147
+Iter=2: Qi=1446760, m=482254(m_msb=22,n_msb=2),Q=24594907
+Iter=3: Qi=90422, m=30144(m_msb=18,n_msb=2),Q=24685329
+Iter=4: Qi=5652, m=1884(m_msb=14,n_msb=2),Q=24690981
+Iter=5: Qi=353, m=119(m_msb=10,n_msb=2),Q=24691334
+Iter=6: Qi=22, m=9(m_msb=6,n_msb=2),Q=24691356
+Iter=7: Qi=1, m=4(m_msb=3,n_msb=2),Q=24691357
+PASS: Q=24691357 (exp=0x178c29d) , R=4 (exp=0x4)
+Operation: 123456789 / 6
+Iter=1: Qi=19290123, m=7716051(m_msb=26,n_msb=2),Q=19290123
+Iter=2: Qi=1205632, m=482259(m_msb=22,n_msb=2),Q=20495755
+Iter=3: Qi=75352, m=30147(m_msb=18,n_msb=2),Q=20571107
+Iter=4: Qi=4710, m=1887(m_msb=14,n_msb=2),Q=20575817
+Iter=5: Qi=294, m=123(m_msb=10,n_msb=2),Q=20576111
+Iter=6: Qi=19, m=9(m_msb=6,n_msb=2),Q=20576130
+Iter=7: Qi=1, m=3(m_msb=3,n_msb=2),Q=20576131
+PASS: Q=20576131 (exp=0x139f783) , R=3 (exp=0x3)
+Operation: 123456789 / 7
+Iter=1: Qi=15432098, m=15432103(m_msb=26,n_msb=2),Q=15432098
+Iter=2: Qi=1929012, m=1929019(m_msb=23,n_msb=2),Q=17361110
+Iter=3: Qi=241127, m=241130(m_msb=20,n_msb=2),Q=17602237
+Iter=4: Qi=30141, m=30143(m_msb=17,n_msb=2),Q=17632378
+Iter=5: Qi=3767, m=3774(m_msb=14,n_msb=2),Q=17636145
+Iter=6: Qi=471, m=477(m_msb=11,n_msb=2),Q=17636616
+Iter=7: Qi=59, m=64(m_msb=8,n_msb=2),Q=17636675
+Iter=8: Qi=8, m=8(m_msb=6,n_msb=2),Q=17636683
+Iter=9: Qi=1, m=1(m_msb=3,n_msb=2),Q=17636684
+PASS: Q=17636684 (exp=0x10d1d4c) , R=1 (exp=0x1)
+Operation: 123456789 / 8
+Iter=1: Qi=13503086, m=15432101(m_msb=26,n_msb=3),Q=13503086
+Iter=2: Qi=1687886, m=1929013(m_msb=23,n_msb=3),Q=15190972
+Iter=3: Qi=210985, m=241133(m_msb=20,n_msb=3),Q=15401957
+Iter=4: Qi=26373, m=30149(m_msb=17,n_msb=3),Q=15428330
+Iter=5: Qi=3297, m=3773(m_msb=14,n_msb=3),Q=15431627
+Iter=6: Qi=412, m=477(m_msb=11,n_msb=3),Q=15432039
+Iter=7: Qi=52, m=61(m_msb=8,n_msb=3),Q=15432091
+Iter=8: Qi=6, m=13(m_msb=5,n_msb=3),Q=15432097
+PASS: Q=15432098 (exp=0xeb79a2) , R=5 (exp=0x5)
+Operation: 123456789 / 9
+Iter=1: Qi=12538580, m=10609569(m_msb=26,n_msb=3),Q=12538580
+Iter=2: Qi=1077534, m=911763(m_msb=23,n_msb=3),Q=13616114
+Iter=3: Qi=92600, m=78363(m_msb=19,n_msb=3),Q=13708714
+Iter=4: Qi=7958, m=6741(m_msb=16,n_msb=3),Q=13716672
+Iter=5: Qi=684, m=585(m_msb=12,n_msb=3),Q=13717356
+Iter=6: Qi=59, m=54(m_msb=9,n_msb=3),Q=13717415
+Iter=7: Qi=5, m=9(m_msb=5,n_msb=3),Q=13717420
+PASS: Q=13717421 (exp=0xd14fad) , R=0 (exp=0x0)

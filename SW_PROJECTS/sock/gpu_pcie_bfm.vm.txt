@@ -1,0 +1,518 @@
+/***********************************************************************\
+|*                                                                     *|
+|*    Copyright (c) 2002-2005 by PARTNER Corp.  All rights reserved.    *|
+|*                                                                     *|
+|*  This material  constitutes  the trade  secrets  and confidential,  *|
+|*  proprietary information of PARTNER, Corp.  This material is not to  *|
+|*  be  disclosed,  reproduced,  copied,  or used  in any manner  not  *|
+|*  permitted  under license from PARTNER, Corp.                        *|
+|*                                                                     *|
+\***********************************************************************/
+
+// PLI functions used
+
+// from clib/standVerilog/nonBlockInterfacePLI.c
+/* $PopTransactionQPLI (node, &streamId, &adr, &rdNotWrt, &cmd, &wrdSize); */
+/* $PopWrtDataQPLI (node, streamId, &data, &be_); */
+/* $PushRdDoneQPLI (node, streamId, wrdSize); */
+/* $PushRdDataQPLI (node, streamId, data); */
+/* $PopRdReqQPLI (node, streamId, &wrdSize); */
+
+// from vmodels/BESTCmd.v
+/* BESTCmd.RdAck( streamId, node, expNumWrds, actNumWrds); */
+
+// from clib/standVerilog/dispatchPLI.c
+/* $DirectWrtPLI(adr, data)*/
+
+// from clib/standVerilog/errMsgPLI.c
+/* $Message() */
+/* $Error()   */
+
+// from hostc.cpp
+/* HostCMdlIoWrtPLI(adr, data, be_) */
+/* HostCMdlCfgWrtPLI(adr, data, be_) */
+/* HostCMdlWrtPLI(adr, data, be_) */
+/* HostCMdlIoRdPLI(adr, be_) */
+/* HostCMdlRdPLI(adr, be_) */
+
+`include "socketProtocal.vh"
+`include "pcie_bfm_api.vh"
+
+// PCI command encodings
+// this is also how commands are received through the socket,
+// otherwise these definitions would not be necessary
+`define Int_ack		4'b 0000
+`define Special		4'b 0001
+`define Io_read		4'b 0010
+`define Io_write	4'b 0011
+`define Reserved1	4'b 0100 // I'm going to hijak this command to use for Mem_rd with
+                                 // no status expected.. Martin M
+                                 // The reason for this, is if an illegal read is sent, there's currently
+                                 // no way to get the status back from the 3gio_bfm.
+`define Reserved2	4'b 0101
+`define Reserved3	4'b 1000
+`define Reserved4	4'b 1001
+`define Config_read	4'b 1010
+`define Config_write	4'b 1011
+`define Mem_read	4'b 0110
+`define Mem_read_mult	4'b 1100
+`define Mem_read_line	4'b 1110
+`define Mem_write	4'b 0111
+`define Mem_write_inv	4'b 1111
+`define Dual_adr	4'b 1101
+`define StatusReq	5'h 10
+`define DataStepEn      9'h 100
+`define DataStepField   7:4
+`define BeField   	3:0
+//  status defines - the only status sent back is STAT_ACK
+//  previously there were others, but that's all dealt with
+//  in the bus model now
+`define STAT_ACK 8'h0
+`define STAT_MABORT 8'h1 // this will be used for all status not ack'd - Martin M
+
+// This define is used in xbus_bfm_accType.vh to define memory used in the gpu sims
+`define GPU_XBUS_BFM 1
+
+&Module;
+
+&Ports;
+
+&Instance pcie_bfm pcie_bfm;
+&Instance host_traffic_gen host_traffic_gen;
+
+
+
+/////////////////////////////////////////
+//
+// retrieve and interpret commands from the socket
+//
+/////////////////////////////////////////
+
+// This task was taken from pci_cpu.v
+// Right now this task does not allow for multiple requests(pipelining) that
+// require cpl/status_request from mdiag.
+
+&Forget dangle rdNotWrt;
+&Forget dangle wrdSize;
+reg [31:0] streamId, adr, rdNotWrt, cmd, wrdSize, Size, expNumWrds;
+reg [31:0] data_4bytes;
+reg [3:0] byte_enable;
+reg status_req,back2back_xaction;
+integer data_count;
+initial back2back_xaction = 0;
+
+reg [31:0] bar0_mask;
+reg [31:0] bar0_value;
+initial bar0_mask = 32'hff000000;
+
+reg backdoor_pri_enable;
+
+reg backdoor_read;
+reg [31:0] backdoor_read_data;
+initial backdoor_read = 0;
+
+// at posedge clk or right after a backdoor write
+always @ (posedge symbol_clk or posedge back2back_xaction or negedge back2back_xaction) begin
+  if ($PopTransactionQPLI (`CPUNode, streamId, adr, rdNotWrt, cmd, wrdSize)) begin
+    //check for power mode of bfm
+    if (!pcie_bfm.pl_in_l0_or_l0s) begin
+      $Message("gpu_pcie_bfm.  Currently in low power state.  Moving back to state l0(normal operational state)");
+      pcie_bfm.goto_power_state(`PCIE_BFM_POWER_STATE_L0);
+    end
+
+    if (debug_cpu)
+      $Message ("PopTransactionQ : streamId=%0d adr=%0h rdNotWrt=%0d cmd=%0h wrdSize=%0d",
+                   streamId, adr, rdNotWrt, cmd, wrdSize);
+    // Find out if the calling procedure wants a status returned.
+    if (cmd & `StatusReq) begin
+      status_req = 1;
+      cmd = cmd & 4'hf;
+    end else begin
+      status_req = 0;
+    end
+    Size = wrdSize ; // TODO - I'm assuming wrdSize is the number of 32bit transfers
+                    //      - Since length in pci express is expressed in dwords(32bits)
+                    //      - Size and wrdSize are equivalent
+
+
+///////////////////////////////////////////////////////////////////////////
+    if (rand_host_traffic_enable_on_non_cfg &&
+        (cmd != `Config_read) && (cmd != `Config_write)) begin
+      rand_host_traffic_enable = 1;
+    end
+    if (rand_host_traffic_enable) begin
+      ->trigger_random_host_traffic;
+    end
+///////////////////////////////////////////////////////////////////////////
+
+
+    case (cmd)
+      `Io_read : begin
+          get_read_info(byte_enable);
+          pcie_bfm.req_wait4cpl = 1;
+          if (adr[1:0] != 2'b00) begin
+            if (debug_cpu) $Message("gpu_pcie_bfm; IO read address being converted from 0x%x to 0x%x", adr, {adr[31:2],2'b00});
+            adr = {adr[31:2], 2'b00};// byte_enables are assumed already correct from mdiag
+          end
+          if (!disable_log) $Message("PCI-E : io read adr 0x%x be 0x%x",adr, byte_enable);
+          pcie_bfm.io_read(adr,byte_enable,32'bx); // 4'b1111 is the byte_enables, 32'bx means that the bfm doesn't compare data
+        end
+      `Config_read : begin
+          // check that the config read is targetting the chip
+          // the address coming from mdiag will be {bus_number[23:16],device_number[15:11], function_number[10:8],register_number[7:0]}
+          // for pci interface, the gpu is expected to have bus number 1, device number 0
+          // for agp interface, the gpu is expected to have bus number 0, device number 1
+          // TODO - have not implemented reading config for pcie extended registers.  Have to add to mdiag
+          if ((adr[23:16]==8'h00) && (adr[15:11]==5'h01))  begin
+            if (debug_cpu)
+              $Message("gpu_pcie_bfm: config read request sent via agp config command");
+          end else if ((adr[23:16]==8'h01) && (adr[15:11]==5'h00)) begin
+            if (debug_cpu)
+              $Message("gpu_pcie_bfm: config read request sent via pci config command");
+          end else
+            $Error("gpu_pcie_bfm: config read request sent with illegal bus/device combination, allowed 0/1, or 1/0, actual bus=0x%x, device=0x%x",adr[23:16], adr[15:11]);
+          // convert address to config 0 type request(type 1 not accepted by endpoint)
+          adr= {8'h01, 5'h0, adr[10:8], 4'h0, adr[7:0]}; // bus 1 , device 0, function=adr[function field], extended pcie reg 0, register number
+                                                          // note that all endpoints must be device 0!
+          get_read_info(byte_enable);
+
+          // TEMPORARY HACK UNTIL MDIAG IS UPDATED FOR NEW BASE ADDRESSES!!!!!- Martin
+          if (adr[7:0] == 8'h18) begin
+            if (!allow_cfg_access_to_0x18) begin // this allows for an mdiag/diag test to access this cfg register by setting
+                                                 // this reg through BESTCMDBridge.v
+              if (debug_cpu) $Message("gpu_pcie_bfm.  Temporarily changing config read from register 18 to register 1c until mdiag fix is in");
+              adr[7:0] = 8'h1C;
+            end
+          end
+          pcie_bfm.req_wait4cpl = 1;
+          if (!disable_log) $Message("PCI-E : cfg read adr 0x%x be 0x%x", adr, byte_enable);
+          pcie_bfm.cfg_read(0,adr,byte_enable,32'bx); // the first 0 is for cfg type 0 read -type 1 not used
+                                                      // 32'bx means that the bfm doesn't compare data internally
+        end
+
+
+      `Mem_read,`Mem_read_line, `Reserved1 : begin
+          if (!all_mem_reads_non_blocking) begin
+            pcie_bfm.req_wait4cpl = 1;
+          end else begin
+            pcie_bfm.req_wait4cpl = 0;
+          end
+          get_read_info(byte_enable);
+          if (cmd == `Reserved1) pcie_bfm.cpl_require_status = 3'h1; // if there is an expected completion error, this will
+                                                                 // tell the bfm such.  An error will occur if the completion
+                                                                 // status is not equal to 1
+          if (Size > 1) begin
+            if (HostCMdl) host_data = $HostCMdlRdPLI(adr, ~byte_enable);
+            // TODO - I'm assuming last byte_enable is 4'b1111 for now, if this is not the case need to make a queue
+            if (!disable_log) $Message("PCI-E : mem read adr 0x%x length 0x%x first_be 0x%x",adr, Size, byte_enable);
+            pcie_bfm.mem_read(adr, Size,byte_enable,4'b1111,32'bx); // the second 4'b111 are the last word byte enables,
+                                                                    // the 32'bx is for the bfm to not compare
+            repeat(Size - 1) begin
+              adr = adr + 4;
+              if (HostCMdl) host_data = $HostCMdlRdPLI(adr, 4'b0);
+              get_read_info(byte_enable);
+              if (byte_enable != 4'b1111) $Error("pcie_bfm. Mem_read is not configured for reads > 32b with byte_enable of middle or last word not 4'b111, actual be=0x%x",byte_enable);
+            end
+          end
+          else begin
+            if (HostCMdl) host_data = $HostCMdlRdPLI(adr, ~byte_enable);
+            if (!disable_log) $Message("PCI-E : mem read adr 0x%x length 0x1 be 0x%x",adr, byte_enable);
+
+            backdoor_read = 0;
+            backdoor_read_data = 32'bx;
+
+            if (backdoor_pri_enable && (adr & bar0_mask) == bar0_value) begin
+                backdoor_read = $BackdoorPrivRegisterRead( adr & ~bar0_mask, byte_enable, backdoor_read_data );
+            end
+
+            if (!backdoor_read) begin
+                if (debug_cpu) $display("getting frontdoor data for %x ...", adr);
+                pcie_bfm.mem_read(adr, 1,byte_enable,4'b0000,32'bx);
+                // for a length 1 read, the last word byte enables must be 0
+            end
+          end
+        end
+      `Io_write : begin
+          get_write_info(data_4bytes, byte_enable);
+          if (HostCMdl) $HostCMdlIoWrtPLI(adr, data_4bytes,~byte_enable);
+          pcie_bfm.req_wait4cpl = 1;
+          if (adr[1:0] != 2'b00) begin
+            if (debug_cpu) $Message("gpu_pcie_bfm; IO write address being converted from 0x%x to 0x%x", adr, {adr[31:2],2'b00});
+            adr = {adr[31:2], 2'b00}; // byte enables are assumed correct from Mdiag
+          end
+          if (!disable_log) $Message("PCI-E : io write adr 0x%x data 0x%x be 0x%x",adr, data_4bytes, byte_enable);
+          pcie_bfm.io_write(adr,byte_enable,data_4bytes);
+        end
+      `Config_write : begin
+          // check that the config read is targetting the chip
+          // the address coming from mdiag will be {bus_number[23:16],device_number[15:11], function_number[10:8],register_number[7:0]}
+          // for pci interface, the gpu is expected to have bus number 1, device number 0
+          // for agp interface, the gpu is expected to have bus number 0, device number 1
+          // TODO - have not implemented reading config for pcie extended registers.  Have to add to mdiag
+          if ((adr[23:16]==8'h00) && (adr[15:11]==5'h01))  begin
+            if (debug_cpu) $Message("gpu_pcie_bfm: config write request sent via agp config command");
+          end else if ((adr[23:16]==8'h01) && (adr[15:11]==5'h00)) begin
+            if (debug_cpu) $Message("gpu_pcie_bfm: config write request sent via pci config command");
+          end else
+            $Error("gpu_pcie_bfm: config read request sent with illegal bus/device combination, allowed 0/1, or 1/0, actual bus=0x%x, device=0x%x",adr[23:16], adr[15:11]);
+          adr= {8'h01, 5'h0, adr[10:8], 4'h0, adr[7:0]}; // bus 0 , device 0, function=adr[function field], extended pcie reg 0, register number
+                                                        // note that all endpoints must be device 0!
+          get_write_info(data_4bytes, byte_enable);
+
+          // TEMPORARY HACK UNTIL MDIAG IS UPDATED FOR NEW BASE ADDRESSES!!!!!- Martin
+          if (adr[7:0] == 8'h18) begin
+           if (!allow_cfg_access_to_0x18) begin // this allows for an mdiag/diag test to access this cfg register by setting
+                                                 // this reg through BESTCMDBridge.v
+              if (debug_cpu) $Message("gpu_pcie_bfm.  Temporarily changing config write from register 18 to register 1c until mdiag fix is in");
+              adr[7:0] = 8'h1C;
+            end
+          end
+
+          if (adr[15:0] == 16'h0010) begin
+              bar0_value = data_4bytes;
+          end
+
+          pcie_bfm.req_wait4cpl = 1;
+          if (HostCMdl) $HostCMdlCfgWrtPLI(adr[11:0], data_4bytes, ~byte_enable);
+          if (!disable_log) $Message("PCI-E : cfg write adr 0x%x data 0x%x be 0x%x", adr, data_4bytes, byte_enable);
+          pcie_bfm.cfg_write(0,adr,byte_enable,data_4bytes);
+
+        end
+      `Mem_write : begin
+          if (Size > 1) begin
+            pcie_bfm.req_wait4tx = 0;// will only set on last transfer
+            // There are burst write commands that assume be can be controlled on every byte.  This is incorrect for
+            // 3gio, therefore any transfer size greater than 1 will be broken up for now. Martin M
+            get_write_info(data_4bytes, byte_enable);
+            if (HostCMdl) $HostCMdlWrtPLI(adr, data_4bytes, ~byte_enable);
+            if (!disable_log) $Message("PCI-E : mem write adr 0x%x length 0x%x data 0x%x be 0x%x", adr, 1, data_4bytes, byte_enable);
+            pcie_bfm.mem_write(adr,1,byte_enable,4'b0000, data_4bytes);
+            for (data_count = 1; data_count < Size; data_count=data_count + 1) begin
+              get_write_info(data_4bytes, byte_enable);
+              if (HostCMdl) $HostCMdlWrtPLI(adr+(data_count*4), data_4bytes, ~byte_enable);
+              if (!disable_log) $Message("PCI-E : mem write adr 0x%x length 0x%x data 0x%x be 0x%x", adr, 1, data_4bytes, byte_enable);
+              if ((status_req == 1) && (data_count == Size - 1))
+                pcie_bfm.req_wait4tx = 1;
+              else
+                pcie_bfm.req_wait4tx = 0;
+              pcie_bfm.mem_write(adr,1,byte_enable,4'b0000, data_4bytes);
+            end
+          end
+          else begin
+
+            // bar0 writes may be able to do a backdoor write for quicker simulation
+            if (attempt_backdoor_write( adr, byte_enable, data_4bytes )) begin
+              back2back_xaction <= ! back2back_xaction;
+            end else begin
+             if (status_req == 1)
+               pcie_bfm.req_wait4tx = 1;
+             else
+               pcie_bfm.req_wait4tx = 0;
+             get_write_info(data_4bytes, byte_enable);
+             if (HostCMdl) $HostCMdlWrtPLI(adr, data_4bytes, ~byte_enable);
+             if (!disable_log) $Message("PCI-E : mem write adr 0x%x length 0x1 data 0x%x", adr,data_4bytes, byte_enable);
+             pcie_bfm.mem_write(adr,1,byte_enable,4'b0000, data_4bytes);
+            end
+
+          end
+        end
+      default : $Error("Socket command 0x%x does not correspond to a known(used in pcie bfm) command",cmd);
+    endcase
+
+    //send back read results
+    if (rdNotWrt)begin
+      // push read return data onto the pli queue
+      for (data_count = 0; data_count < Size; data_count=data_count + 1) begin
+        if (backdoor_read) begin
+            data_4bytes = backdoor_read_data;
+            if (!disable_log) $Message("PCI-E BACKDOOR: read return data 0x%x for address 0x%x", data_4bytes, adr);
+            backdoor_read = 0;
+        end else begin
+            pcie_bfm.get_read_data(data_count,data_4bytes);
+            // TODO- this always assumes that we'll wait for data to come back before issuing another command
+            // otherwise the address will be wrong
+            // we'll push whatever data gpu_pcie gives us in the case of `Reserved which will actually provide no data
+            // because this seems to be required for the proper socket queue operation - Martin
+            // for non-blocking reads, send back DEADBEEF
+            if ((cmd == `Mem_read) & (all_mem_reads_non_blocking))
+                data_4bytes = 32'hDEADBEEF;
+            if (!disable_log) $Message("PCI-E : read return data 0x%x for address 0x%x", data_4bytes, adr);
+        end
+        $PushRdDataQPLI (`CPUNode,streamId, data_4bytes);
+        if (debug_cpu)
+          $Message("PushRdDataQPLI sending back streamID=0%d, data=0x%x",streamId, data_4bytes);
+      end // for
+      // if status is required, send back STAT_ACK, all errors are dealt with in pcie bus model
+      if (status_req) begin
+        if (debug_cpu) begin
+          if (cmd != `Reserved1)
+            $Message ("PushRdData sending back status : streamId=%0d status=0x%x", streamId, `STAT_ACK);
+          else
+            $Message ("PushRdData sending back status : streamId=%0d status=0x%x", streamId, `STAT_MABORT);
+        end
+        if (cmd != `Reserved1)
+          $PushRdDataQPLI(`CPUNode, streamId, `STAT_ACK);
+        else
+          $PushRdDataQPLI(`CPUNode, streamId, `STAT_MABORT);
+      end
+      //here's the read request queue
+      if ($PopRdReqQPLI (`CPUNode, streamId, expNumWrds)) begin
+        /* Test is ready for the data.  Return the data	with the ack. */
+        // note that the actNumWrds now equals the expNumWrds, no other transfer is possible
+        BESTCmd.RdAck (streamId, `CPUNode, expNumWrds, Size+status_req);
+      end else begin
+        /* Test is not ready for data yet, push the number
+           of actual words read onto the Q.  Ack will be
+           given later when the test gives a read request. */
+        $PushRdDoneQPLI (`CPUNode, streamId, expNumWrds+status_req);
+      end
+    end else begin // for write requests
+
+      // send back status if required, for write transactions
+      // note that only status is STAT_ACK, all other results are dealt with in the bus model
+      if (status_req) begin
+        if (debug_cpu)
+          $Message ("PushRdData sending back status : streamId=%0d status=0x%x  ", streamId,`STAT_ACK);
+
+        $PushRdDataQPLI (`CPUNode, streamId, `STAT_ACK);
+
+        // ack the stream so that the C code will continue
+        if ($PopRdReqQPLI (`CPUNode, streamId, expNumWrds)) begin
+          /* Test is ready for the data.  Return the data	with the ack. */
+          BESTCmd.RdAck (streamId, `CPUNode, expNumWrds, 1);
+        end else begin
+          /* Test is not ready for data yet, push the number
+             of actual words read onto the Q.  Ack will be
+             given later when the test gives a read request. */
+             $PushRdDoneQPLI (`CPUNode, streamId, 1);
+        end
+      end // if (status_req)
+    end // else if !(rdNotWrt)
+  end // if ($PopTransaction)
+end // always
+
+
+
+/*******************************************************************************/
+/****************** enabling of host cmodel ************************************/
+
+initial begin
+  if ($test$plusargs("HostCMdl")) HostCMdl = 1'b1;
+  else if (!$test$plusargs("NoHostCMdlOk")) begin
+    $display("Error %m: host cmdl not activated");
+    $display("\tDid you forget to use +SW (or +HostCMdl etc.) ?");
+    $display("\tTo run without cmdl you must specify +NoHostCMdlOk\n\n");
+    $finish;
+  end
+  //Some areas of the verilog env require the cmodel to exist, even if you
+  //don't care about hw/cmodel checking.  For example, in BESTCmd.v,
+  //read and write addressses are passed through the cmodel function PNVM2TileAdrPLI
+  //before being written to memory.  If the cmdl is not running, then the FB
+  //config has not been initialized in the cmodel, and PNVM2TileAdrPLI will return
+  //a bad address.
+
+  //If we fixed up this area of the verilog env (and any other areas that count on
+  //the cmodel), we could run without the cmodel.
+end // initial
+
+
+/*******************************************************************************/
+/****************** get_write_info task to pop write data,be off of queue *****/
+
+task get_write_info;
+  output [31:0] data;
+  output [3:0] byte_enable;
+  reg [31:0] byte_enable_;
+  begin
+    if (!$PopWrtDataQPLI (`CPUNode, streamId, data, byte_enable_)) begin
+      $Error ("$PopWrtDataQPLI () for write failed.");
+    end else begin
+      byte_enable = ~(byte_enable_[`BeField]); // remove upper bits and invert since be_ is transferred
+    end
+    if (debug_cpu)
+      $Message ("PopWrtDataQ for write : streamId=%0d data=0x%0h be_=0x%0h ",
+			streamId, data, byte_enable_ );
+  end
+endtask
+
+/*******************************************************************************/
+/****************** get_read_info task to pop read byte enables off of queue ***/
+
+task get_read_info;
+  output [3:0] byte_enable;
+  reg [31:0] dummy_data_4bytes;
+  reg [31:0] byte_enable_;
+  begin
+    if (!$PopWrtDataQPLI (`CPUNode, streamId, dummy_data_4bytes, byte_enable_)) begin
+      $Error ("$PopWrtDataQPLI () for read failed.");
+    end else begin
+      byte_enable = ~(byte_enable_[`BeField]); // trim and invert byte enables
+    end
+    if (debug_cpu)
+      $Message ("PopWrtDataQ for read : streamId=%0d byte_enable_=0x%0h ",
+                streamId, byte_enable_);
+  end
+endtask
+
+
+
+
+
+
+
+
+/****************************************************************************/
+/****************** Task definitions for backdoor accesses ******************/
+
+reg doing_initialization_phase;
+
+initial begin: init_backdoor
+    doing_initialization_phase = 1;
+    backdoor_pri_enable = 0;
+
+    $Map( doing_initialization_phase, "doing_initialization_phase" );
+
+    if ( ! $test$plusargs("backdoor_pri_enable")) begin
+        disable init_backdoor;
+    end
+    if ($test$plusargs("backdoor_pri_enable=0")) begin
+        disable init_backdoor;
+    end
+
+    backdoor_pri_enable = 1;
+
+    forever @(doing_initialization_phase) begin
+        backdoor_pri_enable = doing_initialization_phase;
+        $display("DAVEW: backdoor_pri_enable=%d", backdoor_pri_enable);
+    end
+
+end
+
+function attempt_backdoor_write;
+    input [31:0] adr;
+    input [3:0] byte_enable;
+    input [31:0] data_4bytes;
+
+    begin
+        if (!backdoor_pri_enable) begin
+            attempt_backdoor_write = 0;
+        end else if ( (adr & bar0_mask) != bar0_value ) begin
+            attempt_backdoor_write = 0;
+//      end else if ($BackdoorPrivRegisterWrite( adr & ~bar0_mask, byte_enable, data_4bytes) ) begin
+//          if (debug_cpu)
+//              $Message ("%0t CPU: new-style backdoor_write : adr=%08x data=%08x", adr & ~bar0_mask, data_4bytes);
+//          attempt_backdoor_write = 1;
+        end else if (byte_enable != 4'b1111) begin
+            attempt_backdoor_write = 0;
+        end else if ($IsMapped(adr & ~bar0_mask)) begin
+            $DirectWrtPLI(adr & ~bar0_mask, data_4bytes);
+            if (debug_cpu)
+                $Message ("%0t CPU: old-style backdoor_write : adr=%08x data=%08x", adr & ~bar0_mask, data_4bytes);
+            attempt_backdoor_write = 1;
+        end else begin
+            attempt_backdoor_write = 0;
+        end
+    end
+endfunction
+
+&EndModule;

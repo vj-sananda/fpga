@@ -1,0 +1,112 @@
+/*
+ *  * Copyright (c) 2004 Xilinx, Inc.  All rights reserved.
+ *
+ * Xilinx, Inc.
+ * XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS" AS A 
+ * COURTESY TO YOU.  BY PROVIDING THIS DESIGN, CODE, OR INFORMATION AS
+ * ONE POSSIBLE   IMPLEMENTATION OF THIS FEATURE, APPLICATION OR 
+ * STANDARD, XILINX IS MAKING NO REPRESENTATION THAT THIS IMPLEMENTATION 
+ * IS FREE FROM ANY CLAIMS OF INFRINGEMENT, AND YOU ARE RESPONSIBLE 
+ * FOR OBTAINING ANY RIGHTS YOU MAY REQUIRE FOR YOUR IMPLEMENTATION
+ * XILINX EXPRESSLY DISCLAIMS ANY WARRANTY WHATSOEVER WITH RESPECT TO 
+ * THE ADEQUACY OF THE IMPLEMENTATION, INCLUDING BUT NOT LIMITED TO 
+ * ANY WARRANTIES OR REPRESENTATIONS THAT THIS IMPLEMENTATION IS FREE 
+ * FROM CLAIMS OF INFRINGEMENT, IMPLIED WARRANTIES OF MERCHANTABILITY 
+ * AND FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/*
+ * Xilinx EDK 7.1.1 EDK_H.11.3
+ *
+ * This file is a sample test application
+ *
+ * This application is intended to test and/or illustrate some 
+ * functionality of your system.  The contents of this file may
+ * vary depending on the IP in your system and may use existing
+ * IP driver functions.  These drivers will be generated in your
+ * XPS project when you run the "Generate Libraries" menu item
+ * in XPS.
+ *
+ * Your XPS project directory is at:
+ *    F:\fpga\proj\huffman_encode
+ */
+
+
+// Located in: ppc405_0/include/xparameters.h
+#include "xparameters.h"
+
+#include "xgpio_l.h"
+
+/*
+ * Routine to write a pattern out to a GPIO
+ * which is configured as an output
+ *   PARAMETER C_ALL_INPUTS = 0
+ */ 
+void WriteToGPOutput(Xuint32 BaseAddress, int gpio_width) {
+   int i=0, j=0;
+   volatile int delay=0;
+   int numTimes = 5;
+ 
+   XGpio_mSetDataDirection(BaseAddress, 1, 0x00000000);   /* Set as outputs */
+   while (numTimes > 0) {
+      j = 1;
+      for(i=0; i<(gpio_width-1); i++) {
+         XGpio_mSetDataReg(BaseAddress, 1, j);
+         j = j << 1;
+         for (delay=0; delay<1000000; delay++) {
+            ; //wait
+         }
+      }
+      j = 1;
+      j = ~j;
+      for(i=0; i<(gpio_width-1); i++) {
+         XGpio_mSetDataReg(BaseAddress, 1, j);
+         j = j << 1;
+         for (delay=0; delay<1000000; delay++) {
+            ; //wait
+         }
+      }
+      numTimes--;
+   }
+}
+
+
+/*
+ * Routine to read data from a GPIO
+ * which is configured as an input
+ *   PARAMETER C_ALL_INPUTS = 1
+ */
+Xuint32 ReadFromGPInput(Xuint32 BaseAddress) {
+   Xuint32 data = XGpio_mGetDataReg(BaseAddress, 1);
+   return data;
+}
+
+
+//====================================================
+
+int main (void) {
+
+
+   print("-- Entering main() --\r\n");
+
+   /*
+    * Peripheral SelfTest will not be run for RS232_Uart_1
+    * because it has been selected as the STDOUT device
+    */
+
+
+  // WriteToGPOutput(XPAR_LEDS_4BIT_BASEADDR, 4);
+
+ //  {
+   //   Xuint32 data = ReadFromGPInput(XPAR_DIPSWS_4BIT_BASEADDR);
+      //xil_printf("Data read from DIPSWs_4Bit: 0x%x\r\n", data);
+   //}
+ 
+ 	//HUFFMAN_ENCODE_TESTHARNESS_SelfTest(XPAR_HUFFMAN_ENCODE_TESTHARNESS_0_BASEADDR);
+
+     HUFFMAN_ENCODE_TESTHARNESS_Test1(XPAR_HUFFMAN_ENCODE_TESTHARNESS_0_BASEADDR);
+
+   print("-- Exiting main() --\r\n");
+   return 0;
+}
+

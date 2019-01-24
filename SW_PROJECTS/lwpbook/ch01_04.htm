@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Words of Caution (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch01_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:38:08 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch01_04' class='lwp lwp_ch01_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">1.4. Words of Caution</h2>
+
+<p>In theory, the underlying mechanisms of the Web make no difference
+between a browser getting data and displaying it to you, and your
+LWP-based program getting data and doing something else with it.
+However, in practice, almost all the data on the Web was put there
+with the assumption (sometimes implicit, sometimes explicit) that it
+would be looked at directly in a browser. When you write an LWP
+program that downloads that data, you are working against that
+assumption. The trick is to do this in as considerate a way as
+possible.
+</p>
+
+<a name="perllwp-CHP-1-SECT-4.1"></a><div class="sect2">
+<h3 class="sect2">1.4.1. Network and Server Load</h3>
+
+<p>When you access a web server, <a name="INDEX-36" class="ipoint"
+></a><a name="INDEX-37" class="ipoint"
+></a>you
+are using scarce resources. You are using your bandwidth and the web
+server's bandwidth. Moreover, processing your
+request places a load on the remote server, particularly if the page
+you're requesting has to be dynamically generated,
+and especially if that dynamic generation involves database access.
+If you're writing a program that requests several
+pages from a given server but you don't need the
+pages immediately, you should write delays into your program (such as
+<tt class="literal">sleep 60;</tt> to sleep for one minute), so that the
+load that you're placing on the network and on the
+web server is spread unobtrusively over a longer period of time.
+</p>
+
+<p>If possible, you might even want to consider having your program run
+in the middle of the night (<em class="emphasis">modulo</em> the relevant
+time zones), when network usage is low and the web server is not
+likely to be busy handling a lot of requests. Do this only if you
+<em class="emphasis">know</em> there is no risk of your program behaving
+unpredictably. In <a href="ch12_01.htm">Chapter 12, "Spiders"</a><em class="emphasis">,</em>
+we discuss programs with definite risk of that happening; do not let
+such programs run unattended until you have added appropriate
+safeguards and carefully checked that they behave as you expect them
+to.
+</p>
+
+</div>
+<a name="perllwp-CHP-1-SECT-4.2"></a><div class="sect2">
+<h3 class="sect2">1.4.2. Copyright</h3>
+
+<p>While the complexities of <a name="INDEX-38" class="ipoint"
+></a><a name="INDEX-39" class="ipoint"
+></a>national and international copyright
+law can't be covered in a page or two (or even a
+library or two), the short story is that just because you can get
+some data off the Web doesn't mean you can do
+whatever you want with it. The things you do with data on the Web
+form a continuum, as far as their relation to copyright law. At the
+one end is direct use, where you sit at your browser, downloading and
+reading pages as the site owners clearly intended. At the other end
+is illegal use, where you run a program that hammers a remote server
+as it copies and saves copyrighted data that was not meant for free
+public consumption, then saves it all to your public web server,
+which you then encourage people to visit so that you can make money
+off of the ad banners you've put there. Between
+these extremes, there are many gray areas involving considerations of
+"fair use," a tricky concept. The
+safest guide in trying to stay on the right side of copyright law is
+to ask, by using the data this way, could I possibly be depriving the
+original web site of some money that it would/could otherwise get?
+</p>
+
+<p>For example, suppose that you set up a program that copies data every
+hour from the Yahoo! Weather site, for the 50 most populous towns in
+your state. You then copy the data directly to your public web site
+and encourage everyone to visit it. Even though "no
+one owns the weather," even if any particular bit of
+weather data is in the public domain (which it may be, depending on
+its source), Yahoo! Weather put time and effort into making a
+collection of that data, presented in a certain way. And as such, the
+<em class="emphasis">collection</em> of data is copyrighted.
+</p>
+
+<p>Moreover, by posting the data publicly, you are almost definitely
+taking viewers away from Yahoo! Weather, which means less ad revenue
+for them. Even if Yahoo! Weather didn't have any ads
+and so wasn't obviously making any money off of
+viewers, your having the data online elsewhere means that if Yahoo!
+Weather wanted to start having ads tomorrow, they'd
+be unable to make as much money at it, because there would be people
+in the habit of looking at your web site's weather
+data instead of at theirs.
+</p>
+
+</div>
+<a name="perllwp-CHP-1-SECT-4.3"></a><div class="sect2">
+<h3 class="sect2">1.4.3. Acceptable Use</h3>
+
+<p>Besides the protection
+<a name="INDEX-40" class="ipoint"
+></a>provided by copyright law, many web
+sites have "terms of use" or
+"acceptable use" policies, where
+the web site owners basically say "as a user, you
+may do this and this, but not that or that, and if you
+don't abide by these terms, then we
+don't want you using this web
+site." For example, a search
+engine's terms of use might stipulate that you
+should not make "automated queries"
+to their system, nor should you show the search data on another site.
+</p>
+
+<p>Before you start pulling data off of a web site, you should put good
+effort into looking around for its terms of service document, and
+take the time to read it and reasonably interpret what it says. When
+in doubt, ask the web site's administrators whether
+what you have in mind would bother them.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,481 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Processing (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch09_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:58:09 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch09_03' class='lwp lwp_ch09_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">9.3. Processing</h2>
+
+<p>Once you have parsed some HTML, you need to process it. Exactly what
+you do will depend on the nature of your problem. Two common models
+are extracting information and producing a transformed version of the
+HTML (for example, to remove banner advertisements).
+</p>
+
+<p>Whether extracting or transforming, you'll probably
+want to find the bits of the document you're
+interested in. They might be all headings, all bold italic regions,
+or all paragraphs with <tt class="literal">class="blinking"</tt>.
+HTML::Element provides several functions for searching the tree.
+</p>
+
+<a name="perllwp-CHP-9-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">9.3.1. Methods for Searching the Tree</h3>
+
+<p>In scalar context, these
+<a name="INDEX-542" class="ipoint"
+></a><a name="INDEX-543" class="ipoint"
+></a><a name="INDEX-544" class="ipoint"
+></a>methods
+return the first node that satisfies the criteria. In list context,
+all such nodes are returned. The methods can be called on the root of
+the tree or any node in it.
+</p>
+
+<dl>
+<dt><tt class="literal">$node-&gt;find_by_tag_name(</tt><tt><em class="replaceable">tag</em></tt> <tt class="literal">[, ...])</tt></dt>
+<dd>
+Return node(s) for tags of the names listed. For example, to find all
+<tt class="literal">h1</tt> and <tt class="literal">h2</tt> nodes:
+
+
+
+<pre class="code">@headings = $root-&gt;find_by_tag_name('h1', 'h2');</pre>
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;find_by_attribute(</tt><tt><em class="replaceable">attribute</em></tt>, <tt><em class="replaceable">value</em></tt><tt class="literal">)</tt></dt>
+<dd>
+Returns the node(s) with the given attribute set to the given value.
+For example, to find all nodes with
+<tt class="literal">class="blinking"</tt>:
+
+
+
+<pre class="code">@blinkers = $root-&gt;find_by_attribute("class",
+"blinking");</pre>
+</dd>
+
+
+
+<dt><tt class="literal">$node-&gt;look_down(...)</tt></dt>
+<dt><tt class="literal">$node-&gt;look_up(...)</tt></dt>
+<dd>
+These two methods search <tt class="literal">$node</tt> and its children
+(and children's children, and so on) in the case of
+<tt class="literal">look_down</tt>, or its parent (and the
+parent's parent, and so on) in the case of
+<tt class="literal">look_up</tt>, looking for nodes that match whatever
+criteria you specify. The parameters are either
+<tt class="literal">attribute</tt> <tt class="literal">=&gt;</tt>
+<tt class="literal">value</tt> pairs (where the special attribute
+<tt class="literal">_tag</tt> represents the tag name), or a subroutine
+that is passed a current node and returns true to indicate that this
+node is of interest.
+
+
+
+<p>For example, to find all <tt class="literal">h2</tt> nodes in the tree with
+<tt class="literal">class="blinking"</tt>:
+
+
+<pre class="code">@blinkers = $root-&gt;look_down(_tag =&gt; 'h2', class =&gt; 'blinking');</pre>
+
+<p>We'll discuss <tt class="literal">look_down</tt> in
+greater detail later.
+
+</dd>
+
+</dl>
+
+</div>
+<a name="perllwp-CHP-9-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">9.3.2. Attributes of a Node</h3>
+
+<p>Four methods give access to the
+<a name="INDEX-545" class="ipoint"
+></a><a name="INDEX-546" class="ipoint"
+></a><a name="INDEX-547" class="ipoint"
+></a>basic information in a node:
+</p>
+
+<dl>
+<dt><tt class="literal">$node-&gt;tag(&#160;)</tt></dt>
+<dd>
+The tag name string of this element. Example values:
+<tt class="literal">html</tt>, <tt class="literal">img</tt>,
+<tt class="literal">blockquote</tt>. Note that this is always lowercase.
+
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;parent(&#160;)</tt></dt>
+<dd>
+This returns the node object that is the parent of this node. If
+<tt class="literal">$node</tt> is the root of the tree,
+<tt class="literal">$node-&gt;parent(&#160;)</tt> will return
+<tt class="literal">undef</tt>.
+
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;content_list(&#160;)</tt></dt>
+<dd>
+This returns the (potentially empty) list of nodes that are this
+node's children.
+
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;attr(</tt><tt><em class="replaceable">attributename</em></tt><tt class="literal">)</tt></dt>
+<dd>
+This returns the value of the HTML
+<em class="replaceable"><tt>attributename</tt></em> attribute for this element.
+If there is no such attribute for this element, this returns
+<tt class="literal">undef</tt>. For example: if <tt class="literal">$node</tt> is
+parsed from <tt class="literal">&lt;img</tt>
+<tt class="literal">src="x1.jpg"</tt> <tt class="literal">alt="Looky!"&gt;</tt>,
+then <tt class="literal">$node-&gt;attr("src")</tt> will return the string
+<tt class="literal">x1.jpg</tt>.
+
+</dd>
+
+</dl>
+
+<p>Four more methods convert a tree or part of a tree into another
+format, such as HTML or text.
+</p>
+
+<dl>
+<dt><tt class="literal">$node-&gt;as_HTML([</tt> <tt><em class="replaceable">entities</em></tt> <tt class="literal">[</tt>, <tt><em class="replaceable">indent_char</em></tt> <tt class="literal">[</tt>, <tt><em class="replaceable">optional_end_tags</em></tt> <tt class="literal">]]]);</tt></dt>
+<dd>
+Returns a string consisting of the node and its children as HTML. The
+<tt><em class="replaceable"><tt>entities</tt></em></tt> parameter is a string containing
+characters that should be entity escaped (if empty, all potentially
+unsafe characters are encoded as entities; if you pass just
+<tt class="literal">&lt;&gt;&amp;</tt>, just those characters will get
+encoded&#x2014;a bare minimum for valid HTML). The
+<tt><em class="replaceable"><tt>indent_char</tt></em></tt> parameter is a string used for
+indenting the HTML. The <tt><em class="replaceable"><tt>optional_end_tags</tt></em></tt>
+parameter is a reference to a hash that has a true value for every
+key that is the name of a tag whose closing tag is optional. The most
+common value for this parameter is <tt class="literal">{}</tt> to force all
+tags to be closed:
+
+
+
+<pre class="code">$html = $node-&gt;as_HTML("", "", {});</pre>
+
+<p>For example, this will emit <tt class="literal">&lt;/li&gt;</tt> tags for
+any <tt class="literal">li</tt> nodes under <tt class="literal">$node</tt>, even
+though <tt class="literal">&lt;/li&gt;</tt> tags are technically optional,
+according to the HTML specification.
+
+
+<p>Using <tt class="literal">$node-&gt;as_HTML(&#160;)</tt> with no parameters
+should be fine for most purposes.
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;as_text(&#160;)</tt></dt>
+<dd>
+Returns a string consisting of all the text nodes from this element
+and its children.
+
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;starttag([</tt><tt><em class="replaceable">entities</em></tt><tt class="literal">])</tt></dt>
+<dd>
+Returns the HTML for the start-tag for this node. The
+<tt><em class="replaceable"><tt>entities</tt></em></tt> parameter is a string of
+characters to entity escape, as in the <tt class="literal">as_HTML(&#160;)</tt>
+method; you can omit this. For example, if this node came from
+parsing <tt class="literal">&lt;TD</tt>
+<tt class="literal">class=loud&gt;Hooboy&lt;/TD&gt;</tt>, then
+<tt class="literal">$node-&gt;starttag(&#160;)</tt> returns
+<tt class="literal">&lt;td</tt> <tt class="literal">class="loud"&gt;</tt>. Note
+that the original source text is not reproduced exactly, because
+insignificant differences, such as the capitalization of the tag name
+or attribute names, will have been discarded during parsing.
+
+</dd>
+
+
+<dt><tt class="literal">$node-&gt;endtag(&#160;)</tt></dt>
+<dd>
+Returns the HTML for the end-tag for this node. For example, if this
+node came from parsing <tt class="literal">&lt;TD</tt>
+<tt class="literal">class=loud&gt;Hooboy&lt;/TD&gt;</tt>, then
+<tt class="literal">$node-&gt;endtag(&#160;)</tt> returns
+<tt class="literal">&lt;/td&gt;</tt>.
+
+</dd>
+
+</dl>
+
+<p>These methods are useful once you've found the
+desired content. <a href="ch09_03.htm#perllwp-CHP-9-EX-4">Example 9-4</a> prints all the bold
+italic text in a document.
+</p>
+
+<a name="perllwp-CHP-9-EX-4"></a><div class="example">
+<h4 class="objtitle">Example 9-4. Bold-italic headline printer </h4>
+<pre class="code">#!/usr/bin/perl -w
+
+use HTML::TreeBuilder;
+use strict;
+
+my $root = HTML::TreeBuilder-&gt;new_from_content(&lt;&lt;"EOHTML");
+&lt;b&gt;&lt;i&gt;Shatner wins Award!&lt;/i&gt;&lt;/b&gt;
+Today in &lt;b&gt;Hollywood&lt;/b&gt; ...
+&lt;b&gt;&lt;i&gt;End of World Predicted!&lt;/i&gt;&lt;/b&gt;
+Today in &lt;b&gt;Washington&lt;/b&gt; ...
+EOHTML
+$root-&gt;eof( );
+
+# print contents of &lt;b&gt;&lt;i&gt;...&lt;/i&gt;&lt;/b&gt;
+my @bolds = $root-&gt;find_by_tag_name('b');
+foreach my $node (@bolds) {
+  my @kids = $node-&gt;content_list( );
+  if (@kids and ref $kids[0] and $kids[0]-&gt;tag( ) eq 'i') {
+    print $kids[0]-&gt;as_text( ), "\n";
+  }
+}</pre>
+</div>
+
+<p><a href="ch09_03.htm#perllwp-CHP-9-EX-4">Example 9-4</a> is fairly straightforward. Having parsed
+the string into a new tree, we get a list of all the bold nodes. Some
+of these will be the headlines we want, while others will simply be
+bolded text. In this case, we can identify headlines by checking that
+the node that it contains represents
+<tt class="literal">&lt;i&gt;...&lt;/i&gt;</tt>. If it is an italic node,
+we print its text content.
+</p>
+
+<p>The only complicated part of <a href="ch09_03.htm#perllwp-CHP-9-EX-4">Example 9-4</a> is the test
+to see whether it's an interesting node. This test
+has three parts:
+</p>
+
+<dl>
+<dt><tt class="literal">@kids</tt></dt>
+<dd>
+True if there are children of this node. An empty
+<tt class="literal">&lt;b&gt;&lt;/b&gt;</tt> would fail this test.
+
+</dd>
+
+
+<dt><tt class="literal">ref $kids[0]</tt></dt>
+<dd>
+True if the first child of this node is an element. This is false in
+cases such as <tt class="literal">&lt;b&gt;Washington&lt;/b&gt;</tt>, where
+the first (and here, only) child is text. If we fail to check this,
+the next expression, <tt class="literal">$kids[0]-&gt;tag(&#160;)</tt>, would
+produce an error when <tt class="literal">$kids[0]</tt>
+isn't an object value.
+
+</dd>
+
+
+<dt><tt class="literal">$kids[0]-&gt;tag( ) eq 'i'</tt></dt>
+<dd>
+True if the first child of this node is an <tt class="literal">i</tt>
+element. This would weed out anything like
+<tt class="literal">&lt;b&gt;&lt;img</tt>
+<tt class="literal">src="shatner.jpg"&gt;&lt;/b&gt;</tt>, where
+<tt class="literal">$kids[0]-&gt;tag(&#160;)</tt> would return
+<tt class="literal">img</tt>, or
+<tt class="literal">&lt;b&gt;&lt;strong&gt;Yes,</tt>
+<tt class="literal">Shatner!&lt;/strong&gt;&lt;/b&gt;</tt>, where
+<tt class="literal">$kids[0]-&gt;tag(&#160;)</tt> would return
+<tt class="literal">strong</tt>.
+
+</dd>
+
+</dl>
+
+</div>
+<a name="perllwp-CHP-9-SECT-3.3"></a><div class="sect2">
+<h3 class="sect2">9.3.3. Traversing</h3>
+
+<p>For many tasks, you can use
+<a name="INDEX-548" class="ipoint"
+></a><a name="INDEX-549" class="ipoint"
+></a><a name="INDEX-550" class="ipoint"
+></a>the
+built-in search functions. Sometimes, though, you'd
+like to visit every node of the tree. You have two choices: you can
+use the existing <tt class="literal">traverse(&#160;)</tt> function or write
+your <a name="INDEX-551" class="ipoint"
+></a><a name="INDEX-552" class="ipoint"
+></a>own using either recursion or your own
+stack.
+</p>
+
+<p>The act of visiting every node in a tree is called a
+<em class="emphasis">traversal</em></tt>. Traversals can either be
+<em class="emphasis">preorder</em></tt> (where you <a name="INDEX-553" class="ipoint"
+></a><a name="INDEX-554" class="ipoint"
+></a>process the current node before
+processing its children) or <em class="emphasis">postorder</em></tt> (where you
+process the current node after processing its children). The
+<tt class="literal">traverse(&#160;)</tt> method lets you do both:
+</p>
+
+<pre class="code">$node-&gt;traverse(<tt><em class="replaceable"><tt>callbacks</em></tt> [, <tt><em class="replaceable">ignore_text</tt></em></tt>]);</pre>
+
+<p>The <tt class="literal">traverse(&#160;)</tt> method calls a callback before
+processing the children and again afterward. If the
+<tt><em class="replaceable"><tt>callbacks</tt></em></tt> parameter is a single function
+reference, the same function is called before and after processing
+the children. If the <tt><em class="replaceable"><tt>callbacks</tt></em></tt> parameter
+is an array reference, the first element is a reference to a function
+called before the children are processed, and the second element is
+similarly called after the children are processed, unless this node
+is a text segment or an element that is prototypically empty, such as
+<tt class="literal">br</tt> or <tt class="literal">hr</tt>. (This last quirk of
+the <tt class="literal">traverse(&#160;)</tt> method is one of the reasons that
+I discourage its use.)
+</p>
+
+<p>Callbacks get called with three values:</p>
+
+<pre class="code">sub callback 
+  my ($node, $startflag, $depth,
+      $parent, $my_index) = @_;
+  # ...
+}</pre>
+
+<p>The current node is
+<a name="INDEX-555" class="ipoint"
+></a><a name="INDEX-556" class="ipoint"
+></a>the
+first parameter. The next is a Boolean value indicating whether
+we're being called before (true) or after (false)
+the children, and the third is a number indicating how deep into the
+traversal we are. The fourth and fifth parameters are supplied only
+for text elements: the parent node object and the index of the
+current node in its parent's list of children.
+</p>
+
+<p>A callback can return any of the following values:</p>
+
+<dl>
+<dt><tt class="literal">HTML::Element::OK</tt> (or any true value)</dt>
+<dd>
+Continue traversing.
+</dd>
+
+
+<dt><tt class="literal">HTML::Element::PRUNE</tt> (or any false value)</dt>
+<dd>
+Do not go into the children. The postorder callback is not called.
+(Ignored if returned by a postorder callback.)
+
+</dd>
+
+
+<dt><tt class="literal">HTML::Element::ABORT</tt></dt>
+<dd>
+Abort the traversal immediately.
+</dd>
+
+
+<dt><tt class="literal">HTML::Element::PRUNE_UP</tt></dt>
+<dd>
+Do not go into this node's children or into its
+parent node.
+
+</dd>
+
+
+<dt><tt class="literal">HTML::Element::PRUNE_SOFTLY</tt></dt>
+<dd>
+Do not go into the children, but do call this node's
+postorder callback.
+
+</dd>
+
+</dl>
+
+<p>For example, to extract text from a node but not go into
+<tt class="literal">table</tt> elements:
+</p>
+
+<pre class="code">my $text;
+sub text_no_tables {
+  return if ref $_[0] &amp;&amp; $_[0]-&gt;tag eq 'table';
+  $text .= $_[0] unless ref $_[0];  # only append text nodex
+  return 1;                         # all is copacetic
+}
+
+$root-&gt;traverse([\&amp;text_no_tables]);</pre>
+
+<p>This prevents descent into the contents of tables, while accumulating
+the text nodes in <tt class="literal">$text</tt>.
+</p>
+
+<p>It can be hard to think in terms of callbacks, though, and the
+multiplicity of return values and calling parameters you get with
+<tt class="literal">traverse(&#160;)</tt> makes for confusing code, as you will
+likely note when you come across its use in existing programs that
+use HTML::TreeBuilder.
+</p>
+
+<p>Instead, it's usually easier and clearer to simply
+write your own recursive subroutine, like this one:
+</p>
+
+<pre class="code">my $text = '';
+sub <tt class="userinput"><b>scan_for_non_table_text</b></tt> {
+  my $element = $_[0];
+  return if $element-&gt;tag eq 'table';   # prune!
+  foreach my $child ($element-&gt;content_list) {
+    if (ref $child) {  # it's an element
+      <tt class="userinput"><b>scan_for_non_table_text</b></tt>($child);  # recurse!
+    } else {           # it's a text node!
+      $text .= $child;
+    }
+  }
+  return;
+}
+<tt class="userinput"><b>scan_for_non_table_text</b></tt>($root);</pre>
+
+<p>Alternatively, implement it using a stack, doing the same work:</p>
+
+<pre class="code">my $text = '';
+my <tt class="userinput"><b>@stack = ($root)</b></tt>;  # where to start
+ 
+<tt class="userinput"><b>while (@stack)</b></tt> {
+  my $node = <tt class="userinput"><b>shift @stack</b></tt>;
+  next if ref $node and $node-&gt;tag eq 'table';  # skip tables
+  if (ref $node) {
+    <tt class="userinput"><b>unshift @stack</b></tt>, $node-&gt;content_list;        # add children
+  } else {
+    $text .= $node;                             # add text
+  }
+}</pre>
+
+<p>The <tt class="literal">while(&#160;)</tt> loop version can be faster than the
+recursive version, but at the cost of being much less clear to people
+who are unfamiliar with this technique. If speed is a concern, you
+should always benchmark the two versions to make sure you really need
+the speedup and that the <tt class="literal">while(&#160;)</tt> loop version
+actually delivers. The speed difference is sometimes insignificant.
+The manual page <tt class="literal">perldoc</tt>
+<tt class="literal">HTML::Element::traverse</tt> discusses writing more
+complex traverser routines, in the rare cases where you might find
+this necessary.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

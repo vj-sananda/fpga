@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top plb_bram_if_cntlr_1_bram_wrapper
+-ifmt MIXED
+-ifn plb_bram_if_cntlr_1_bram_wrapper_xst.prj
+-ofn ../implementation/plb_bram_if_cntlr_1_bram_wrapper/plb_bram_if_cntlr_1_bram_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/plb_bram_if_cntlr_1_bram_wrapper}

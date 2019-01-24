@@ -1,0 +1,142 @@
+   {
+        do
+        {
+            get_symbol_scale( &s );
+            count = get_current_count( &s );
+            c = convert_symbol_to_int( count, &s );
+	    remove_symbol_from_stream( compressed_file, &s );
+        } while ( c == ESCAPE );
+        if ( c == DONE )
+            break;
+        if ( ( ++counter & 0xff ) == 0 )
+	    print_compression();
+	if ( c != FLUSH )
+	    putc( (char) c, text_file );
+	else
+	{
+	    fprintf( stderr, "\rFlushing...      \r" );
+	    flush_model();
+	}
+	update_model( c );
+	add_character_to_model( c );
+    }
+    print_compression();
+    fputc( '\n', stderr );
+    exit( 0 );
+}
+
+/*
+ * This routine checks for command line options, and opens the
+ * input and output files.  The only other command line option
+ * besides the input and output file names is the order of the model,
+ * which defaults to 3.
+ */
+void initialize_options( int argc, char **argv )
+{
+    char text_file_name[ 81 ];
+    char compressed_file_name[ 81 ];
+
+    strcpy( compressed_file_name, "test.cmp" );
+    strcpy( text_file_name, "test.out" );
+    while ( argc-- > 0 )
+    {
+        if ( strcmp( *argv, "-f" ) == 0 )
+	{
+	    argc--;
+	    strcpy( text_file_name, *++argv );
+	}
+        else if ( strcmp( *argv, "-c" ) == 0 )
+	{
+	    argc--;
+	    strcpy( compressed_file_name, *++argv );
+	}
+        else if ( strcmp( *argv, "-o" ) == 0 )
+	{
+	    argc--;
+            max_order = atoi( *++argv );
+	}
+	else
+	{
+            fprintf( stderr, "\nUsage: EXPAND-2 [-o order] " );
+            fprintf( stderr, "[-f text file] [-c compressed file]\n" );
+            exit( -1 );
+	}
+	argc--;
+	argv++;
+    }
+    text_file = fopen( text_file_name, "wb" );
+    compressed_file = fopen( compressed_file_name, "rb" );
+    setvbuf( text_file, NULL, _IOFBF, 4096 );
+    setbuf( stdout, NULL );
+    printf( "Decoding %s to %s, order %d.\n",
+            compressed_file_name ,
+            text_file_name,
+            max_order );
+}
+
+/*
+ * This routine is called to print the current compression ratio.
+ * It prints out the number of input bytes, the number of output bytes,
+ * and the bits per byte compression ratio.   This is done both as a
+ * pacifier and as a seat-of-the-pants diagnostice.  A better version
+ * of this routine would also print the local compression ratio.
+ */
+void print_compression()
+{
+    long input_bytes;
+    long output_bytes;
+
+    output_bytes = ftell( text_file );
+    input_bytes = bit_ftell_input( compressed_file );
+    if ( output_bytes == 0 )
+        output_bytes = 1;
+    fprintf( stderr,
+             "\r%ld/%ld, %2.3f    ",
+	     input_bytes,
+	     output_bytes,
+             8.0 * input_bytes / output_bytes );
+}
+
+/*
+ * Listing 9 -- model-1.c
+ *
+ * This is the modeling module for an order 0 fixed context
+ * data compression program.  This is a relatively simple model.
+ * The totals for all of the symbols are stored in an array accessed
+ * under the name "totals".  This array has valid indices from -1
+ * to 256.  The reason for having a -1 element is because the EOF
+ * symbols is included in the table, and it has a value of -1.
+ *
+ * The total count for all the symbols is stored in totals[256], and
+ * the low and high counts for symbol c are found in totals[c] and
+ * totals[c+1].  The major performance problem with this is that
+ * the update_model() routine on the average will have to increment
+ * 128 totals, a very high cost operation.
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include "coder.h"
+#include "model.h"
+
+/*
+ * In order to create an array with indices -1 through 256, I have
+ * to do this funny declaration.  totals[-1] == storage[0].
+ */
+short int storage[ 258 ];
+short int *totals = storage + 1;
+
+/*
+ * When the model is first started up, each symbols has a count of
+ * 1, which means a low value of c+1, and a high value of c+2.
+ */
+void initialize_model()
+{
+    short int i;
+
+    for ( i = -1 ; i <= 256 ; i++ )
+        totals[ i ] = i + 1;
+}
+
+/*
+ * Updating the model means incrementing every single count from
+ * the high value for the symbol 

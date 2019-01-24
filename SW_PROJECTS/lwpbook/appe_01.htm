@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Common Content Encodings (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appe_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:33:40 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appe_01' class='lwp lwp_appe_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Appendix E. Common Content Encodings</h1><p>In an ideal world, the only character encoding (or, loosely,
+"character set") that
+you'd ever see would be UTF-8
+(<tt class="literal">utf-8</tt>), and Latin-1
+(<tt class="literal">iso-8859-1</tt>) for all those legacy documents.
+However, the encodings mentioned below exist and can be found on the
+Web. They are listed below in order of their English names, with the
+lefthand side being the value you'd get returned
+from <tt class="literal">$response-&gt;content_charset</tt>. The complete
+list of character sets can be found at <a href="http://www.iana.org/assignments/character-sets">http://www.iana.org/assignments/character-sets</a>.
+</p>
+
+<a name="appe-2-fm2xml"></a><table border="1" cellpadding="3">
+
+
+
+<tr>
+<th>
+<p>Value</p>
+</th>
+<th>
+<p>Encoding</p>
+</th>
+</tr>
+
+
+<tr>
+<td><code class="code">us-ascii</code></td>
+<td>
+<p>ASCII plain (just characters 0x00-0x7F)</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">asmo-708</code></td>
+<td>
+<p>Arabic ASMO-708</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-6</code></td>
+<td>
+<p>Arabic ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">dos-720</code></td>
+<td>
+<p>Arabic MSDOS</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1256</code></td>
+<td>
+<p>Arabic MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-4</code></td>
+<td>
+<p>Baltic ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1257</code></td>
+<td>
+<p>Baltic MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-2</code></td>
+<td>
+<p>Central European ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">ibm852</code></td>
+<td>
+<p>Central European MSDOS</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1250</code></td>
+<td>
+<p>Central European MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">hz-gb-2312</code></td>
+<td>
+<p>Chinese Simplified (HZ)</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">gb2312</code></td>
+<td>
+<p>Chinese Simplified (GB2312)</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">euc-cn</code></td>
+<td>
+<p>Chinese Simplified EUC</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">big5</code></td>
+<td>
+<p>Chinese Traditional (Big5)</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">cp866</code></td>
+<td>
+<p>Cyrillic DOS</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-5</code></td>
+<td>
+<p>Cyrillic ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">koi8-r</code></td>
+<td>
+<p>Cyrillic KOI8-R</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">koi8-u</code></td>
+<td>
+<p>Cyrillic KOI8-U</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1251</code></td>
+<td>
+<p>Cyrillic MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-7</code></td>
+<td>
+<p>Greek ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1253</code></td>
+<td>
+<p>Greek MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-8-i</code></td>
+<td>
+<p>Hebrew ISO Logical</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-8</code></td>
+<td>
+<p>Hebrew ISO Visual</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">dos-862</code></td>
+<td>
+<p>Hebrew MSDOS</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1255</code></td>
+<td>
+<p>Hebrew MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">euc-jp</code></td>
+<td>
+<p>Japanese EUC-JP</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-2022-jp</code></td>
+<td>
+<p>Japanese JIS</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">shift_jis</code></td>
+<td>
+<p>Japanese Shift-JIS</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-2022-kr</code></td>
+<td>
+<p>Korean ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">euc-kr</code></td>
+<td>
+<p>Korean Standard</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-874</code></td>
+<td>
+<p>Thai MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-9</code></td>
+<td>
+<p>Turkish ISO</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1254</code></td>
+<td>
+<p>Turkish MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">utf-8</code></td>
+<td>
+<p>Unicode expressed as UTF-8</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">utf-16</code></td>
+<td>
+<p>Unicode expressed as UTF-16</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1258</code></td>
+<td>
+<p>Vietnamese MSWindows</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">viscii</code></td>
+<td>
+<p>Vietnamese VISCII</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">iso-8859-1</code></td>
+<td>
+<p>Western European (Latin-1)</p>
+</td>
+</tr>
+<tr>
+<td><code class="code">windows-1252</code></td>
+<td>
+<p>Western European (Latin-1) with extra characters in 0x80-0x9F</p>
+</td>
+</tr>
+
+</table><p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

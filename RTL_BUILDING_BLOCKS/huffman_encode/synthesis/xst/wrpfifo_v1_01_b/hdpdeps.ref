@@ -1,0 +1,39 @@
+V2 30
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_dp_cntl.vhd 2005/03/16.02:10:55 H.42
+EN wrpfifo_v1_01_b/WRPFIFO_DP_CNTL 1122082389 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_dp_cntl.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PB ieee/STD_LOGIC_UNSIGNED 1106404634 PH PROC_COMMON_V2_00_A/PF_COUNTER_TOP -1 \
+      PH PROC_COMMON_V2_00_A/PF_OCC_COUNTER_TOP -1 \
+      PH PROC_COMMON_V2_00_A/PF_ADDER -1
+AR wrpfifo_v1_01_b/WRPFIFO_DP_CNTL/IMPLEMENTATION 1122082390 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_dp_cntl.vhd \
+      EN wrpfifo_v1_01_b/WRPFIFO_DP_CNTL 1122082389 CP STD_LOGIC \
+      CP TRANSITION_STATE_TYPE CP STD_LOGIC_VECTOR CP PF_DLY1_MUX \
+      CP PF_OCC_COUNTER_TOP CP PF_COUNTER_TOP CP BOOLEAN    CP PF_ADDER
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_top.vhd 2005/03/16.02:10:55 H.42
+EN wrpfifo_v1_01_b/WRPFIFO_TOP 1122082429 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_top.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PH PROC_COMMON_V2_00_A/PF_DPRAM_SELECT -1 \
+      PH PROC_COMMON_V2_00_A/SRL16_FIFO -1
+AR wrpfifo_v1_01_b/WRPFIFO_TOP/IMPLEMENTATION 1122082430 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_top.vhd \
+      EN wrpfifo_v1_01_b/WRPFIFO_TOP 1122082429 CP IPIF_CONTROL_WR CP INTEGER \
+      CP BOOLEAN        CP IN             CP OUT            CP WRPFIFO_DP_CNTL \
+      CP PF_DPRAM_SELECT CP SRL16_FIFO
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/pf_dly1_mux.vhd 2005/03/16.02:10:55 H.42
+EN wrpfifo_v1_01_b/PF_DLY1_MUX 1122082381 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/pf_dly1_mux.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PH PROC_COMMON_V2_00_A/INFERRED_LUT4 -1 \
+      PH unisim/VCOMPONENTS 1122082370
+AR wrpfifo_v1_01_b/PF_DLY1_MUX/IMPLEMENTATION 1122082382 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/pf_dly1_mux.vhd \
+      EN wrpfifo_v1_01_b/PF_DLY1_MUX 1122082381 CP INFERRED_LUT4 CP FDRE
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/ipif_control_wr.vhd 2005/03/16.02:10:55 H.42
+EN wrpfifo_v1_01_b/IPIF_CONTROL_WR 1122082387 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/ipif_control_wr.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630
+AR wrpfifo_v1_01_b/IPIF_CONTROL_WR/IMPLEMENTATION 1122082388 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/ipif_control_wr.vhd \
+      EN wrpfifo_v1_01_b/IPIF_CONTROL_WR 1122082387 CP STD_LOGIC_VECTOR CP INTEGER

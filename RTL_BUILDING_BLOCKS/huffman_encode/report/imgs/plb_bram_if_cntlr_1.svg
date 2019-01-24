@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
+<svg width="332" height="230">
+<?xml-stylesheet href="MdtXdsSVG_Render.css" type="text/css"?>
+  <defs>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_PLB_BusArrowEast">
+      <path class="bus" d="M 0  0,       L 28 16       L 0 32       Z" style="stroke:none; fill:#FF3300; fill-opacity:1"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_PLB_CBusArrowSouth">
+      <path class="bus" d="M 0  0,       L 16 0       L 8 16       Z" style="stroke:none; fill:#FF3300; fill-opacity:1"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_PLB_BusArrowWest">
+      <use x="0" y="0" xlink:href="#MOD_PLB_BusArrowEast" transform="scale(-1,1) translate(-28,0)"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_PLB_BusBody">
+      <use x="0" y="0" xlink:href="#MOD_PLB_BusArrowWest"/>
+      <use x="272" y="0" xlink:href="#MOD_PLB_BusArrowEast"/>
+      <rect x="28" y="8" width="244" height="16" style="fill:#FF3300; fill-opacity:1; stroke:none"/>
+      <text style="fill:#FFBB00;     stroke:none;      font-size:12pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="150" y="22">PLB</text>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_TRS_BifArrowEast">
+      <path class="bif" d="M   0    0,       L      14 5       L   0  10       Z" style="stroke:none; fill:#888888; fill-opacity:1"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_TRS_BifBody">
+      <use x="46" y="0" xlink:href="#MOD_TRS_BifArrowEast"/>
+      <rect x="0" y="3" width="46" height="4" style="fill:#888888; fill-opacity:1; stroke:none"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="HCurve" overflow="visible">
+      <path d="m 0  0,      a 16 16, 0,0,0, 32,0,     z" style="fill:#F0F0F0;fill-opacity:1;stroke:black;stroke-width:1.5"/>
+      <line x1="0" y1="0" x2="32" y2="0" style="stroke:#F0F0F0;stroke-width:3"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_StandardBody">
+      <rect x="0" y="0" width="300" height="114" style="fill:#F0F0F0;  fill-opacity: 1.0; stroke:#000000; stroke-width:1"/>
+      <rect x="60" y="16" width="180" height="82" style="fill:#FFFFFF; fill-opacity: 1.0; stroke:#000000; stroke-width:1.5"/>
+      <use x="134" y="16" xlink:href="#HCurve"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_MPort">
+      <rect width="8" height="8" style="fill:#888888;stroke-width:1;stroke:black;"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_SPort">
+      <line x1="0" y1="0" x2="8" y2="0" style="stroke:#888888;stroke-width:2;stroke-opacity:1"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_PortClk">
+      <line x1="0" y1="0" x2="7" y2="3" style="stroke:#000000;stroke-width:1;stroke-opacity:1"/>
+      <line x1="7" y1="3" x2="0" y2="7" style="stroke:#000000;stroke-width:1;stroke-opacity:1"/>
+    </symbol>
+  </defs>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" x="16" y="68" xlink:href="#MOD_StandardBody"/>
+  <text xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" class="iptype" x="166" y="129">plb_bram_if_cntlr</text>
+  <text xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" class="iplabel" x="166" y="141">plb_bram_if_cntlr_1</text>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="68" y="92" xlink:href="#MOD_SPort"/>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="76" y="90" xlink:href="#MOD_PortClk"/>
+  <text class="portlabel" x="88" y="98">1</text>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="16" y="0" xlink:href="#MOD_PLB_BusBody"/>
+  <text class="iplabel" x="200" y="32">plb</text>
+  <rect x="162" y="24" width="8" height="28" style="fill:#FF3300; fill-opacity: 1.0; stroke:none;"/>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="158" y="52" xlink:href="#MOD_PLB_CBusArrowSouth"/>
+  <text style="fill:#FF3300;     stroke:none;      font-size:8pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="166" y="78">SPLB</text>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="16" y="148" xlink:href="#MOD_TRS_BifBody"/>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="256" y="148" xlink:href="#MOD_TRS_BifBody"/>
+  <text style="fill:#000000;     stroke:none;      font-size:6pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="91" y="155">PORTA</text>
+  <text style="fill:#000000;     stroke:none;      font-size:6pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="241" y="155">PORTA</text>
+</svg>

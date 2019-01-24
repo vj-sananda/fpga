@@ -1,0 +1,3466 @@
+Release 7.1.01i Map H.40
+Xilinx Mapping Report File for Design 'system'
+
+Design Information
+------------------
+Command Line   : map -o system_map.ncd -pr b system.ngd system.pcf 
+Target Device  : xc2vp30
+Target Package : ff896
+Target Speed   : -7
+Mapper Version : virtex2p -- $Revision: 1.26.6.4 $
+Mapped Date    : Sun Apr 24 15:05:18 2005
+
+Design Summary
+--------------
+Number of errors:      0
+Number of warnings:    8
+Logic Utilization:
+  Number of Slice Flip Flops:       1,477 out of  27,392    5%
+  Number of 4 input LUTs:           1,979 out of  27,392    7%
+Logic Distribution:
+  Number of occupied Slices:        1,720 out of  13,696   12%
+  Number of Slices containing only related logic:   1,720 out of   1,720  100%
+  Number of Slices containing unrelated logic:          0 out of   1,720    0%
+        *See NOTES below for an explanation of the effects of unrelated logic
+Total Number 4 input LUTs:          2,349 out of  27,392    8%
+  Number used as logic:             1,979
+  Number used as a route-thru:        114
+  Number used for Dual Port RAMs:     204
+    (Two LUTs used per Dual Port RAM)
+  Number used as Shift registers:      52
+
+  Number of bonded IOBs:               12 out of     556    2%
+    IOB Flip Flops:                    10
+  Number of PPC405s:                   2 out of       2  100%
+  Number of JTAGPPCs:                  1 out of       1  100%
+  Number of Block RAMs:                66 out of     136   48%
+  Number of GCLKs:                      1 out of      16    6%
+  Number of DCMs:                       1 out of       8   12%
+  Number of GTs:                        0 out of       8    0%
+  Number of GT10s:                      0 out of       0    0%
+
+Total equivalent gate count for design:  4,387,329
+Additional JTAG gate count for IOBs:  576
+Peak Memory Usage:  198 MB
+
+NOTES:
+
+   Related logic is defined as being logic that shares connectivity - e.g. two
+   LUTs are "related" if they share common inputs.  When assembling slices,
+   Map gives priority to combine logic that is related.  Doing so results in
+   the best timing performance.
+
+   Unrelated logic shares no connectivity.  Map will only begin packing
+   unrelated logic into a slice once 99% of the slices are occupied through
+   related logic packing.
+
+   Note that once logic distribution reaches the 99% level through related
+   logic packing, this does not mean the device is completely utilized.
+   Unrelated logic packing will then begin, continuing until all usable LUTs
+   and FFs are occupied.  Depending on your timing budget, increased levels of
+   unrelated logic packing may adversely affect the overall timing performance
+   of your design.
+
+Table of Contents
+-----------------
+Section 1 - Errors
+Section 2 - Warnings
+Section 3 - Informational
+Section 4 - Removed Logic Summary
+Section 5 - Removed Logic
+Section 6 - IOB Properties
+Section 7 - RPMs
+Section 8 - Guide Report
+Section 9 - Area Group Summary
+Section 10 - Modular Design Summary
+Section 11 - Timing Report
+Section 12 - Configuration String Information
+Section 13 - Additional Device Resource Counts
+
+Section 1 - Errors
+------------------
+
+Section 2 - Warnings
+--------------------
+WARNING:LIT:243 - Logical network plb_PLB_compress has no load.
+WARNING:LIT:374 - The above warning message base_net_load_rule is repeated 893
+   more times for the following (max. 5 shown):
+   opb_M_seqAddr,
+   plb_PLB_rdPrim,
+   plb_PLB_pendReq,
+   plb_PLB_lockErr,
+   opb_M_busLock
+   To see the details of these warning messages, please use the -detail switch.
+WARNING:PhysDesignRules:1009 - Blockcheck: The clock pin BRAMISOCMCLK for the
+   comp ppc405_0/ppc405_0/PPC405_i is not connected to the output of a DCM
+   driven clock buffer.
+WARNING:PhysDesignRules:1009 - Blockcheck: The clock pin BRAMDSOCMCLK for the
+   comp ppc405_0/ppc405_0/PPC405_i is not connected to the output of a DCM
+   driven clock buffer.
+WARNING:PhysDesignRules:1009 - Blockcheck: The clock pin CPMC405CLOCK for the
+   comp ppc405_1/ppc405_1/PPC405_i is not connected to the output of a DCM
+   driven clock buffer.
+WARNING:PhysDesignRules:1009 - Blockcheck: The clock pin PLBCLK for the comp
+   ppc405_1/ppc405_1/PPC405_i is not connected to the output of a DCM driven
+   clock buffer.
+WARNING:PhysDesignRules:1009 - Blockcheck: The clock pin BRAMISOCMCLK for the
+   comp ppc405_1/ppc405_1/PPC405_i is not connected to the output of a DCM
+   driven clock buffer.
+WARNING:PhysDesignRules:1009 - Blockcheck: The clock pin BRAMDSOCMCLK for the
+   comp ppc405_1/ppc405_1/PPC405_i is not connected to the output of a DCM
+   driven clock buffer.
+
+Section 3 - Informational
+-------------------------
+INFO:MapLib:562 - No environment variables are currently set.
+INFO:MapLib:535 - The following Virtex BUFG(s) is/are being retargetted to
+   Virtex2 BUFGMUX(s) with input tied to I0 and Select pin tied to constant 0:
+   BUFG symbol "dcm_0/dcm_0/CLK0_BUFG_INST" (output
+   signal=plb_bram_if_cntlr_1_port_BRAM_Clk)
+INFO:LIT:244 - All of the single ended outputs in this design are using slew
+   rate limited output drivers. The delay on speed critical single ended outputs
+   can be dramatically reduced by designating them as fast outputs in the
+   schematic.
+
+Section 4 - Removed Logic Summary
+---------------------------------
+ 512 block(s) removed
+ 162 block(s) optimized away
+1210 signal(s) removed
+
+Section 5 - Removed Logic
+-------------------------
+
+The trimmed logic report below shows the logic removed from your design due to
+sourceless or loadless signals, and VCC or ground connections.  If the removal
+of a signal or symbol results in the subsequent removal of an additional signal
+or symbol, the message explaining that second removal will be indented.  This
+indentation will be repeated as a chain of related logic is removed.
+
+To quickly locate the original cause for the removal of a chain of logic, look
+above the place where that logic is listed in the trimming report, then locate
+the lines that are least indented (begin at the leftmost edge).
+
+The signal "plb_PLB_compress" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ADDRPATH/I_PLBCMPRS_MUX/_n00021" (ROM) removed.
+  The signal "plb_M_compress<0>" is loadless and has been removed.
+  The signal "plb_M_compress<1>" is loadless and has been removed.
+The signal "opb_M_seqAddr" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I70" (SFF) removed.
+  The signal "plb2opb/plb2opb/XFER_IF_I/dout<70>" is loadless and has been
+removed.
+The signal "plb_PLB_rdPrim" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_rdPrim1" (ROM) removed.
+  The signal "plb/plb/I_PLB_ARBITER_LOGIC/plb_rdprimreg_i" is loadless and has
+been removed.
+   Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/plb_rdprimreg_i" (SFF) removed.
+The signal "plb_PLB_pendReq" is loadless and has been removed.
+ Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/I_MASTERREQ_MUX3"
+(MUX) removed.
+  The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/req_mux<2>" is
+loadless and has been removed.
+   Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/I_MASTERREQ_MUX2"
+(MUX) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/req_mux<1>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/I_REQ_MUX1" (MUX)
+removed.
+      The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/_n0000" is
+loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/I_REQ_MUX0" (MUX)
+removed.
+        The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/arbSecWrInProgReg_n"
+is loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/arbSecWrInProgReg_n1_
+INV_0" (BUF) removed.
+      The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/arbSecRdInProgReg_n"
+is loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/arbSecRdInProgReg_n1_
+INV_0" (BUF) removed.
+    The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/_n0010" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/_n00101_INV_0" (BUF)
+removed.
+  The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/m_request_n<1>" is
+loadless and has been removed.
+   Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_REQ/_n00121_INV_0" (BUF)
+removed.
+The signal "plb_PLB_lockErr" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ADDRPATH/I_PLBLOCKERR_MUX/_n00021" (ROM) removed.
+The signal "opb_M_busLock" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/OPB_IF_I/BGO_busLock1" (ROM) removed.
+  The signal "plb2opb/plb2opb/OPB_IF_I/hold_buslock" is loadless and has been
+removed.
+   Loadless block "plb2opb/plb2opb/OPB_IF_I/hold_buslock" (SFF) removed.
+    The signal "plb2opb/plb2opb/OPB_IF_I/_n0006" is loadless and has been removed.
+     Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00062" (ROM) removed.
+      The signal "plb2opb/plb2opb/OPB_IF_I/N11" is loadless and has been removed.
+       Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00061/LUT4_L_BUF" (BUF) removed.
+        The signal "plb2opb/plb2opb/OPB_IF_I/_n00061/O" is loadless and has been
+removed.
+         Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00061" (ROM) removed.
+          The signal "plb2opb/plb2opb/XFER_IF_I/PLB_hold_buslock_d3" is loadless and has
+been removed.
+           Loadless block "plb2opb/plb2opb/XFER_IF_I/PLB_hold_buslock_d3" (FF) removed.
+            The signal "plb2opb/plb2opb/XFER_IF_I/PLB_hold_buslock_d2" is loadless and has
+been removed.
+             Loadless block "plb2opb/plb2opb/XFER_IF_I/PLB_hold_buslock_d2" (FF) removed.
+              The signal "plb2opb/plb2opb/XFER_IF_I/PLB_hold_buslock_d1" is loadless and has
+been removed.
+               Loadless block "plb2opb/plb2opb/XFER_IF_I/PLB_hold_buslock_d1" (FF) removed.
+                The signal "plb2opb/plb2opb/PLB_IF_I/PLB_hold_buslock" is loadless and has been
+removed.
+                 Loadless block "plb2opb/plb2opb/PLB_IF_I/PLB_hold_buslock" (SFF) removed.
+                  The signal "plb2opb/plb2opb/PLB_IF_I/_n0054" is loadless and has been removed.
+                   Loadless block "plb2opb/plb2opb/PLB_IF_I/_n00542" (ROM) removed.
+                    The signal "plb2opb/N665" is loadless and has been removed.
+                     Loadless block "plb2opb/plb2opb/PLB_IF_I/_n00542_SW0/LUT4_L_BUF" (BUF) removed.
+                      The signal "plb2opb/plb2opb/PLB_IF_I/_n00542_SW0/O" is loadless and has been
+removed.
+                       Loadless block "plb2opb/plb2opb/PLB_IF_I/_n00542_SW0" (ROM) removed.
+                  The signal "plb2opb/plb2opb/PLB_IF_I/_n0194" is loadless and has been removed.
+                   Loadless block "plb2opb/plb2opb/PLB_IF_I/_n01941" (ROM) removed.
+    The signal "plb2opb/plb2opb/OPB_IF_I/_n0007" is loadless and has been removed.
+     Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00071" (ROM) removed.
+  The signal "plb2opb/plb2opb/OPB_IF_I/timeout_last" is loadless and has been
+removed.
+   Loadless block "plb2opb/plb2opb/OPB_IF_I/timeout_last" (SFF) removed.
+    The signal "plb2opb/N587" is loadless and has been removed.
+     Loadless block "plb2opb/plb2opb/OPB_IF_I/_n000211" (ROM) removed.
+  The signal "plb2opb/plb2opb/opb_xfer_rd_data<69>" is loadless and has been
+removed.
+   Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I69" (SFF) removed.
+    The signal "plb2opb/plb2opb/XFER_IF_I/dout<69>" is loadless and has been
+removed.
+The signal "plb_PLB_wrPrim" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_wrPrim" (ROM) removed.
+  The signal "plb/N450" is loadless and has been removed.
+   Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_wrPrim_SW1" (ROM) removed.
+The signal "plb_PLB_ordered" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ADDRPATH/I_PLBORDERED_MUX/_n00021" (ROM) removed.
+The signal "opb_M_BE<2>" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I66" (SFF) removed.
+  The signal "plb2opb/plb2opb/XFER_IF_I/dout<66>" is loadless and has been
+removed.
+The signal "opb_M_BE<1>" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I65" (SFF) removed.
+  The signal "plb2opb/plb2opb/XFER_IF_I/dout<65>" is loadless and has been
+removed.
+The signal "opb_M_BE<0>" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I64" (SFF) removed.
+  The signal "plb2opb/plb2opb/XFER_IF_I/dout<64>" is loadless and has been
+removed.
+The signal "opb_M_ABus<31>" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I63" (SFF) removed.
+  The signal "plb2opb/plb2opb/XFER_IF_I/dout<63>" is loadless and has been
+removed.
+The signal "opb_M_ABus<30>" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I62" (SFF) removed.
+  The signal "plb2opb/plb2opb/XFER_IF_I/dout<62>" is loadless and has been
+removed.
+The signal "fpga_0_LEDs_4Bit_GPIO_IO_I<3>" is loadless and has been removed.
+ Loadless block "iobuf_5/IBUF" (BUF) removed.
+The signal "fpga_0_LEDs_4Bit_GPIO_IO_I<2>" is loadless and has been removed.
+ Loadless block "iobuf_4/IBUF" (BUF) removed.
+The signal "fpga_0_LEDs_4Bit_GPIO_IO_I<1>" is loadless and has been removed.
+ Loadless block "iobuf_3/IBUF" (BUF) removed.
+The signal "fpga_0_LEDs_4Bit_GPIO_IO_I<0>" is loadless and has been removed.
+ Loadless block "iobuf_2/IBUF" (BUF) removed.
+The signal "plb_PLB_MRdBTerm<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00261" (ROM)
+removed.
+  The signal "plb_Sl_rdBTerm<1>" is loadless and has been removed.
+   Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdbter
+m_i" (SFF) removed.
+    The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdbter
+m_ns0" is loadless and has been removed.
+     Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdbter
+m_ns0" (ROM) removed.
+      The signal "plb_bram_if_cntlr_1/N58" is loadless and has been removed.
+       Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdbter
+m_ns0_SW0" (ROM) removed.
+        The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/burst_tra
+nsfer_reg" is loadless and has been removed.
+         Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/burst_tra
+nsfer_reg" (SFF) removed.
+          The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/burst_tra
+nsfer" is loadless and has been removed.
+  The signal "plb/plb/I_PLB_ARBITER_LOGIC/wdtRdBTerm" is loadless and has been
+removed.
+   Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtRdBTerm_i1" (ROM) removed.
+The signal "plb_PLB_MRdBTerm<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00301" (ROM)
+removed.
+The signal "plb_PLB_pendPri<0>" is loadless and has been removed.
+ Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n00001" (ROM)
+removed.
+  The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl2_mux<3>" is
+loadless and has been removed.
+   Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_MASTER_MUX30"
+(MUX) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl2_mux<2>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_MASTER_MUX20"
+(MUX) removed.
+      The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl2_mux<1>" is
+loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_LVL2_MUX1" (MUX)
+removed.
+        The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n0022"
+is loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_LVL2_MUX0" (MUX)
+removed.
+          The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/secwr_lvl2_n" is
+loadless and has been removed.
+           Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_SECWR_LVL/Lvl2_n1
+" (ROM) removed.
+            The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecWrInProgPriorReg<1>" is
+loadless and has been removed.
+             Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecWrInProgPriorReg_1" (SFF)
+removed.
+              The signal "plb_PLB_reqPri<1>" is loadless and has been removed.
+               Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_REQ_PRIOR/_n00051" (ROM)
+removed.
+            The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecWrInProgPriorReg<0>" is
+loadless and has been removed.
+             Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecWrInProgPriorReg_0" (SFF)
+removed.
+              The signal "plb_PLB_reqPri<0>" is loadless and has been removed.
+               Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_REQ_PRIOR/_n00041" (ROM)
+removed.
+        The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/secrd_lvl2_n" is
+loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_SECRD_LVL/Lvl2_n1
+" (ROM) removed.
+          The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecRdInProgPriorReg<1>" is
+loadless and has been removed.
+           Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecRdInProgPriorReg_1" (SFF)
+removed.
+          The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecRdInProgPriorReg<0>" is
+loadless and has been removed.
+           Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbSecRdInProgPriorReg_0" (SFF)
+removed.
+      The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n0006"
+is loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_QUAL_MASTERS_PRIO
+RITY0/Lvl2_n1" (ROM) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/m_lvl2_n<1>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_QUAL_MASTERS_PRIO
+RITY1/Lvl2_n1" (ROM) removed.
+  The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl3_mux<3>" is
+loadless and has been removed.
+   Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_MASTER_MUX3"
+(MUX) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl3_mux<2>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_MASTER_MUX2"
+(MUX) removed.
+      The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl3_mux<1>" is
+loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_LVL3_MUX1" (MUX)
+removed.
+        The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n0013"
+is loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_LVL3_MUX0" (MUX)
+removed.
+          The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/secwr_lvl3_n" is
+loadless and has been removed.
+           Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_SECWR_LVL/Lvl3_n1
+" (ROM) removed.
+        The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/secrd_lvl3_n" is
+loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_SECRD_LVL/Lvl3_n1
+" (ROM) removed.
+      The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n0007"
+is loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_QUAL_MASTERS_PRIO
+RITY0/Lvl3_n1" (ROM) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/m_lvl3_n<1>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_QUAL_MASTERS_PRIO
+RITY1/Lvl3_n1" (ROM) removed.
+The signal "plb_PLB_pendPri<1>" is loadless and has been removed.
+ Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n00011" (ROM)
+removed.
+  The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl1_mux<3>" is
+loadless and has been removed.
+   Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_MASTER_MUX31"
+(MUX) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl1_mux<2>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_MASTER_MUX21"
+(MUX) removed.
+      The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/lvl1_mux<1>" is
+loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_LVL1_MUX1" (MUX)
+removed.
+        The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n0031"
+is loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_LVL1_MUX0" (MUX)
+removed.
+          The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/secwr_lvl1_n" is
+loadless and has been removed.
+           Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_SECWR_LVL/Lvl1_n1
+" (ROM) removed.
+        The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/secrd_lvl1_n" is
+loadless and has been removed.
+         Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_SECRD_LVL/Lvl1_n1
+" (ROM) removed.
+      The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/_n0005"
+is loadless and has been removed.
+       Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_QUAL_MASTERS_PRIO
+RITY0/Lvl1_n1" (ROM) removed.
+    The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/m_lvl1_n<1>" is
+loadless and has been removed.
+     Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PEND_PRIOR/I_QUAL_MASTERS_PRIO
+RITY1/Lvl1_n1" (ROM) removed.
+The signal "plb_PLB_MRdWdAddr<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_RD_DATAPATH/PLB_MRdWdAddr<4>1" (ROM) removed.
+  The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/N14" is loadless and has been
+removed.
+   Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/PLB_rdWdAddrWDT<0>1" (ROM)
+removed.
+  The signal "plb/PLB_SrdWdAddr<0>" is loadless and has been removed.
+   Loadless block "plb/plb/I_PLB_SLAVE_ORS/RDWDADDR_OR/_n00111" (ROM) removed.
+    The signal "plb_Sl_rdWdAddr<0>" is loadless and has been removed.
+     Loadless block "plb2opb/plb2opb/BGO_rdWdAddr_2dly_0" (SFF) removed.
+      The signal "plb2opb/plb2opb/BGO_rdWdAddr_1dly<0>" is loadless and has been
+removed.
+       Loadless block "plb2opb/plb2opb/BGO_rdWdAddr_1dly_0" (SFF) removed.
+        The signal "plb2opb/plb2opb/PLB_IF_I/BGO_rdWdAddr<0>" is loadless and has been
+removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/BGO_rdWdAddr_0" (SFF) removed.
+          The signal "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data<32>" is loadless and has
+been removed.
+           Loadless block "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_32" (SFF) removed.
+            The signal "plb2opb/plb2opb/RCV_DATA_IF_I/async_fifo_dout<32>" is loadless and
+has been removed.
+    The signal "plb_Sl_rdWdAddr<4>" is loadless and has been removed.
+     Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdwdad
+dr_i_0" (SFF) removed.
+      The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdwdad
+dr_ns0<0>" is loadless and has been removed.
+       Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdwdad
+dr_ns0<0>2" (ROM) removed.
+The signal "plb_PLB_MRearbitrate<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00431" (ROM)
+removed.
+The signal "plb_PLB_MRearbitrate<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00471" (ROM)
+removed.
+The signal "plb_PLB_MWrBTerm<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00401" (ROM)
+removed.
+  The signal "plb_Sl_wrBTerm<0>" is loadless and has been removed.
+   Loadless block "plb2opb/plb2opb/PLB_IF_I/BGO_wrBTerm1" (ROM) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid" is loadless and has
+been removed.
+     Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid" (SFF) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d" is loadless and has
+been removed.
+       Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d562" (ROM) removed.
+        The signal "plb2opb/CHOICE135" is loadless and has been removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d54" (ROM) removed.
+        The signal "plb2opb/CHOICE138" is loadless and has been removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d59" (ROM) removed.
+        The signal "plb2opb/CHOICE153" is loadless and has been removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d551" (ROM) removed.
+          The signal "plb2opb/CHOICE144" is loadless and has been removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d525" (ROM) removed.
+          The signal "plb2opb/CHOICE152" is loadless and has been removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d542" (ROM) removed.
+            The signal "plb2opb/CHOICE148" is loadless and has been removed.
+             Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d536" (ROM) removed.
+            The signal "plb2opb/CHOICE151" is loadless and has been removed.
+             Loadless block "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_d541" (ROM) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_rst" is loadless and has
+been removed.
+       Loadless block "plb2opb/plb2opb/PLB_IF_I/_n0121" (ROM) removed.
+        The signal "plb2opb/N412" is loadless and has been removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/_n0121_SW0" (ROM) removed.
+          The signal "plb2opb/plb2opb/PLB_IF_I/_n0158" is loadless and has been removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagecy_rn_2" (MUX) removed.
+            The signal "plb2opb/plb2opb/PLB_IF_I/Neq_stage_cyo2" is loadless and has been
+removed.
+             Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagecy_rn_1" (MUX) removed.
+              The signal "plb2opb/plb2opb/PLB_IF_I/Neq_stage_cyo1" is loadless and has been
+removed.
+               Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagecy_rn_0" (MUX) removed.
+                The signal "plb2opb/plb2opb/PLB_IF_I/Neq_stage_cyo" is loadless and has been
+removed.
+                 Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagecy" (MUX) removed.
+                  The signal "plb2opb/plb2opb/PLB_IF_I/N7" is loadless and has been removed.
+                   Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagelut" (ROM) removed.
+                    The signal "plb2opb/plb2opb/PLB_IF_I/bndry_PLB_ABus<7>" is loadless and has been
+removed.
+                     Loadless block "plb2opb/plb2opb/PLB_IF_I/bndry_PLB_ABus<7>2" (ROM) removed.
+                The signal "plb2opb/plb2opb/PLB_IF_I/N8" is loadless and has been removed.
+                 Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagelut1" (ROM) removed.
+              The signal "plb2opb/plb2opb/PLB_IF_I/N9" is loadless and has been removed.
+               Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagelut2" (ROM) removed.
+            The signal "plb2opb/plb2opb/PLB_IF_I/N10" is loadless and has been removed.
+             Loadless block "plb2opb/plb2opb/PLB_IF_I/Neq_stagelut3" (ROM) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/wrBTerm_if_PAValid_set" is loadless and has
+been removed.
+       Loadless block "plb2opb/plb2opb/PLB_IF_I/_n01111" (ROM) removed.
+        The signal "plb_PLB_guarded" is loadless and has been removed.
+         Loadless block "plb/plb/I_PLB_ADDRPATH/I_PLBGUARDED_MUX/_n00021" (ROM) removed.
+          The signal "plb_M_guarded<0>" is loadless and has been removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/end_of_wr_burst" is loadless and has been
+removed.
+     Loadless block "plb2opb/plb2opb/PLB_IF_I/end_of_wr_burst" (SFF) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/_n0084" is loadless and has been removed.
+       Loadless block "plb2opb/plb2opb/PLB_IF_I/_n008497/LUT4_L_BUF" (BUF) removed.
+        The signal "plb2opb/plb2opb/PLB_IF_I/_n008497/O" is loadless and has been
+removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/_n008497" (ROM) removed.
+          The signal "plb2opb/CHOICE255" is loadless and has been removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/_n008494" (ROM) removed.
+          The signal "plb2opb/CHOICE237" is loadless and has been removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/_n008418" (ROM) removed.
+            The signal "plb2opb/plb2opb/PLB_IF_I/_n0146" is loadless and has been removed.
+             Loadless block "plb2opb/plb2opb/PLB_IF_I/Eq_stagecy_rn_2" (MUX) removed.
+              The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stage_cyo2" is loadless and has been
+removed.
+               Loadless block "plb2opb/plb2opb/PLB_IF_I/Eq_stagecy_rn_1" (MUX) removed.
+                The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stage_cyo1" is loadless and has been
+removed.
+                 Loadless block "plb2opb/plb2opb/PLB_IF_I/Eq_stagecy_rn_0" (MUX) removed.
+                  The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stage_cyo" is loadless and has been
+removed.
+                   Loadless block "plb2opb/plb2opb/PLB_IF_I/Eq_stagecy" (MUX) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/_n0083" is loadless and has been removed.
+       Loadless block "plb2opb/plb2opb/PLB_IF_I/_n00831" (ROM) removed.
+        The signal "plb2opb/plb2opb/PLB_IF_I/wr_active" is loadless and has been
+removed.
+         Loadless block "plb2opb/plb2opb/PLB_IF_I/wr_active" (SFF) removed.
+          The signal "plb2opb/plb2opb/PLB_IF_I/_n0371<1>" is loadless and has been
+removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/_n0371<1>1_INV_0" (BUF) removed.
+          The signal "plb2opb/plb2opb/PLB_IF_I/_n0066" is loadless and has been removed.
+           Loadless block "plb2opb/plb2opb/PLB_IF_I/_n00661" (ROM) removed.
+  The signal "plb_Sl_wrBTerm<1>" is loadless and has been removed.
+   Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_wrbter
+m_i" (SFF) removed.
+    The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_wrbter
+m_ns0" is loadless and has been removed.
+     Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_wrbter
+m_ns0" (ROM) removed.
+      The signal "plb_bram_if_cntlr_1/N56" is loadless and has been removed.
+       Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_wrbter
+m_ns0_SW0" (ROM) removed.
+  The signal "plb/plb/I_PLB_ARBITER_LOGIC/wdtWrBTerm" is loadless and has been
+removed.
+   Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtWrBTerm_i1" (ROM) removed.
+The signal "plb_PLB_MWrBTerm<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00451" (ROM)
+removed.
+The signal "plb_PLB_MWrDAck<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_WR_DATAPATH/_n00041" (ROM) removed.
+The signal "plb_PLB_MSSize<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00381" (ROM)
+removed.
+The signal "plb_PLB_MSSize<2>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n00461" (ROM)
+removed.
+The signal "plb_PLB_SMErr<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/MERR_OR/_n00051" (ROM) removed.
+The signal "plb_PLB_SMErr<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/MERR_OR/_n00021" (ROM) removed.
+The signal "plb_PLB_SMBusy<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/MBUSY_OR/_n00051" (ROM) removed.
+The signal "plb_PLB_SMBusy<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/MBUSY_OR/_n00021" (ROM) removed.
+The signal "dcm_0/CLKFX180" is loadless and has been removed.
+The signal "dcm_0/CLKDV" is loadless and has been removed.
+The signal "dcm_0/CLKFX" is loadless and has been removed.
+The signal "dcm_0/CLK2X180" is loadless and has been removed.
+The signal "dcm_0/CLK180" is loadless and has been removed.
+The signal "dcm_0/CLK90" is loadless and has been removed.
+The signal "dcm_0/CLK2X" is loadless and has been removed.
+The signal "dcm_0/CLK270" is loadless and has been removed.
+The signal "dcm_0/PSDONE" is loadless and has been removed.
+The signal "dcm_0/STATUS<7>" is loadless and has been removed.
+The signal "dcm_0/STATUS<6>" is loadless and has been removed.
+The signal "dcm_0/STATUS<5>" is loadless and has been removed.
+The signal "dcm_0/STATUS<4>" is loadless and has been removed.
+The signal "dcm_0/STATUS<3>" is loadless and has been removed.
+The signal "dcm_0/STATUS<2>" is loadless and has been removed.
+The signal "dcm_0/STATUS<1>" is loadless and has been removed.
+The signal "dcm_0/STATUS<0>" is loadless and has been removed.
+The signal "reset_block/Peripheral_Reset<0>" is loadless and has been removed.
+ Loadless block "reset_block/reset_block/Peripheral_Reset_0" (FF) removed.
+The signal "jtagppc_0/DBGC405DEBUGHALT0" is loadless and has been removed.
+ Loadless block "jtagppc_0/jtagppc_0/DBGC405DEBUGHALT01_INV_0" (BUF) removed.
+The signal "jtagppc_0/DBGC405DEBUGHALT1" is loadless and has been removed.
+ Loadless block "jtagppc_0/jtagppc_0/DBGC405DEBUGHALT11_INV_0" (BUF) removed.
+The signal "ppc405_1/C405PLBDCUCACHEABLE" is loadless and has been removed.
+The signal "ppc405_1/C405JTGCAPTUREDR" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUU0ATTR" is loadless and has been removed.
+The signal "ppc405_1/C405JTGPGMOUT" is loadless and has been removed.
+The signal "ppc405_1/C405TRCCYCLE" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBFULL" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRITETHRU" is loadless and has been removed.
+The signal "ppc405_1/C405DCRWRITE" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMEVENWRITEEN" is loadless and has been removed.
+The signal "ppc405_1/C405JTGEXTEST" is loadless and has been removed.
+The signal "ppc405_1/C405RSTCHIPRESETREQ" is loadless and has been removed.
+The signal "ppc405_1/C405JTGUPDATEDR" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMEN" is loadless and has been removed.
+The signal "ppc405_1/C405JTGSHIFTDR" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUCACHEABLE" is loadless and has been removed.
+The signal "ppc405_1/C405RSTSYSRESETREQ" is loadless and has been removed.
+The signal "ppc405_1/C405CPMCORESLEEPREQ" is loadless and has been removed.
+The signal "ppc405_1/C405DBGMSRWE" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUREQUEST" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBUSY" is loadless and has been removed.
+The signal "ppc405_1/C405CPMTIMERRESETREQ" is loadless and has been removed.
+The signal "ppc405_1/C405XXXMACHINECHECK" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMODDWRITEEN" is loadless and has been removed.
+The signal "ppc405_1/C405RSTCORERESETREQ" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUREQUEST" is loadless and has been removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTOUT" is loadless and has been removed.
+The signal "ppc405_1/C405DCRREAD" is loadless and has been removed.
+The signal "ppc405_1/C405DBGSTOPACK" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABORT" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUGUARDED" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABORT" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMEN" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBCOMPLETE" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUU0ATTR" is loadless and has been removed.
+The signal "ppc405_1/C405CPMMSRCE" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCURNW" is loadless and has been removed.
+The signal "ppc405_1/C405CPMTIMERIRQ" is loadless and has been removed.
+The signal "ppc405_1/C405CPMMSREE" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<0>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<1>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<2>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<3>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<4>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<5>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<6>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUBE<7>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<8>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<9>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<10>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<11>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<12>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<13>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<14>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<15>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<16>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<17>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<18>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<19>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<20>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<21>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<22>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<23>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<24>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<25>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<26>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<27>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMRDABUS<28>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<0>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<1>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<2>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<3>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<4>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<5>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<6>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<7>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<8>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<9>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<10>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<11>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<12>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<13>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<14>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<15>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<16>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<17>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<18>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<19>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<20>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<21>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<22>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<23>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<24>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<25>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<26>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<27>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<28>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<29>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<30>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<31>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<32>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<33>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<34>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<35>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<36>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<37>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<38>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<39>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<40>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<41>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<42>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<43>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<44>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<45>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<46>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<47>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<48>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<49>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<50>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<51>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<52>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<53>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<54>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<55>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<56>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<57>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<58>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<59>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<60>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<61>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<62>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUWRDBUS<63>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCEVENEXECUTIONSTATUS<0>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCEVENEXECUTIONSTATUS<1>" is loadless and has been
+removed.
+The signal "ppc405_1/C405DBGWBIAR<0>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<1>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<2>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<3>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<4>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<5>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<6>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<7>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<8>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<9>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<10>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<11>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<12>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<13>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<14>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<15>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<16>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<17>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<18>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<19>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<20>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<21>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<22>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<23>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<24>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<25>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<26>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<27>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<28>" is loadless and has been removed.
+The signal "ppc405_1/C405DBGWBIAR<29>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<0>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<1>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<2>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<3>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<4>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<5>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<6>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<7>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<8>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<9>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<10>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<11>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<12>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<13>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<14>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<15>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<16>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<17>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<18>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<19>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<20>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<21>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<22>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<23>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<24>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<25>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<26>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<27>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<28>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<29>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<30>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRDBUSOUT<31>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUPRIORITY<0>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUPRIORITY<1>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUSIZE<2>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUSIZE<3>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<0>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<1>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<2>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<3>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<4>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<5>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<6>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<7>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<8>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<9>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<10>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<11>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<12>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<13>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<14>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<15>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<16>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<17>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<18>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<19>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<20>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<21>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<22>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<23>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<24>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<25>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<26>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<27>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<28>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<29>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<30>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRDBUS<31>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMBYTEWRITE<0>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMBYTEWRITE<1>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMBYTEWRITE<2>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMBYTEWRITE<3>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<8>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<9>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<10>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<11>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<12>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<13>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<14>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<15>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<16>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<17>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<18>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<19>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<20>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<21>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<22>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<23>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<24>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<25>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<26>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<27>" is loadless and has been removed.
+The signal "ppc405_1/ISOCMBRAMWRABUS<28>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUSIZE<2>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCTRACESTATUS<0>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCTRACESTATUS<1>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCTRACESTATUS<2>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCTRACESTATUS<3>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<0>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<1>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<2>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<3>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<4>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<5>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<6>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<7>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<8>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<9>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCTRIGGEREVENTTYPE<10>" is loadless and has been
+removed.
+The signal "ppc405_1/C405PLBICUABUS<0>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<1>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<2>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<3>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<4>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<5>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<6>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<7>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<8>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<9>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<10>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<11>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<12>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<13>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<14>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<15>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<16>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<17>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<18>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<19>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<20>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<21>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<22>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<23>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<24>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<25>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<26>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<27>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<28>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBICUABUS<29>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUPRIORITY<0>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUPRIORITY<1>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<0>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<1>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<2>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<3>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<4>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<5>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<6>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<7>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<8>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<9>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<10>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<11>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<12>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<13>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<14>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<15>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<16>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<17>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<18>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<19>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<20>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<21>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<22>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<23>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<24>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<25>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<26>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<27>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<28>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<29>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<30>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMWRDBUS<31>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<8>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<9>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<10>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<11>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<12>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<13>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<14>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<15>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<16>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<17>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<18>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<19>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<20>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<21>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<22>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<23>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<24>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<25>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<26>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<27>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<28>" is loadless and has been removed.
+The signal "ppc405_1/DSOCMBRAMABUS<29>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<0>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<1>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<2>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<3>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<4>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<5>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<6>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<7>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<8>" is loadless and has been removed.
+The signal "ppc405_1/C405DCRABUS<9>" is loadless and has been removed.
+The signal "ppc405_1/C405TRCODDEXECUTIONSTATUS<0>" is loadless and has been
+removed.
+The signal "ppc405_1/C405TRCODDEXECUTIONSTATUS<1>" is loadless and has been
+removed.
+The signal "ppc405_1/C405PLBDCUABUS<0>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<1>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<2>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<3>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<4>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<5>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<6>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<7>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<8>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<9>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<10>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<11>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<12>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<13>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<14>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<15>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<16>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<17>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<18>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<19>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<20>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<21>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<22>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<23>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<24>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<25>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<26>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<27>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<28>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<29>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<30>" is loadless and has been removed.
+The signal "ppc405_1/C405PLBDCUABUS<31>" is loadless and has been removed.
+The signal "ppc405_0/C405PLBDCUCACHEABLE" is loadless and has been removed.
+The signal "ppc405_0/C405JTGCAPTUREDR" is loadless and has been removed.
+The signal "ppc405_0/C405JTGPGMOUT" is loadless and has been removed.
+The signal "ppc405_0/C405TRCCYCLE" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBFULL" is loadless and has been removed.
+The signal "ppc405_0/C405PLBDCUWRITETHRU" is loadless and has been removed.
+The signal "ppc405_0/C405DCRWRITE" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMEVENWRITEEN" is loadless and has been removed.
+The signal "ppc405_0/C405JTGEXTEST" is loadless and has been removed.
+The signal "ppc405_0/C405JTGUPDATEDR" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMEN" is loadless and has been removed.
+The signal "ppc405_0/C405JTGSHIFTDR" is loadless and has been removed.
+The signal "ppc405_0/C405PLBICUCACHEABLE" is loadless and has been removed.
+The signal "ppc405_0/C405CPMCORESLEEPREQ" is loadless and has been removed.
+The signal "ppc405_0/C405DBGMSRWE" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBUSY" is loadless and has been removed.
+The signal "ppc405_0/C405CPMTIMERRESETREQ" is loadless and has been removed.
+The signal "ppc405_0/C405XXXMACHINECHECK" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMODDWRITEEN" is loadless and has been removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTOUT" is loadless and has been removed.
+The signal "ppc405_0/C405DCRREAD" is loadless and has been removed.
+The signal "ppc405_0/C405DBGSTOPACK" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMEN" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBCOMPLETE" is loadless and has been removed.
+The signal "ppc405_0/C405CPMMSRCE" is loadless and has been removed.
+The signal "ppc405_0/C405CPMTIMERIRQ" is loadless and has been removed.
+The signal "ppc405_0/C405CPMMSREE" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<8>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<9>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<10>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<11>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<12>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<13>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<14>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<15>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<16>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<17>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<18>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<19>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<20>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<21>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<22>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<23>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<24>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<25>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<26>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<27>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMRDABUS<28>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCEVENEXECUTIONSTATUS<0>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCEVENEXECUTIONSTATUS<1>" is loadless and has been
+removed.
+The signal "ppc405_0/C405DBGWBIAR<0>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<1>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<2>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<3>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<4>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<5>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<6>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<7>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<8>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<9>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<10>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<11>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<12>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<13>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<14>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<15>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<16>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<17>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<18>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<19>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<20>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<21>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<22>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<23>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<24>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<25>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<26>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<27>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<28>" is loadless and has been removed.
+The signal "ppc405_0/C405DBGWBIAR<29>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<0>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<1>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<2>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<3>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<4>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<5>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<6>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<7>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<8>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<9>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<10>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<11>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<12>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<13>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<14>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<15>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<16>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<17>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<18>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<19>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<20>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<21>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<22>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<23>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<24>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<25>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<26>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<27>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<28>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<29>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<30>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRDBUSOUT<31>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<0>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<1>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<2>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<3>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<4>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<5>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<6>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<7>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<8>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<9>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<10>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<11>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<12>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<13>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<14>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<15>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<16>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<17>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<18>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<19>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<20>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<21>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<22>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<23>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<24>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<25>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<26>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<27>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<28>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<29>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<30>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRDBUS<31>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMBYTEWRITE<0>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMBYTEWRITE<1>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMBYTEWRITE<2>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMBYTEWRITE<3>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<8>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<9>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<10>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<11>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<12>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<13>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<14>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<15>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<16>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<17>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<18>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<19>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<20>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<21>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<22>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<23>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<24>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<25>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<26>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<27>" is loadless and has been removed.
+The signal "ppc405_0/ISOCMBRAMWRABUS<28>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCTRACESTATUS<0>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCTRACESTATUS<1>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCTRACESTATUS<2>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCTRACESTATUS<3>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<0>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<1>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<2>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<3>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<4>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<5>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<6>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<7>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<8>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<9>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCTRIGGEREVENTTYPE<10>" is loadless and has been
+removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<0>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<1>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<2>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<3>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<4>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<5>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<6>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<7>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<8>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<9>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<10>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<11>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<12>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<13>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<14>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<15>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<16>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<17>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<18>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<19>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<20>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<21>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<22>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<23>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<24>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<25>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<26>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<27>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<28>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<29>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<30>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMWRDBUS<31>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<8>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<9>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<10>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<11>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<12>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<13>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<14>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<15>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<16>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<17>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<18>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<19>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<20>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<21>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<22>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<23>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<24>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<25>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<26>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<27>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<28>" is loadless and has been removed.
+The signal "ppc405_0/DSOCMBRAMABUS<29>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<0>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<1>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<2>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<3>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<4>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<5>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<6>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<7>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<8>" is loadless and has been removed.
+The signal "ppc405_0/C405DCRABUS<9>" is loadless and has been removed.
+The signal "ppc405_0/C405TRCODDEXECUTIONSTATUS<0>" is loadless and has been
+removed.
+The signal "ppc405_0/C405TRCODDEXECUTIONSTATUS<1>" is loadless and has been
+removed.
+The signal "rs232_uart_1/Interrupt" is loadless and has been removed.
+ Loadless block "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Interrupt" (FF)
+removed.
+  The signal "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/_n0006" is loadless
+and has been removed.
+   Loadless block "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/_n00061" (ROM)
+removed.
+    The signal "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/tx_Buffer_Empty_Pre"
+is loadless and has been removed.
+     Loadless block
+"rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/TX_Buffer_Empty_FDRE" (SFF)
+removed.
+      The signal "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/status_Reg<5>" is
+loadless and has been removed.
+       Loadless block
+"rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/TX_Buffer_Empty
+1_INV_0" (BUF) removed.
+The signal "plb2opb/BGI_Trans_Abort" is loadless and has been removed.
+ Loadless block "plb2opb/plb2opb/OPB_IF_I/bgi_trans_abort_i" (SFF) removed.
+  The signal "plb2opb/plb2opb/OPB_IF_I/_n0008" is loadless and has been removed.
+   Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00082" (ROM) removed.
+    The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr<0>" is loadless and has
+been removed.
+     Loadless block "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_0" (SFF) removed.
+      The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr__n0000<4>" is loadless
+and has been removed.
+       Loadless block
+"plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_Madd__n0000_Mxor_Result<4>_Result2
+" (ROM) removed.
+        The signal "plb2opb/plb2opb/OPB_IF_I/N34" is loadless and has been removed.
+         Loadless block
+"plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_Madd__n0000_Mxor_Result<4>_Result1
+" (ROM) removed.
+          The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr<1>" is loadless and has
+been removed.
+           Loadless block "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_1" (SFF) removed.
+            The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr__n0000<3>" is loadless
+and has been removed.
+             Loadless block
+"plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_Madd__n0000_Mxor_Result<3>_Result1
+" (ROM) removed.
+              The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr<2>" is loadless and has
+been removed.
+               Loadless block "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_2" (SFF) removed.
+                The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr__n0000<2>" is loadless
+and has been removed.
+                 Loadless block
+"plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_Madd__n0000_Mxor_Result<2>_Result1
+" (ROM) removed.
+                  The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr<3>" is loadless and has
+been removed.
+                   Loadless block "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_3" (SFF) removed.
+                    The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr__n0000<1>" is loadless
+and has been removed.
+                     Loadless block
+"plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_Madd__n0000_Mxor_Result<1>_Result1
+" (ROM) removed.
+                      The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr<4>" is loadless and has
+been removed.
+                       Loadless block "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_4" (SFF) removed.
+                        The signal "plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr__n0000<0>" is loadless
+and has been removed.
+                         Loadless block
+"plb2opb/plb2opb/OPB_IF_I/bgi_transabort_cntr_Madd__n0000__n00121_INV_0" (BUF)
+removed.
+                        The signal "plb2opb/plb2opb/OPB_IF_I/_n0004" is loadless and has been removed.
+                         Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00041" (ROM) removed.
+                          The signal "opb_M_request" is loadless and has been removed.
+                           Loadless block "plb2opb/plb2opb/OPB_IF_I/BGO_request_fdr" (SFF) removed.
+                            The signal "plb2opb/plb2opb/OPB_IF_I/BGO_request_set" is loadless and has been
+removed.
+                             Loadless block "plb2opb/plb2opb/OPB_IF_I/BGO_request_set2" (ROM) removed.
+                              The signal "plb2opb/plb2opb/rst1" is loadless and has been removed.
+                               Loadless block "plb2opb/plb2opb/rst1_1" (ROM) removed.
+                            The signal "plb2opb/plb2opb/OPB_IF_I/BGO_request_ce" is loadless and has been
+removed.
+                             Loadless block "plb2opb/plb2opb/OPB_IF_I/BGO_request_ce1" (ROM) removed.
+                        The signal "plb2opb/plb2opb/OPB_IF_I/_n0028" is loadless and has been removed.
+                         Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00282" (ROM) removed.
+                          The signal "plb2opb/plb2opb/OPB_IF_I/N8" is loadless and has been removed.
+                           Loadless block "plb2opb/plb2opb/OPB_IF_I/_n00081" (ROM) removed.
+The signal "opb/OPB_hwAck" is loadless and has been removed.
+ Loadless block "opb/opb/OPB_hwAck_I/_n00041" (ROM) removed.
+  The signal "net_gnd1" is loadless and has been removed.
+The signal "opb/OPB_dwAck" is loadless and has been removed.
+ Loadless block "opb/opb/OPB_dwAck_I/_n00041" (ROM) removed.
+The signal "opb/OPB_fwAck" is loadless and has been removed.
+ Loadless block "opb/opb/OPB_fwAck_I/_n00041" (ROM) removed.
+The signal "opb/OPB_beAck" is loadless and has been removed.
+ Loadless block "opb/opb/OPB_beAck_I/_n00041" (ROM) removed.
+The signal "plb/PLB_SrdBTerm" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/RDBTERM_OR/_n00021" (ROM) removed.
+The signal "plb/PLB_SrdDAck" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/RDDACK_OR/_n00021" (ROM) removed.
+The signal "plb/PLB_SwrBTerm" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/WRBTERM_OR/_n00021" (ROM) removed.
+The signal "plb/PLB_SwrDAck" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/WRDACK_OR/_n00021" (ROM) removed.
+The signal "plb/PLB_SrdWdAddr<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/RDWDADDR_OR/_n00021" (ROM) removed.
+The signal "plb/PLB_SrdWdAddr<2>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/RDWDADDR_OR/_n00051" (ROM) removed.
+The signal "plb/PLB_SrdWdAddr<3>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/RDWDADDR_OR/_n00081" (ROM) removed.
+The signal "plb/PLB_Sssize<0>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/SSIZE_OR/_n00051" (ROM) removed.
+The signal "plb/PLB_Sssize<1>" is loadless and has been removed.
+ Loadless block "plb/plb/I_PLB_SLAVE_ORS/SSIZE_OR/_n00021" (ROM) removed.
+Loadless block "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I00/MUXCY_I0"
+(MUX) removed.
+ The signal "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I00/_n0009" is
+loadless and has been removed.
+  Loadless block
+"dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I00/_n00091_INV_0" (BUF)
+removed.
+   The signal "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0<29>" is
+loadless and has been removed.
+    Loadless block "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29"
+(FF) removed.
+Loadless block "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I01/MUXCY_I0"
+(MUX) removed.
+ The signal "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29_rt" is
+loadless and has been removed.
+  Loadless block "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29_rt"
+(ROM) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I0/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<0>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I0/XOR_I" (XOR) removed.
+   The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<1>" is loadless and has been removed.
+    Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I1/MUXCY_I" (MUX) removed.
+     The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<2>" is loadless and has been removed.
+      Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I2/MUXCY_I" (MUX) removed.
+       The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<3>" is loadless and has been removed.
+        Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I3/MUXCY_I" (MUX) removed.
+         The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<4>" is loadless and has been removed.
+          Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I4/MUXCY_I" (MUX) removed.
+           The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<5>" is loadless and has been removed.
+            Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I5/MUXCY_I" (MUX) removed.
+             The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<6>" is loadless and has been removed.
+              Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I6/MUXCY_I" (MUX) removed.
+               The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<7>" is loadless and has been removed.
+                Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I7/MUXCY_I" (MUX) removed.
+                 The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<8>" is loadless and has been removed.
+                  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I8/MUXCY_I" (MUX) removed.
+                   The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/alu_cy<9>" is loadless and has been removed.
+                    Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I9/MUXCY_I" (MUX) removed.
+                     The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I9/lutout_AddSub" is loadless and has been removed.
+                      Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I9/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+                   The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I8/lutout_AddSub" is loadless and has been removed.
+                    Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I8/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+                 The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I7/lutout_AddSub" is loadless and has been removed.
+                  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I7/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+               The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I6/lutout_AddSub" is loadless and has been removed.
+                Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I6/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+             The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I5/lutout_AddSub" is loadless and has been removed.
+              Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I5/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+           The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I4/lutout_AddSub" is loadless and has been removed.
+            Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I4/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+         The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I3/lutout_AddSub" is loadless and has been removed.
+          Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I3/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+       The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I2/lutout_AddSub" is loadless and has been removed.
+        Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I2/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+     The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I1/lutout_AddSub" is loadless and has been removed.
+      Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I1/I_ALU_LUT/Mrom__n0001_inst_lut4_111_INV_0" (BUF)
+removed.
+   The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Full_rt" is loadless
+and has been removed.
+    Loadless block "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Full_rt" (ROM)
+removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I1/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<1>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I1/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I2/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<2>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I2/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I3/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<3>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I3/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I4/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<4>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I4/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I5/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<5>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I5/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I6/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<6>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I6/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I7/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<7>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I7/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I8/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<8>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I8/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I9/FDRE_I" (SFF) removed.
+ The signal "huffman_decoder_0/huffman_decoder_0/iRFIFO2IP_Vacancy<9>" is
+loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_VAC_CALC/Counter_Bit_I9/XOR_I" (XOR) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I1" (SFF) removed.
+ The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/dly_mux_in<1>" is loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_NORMAL_OCCUPANCY/almost_empty1" (ROM) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I10" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I11" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I2" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I3" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I4" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I5" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I6" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I7" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I8" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_DELAY_MUX/FDRE_I9" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT" (SFF) removed.
+ The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/sig_cnt_enable" is loadless and has been removed.
+  Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/Mxor_sig_cnt_enable_Result1" (ROM) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX)
+removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I0/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I1/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I2/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I3/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I4/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I5/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I6/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I7/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I8/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_VAC_CALC/Counter_Bit_I9/FDRE_I" (SFF) removed.
+Loadless block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/I_CARRY_OUT" (SFF) removed.
+Loadless block "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I00/MUXCY_I0" (MUX)
+removed.
+ The signal "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I00/_n0009" is loadless
+and has been removed.
+  Loadless block "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I00/_n00091_INV_0"
+(BUF) removed.
+Loadless block "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/CE_I01/MUXCY_I0" (MUX)
+removed.
+ The signal "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29_rt" is
+loadless and has been removed.
+  Loadless block "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29_rt"
+(ROM) removed.
+Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/AVOID_MAP_ERR_LUT" (ROM)
+removed.
+ The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/prioencdrOutput<3>"
+is loadless and has been removed.
+  Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES036" (MUX)
+removed.
+   The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><3><5>" is
+loadless and has been removed.
+    Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES035" (MUX)
+removed.
+     The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><3><4>" is
+loadless and has been removed.
+      Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES034" (MUX)
+removed.
+       The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><3><3>" is
+loadless and has been removed.
+        Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES033" (MUX)
+removed.
+         The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><3><2>" is
+loadless and has been removed.
+          Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES032" (MUX)
+removed.
+           The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><3><1>" is
+loadless and has been removed.
+            Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES031" (MUX)
+removed.
+             The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/_n0103"
+is loadless and has been removed.
+              Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/FIRSTMUX03" (MUX)
+removed.
+ The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/prioencdrOutput<2>"
+is loadless and has been removed.
+  Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES026" (MUX)
+removed.
+   The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><2><5>" is
+loadless and has been removed.
+    Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES025" (MUX)
+removed.
+     The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><2><4>" is
+loadless and has been removed.
+      Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES024" (MUX)
+removed.
+       The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><2><3>" is
+loadless and has been removed.
+        Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES023" (MUX)
+removed.
+         The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><2><2>" is
+loadless and has been removed.
+          Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES022" (MUX)
+removed.
+           The signal
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/cyout<0><2><1>" is
+loadless and has been removed.
+            Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/MUXES021" (MUX)
+removed.
+             The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/_n0083"
+is loadless and has been removed.
+              Loadless block
+"plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_PRIOR_ENC/FIRSTMUX02" (MUX)
+removed.
+Loadless block "plb2opb/plb2opb/I_PLB_PAValid_neg_edge" (ROM) removed.
+ The signal "plb2opb/plb2opb/PLB_PAValid_1dly" is loadless and has been removed.
+  Loadless block "plb2opb/plb2opb/I_PLB_PAValid_1dly" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N31" (MUX) removed.
+ The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<31>" is loadless and has been removed.
+  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N30" (MUX) removed.
+   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<30>" is loadless and has been removed.
+    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N29" (MUX) removed.
+     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<29>" is loadless and has been removed.
+      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N28" (MUX) removed.
+       The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<28>" is loadless and has been removed.
+        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N27" (MUX) removed.
+         The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<27>" is loadless and has been removed.
+          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N26" (MUX) removed.
+           The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<26>" is loadless and has been removed.
+            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N25" (MUX) removed.
+             The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<25>" is loadless and has been removed.
+              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N24" (MUX) removed.
+               The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<24>" is loadless and has been removed.
+                Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N23" (MUX) removed.
+                 The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<23>" is loadless and has been removed.
+                  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N22" (MUX) removed.
+                   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<22>" is loadless and has been removed.
+                    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N21" (MUX) removed.
+                     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<21>" is loadless and has been removed.
+                      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N20" (MUX) removed.
+                       The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<20>" is loadless and has been removed.
+                        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N19" (MUX) removed.
+                         The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<19>" is loadless and has been removed.
+                          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N18" (MUX) removed.
+                           The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<18>" is loadless and has been removed.
+                            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N17" (MUX) removed.
+                             The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/Cout<17>" is loadless and has been removed.
+                              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY_N16" (MUX) removed.
+                             The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<17>" is loadless and has been removed.
+                              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N17" (ROM) removed.
+                               The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<14>" is loadless and has been
+removed.
+                                Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N17" (SFF) removed.
+                                 The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<17>" is loadless and has been removed.
+                                  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N17" (XOR) removed.
+                           The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<18>" is loadless and has been removed.
+                            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N18" (ROM) removed.
+                             The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<13>" is loadless and has been
+removed.
+                              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N18" (SFF) removed.
+                               The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<18>" is loadless and has been removed.
+                                Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N18" (XOR) removed.
+                         The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<19>" is loadless and has been removed.
+                          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N19" (ROM) removed.
+                           The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<12>" is loadless and has been
+removed.
+                            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N19" (SFF) removed.
+                             The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<19>" is loadless and has been removed.
+                              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N19" (XOR) removed.
+                       The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<20>" is loadless and has been removed.
+                        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N20" (ROM) removed.
+                         The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<11>" is loadless and has been
+removed.
+                          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N20" (SFF) removed.
+                           The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<20>" is loadless and has been removed.
+                            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N20" (XOR) removed.
+                     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<21>" is loadless and has been removed.
+                      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N21" (ROM) removed.
+                       The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<10>" is loadless and has been
+removed.
+                        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N21" (SFF) removed.
+                         The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<21>" is loadless and has been removed.
+                          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N21" (XOR) removed.
+                   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<22>" is loadless and has been removed.
+                    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N22" (ROM) removed.
+                     The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<9>" is loadless and has been
+removed.
+                      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N22" (SFF) removed.
+                       The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<22>" is loadless and has been removed.
+                        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N22" (XOR) removed.
+                 The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<23>" is loadless and has been removed.
+                  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N23" (ROM) removed.
+                   The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<8>" is loadless and has been
+removed.
+                    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N23" (SFF) removed.
+                     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<23>" is loadless and has been removed.
+                      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N23" (XOR) removed.
+               The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<24>" is loadless and has been removed.
+                Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N24" (ROM) removed.
+                 The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<7>" is loadless and has been
+removed.
+                  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N24" (SFF) removed.
+                   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<24>" is loadless and has been removed.
+                    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N24" (XOR) removed.
+             The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<25>" is loadless and has been removed.
+              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N25" (ROM) removed.
+               The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<6>" is loadless and has been
+removed.
+                Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N25" (SFF) removed.
+                 The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<25>" is loadless and has been removed.
+                  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N25" (XOR) removed.
+           The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<26>" is loadless and has been removed.
+            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N26" (ROM) removed.
+             The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<5>" is loadless and has been
+removed.
+              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N26" (SFF) removed.
+               The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<26>" is loadless and has been removed.
+                Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N26" (XOR) removed.
+         The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<27>" is loadless and has been removed.
+          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N27" (ROM) removed.
+           The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<4>" is loadless and has been
+removed.
+            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N27" (SFF) removed.
+             The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<27>" is loadless and has been removed.
+              Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N27" (XOR) removed.
+       The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<28>" is loadless and has been removed.
+        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N28" (ROM) removed.
+         The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<3>" is loadless and has been
+removed.
+          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N28" (SFF) removed.
+           The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<28>" is loadless and has been removed.
+            Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N28" (XOR) removed.
+     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<29>" is loadless and has been removed.
+      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N29" (ROM) removed.
+       The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<2>" is loadless and has been
+removed.
+        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N29" (SFF) removed.
+         The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<29>" is loadless and has been removed.
+          Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N29" (XOR) removed.
+   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<30>" is loadless and has been removed.
+    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N30" (ROM) removed.
+     The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<1>" is loadless and has been
+removed.
+      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N30" (SFF) removed.
+       The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<30>" is loadless and has been removed.
+        Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N30" (XOR) removed.
+ The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/lut_out<31>" is loadless and has been removed.
+  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_LUT_N31" (ROM) removed.
+   The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<0>" is loadless and has been
+removed.
+    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N31" (SFF) removed.
+     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/next_addr_i<31>" is loadless and has been removed.
+      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_FLEX_ADDR_CNTR/I_XOR_N31" (XOR) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_SIZE_S_H_REG0" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/I_SIZE_S_H_REG1" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_ADDR_S_H_REG0" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_ADDR_S_H_REG1" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_ADDR_S_H_REG2" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_BKEND_CE_REG0" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_BKEND_RDCE_REG0" (SFF) removed.
+ The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/rdce_clr" is loadless and has been removed.
+  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/rdce_clr1" (ROM) removed.
+   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/RNW_S_H" is loadless and has been removed.
+    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_RNW_S_H_REG" (SFF) removed.
+ The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/decode_ld
+_rw_ce" is loadless and has been removed.
+  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/decode_ld
+_rw_ce" (ROM) removed.
+   The signal "plb_bram_if_cntlr_1/N158" is loadless and has been removed.
+    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/decode_ld
+_rw_ce_SW1" (ROM) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_BKEND_WRCE_REG0" (SFF) removed.
+ The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/wrce_clr" is loadless and has been removed.
+  Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/wrce_clr1" (ROM) removed.
+   The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/decode_cl
+r_rw_ce" is loadless and has been removed.
+    Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/decode_cl
+r_rw_ce2" (ROM) removed.
+     The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/N20" is
+loadless and has been removed.
+      Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/decode_cl
+r_rw_ce1" (ROM) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_CS_SIZE_REG0" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_CS_SIZE_REG1" (SFF) removed.
+Loadless block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER
+/I_CS_SIZE_REG2" (SFF) removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<0>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<1>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<2>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<3>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<4>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<5>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<6>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<7>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<8>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<9>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<10>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<11>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<12>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<13>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<14>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<15>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<16>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<17>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<18>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<19>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<20>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<21>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<22>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<23>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<24>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<25>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<26>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<27>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<28>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<29>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<30>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<31>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<32>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<33>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<34>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<35>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<36>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<37>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<38>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<39>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<40>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<41>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<42>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<43>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<44>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<45>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<46>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<47>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<48>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<49>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<50>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<51>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<52>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<53>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<54>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<55>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<56>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<57>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<58>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<59>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<60>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<61>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<62>" is sourceless and has been
+removed.
+The signal "plb_bram_if_cntlr_1_bram/BRAM_Din_B<63>" is sourceless and has been
+removed.
+
+The trimmed logic reported below is either:
+   1. part of a cycle
+   2. part of disabled logic
+   3. a side-effect of other trimmed logic
+
+The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<29>" is unused and has been
+removed.
+The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<30>" is unused and has been
+removed.
+The signal "plb_bram_if_cntlr_1_port_BRAM_Addr<31>" is unused and has been
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/_n0047<1>" is unused and has been
+removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/sig_cnt_up_n_dwn" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/sig_cnt_up_n_dwn2" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/N19" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/sig_cnt_up_n_dwn1" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<1>" is unused and has been
+removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/MUXCY_I" (MUX)
+removed.
+  The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<2>" is unused and has been
+removed.
+   Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/MUXCY_I" (MUX)
+removed.
+    The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<3>" is unused and has been
+removed.
+     Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/MUXCY_I" (MUX)
+removed.
+      The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<4>" is unused and has been
+removed.
+       Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/MUXCY_I" (MUX)
+removed.
+        The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<5>" is unused and has been
+removed.
+         Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/MUXCY_I" (MUX)
+removed.
+          The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<6>" is unused and has been
+removed.
+           Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/MUXCY_I" (MUX)
+removed.
+            The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<7>" is unused and has been
+removed.
+             Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/MUXCY_I" (MUX)
+removed.
+              The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/alu_cy<8>" is unused and has been
+removed.
+               Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/MUXCY_I" (MUX)
+removed.
+                The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/_n0048" is unused and has been
+removed.
+                 Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/_n004811" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/_n0047<1>" is unused and has been
+removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/_n0047<1>" is unused and has been
+removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/_n0047<1>" is unused and has been
+removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/_n0047<1>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/_n0047<1>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/MUXCY_I" (MUX) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<8>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I" (SFF)
+removed.
+  The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/count_Result" is
+unused and has been removed.
+   Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/count_Result" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/XOR_I" (XOR)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<7>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<6>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<5>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<4>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<3>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<2>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<1>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/mark_address<0>" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I" (SFF)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1/O" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1" (ROM)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1/O" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1" (ROM)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1/O" is unused
+and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1" (ROM)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1/O"
+is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1"
+(ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21/O" is unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/I_ALU_LUT/Mrom__n000
+1_inst_lut4_21" (ROM) removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1/O" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLL
+ER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1" (ROM)
+removed.
+The signal
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1/O" is
+unused and has been removed.
+ Unused block
+"huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CON
+TROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Mxor_carry_active_high_Result1" (ROM)
+removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/N31" is
+unused and has been removed.
+ Unused block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl
+_state_FFd4-In1" (ROM) removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl
+_state_FFd4-In" is unused and has been removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/N29" is
+unused and has been removed.
+ Unused block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl
+_state_FFd1-In1" (ROM) removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl
+_state_FFd1-In" is unused and has been removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS
+_COUNTER/cntx1" is unused and has been removed.
+The signal "plb_bram_if_cntlr_1/N28" is unused and has been removed.
+The signal "plb_bram_if_cntlr_1/N30" is unused and has been removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/_n0156_SW
+0/O" is unused and has been removed.
+ Unused block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/_n0156_SW
+0" (ROM) removed.
+The signal
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/Addr_cntr
+_load_en1_1/O" is unused and has been removed.
+ Unused block
+"plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/Addr_cntr
+_load_en1_1" (ROM) removed.
+The signal "reset_block/reset_block/EXT_LPF/asr_d1" is unused and has been
+removed.
+The signal "reset_block/reset_block/EXT_LPF/asr_and" is unused and has been
+removed.
+The signal "reset_block/reset_block/EXT_LPF/asr_nand" is unused and has been
+removed.
+The signal "plb2opb/Bus_Error_Det" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/BUSERR_INTR_I/INTERRUPT_REFF_I" (SFF) removed.
+  The signal "plb2opb/plb2opb/BUSERR_INTR_I/bus_error_det_d" is unused and has
+been removed.
+   Unused block "plb2opb/plb2opb/BUSERR_INTR_I/bus_error_det_d1" (ROM) removed.
+    The signal "plb2opb/plb2opb/OPB_IF_I/Err_ack_det" is unused and has been
+removed.
+     Unused block "plb2opb/plb2opb/OPB_IF_I/Err_ack_det" (FF) removed.
+      The signal "plb2opb/plb2opb/OPB_IF_I/_n0003" is unused and has been removed.
+       Unused block "plb2opb/plb2opb/OPB_IF_I/_n00031" (ROM) removed.
+The signal "plb2opb/plb2opb/OPB_timeout_onRd" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/OPB_timeout_onRd1" (ROM) removed.
+The signal "plb2opb/plb2opb/N15" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/Block_on_Term_Rd_after_tout_CE1" (ROM) removed.
+  The signal "plb2opb/plb2opb/Block_on_Term_Rd_after_tout_EN" is unused and has
+been removed.
+   Unused block "plb2opb/plb2opb/Block_on_Term_Rd_after_tout_EN" (SFF) removed.
+    The signal "plb2opb/plb2opb/_n0014" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/_n00141" (ROM) removed.
+    The signal "plb2opb/plb2opb/OPB_timeout_onRd_PLBside" is unused and has been
+removed.
+     Unused block "plb2opb/plb2opb/I_OPB_timeout_onRd_synch2" (SFF) removed.
+      The signal "plb2opb/plb2opb/OPB_timeout_onRd_regd_synch1" is unused and has been
+removed.
+       Unused block "plb2opb/plb2opb/I_OPB_timeout_onRd_synch1" (SFF) removed.
+        The signal "plb2opb/plb2opb/OPB_timeout_onRd_regd" is unused and has been
+removed.
+         Unused block "plb2opb/plb2opb/I_OPB_timeout_Reg" (FF) removed.
+          The signal "plb2opb/plb2opb/PLBside_reset_OPB_timeout_onRd" is unused and has
+been removed.
+           Unused block "plb2opb/plb2opb/I_OPB_timeout_side_Reg_CLR" (ROM) removed.
+            The signal "plb2opb/plb2opb/OPB_timeout_onRd_PLBside_1dly" is unused and has
+been removed.
+             Unused block "plb2opb/plb2opb/I_OPB_timeout_Strobe_out_1dly" (SFF) removed.
+The signal "plb2opb/plb2opb/Block_on_Term_Rd_after_tout_CE" is unused and has
+been removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/opb_BE<4>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_BE_4" (SFF) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/_n0064<3>" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/_n0064<3>1" (ROM) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/N43" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/Ker431" (ROM) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/N51" is unused and has been removed.
+       Unused block "plb2opb/plb2opb/PLB_IF_I/Ker51" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/opb_BE<6>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_BE_6" (SFF) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/_n0064<1>" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/_n0064<1>1" (ROM) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/N411" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/Ker411" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/opb_BE<5>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_BE_5" (SFF) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/_n0064<2>" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/_n0064<2>1" (ROM) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/N42" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/Ker421" (ROM) removed.
+The signal "plb2opb/N689" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0442111_G" (ROM) removed.
+The signal "plb2opb/N650" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_busLock1_SW0" (ROM) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/at_1k_bndry_d2" is unused and has been
+removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/at_1k_bndry_d2" (SFF) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/at_1k_bndry_d1" is unused and has been
+removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/at_1k_bndry_d1" (SFF) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/at_1k_bndry" is unused and has been
+removed.
+       Unused block "plb2opb/plb2opb/PLB_IF_I/at_1k_bndry" (SFF) removed.
+        The signal "plb2opb/N589" is unused and has been removed.
+         Unused block "plb2opb/plb2opb/PLB_IF_I/_n0138611" (ROM) removed.
+          The signal "plb2opb/CHOICE185" is unused and has been removed.
+           Unused block "plb2opb/plb2opb/PLB_IF_I/_n01384" (ROM) removed.
+          The signal "plb2opb/CHOICE188" is unused and has been removed.
+           Unused block "plb2opb/plb2opb/PLB_IF_I/_n01389" (ROM) removed.
+        The signal "plb2opb/CHOICE201" is unused and has been removed.
+         Unused block "plb2opb/plb2opb/PLB_IF_I/_n013852" (ROM) removed.
+          The signal "plb2opb/CHOICE195" is unused and has been removed.
+           Unused block "plb2opb/plb2opb/PLB_IF_I/_n013832" (ROM) removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<69>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_busLock1" (ROM) removed.
+The signal "plb2opb/plb2opb/OPB_IF_I/_n0010" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/OPB_IF_I/_n00101" (ROM) removed.
+The signal "plb2opb/plb2opb/OPB_IF_I/retry_last" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/OPB_IF_I/retry_last" (FF) removed.
+The signal "plb2opb/CHOICE249" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n008458" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/xfer_is_32_1" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/xfer_is_32_1" (FF) removed.
+The signal "plb2opb/N659" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<2>73_SW0" (ROM) removed.
+The signal "plb2opb/plb2opb/XFER_IF_I/PLB_xfer_abort_flag_d2" is unused and has
+been removed.
+The signal "plb2opb/plb2opb/XFER_IF_I/PLB_xfer_abort_flag_d1" is unused and has
+been removed.
+The signal "plb2opb/plb2opb/plb_xfer_abort_flag" is unused and has been removed.
+The signal "plb2opb/plb2opb/XFER_IF_I/OPB_xfer_abort_ack_d2" is unused and has
+been removed.
+The signal "plb2opb/plb2opb/XFER_IF_I/OPB_xfer_abort_ack_d1" is unused and has
+been removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<62>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n04342" (ROM) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/opb_BE<1>" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/opb_BE_1" (SFF) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/_n0064<6>" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/_n0064<6>1" (ROM) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/opb_BE<0>" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/opb_BE_0" (SFF) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/_n0064<7>" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/_n0064<7>1" (ROM) removed.
+  The signal "plb2opb/plb2opb/PLB_IF_I/N22" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/_n04341" (ROM) removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<63>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0442111" (MUX) removed.
+  The signal "plb2opb/N688" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/_n0442111_F" (ROM) removed.
+    The signal "plb2opb/plb2opb/PLB_IF_I/opb_BE<2>" is unused and has been removed.
+     Unused block "plb2opb/plb2opb/PLB_IF_I/opb_BE_2" (SFF) removed.
+      The signal "plb2opb/plb2opb/PLB_IF_I/_n0064<5>" is unused and has been removed.
+       Unused block "plb2opb/plb2opb/PLB_IF_I/_n0064<5>1" (ROM) removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<64>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n04261" (ROM) removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<65>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n04291" (ROM) removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<66>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n04371" (ROM) removed.
+The signal "plb2opb/plb2opb/plb_xfer_data<70>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_seqAddr34" (ROM) removed.
+  The signal "plb2opb/CHOICE162" is unused and has been removed.
+   Unused block "plb2opb/plb2opb/PLB_IF_I/opb_busLock1_F" (ROM) removed.
+The signal "plb2opb/CHOICE56" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<3>29" (ROM) removed.
+The signal "plb2opb/CHOICE57" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<3>30" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/size<1>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/size_1" (FF) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/size<2>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/size_2" (FF) removed.
+The signal "plb2opb/CHOICE166" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_seqAddr23" (ROM) removed.
+The signal "plb2opb/CHOICE99" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<1>33" (ROM) removed.
+The signal "plb2opb/N663" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<0>81_SW0" (ROM) removed.
+The signal "plb2opb/N685" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<0>103_SW0" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/size<3>" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/size_3" (FF) removed.
+The signal "plb2opb/CHOICE77" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<2>30" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/_n0135" is unused and has been removed.
+The signal "plb2opb/N661" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<1>76_SW0" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/_n0063" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n00631" (ROM) removed.
+The signal "plb2opb/CHOICE49" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n0060<3>10" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/valid_term1" is unused and has been
+removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/muxcy_o1" is unused and has been removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/valid_term2" is unused and has been
+removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/stop_wrburst" is unused and has been
+removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/stop_rdburst" is unused and has been
+removed.
+The signal "plb2opb/plb2opb/OPB_IF_I/BGO_request_set1/O" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/OPB_IF_I/BGO_request_set1" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/opb_seqAddr32/O" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/opb_seqAddr32" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut1/O" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut1" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut2/O" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut2" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut3/O" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut3" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut/O" is unused and has been
+removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/Eq_stagelut" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/_n008468/O" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n008468" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/_n008452/O" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n008452" (ROM) removed.
+The signal "plb2opb/plb2opb/PLB_IF_I/_n013840/O" is unused and has been removed.
+ Unused block "plb2opb/plb2opb/PLB_IF_I/_n013840" (ROM) removed.
+The signal
+"opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/timeout_cnt_0_N0" is
+unused and has been removed.
+The signal "plb/Bus_Error_Det" is unused and has been removed.
+ Unused block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/INTERRUPT_REFF_I" (SFF)
+removed.
+  The signal "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/bus_error_det_d" is unused
+and has been removed.
+   Unused block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/bus_error_det_d1" (ROM)
+removed.
+    The signal "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/sl_addrack_d1" is unused and
+has been removed.
+     Unused block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/sl_addrack_d1" (SFF)
+removed.
+    The signal "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/wdtaddrack_d1" is unused and
+has been removed.
+     Unused block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/wdtaddrack_d1" (SFF)
+removed.
+    The signal "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/wdtcountiszero_d1" is unused
+and has been removed.
+     Unused block "plb/plb/I_PLB_ARBITER_LOGIC/PLB_INTR_I/wdtcountiszero_d1" (SFF)
+removed.
+The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/plb_buslock_reg" is unused
+and has been removed.
+ Unused block "plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/plb_buslock_reg" (SFF)
+removed.
+  The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/_n0003" is unused and has
+been removed.
+   Unused block "plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/_n0003" (ROM) removed.
+The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbPriRdBurstIn" is
+unused and has been removed.
+The signal "plb/plb/I_PLB_ARBITER_LOGIC/rdPrimIn2/O" is unused and has been
+removed.
+ Unused block "plb/plb/I_PLB_ARBITER_LOGIC/rdPrimIn2" (ROM) removed.
+The signal "plb/plb/I_PLB_ARBITER_LOGIC/rdPrimIn1/O" is unused and has been
+removed.
+ Unused block "plb/plb/I_PLB_ARBITER_LOGIC/rdPrimIn1" (ROM) removed.
+The signal "plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/_n0003_SW0/O" is unused and
+has been removed.
+ Unused block "plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/_n0003_SW0" (ROM)
+removed.
+Unused block "iobuf_6/OBUFT" (TRI) removed.
+Unused block "iobuf_7/OBUFT" (TRI) removed.
+Unused block "iobuf_8/OBUFT" (TRI) removed.
+Unused block "iobuf_9/OBUFT" (TRI) removed.
+Unused block "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I32" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I62" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I63" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I64" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I65" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I66" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I69" () removed.
+Unused block "plb2opb/plb2opb/XFER_IF_I/DPRAM_I70" () removed.
+
+Optimized Block(s):
+TYPE 		BLOCK
+GND 		XST_GND
+VCC 		XST_VCC
+GND 		dipsws_4bit/XST_GND
+VCC 		dipsws_4bit/XST_VCC
+GND 		huffman_decoder_0/XST_GND
+VCC 		huffman_decoder_0/XST_VCC
+GND 		leds_4bit/XST_GND
+VCC 		leds_4bit/XST_VCC
+FD 		leds_4bit/leds_4bit/gpio_core_1/gpio_Data_In_0
+   optimized to 0
+FD 		leds_4bit/leds_4bit/gpio_core_1/gpio_Data_In_1
+   optimized to 0
+FD 		leds_4bit/leds_4bit/gpio_core_1/gpio_Data_In_2
+   optimized to 0
+FD 		leds_4bit/leds_4bit/gpio_core_1/gpio_Data_In_3
+   optimized to 0
+GND 		opb/XST_GND
+VCC 		opb/XST_VCC
+LUT4
+		opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/timeout_cnt_ClkEn_IN
+V1
+LUT4 		opb/opb/OPB_toutSup_I/_n00041
+GND 		plb/XST_GND
+VCC 		plb/XST_VCC
+LUT4 		plb/plb/I_PLB_ADDRPATH/I_PLBMSIZE_MUX/_n00041
+LUT4_D 		plb/plb/I_PLB_ADDRPATH/I_PLBSIZE_MUX/_n00081
+LOCALBUF 		plb/plb/I_PLB_ADDRPATH/I_PLBSIZE_MUX/_n00081/LUT4_D_BUF
+LUT4_D 		plb/plb/I_PLB_ADDRPATH/I_PLBSIZE_MUX/_n00091
+LOCALBUF 		plb/plb/I_PLB_ADDRPATH/I_PLBSIZE_MUX/_n00091/LUT4_D_BUF
+LUT4 		plb/plb/I_PLB_ADDRPATH/I_PLBTYPE_MUX/_n00061
+LUT4 		plb/plb/I_PLB_ADDRPATH/I_PLBTYPE_MUX/_n00071
+LUT4 		plb/plb/I_PLB_ADDRPATH/I_PLBTYPE_MUX/_n00081
+LUT4_L 		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd5-In36
+LOCALBUF
+		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd5-In36/LUT4_L_BUF
+LUT4 		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd5-In36_SW0
+LUT4 		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd5-In36_SW1
+FDRE 		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbPriRdBurstReg
+   optimized to 0
+LUT3_L 		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbPriRdBurstIn1
+LOCALBUF
+		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbPriRdBurstIn1/LUT3_L_BUF
+FDRE 		plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecRdBurstReg
+   optimized to 0
+LUT2 		plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/PLB_busLock1
+LUT2_L 		plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/SM_busLock1
+LOCALBUF 		plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/SM_busLock1/LUT2_L_BUF
+FDR 		plb/plb/I_PLB_ARBITER_LOGIC/I_BUSLOCK_SM/sm_buslock_reg
+   optimized to 0
+LUT4_D 		plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/BUSLOCK_MUX/_n00021
+LOCALBUF
+		plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/BUSLOCK_MUX/_n00021/LUT4_D_BUF
+LUT3 		plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n0000
+LUT4 		plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n0000_SW0
+LUT3 		plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n0001
+LUT4 		plb/plb/I_PLB_ARBITER_LOGIC/I_MUXEDSIGNALS/_n0001_SW2
+FDRE 		plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtBurstAccReg
+   optimized to 0
+GND 		plb2opb/XST_GND
+VCC 		plb2opb/XST_VCC
+FDR 		plb2opb/plb2opb/BGO_rdBTerm_int_1dly
+   optimized to 0
+FDR 		plb2opb/plb2opb/BGO_rdBTerm_int_2dly
+   optimized to 0
+FDRE 		plb2opb/plb2opb/Block_on_Term_Rd_after_tout
+   optimized to 0
+LUT4 		plb2opb/plb2opb/Block_on_Term_Rd_after_tout_CE2
+LUT4 		plb2opb/plb2opb/PLB_IF_I/BGO_rdBTerm1
+LUT4 		plb2opb/plb2opb/PLB_IF_I/Ker561
+LUT4 		plb2opb/plb2opb/PLB_IF_I/Ker591
+LUT4 		plb2opb/plb2opb/PLB_IF_I/_n0060<1>57
+LUT4 		plb2opb/plb2opb/PLB_IF_I/_n0060<2>54
+LUT4 		plb2opb/plb2opb/PLB_IF_I/_n0060<3>50
+LUT4_L 		plb2opb/plb2opb/PLB_IF_I/_n00721
+LOCALBUF 		plb2opb/plb2opb/PLB_IF_I/_n00721/LUT4_L_BUF
+LUT3 		plb2opb/plb2opb/PLB_IF_I/_n01161
+LUT3 		plb2opb/plb2opb/PLB_IF_I/_n01171
+LUT4_L 		plb2opb/plb2opb/PLB_IF_I/_n012329_SW0
+LOCALBUF 		plb2opb/plb2opb/PLB_IF_I/_n012329_SW0/LUT4_L_BUF
+LUT3 		plb2opb/plb2opb/PLB_IF_I/_n01351
+FDRE 		plb2opb/plb2opb/PLB_IF_I/abort_flag_hold
+   optimized to 0
+FDE 		plb2opb/plb2opb/PLB_IF_I/guarded_i
+   optimized to 0
+LUT4_D 		plb2opb/plb2opb/PLB_IF_I/master_rd_abort1
+LOCALBUF 		plb2opb/plb2opb/PLB_IF_I/master_rd_abort1/LUT4_D_BUF
+FDRE 		plb2opb/plb2opb/PLB_IF_I/msize_0
+   optimized to 0
+LUT2_L 		plb2opb/plb2opb/PLB_IF_I/plb_xfer_abort_flag_i1
+LOCALBUF 		plb2opb/plb2opb/PLB_IF_I/plb_xfer_abort_flag_i1/LUT2_L_BUF
+LUT3_L 		plb2opb/plb2opb/PLB_IF_I/rdDAck_com1
+LOCALBUF 		plb2opb/plb2opb/PLB_IF_I/rdDAck_com1/LUT3_L_BUF
+FDE 		plb2opb/plb2opb/PLB_IF_I/size_0
+   optimized to 0
+LUT4 		plb2opb/plb2opb/PLB_IF_I/stop_rdburst1
+FDR 		plb2opb/plb2opb/PLB_IF_I/stop_rdburst_d1
+   optimized to 0
+LUT4 		plb2opb/plb2opb/PLB_IF_I/stop_wrburst1
+LUT2 		plb2opb/plb2opb/PLB_IF_I/stop_wrburst2
+FDR 		plb2opb/plb2opb/PLB_IF_I/stop_wrburst_d1
+   optimized to 0
+LUT3_D 		plb2opb/plb2opb/PLB_rdBurst_int1
+LOCALBUF 		plb2opb/plb2opb/PLB_rdBurst_int1/LUT3_D_BUF
+FDR 		plb2opb/plb2opb/XFER_IF_I/OPB_xfer_abort_ack_d1
+   optimized to 0
+FD_1 		plb2opb/plb2opb/XFER_IF_I/OPB_xfer_abort_ack_d2
+   optimized to 0
+FD 		plb2opb/plb2opb/XFER_IF_I/OPB_xfer_abort_ack_d3
+   optimized to 0
+FD 		plb2opb/plb2opb/XFER_IF_I/PLB_xfer_abort_flag_d1
+   optimized to 0
+FD_1 		plb2opb/plb2opb/XFER_IF_I/PLB_xfer_abort_flag_d2
+   optimized to 0
+FD 		plb2opb/plb2opb/XFER_IF_I/PLB_xfer_abort_flag_d3
+   optimized to 0
+GND 		plb_bram_if_cntlr_1/XST_GND
+VCC 		plb_bram_if_cntlr_1/XST_VCC
+FDRE
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/I_BURST_S_H_REG
+   optimized to 0
+LUT4
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/cntx11
+LUT4
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/cntx21
+LUT4
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/cntx41
+LUT3
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/hwrds1
+LUT3
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/words1
+LUT2
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/_n01501
+LUT4
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/_n0156
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd1
+   optimized to 0
+LUT2
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd1-In2
+LUT3
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd12-In_SW0
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd3
+   optimized to 0
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd4
+   optimized to 0
+LUT2
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd4-In2
+LUT3
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cnt
+l_state_FFd9-In_SW0
+LUT3
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cyc
+le_count__n0001<3>_F
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_size
+_reg_0
+   optimized to 0
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_size
+_reg_1
+   optimized to 0
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_type
+_reg_0
+   optimized to 0
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_type
+_reg_1
+   optimized to 0
+FDR
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_type
+_reg_2
+   optimized to 0
+GND 		ppc405_0/XST_GND
+VCC 		ppc405_0/XST_VCC
+GND 		ppc405_1/XST_GND
+VCC 		ppc405_1/XST_VCC
+GND 		reset_block/XST_GND
+VCC 		reset_block/XST_VCC
+LUT4 		reset_block/reset_block/EXT_LPF/asr_and1
+FD 		reset_block/reset_block/EXT_LPF/asr_d1
+   optimized to 0
+FD 		reset_block/reset_block/EXT_LPF/asr_lpf_0
+   optimized to 0
+FD 		reset_block/reset_block/EXT_LPF/asr_lpf_1
+   optimized to 0
+FD 		reset_block/reset_block/EXT_LPF/asr_lpf_2
+   optimized to 0
+FD 		reset_block/reset_block/EXT_LPF/asr_lpf_3
+   optimized to 0
+LUT4 		reset_block/reset_block/EXT_LPF/asr_nand1
+FDSE 		reset_block/reset_block/EXT_LPF/lpf_asr
+   optimized to 0
+GND 		rs232_uart_1/XST_GND
+VCC 		rs232_uart_1/XST_VCC
+MUXCY 		plb2opb/plb2opb/PLB_IF_I/MUXCY1_I
+MUXCY 		plb2opb/plb2opb/PLB_IF_I/MUXCY2_I
+MUXCY
+		plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRES
+S_COUNTER/I_FLEX_ADDR_CNTR/I_MUXCY
+
+To enable printing of redundant blocks removed and signals merged, set the
+detailed map report option and rerun map.
+
+Section 6 - IOB Properties
+--------------------------
+
++------------------------------------------------------------------------------------------------------------------------+
+| IOB Name                           | Type    | Direction | IO Standard | Drive    | Slew | Reg (s)  | Resistor | IOB   |
+|                                    |         |           |             | Strength | Rate |          |          | Delay |
++------------------------------------------------------------------------------------------------------------------------+
+| fpga_0_DIPSWs_4Bit_GPIO_IO_pin<0>  | IOB     | BIDIR     | LVCMOS25    |          |      | INFF1    |          |       |
+| fpga_0_DIPSWs_4Bit_GPIO_IO_pin<1>  | IOB     | BIDIR     | LVCMOS25    |          |      | INFF1    |          |       |
+| fpga_0_DIPSWs_4Bit_GPIO_IO_pin<2>  | IOB     | BIDIR     | LVCMOS25    |          |      | INFF1    |          |       |
+| fpga_0_DIPSWs_4Bit_GPIO_IO_pin<3>  | IOB     | BIDIR     | LVCMOS25    |          |      | INFF1    |          |       |
+| fpga_0_LEDs_4Bit_GPIO_IO_pin<0>    | IOB     | BIDIR     | LVTTL       | 12       | SLOW | OFF1     |          |       |
+| fpga_0_LEDs_4Bit_GPIO_IO_pin<1>    | IOB     | BIDIR     | LVTTL       | 12       | SLOW | OFF1     |          |       |
+| fpga_0_LEDs_4Bit_GPIO_IO_pin<2>    | IOB     | BIDIR     | LVTTL       | 12       | SLOW | OFF1     |          |       |
+| fpga_0_LEDs_4Bit_GPIO_IO_pin<3>    | IOB     | BIDIR     | LVTTL       | 12       | SLOW | OFF1     |          |       |
+| fpga_0_RS232_Uart_1_RX_pin         | IOB     | INPUT     | LVCMOS25    |          |      | INFF1    |          |       |
+| fpga_0_RS232_Uart_1_TX_pin         | IOB     | OUTPUT    | LVCMOS25    | 12       | SLOW | OFF1     |          |       |
+| sys_clk_pin                        | IOB     | INPUT     | LVCMOS25    |          |      |          |          |       |
+| sys_rst_pin                        | IOB     | INPUT     | LVTTL       |          |      |          |          |       |
++------------------------------------------------------------------------------------------------------------------------+
+
+Section 7 - RPMs
+----------------
+
+Section 8 - Guide Report
+------------------------
+Guide not run on this design.
+
+Section 9 - Area Group Summary
+------------------------------
+No area groups were found in this design.
+
+Section 10 - Modular Design Summary
+-----------------------------------
+Modular Design not used for this design.
+
+Section 11 - Timing Report
+--------------------------
+This design was not run using timing mode.
+
+Section 12 - Configuration String Details
+--------------------------
+Use the "-detail" map option to print out Configuration Strings
+
+Section 13 - Additional Device Resource Counts
+----------------------------------------------
+Number of JTAG Gates for IOBs = 12
+Number of Equivalent Gates for Design = 4,387,329
+Number of RPM Macros = 0
+Number of Hard Macros = 0
+GT10 = 0
+GT = 0
+CAPTUREs = 0
+BSCANs = 0
+STARTUPs = 0
+PCILOGICs = 0
+DCMs = 1
+GCLKs = 1
+ICAPs = 0
+18X18 Multipliers = 0
+Block RAMs = 66
+TBUFs = 0
+JTAGPPCs = 1
+CLK_Ps = 0
+CLK_Ns = 0
+GTOPADs = 0
+GTIPADs = 0
+PPC405s = 2
+Total Registers (Flops & Latches in Slices & IOBs) not driven by LUTs = 675
+IOB Dual-Rate Flops not driven by LUTs = 0
+IOB Dual-Rate Flops = 0
+IOB Slave Pads = 0
+IOB Master Pads = 0
+IOB Latches not driven by LUTs = 0
+IOB Latches = 0
+IOB Flip Flops not driven by LUTs = 9
+IOB Flip Flops = 10
+Unbonded IOBs = 0
+Bonded IOBs = 12
+ORCYs = 0
+XORs = 244
+CARRY_INITs = 168
+CARRY_SKIPs = 6
+CARRY_MUXes = 289
+Total Shift Registers = 52
+Static Shift Registers = 6
+Dynamic Shift Registers = 46
+16x1 ROMs = 0
+16x1 RAMs = 0
+32x1 RAMs = 0
+Dual Port RAMs = 102
+MUXFs = 29
+MULT_ANDs = 0
+4 input LUTs used as Route-Thrus = 114
+4 input LUTs = 1979
+Slice Latches not driven by LUTs = 0
+Slice Latches = 0
+Slice Flip Flops not driven by LUTs = 666
+Slice Flip Flops = 1477
+Slices = 1720
+F6 Muxes = 1
+F5 Muxes = 28
+F8 Muxes = 0
+F7 Muxes = 0
+Xilinx Core proc_sys_reset_v1_00_a = 1
+Xilinx Core ppc405_v2_00_c = 2
+Xilinx Core plb_v34_v1_02_a = 1
+Xilinx Core plb_bram_if_cntlr_v1_00_b = 1
+Xilinx Core plb2opb_bridge_v1_01_a = 1
+Xilinx Core opb_v20_v1_10_c = 1
+Xilinx Core opb_uartlite_v1_00_b = 1
+Xilinx Core opb_gpio_v3_01_b = 2
+Xilinx Core jtagppc_cntlr_v2_00_a = 1
+Xilinx Core huffman_decoder_v1_00_a = 1
+Xilinx Core dcm_module_v1_00_a = 1
+Number of LUT signals with 4 loads = 46
+Number of LUT signals with 3 loads = 46
+Number of LUT signals with 2 loads = 551
+Number of LUT signals with 1 load = 1184
+NGM Average fanout of LUT = 2.64
+NGM Maximum fanout of LUT = 69
+NGM Average fanin for LUT = 3.3123
+Number of LUT symbols = 1979

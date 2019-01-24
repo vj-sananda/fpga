@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title		>Starting...</title		>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+<style type="text/css"	>@media all {
+ .hide { display:none; _display:block; border: 5px cyan dashed; padding:1em;}
+ body {background:#000; color:#fff; margin:0; padding:0;}
+ blockquote { position:absolute; left:0; top:0; margin:0; padding:0;
+  width:100%; text-align:center; font-size:300%;}
+}</style></head><body onload="sanity_test();">
+
+<p class="hide">Hm, you're apparently using a browser that doesn't
+support stylesheets properly<em style="display: none">, or at all</em>.
+You should use <a href=
+ "http://www.mozilla.org/products/firefox/">Firefox</a> instead.
+
+<br><br><b><a href="./index.html">Continue</a></b></p>
+
+<div id="Stage"></div>
+<p><a href="./index.html" >Starting...</a></p>
+<script type="text/javascript">/*
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   ~                                                                 ~
+   ~  If you can read this, your browser is way too old !!           ~
+   ~  You can try loading index.html in this (or a better) browser.  ~
+   ~                                                                 ~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+function sanity_test () {
+  if( window && document && window.setTimeout
+    && document.createElement && document.createTextNode
+    && document.getElementById
+    && document.getElementById('Stage')
+    && document.getElementById('Stage').appendChild
+  ) {
+    get_started();
+  } else if(document && document.write) {
+    document.write(
+     "\x3cP\x3e Ouch!  Your browser version is way too old.  " +
+     "\x3cBR\x3e\x3cA href='http://www.getfirefox.com'\x3eUpgrade here!" +
+     "\x3c/A\x3e\x3c/P\x3e"
+    );
+  } else {
+    throw("Insane Error!?!?!  No window or document?!");
+  }
+  return false;
+}
+
+function get_started () {
+  var Stage = document.getElementById('Stage');
+  graft(Stage, ['table',
+   {width:'100%', height:"900", cellpadding:"0", cellspacing:"0"}, ['tr',
+	['td', {bgcolor:"#c0c0c0"}, "" ], ['td', {bgcolor:"#ffff00"}, "" ],
+	['td', {bgcolor:"#00ffff"}, "" ], ['td', {bgcolor:"#00ff00"}, "" ],
+	['td', {bgcolor:"#ff00ff"}, "" ], ['td', {bgcolor:"#ff0000"}, "" ],
+	['td', {bgcolor:"#0000ff"}, "" ]
+  ]]);
+
+  graft(Stage, ['blockquote', ['a', {href:'./index.html',
+    style:"color: black !important; background-color: #fff;"},
+    "\u00a0Starting...\u00a0"
+  ]]);
+  window.setTimeout( function () {
+    if(window.location.replace) {
+      window.location.replace('./index.html');
+    } else {
+      window.location       = './index.html';
+    }
+  }, 123); // and awaaay we go!
+}
+
+function graft (parent, t) {
+  var e = document.createElement(t[0]);
+  for(var i = 1; i < t.length; i++) {
+    if (t[i].constructor == Array ) { graft( e, t[i] ) }
+    else if( t[i].constructor == Object )
+      { for(var k in t[i]) e.setAttribute( k, t[i][k] ) }
+    else { e.appendChild(document.createTextNode(t[i].toString())); }
+  }  
+  parent.appendChild( e );
+  return e;
+}
+
+</script></body></html>

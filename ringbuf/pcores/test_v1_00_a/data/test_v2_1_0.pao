@@ -1,0 +1,7 @@
+##############################################################################
+## Filename:          C:\work\ringbuf\pcores/test_v1_00_a/data/test_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Fri Oct 10 21:57:51 2008 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib test_v1_00_a test verilog

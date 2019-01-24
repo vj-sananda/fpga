@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>POST Example: ABEBooks.com (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_06"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 18:57:08 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_06' class='lwp lwp_ch05_06' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">5.6. POST Example: ABEBooks.com</h2>
+
+<p><a href=
+ "http://www.abebooks.com/"
+ >ABEBooks.com</a> is a <a name="INDEX-343" class="ipoint"
+></a><a name="INDEX-344" class="ipoint"
+></a>web site that allows users to search
+the database of the books for sale at hundreds of used bookstores
+mostly in the U.S. and Canada. An eagle-eyed user can find anything
+from a $2 used copy of <em class="emphasis">Swahili for Travellers</em>,
+to an <!-- img src="figs/euro.gif" alt="E" / -->&euro;11,000
+
+complete set of the 1777 edition of Diderot's <em
+class="emphasis">Encyclop&#xE9;die</em>. The trick, as with any kind
+of bargain hunting, is to always keep looking, because one never knows
+when something new and interesting will arrive. The manual way of
+doing this is to fastidiously keep a list of titles, authors, and
+subjects for which you're keeping an eye out, and to routinely visit
+the ABEBooks site, key in each of your searches into the HTML search
+form, and look for anything new. However, this is precisely the kind
+of drudgery that computers were meant to do for us; so we'll now
+consider how to automate that task.</p>
+
+<p>As with the license plate form in the previous section, the first
+step in automating form submission is to understand the form in
+question. ABEBooks's "Advanced
+Search" system consists of one form, which is shown
+in <a href="ch05_06.htm#perllwp-CHP-5-FIG-3">Figure 5-3</a>.
+</p>
+
+<a name="perllwp-CHP-5-FIG-3"></a><div class="figure"><img src="figs/plwp_0503.gif"
+  alt="Figure 5-3: ABEBooks query form"
+title="Figure 5-3: ABEBooks query form"
+/></div><h4 class="objtitle">Figure 5-3. ABEBooks query form</h4>
+
+<p>The process of searching with this form is just a matter of filling
+in the applicable fields and hitting "Start
+Search"; the web site then returns a web page
+listing the results. For example, entering
+"<a href=
+ "http://en.wikipedia.org/wiki/Codex_Seraphinianus"
+ >Codex Seraphinianus</a>" in the
+"Title" field returns the web page
+shown in <a href="ch05_06.htm#perllwp-CHP-5-FIG-4">Figure 5-4</a>.
+</p>
+
+<a name="perllwp-CHP-5-FIG-4"></a><div class="figure"><img src="figs/plwp_0504.gif"
+  alt="Figure 5-4: ABEBooks results page"
+title="Figure 5-4: ABEBooks results page"
+/></div><h4 class="objtitle">Figure 5-4. ABEBooks results page</h4>
+
+<a name="perllwp-CHP-5-SECT-6.1"></a><div class="sect2">
+<h3 class="sect2">5.6.1. The Form</h3>
+
+<p>In the previous section, the <a name="INDEX-345" class="ipoint"
+></a><a name="INDEX-346" class="ipoint"
+></a>form's source was
+simple enough that we could tell at a glance what form pairs it would
+produce, and our use of <em class="emphasis">formpairs.pl</em> merely
+confirmed that we understood it. However, this ABEBooks form is
+obviously much more complex, so let's start with
+using <em class="filename">formpairs.pl</em> and look to the details of
+the form source only as necessary. Save a local copy of the form and
+change its form action attribute from this:
+</p>
+
+<pre class="code">&lt;FORM ACTION="BookSearch" METHOD=post&gt;</pre>
+
+<p>to this:</p>
+
+<pre class="code">&lt;FORM ACTION="<tt class="userinput"><b>http://someserver.int/cgi-bin/formpairs.pl</b></tt>" METHOD=post&gt;</pre>
+
+<p>or to whatever URL you've put a copy of
+<em class="filename">formpairs.pl</em> at. If you then open that newly
+altered HTML file in a browser, fill in "Codex
+Seraphinianus" in the
+"Title" blank, set
+"Order results by" to
+"Newest," set
+"Results per page" to
+"100," and hit
+"Start Search," our
+<em class="filename">formpairs.pl</em> program shows the form pairs that
+the browser sends:
+</p>
+
+<pre class="code">POST data:
+(
+  "ph" =&gt; "2",
+  "an" =&gt; "",
+  "tn" =&gt; "Codex Seraphinianus",
+  "pn" =&gt; "",
+  "sn" =&gt; "",
+  "gpnm" =&gt; "ALL",
+  "cty" =&gt; "",
+  "bi" =&gt; "",
+  "prl" =&gt; "",
+  "prh" =&gt; "",
+  "sortby" =&gt; "0",
+  "ds" =&gt; "100",
+  "bu" =&gt; "Start Search",
+)</pre>
+
+</div>
+<a name="perllwp-CHP-5-SECT-6.2"></a><div class="sect2">
+<h3 class="sect2">5.6.2. Translating This into LWP</h3>
+
+<p>These form pairs can be pasted into a simple program for saving the
+result of that search, using a call to
+<tt class="literal">$browser-&gt;post(url</tt>,
+<em class="replaceable"><tt>pairs_arrayref</tt></em><tt class="literal">)</tt> such as
+you'll recognize from the previous section. <a href="ch05_06.htm#perllwp-CHP-5-EX-4">Example 5-4</a> demonstrates.
+</p>
+
+<a name="perllwp-CHP-5-EX-4"></a><div class="example">
+<h4 class="objtitle">Example 5-4. seraph.pl </h4>
+<pre class="code">#!/usr/bin/perl -w
+# seraph.pl - search for Codex Seraphinianus on abebooks
+ 
+use strict;
+my $out_file = "result_seraph.html";  # where to save it
+ 
+use LWP;
+my $browser = LWP::UserAgent-&gt;new;
+my $response = $browser-&gt;post(
+  'http://dogbert.abebooks.com/abe/BookSearch',
+   # That's the URL that the real form submits to.
+  [
+    "ph" =&gt; "2",
+    "an" =&gt; "",
+    "tn" =&gt; "Codex Seraphinianus",
+    "pn" =&gt; "",
+    "sn" =&gt; "",
+    "gpnm" =&gt; "All Book Stores",
+    "cty" =&gt; "All Countries",
+    "bi" =&gt; "Any Binding",
+    "prl" =&gt; "",
+    "prh" =&gt; "",
+    "sortby" =&gt; "0",
+    "ds" =&gt; "100",
+    "bu" =&gt; "Start Search",
+  ]
+);
+ 
+die "Error: ", $response-&gt;status_line, "\n"
+ unless $response-&gt;is_success;
+ 
+open(OUT, "&gt;$out_file") || die "Can't write-open $out_file: $!";
+binmode(OUT);
+print OUT $response-&gt;content;
+close(OUT);
+print "Bytes saved: ", -s $out_file, " in $out_file\n";</pre>
+</div>
+
+<p>When run, this program successfully saves to
+<em class="filename">result_seraph.html</em> all the HTML that results
+from running a 100-newest-items search on the title
+"Codex Seraphinianus".
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-6.3"></a><div class="sect2">
+<h3 class="sect2">5.6.3. Adding Features</h3>
+
+<p>A little more experimentation with the form would show that a search
+on an author's name, instead of the title name,
+shows up in the
+<tt class="literal">an=</tt><em class="replaceable"><tt>author_name</tt></em> form
+pair, instead of the
+<tt class="literal">tn=</tt><em class="replaceable"><tt>title_name</tt></em> form
+pair. That is what we see if we go sifting through the HTML source to
+the search form:
+</p>
+
+<pre class="code">...
+&lt;TR&gt;&lt;TH ALIGN=LEFT&gt;Author&lt;/TH&gt;
+&lt;TD&gt;&lt;INPUT TYPE=text NAME=an VALUE="" SIZE=35 MAXLENGTH=254&gt;&lt;/TD&gt;&lt;/TR&gt;
+&lt;TR&gt;&lt;TH ALIGN=LEFT&gt;Title&lt;/TH&gt;
+&lt;TD&gt;&lt;INPUT TYPE=text NAME=tn VALUE="" SIZE=35 MAXLENGTH=254&gt;&lt;/TD&gt;&lt;/TR&gt;
+...</pre>
+
+<p>We could alter our program to <a name="INDEX-347" class="ipoint"
+></a>set the form pairs with something
+like this:
+</p>
+
+<pre class="code">...
+"an" =&gt; $author || "",
+"tn" =&gt; $title  || "",
+...</pre>
+
+<p>Moreover, if we wanted to allow the search to specify that only first
+editions should be shown, some experimentation with
+<em class="filename">formpairs.pl</em> and our local copy of the form
+shows that checking the "First
+Edition" checkbox produces a new form pair
+<tt class="literal">fe=on</tt>, between the <tt class="literal">bi=</tt> and
+<tt class="literal">prl=</tt> pairs, where previously there was nothing.
+This jibes with the HTML source code:
+</p>
+
+<pre class="code">&lt;INPUT TYPE=CHECKBOX NAME=fe&gt;&lt;B&gt;First Edition&lt;/B&gt;</pre>
+
+<p>This could be modeled in our program with a variable
+<tt class="literal">$first_edition</tt>, which, if set to a true value,
+produces that form pair; otherwise, it produces nothing:
+</p>
+
+<pre class="code">...
+ "bi" =&gt; "",
+ $first_edition ? ("fe" =&gt; "on") : ( ),
+ "prl" =&gt; "",
+...</pre>
+
+<p>This can all be bundled up in a single routine that runs a search
+based on three given parameters: author, title, and whether only
+first editions should be shown:
+</p>
+
+<pre class="code">sub run_search {
+  my($author, $title, $first_edition) = @_;
+  my $response = $browser-&gt;post(
+    'http://dogbert.abebooks.com/abe/BookSearch',
+    [
+      "ph" =&gt; "2",
+<tt class="userinput"><b>      "an" =&gt; $author || "",</b></tt>
+<tt class="userinput"><b>      "tn" =&gt; $title  || "",</b></tt>
+      "pn" =&gt; "",
+      "sn" =&gt; "",
+      "gpnm" =&gt; "All Book Stores",
+      "cty" =&gt; "All Countries",
+      "bi" =&gt; "Any Binding",
+<tt class="userinput"><b>      $first_edition ? ("fe" =&gt; "on") : ( ),</b></tt>
+      "prl" =&gt; "",
+      "prh" =&gt; "",
+      "sortby" =&gt; "0",
+      "ds" =&gt; "100",
+      "bu" =&gt; "Start Search",
+    ]
+  );
+  return $response;
+}</pre>
+
+<p>That <tt class="literal">run_search(&#160;)</tt> routine takes all we know about
+how any new-books query to ABEBooks needs to be performed and puts it
+all in a single place. From here, we need only apply initialization
+code and code to call the <tt class="literal">run_search</tt> routine, and
+do whatever needs doing with it:
+</p>
+
+<pre class="code">use strict;
+use LWP;
+my $browser = LWP::UserAgent-&gt;new;
+do_stuff( );
+
+sub do_stuff {
+  my $response = run_search( # author, title, first edition
+    '', 'Codex Seraphinianus', ''
+  );
+  process_search($response, 'result_seraph.html');
+}
+
+sub process_search {
+  my($response, $out_file) = @_;
+  die "Error: ", $response-&gt;status_line, "\n"
+   unless $response-&gt;is_success;
+  open(OUT, "&gt;$out_file") || die "Can't write-open $out_file: $!";
+  binmode(OUT);
+  print OUT $response-&gt;content;
+  close(OUT);
+  print "Bytes saved: ", -s $out_file, " in $out_file\n";
+  return;
+}</pre>
+
+</div>
+<a name="perllwp-CHP-5-SECT-6.4"></a><div class="sect2">
+<h3 class="sect2">5.6.4. Generalizing the Program</h3>
+
+<p>This program still just runs an ABEBooks search for books with the
+title "Codex Seraphinianus", and
+saves the results to <em class="filename">result_seraph.html</em>. But the
+benefit of reshuffling the code as we did is that now, by just
+changing <tt class="literal">do_stuff</tt> slightly, we change our program
+from being dedicated to running one search, to being a generic tool
+for running any number of searches:
+</p>
+
+<pre class="code">my @searches = (  <tt class="userinput"><b># outfile, author, title, first_edition</b></tt>
+  ['result_seraph.html',       '', 'Codex Seraphinianus', ''],
+  ['result_vidal_1green.html', 'Gore Vidal', 'Dark Green Bright Red', 1],
+  ['result_marchand.html',     'Hans Marchand', 'Categories', ''],
+  ['result_origins.html',      'Eric Partridge', 'Origins', ''],
+  ['result_navajo.html',       '', 'Navajo',   ''],
+  ['result_navaho.html',       '', 'Navaho',   ''],
+  ['result_iroq.html',         '', 'Iroquois', ''],
+  ['result_tibetan.html',      '', 'Tibetan',  ''],
+);
+do_stuff( );
+
+sub do_stuff {
+  foreach my $search (@searches) {
+    my $out_file = shift @$search;
+    my $resp = run_search(@$search);
+    sleep 3; # Don't rudely query the ABEbooks server too fast!
+    process_search($resp, $out_file);
+  }
+}</pre>
+
+<p>Running this program saves each of those searches in turn:</p>
+
+<pre class="code">% perl -w abesearch03.pl
+Bytes saved: 15452 in result_seraph.html
+Bytes saved: 57693 in result_vidal_1green.html
+Bytes saved: 8009 in result_marchand.html
+Bytes saved: 25322 in result_origins.html
+Bytes saved: 125337 in result_navajo.html
+Bytes saved: 128665 in result_navaho.html
+Bytes saved: 127475 in result_iroq.html
+Bytes saved: 130941 in result_tibetan.html</pre>
+
+<p>The user can then open each file and skim it for interesting new
+titles. Each book listed there comes with a working absolute URL to a
+book detail page on the ABEBooks server, which can be used for buying
+the book. For some of the queries that generate large numbers of
+results, it would be particularly convenient to have
+<tt class="literal">do_stuff(&#160;)</tt> actually track which books it has seen
+before (using the book-detail URL of each) and report only on new
+ones:
+</p>
+
+<pre class="code">my $is_first_time;
+my (%seen_last_time, %seen_this_time, @new_urls);
+sub do_stuff {
+  if (-e 'seen_last_time.dat') {
+    # Get URLs seen last time.
+    open(LAST_TIME, "&lt;seen_last_time.dat") || die $!;
+    while (&lt;LAST_TIME&gt;) { chomp; $seen_last_time{$_} = 1 };
+    close(LAST_TIME);
+  } else {
+    $is_first_time = 1;
+  }
+
+  foreach my $search (@searches) {
+    my $out_file = shift @$search;
+    my $resp = run_search(@$search);
+    process_search($resp, $out_file);
+
+    foreach my $url ($resp-&gt;content =~
+      # Extract URLs of book-detail pages:
+      m{"(http://dogbert.abebooks.com/abe/BookDetails\?bi=[^\s\"]+)"}g
+    ){
+      push @new_urls, $url unless $seen_last_time{$url}
+       or $seen_this_time{$url};
+      $seen_this_time{$url} = 1;
+    }
+  }
+
+  # Save URLs for comparison next time.
+  open(LAST_TIME, "&gt;seen_last_time.dat") || die $!;
+  for (keys %seen_this_time) { print LAST_TIME $_, "\n" }
+  close(LAST_TIME);
+
+  if($is_first_time) {
+    print "(This was the first time this program was run.)\n";
+  } elsif (@new_urls) {
+    print "\nURLs of new books:\n";
+    for (@new_urls) { print $_, "\n" }
+  } else {
+    print "No new books to report.\n";
+  }
+}</pre>
+
+<p>A typical run of this will produce output as above, but with this
+addendum:
+</p>
+
+<pre class="code"><b class="emphasis-bold">URLs of new books:</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=24017010</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=4766571</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=110543730</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=58703369</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=93298753</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=93204427</b>
+<b class="emphasis-bold">http://dogbert.abebooks.com/abe/BookDetails?bi=24086008</b></pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

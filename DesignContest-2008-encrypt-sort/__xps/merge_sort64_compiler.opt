@@ -1,0 +1,20 @@
+ppc405_0
+MERGE_SORT64_SOURCES = merge_sort64/aes_core.c merge_sort64/main.c merge_sort64/msort.c merge_sort64/sortrecord_hw_plb.c drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.c drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.c merge_sort64/recordio_tc.c 
+MERGE_SORT64_HEADERS = merge_sort64/aes_core.h merge_sort64/msort.h merge_sort64/sortrecord_hw_plb.h merge_sort64/timer.h drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.h drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.h merge_sort64/recordio_tc.h 
+MERGE_SORT64_CC = powerpc-eabi-gcc
+MERGE_SORT64_CC_SIZE = powerpc-eabi-size
+MERGE_SORT64_CC_OPT = -O2
+MERGE_SORT64_CFLAGS = 
+MERGE_SORT64_CC_SEARCH = # -B
+MERGE_SORT64_LIBPATH = -L./ppc405_0/lib/ # -L
+MERGE_SORT64_INCLUDES = -I./ppc405_0/include/  -Imerge_sort64/ -Idrivers/accel_sort_plb_v1_00_a/src/ # -I
+MERGE_SORT64_LFLAGS = # -l
+MERGE_SORT64_CC_PREPROC_FLAG = # -Wp,
+MERGE_SORT64_CC_ASM_FLAG = # -Wa,
+MERGE_SORT64_CC_LINKER_FLAG = # -Wl,
+MERGE_SORT64_LINKER_SCRIPT = merge_sort64_linker_script
+MERGE_SORT64_CC_DEBUG_FLAG =  -g 
+MERGE_SORT64_CC_GLOBPTR_FLAG= # -msdata=eabi
+MERGE_SORT64_CC_START_ADDR_FLAG=  # -Wl,-defsym -Wl,_START_ADDR=
+MERGE_SORT64_CC_STACK_SIZE_FLAG=  # -Wl,-defsym -Wl,_STACK_SIZE=
+MERGE_SORT64_CC_HEAP_SIZE_FLAG=  # -Wl,-defsym -Wl,_HEAP_SIZE=

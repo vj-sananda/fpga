@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>HTML::TreeBuilder (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch09_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:58:52 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch09_02' class='lwp lwp_ch09_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">9.2. HTML::TreeBuilder</h2>
+
+<p>There are five steps to an HTML::TreeBuilder
+<a name="INDEX-521" class="ipoint"
+></a><a name="INDEX-522" class="ipoint"
+></a>program:
+</p>
+
+<ol><li>
+Create the HTML::TreeBuilder object.
+</li><li>
+Set the parse options.
+</li><li>
+Parse the HTML.
+</li><li>
+Process it according to the needs of your problem.
+</li><li>
+Delete the HTML::TreeBuilder object.
+</li></ol>
+<p><a href="ch09_02.htm#perllwp-CHP-9-EX-2">Example 9-2</a> is a simple HTML::TreeBuilder
+<a name="INDEX-523" class="ipoint"
+></a>program.
+</p>
+
+<a name="perllwp-CHP-9-EX-2"></a><div class="example">
+<h4 class="objtitle">Example 9-2. Simple HTML::TreeBuilder program </h4>
+<pre class="code">#!/usr/bin/perl -w
+use strict;
+use HTML::TreeBuilder 3;  # make sure our version isn't ancient
+my $root = HTML::TreeBuilder-&gt;new;
+$root-&gt;parse(  # parse a string...
+q{
+   &lt;ul&gt;
+     &lt;li&gt;Ice cream.&lt;/li&gt;
+     &lt;li&gt;Whipped cream.
+     &lt;li&gt;Hot apple pie &lt;br&gt;(mmm pie)&lt;/li&gt;
+   &lt;/ul&gt;
+});
+$root-&gt;eof( );  # done parsing for this tree
+$root-&gt;dump;   # print( ) a representation of the tree
+$root-&gt;delete; # erase this tree because we're done with it</pre>
+</div>
+
+<p>Four of the five steps are shown here. The HTML::TreeBuilder
+class's <tt class="literal">new(&#160;)</tt> constructor
+creates a new object. We don't set parse options,
+preferring instead to use the defaults. The <tt class="literal">parse(
+)</tt> method <a name="INDEX-524" class="ipoint"
+></a><a name="INDEX-525" class="ipoint"
+></a><a name="INDEX-526" class="ipoint"
+></a>parses HTML from a string.
+It's designed to let you supply HTML in chunks, so
+you use the <tt class="literal">eof(&#160;)</tt> method to tell the parser when
+there's no more HTML. The <tt class="literal">dump(&#160;)</tt>
+method is <a name="INDEX-527" class="ipoint"
+></a><a name="INDEX-528" class="ipoint"
+></a><a name="INDEX-529" class="ipoint"
+></a>our processing here, printing a string
+form of the tree (the output is given in <a href="ch09_02.htm#perllwp-CHP-9-EX-3">Example 9-3</a>). And finally we <tt class="literal">delete(&#160;)</tt>
+the tree to free the memory it used.
+</p>
+
+<a name="perllwp-CHP-9-EX-3"></a><div class="example">
+<h4 class="objtitle">Example 9-3. Output of <a href="ch09_02.htm#perllwp-CHP-9-EX-2">Example 9-2</a> </h4>
+<pre class="code">&lt;html&gt; @0 (IMPLICIT)
+  &lt;head&gt; @0.0 (IMPLICIT)
+  &lt;body&gt; @0.1 (IMPLICIT)
+    &lt;ul&gt; @0.1.0
+      &lt;li&gt; @0.1.0.0
+        "Ice cream."
+      &lt;li&gt; @0.1.0.1
+        "Whipped cream. "
+      &lt;li&gt; @0.1.0.2
+        "Hot apple pie "
+        &lt;br&gt; @0.1.0.2.1
+        "(mmm pie)"</pre>
+</div>
+
+<p>Each line in the dump represents either an element or text. Each
+element is identified by a dotted sequence of numbers (e.g.,
+0.1.0.2). This sequence identifies the position of the element in the
+tree (2nd child of the 0th child of the 1st child of the 0th child of
+the root of the tree). The dump also identifies some nodes as
+<tt class="literal">(IMPLICIT)</tt>, meaning they weren't
+present in the HTML fragment but have been inferred to make a valid
+document parse tree.
+</p>
+
+<a name="perllwp-CHP-9-SECT-2.1"></a><div class="sect2">
+<h3 class="sect2">9.2.1. Constructors</h3>
+
+<p>To create a new empty tree, use
+<a name="INDEX-530" class="ipoint"
+></a><a name="INDEX-531" class="ipoint"
+></a>the
+<tt class="literal">new(&#160;)</tt> method:
+</p>
+
+<pre class="code">$root = HTML::TreeBuilder-&gt;new( );</pre>
+
+<p>To create a new tree and parse the HTML in one go, pass one or more
+strings to the <tt class="literal">new_from_content(&#160;)</tt> method:
+</p>
+
+<pre class="code">$root = HTML::TreeBuilder-&gt;new_from_content([<em class="replaceable"><tt>string</tt></em>, ...]);</pre>
+
+<p>To create a new HTML::TreeBuilder object and parse HTML from a file,
+pass the filename or a filehandle to the <tt class="literal">new_from_file(
+)</tt> method:
+</p>
+
+<pre class="code">$root = HTML::TreeBuilder-&gt;new_from_file(<em class="replaceable"><tt>filename</tt></em>);
+$root = HTML::TreeBuilder-&gt;new_from_file(<em class="replaceable"><tt>filehandle</tt></em>);</pre>
+
+<p>If you use <tt class="literal">new_from_file(&#160;)</tt> or
+<tt class="literal">new_from_content(&#160;)</tt>, the parse is carried out with
+the default parsing options. To parse with any nondefault options,
+you must use the <tt class="literal">new(&#160;)</tt> constructor and call
+<tt class="literal">parse_file(&#160;)</tt> or <tt class="literal">parse(&#160;)</tt>.
+</p>
+
+</div>
+<a name="perllwp-CHP-9-SECT-2.2"></a><div class="sect2">
+<h3 class="sect2">9.2.2. Parse Options</h3>
+
+<p>Set options for the parse
+<a name="INDEX-532" class="ipoint"
+></a><a name="INDEX-533" class="ipoint"
+></a>by calling methods on the
+HTML::TreeBuilder object. These methods return the old value for the
+option and set the value if passed a parameter. For example:
+</p>
+
+<pre class="code">$comments = $root-&gt;strict_comment( );
+print "Strict comment processing is ";
+print $comments ? "on\n" : "off\n";
+$root-&gt;strict_comment(0);      # disable</pre>
+
+<p>Some options affect the way the HTML standard is ignored or obeyed,
+while others affect the internal behavior of the parser. The full
+list of parser options follows.
+</p>
+
+<dl>
+<dt><tt class="literal">$root-&gt;strict_comment([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+The HTML standard says that a comment is terminated by an even number
+of <tt class="literal">--</tt> s between the opening <tt class="literal">&lt;</tt>
+and the closing <tt class="literal">&gt;</tt>, and there must be nothing
+but whitespace between even and odd <tt class="literal">--</tt> s. That part
+of the HTML standard is little known, little understood, and little
+obeyed. So most browsers simply accept any <tt class="literal">--&gt;</tt>
+as the end of a comment. If enabled via a true value, this option
+makes the HTML::TreeBuilder recognize <em class="emphasis">only</em></tt> those
+comments that obey the HTML standard. By default, this option is off,
+so that HTML::TreeBuilder will parse comments as normal browsers do.
+</dd>
+
+
+<dt><tt class="literal">$root-&gt;strict_names([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+Some HTML has unquoted attribute values that include spaces, e.g.,
+<tt class="literal">&lt;img</tt> <tt class="literal">alt=big</tt>
+<tt class="literal">dog!</tt> <tt class="literal">src="dog.jpg"&gt;</tt>. If this
+option is enabled, that tag would be reported as text, because it
+doesn't obey the standard (<tt class="literal">dog!</tt>
+is not a valid attribute name). If the option is disabled, as it is
+by default, source such as this is parsed as a tag, with a Boolean
+attribute called <tt class="literal">dog!</tt> set.
+
+</dd>
+
+
+<dt><tt class="literal">$root-&gt;implicit_tags([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+Enabled by default, this option makes the parser create nodes for
+missing start- or end-tags. If disabled, the parse tree simply
+reflects the input text, which is rarely useful.
+
+</dd>
+
+
+<dt><tt class="literal">$root-&gt;implicit_body_p_tag([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+This option controls what happens to text or phrasal tags (such as
+<tt class="literal">&lt;i&gt;...&lt;/i&gt;</tt>) that are directly in a
+<tt class="literal">&lt;body&gt;</tt>, without a containing
+<tt class="literal">&lt;p&gt;</tt>. By default, the text or phrasal tag
+nodes are children of the <tt class="literal">&lt;body&gt;</tt>. If
+enabled, an implicit <tt class="literal">&lt;p&gt;</tt> is created to
+contain the text or phrasal tags.
+
+</dd>
+
+
+<dt><tt class="literal">$root-&gt;ignore_unknown([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+By default, unknown tags, such as <tt class="literal">&lt;footer&gt;</tt>,
+are ignored. Enable this to create nodes in the parse tree for
+unknown tags.
+
+</dd>
+
+
+<dt><tt class="literal">$root-&gt;ignore_text([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+By default, text in elements appears in the parse tree. Enable this
+option to create parse trees without the text from the document.
+
+</dd>
+
+
+<dt><tt class="literal">$root-&gt;ignore_ignorable_whitespace([</tt><tt><em class="replaceable">boolean</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+Whitespace between most tags is ignorable, and multiple whitespace
+characters are collapsed to one. If you want to preserve the
+whitespace present in the original HTML, enable this option.
+
+</dd>
+
+</dl>
+
+</div>
+<a name="perllwp-CHP-9-SECT-2.3"></a><div class="sect2">
+<h3 class="sect2">9.2.3. Parsing</h3>
+
+<p>There are two ways of <a name="INDEX-534" class="ipoint"
+></a><a name="INDEX-535" class="ipoint"
+></a><a name="INDEX-536" class="ipoint"
+></a><a name="INDEX-537" class="ipoint"
+></a>parsing HTML: from a file or from strings.
+</p>
+
+<p>Pass the <tt class="literal">parse_file(&#160;)</tt> method a
+<a name="INDEX-538" class="ipoint"
+></a><a name="INDEX-539" class="ipoint"
+></a>filename or filehandle to parse the HTML in
+that file:
+</p>
+
+<pre class="code">$success = $root-&gt;parse_file(<tt><em class="replaceable"><tt>filename</tt></em></tt>);
+$success = $root-&gt;parse_file(<tt><em class="replaceable"><tt>filehandle</tt></em></tt>);</pre>
+
+<p>For example, to parse HTML from STDIN:</p>
+
+<pre class="code">$root-&gt;parse_file(*STDIN) or die "Can't parse STDIN";</pre>
+
+<p>The <tt class="literal">parse_file(&#160;)</tt> method returns the
+HTML::TreeBuilder object if successful or <tt class="literal">undef</tt> if
+an error occurred.
+</p>
+
+<p>The <tt class="literal">parse(&#160;)</tt> method takes a chunk of HTML and
+parses it. Call <tt class="literal">parse(&#160;)</tt> on each chunk, then call
+the <tt class="literal">eof(&#160;)</tt> method when there's no
+more HTML to come.
+</p>
+
+<pre class="code">$success = $root-&gt;parse(<tt><em class="replaceable"><tt>chunk</tt></em></tt>);
+$success = $root-&gt;eof( );</pre>
+
+<p>This method is designed for situations where you are acquiring your
+HTML one chunk at a time. It's also useful when
+you're extracting HTML from a larger file and
+can't simply parse the entire file with
+<tt class="literal">parse_file(&#160;)</tt>. In many cases, you could use
+<tt class="literal">new_from_content(&#160;)</tt>, but recall that
+<tt class="literal">new_from_content(&#160;)</tt> doesn't give
+you an opportunity to set nondefault parsing options.
+</p>
+
+</div>
+<a name="perllwp-CHP-9-SECT-2.4"></a><div class="sect2">
+<h3 class="sect2">9.2.4. Cleanup</h3>
+
+<p>The <tt class="literal">delete(&#160;)</tt> method frees the
+<a name="INDEX-540" class="ipoint"
+></a><a name="INDEX-541" class="ipoint"
+></a>tree and its elements,
+giving the memory it used back to Perl:
+</p>
+
+<pre class="code">$root-&gt;delete( );</pre>
+
+<p>Use this method in persistent environments such as mod_perl or when
+your program will parse a lot of HTML files. It's
+not enough to simply have <tt class="literal">$root</tt> be a private
+variable that goes out of scope, or to assign a new value to
+<tt class="literal">$root</tt>. Perl's current
+memory-management system fails on the kinds of data structures that
+HTML::Element uses.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

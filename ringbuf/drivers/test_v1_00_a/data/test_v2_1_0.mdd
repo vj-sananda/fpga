@@ -1,0 +1,16 @@
+##############################################################################
+## Filename:          C:\work\ringbuf\drivers/test_v1_00_a/data/test_v2_1_0.mdd
+## Description:       Microprocessor Driver Definition
+## Date:              Fri Oct 10 21:57:52 2008 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+OPTION psf_version = 2.1.0;
+
+BEGIN DRIVER test_v1_00_a
+
+  OPTION supported_peripherals = (test_v1_00_a);
+  OPTION depends = (common_v1_00_a);
+  OPTION DESC = new FSL core;
+  OPTION copyfiles = all;
+
+END DRIVER

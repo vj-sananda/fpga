@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>An HTTP Authentication Example:The Unicode Mailing Archive (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch11_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:54:29 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch11_04' class='lwp lwp_ch11_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">11.4. An HTTP Authentication Example:The Unicode Mailing Archive</h2>
+
+<p>Most password-protected
+<a name="INDEX-650" class="ipoint"
+></a><a name="INDEX-651" class="ipoint"
+></a><a name="INDEX-652" class="ipoint"
+></a>sites (whether protected
+via HTTP Basic Authentication or otherwise) are that way because the
+sites' owners don't want just
+anyone to look at the content. And it would be a bit odd if I gave
+away such a username and password by mentioning it in this book!
+However, there is one well-known site whose content is password-protected
+without being secret: the mailing list archive of the
+Unicode mailing lists.
+</p>
+
+<p>In an effort to keep email-harvesting bots from finding the Unicode
+mailing list archive while spidering the Web for fresh email
+addresses, the Unicode.org sysadmins have put a password on that part
+of their site. But to allow people (actual not-bot humans) to access
+the site, the site administrators publicly state the password, on an
+unprotected page, at <a href="http://www.unicode.org/mail-arch/">http://www.unicode.org/mail-arch/</a>, which
+links to the protected part, but also states the username and
+password you should use.
+</p>
+
+<p>The main Unicode mailing list (called <em class="emphasis">unicode</em>)
+once in a while has a thread that is really very interesting and you
+really must read, but it's buried in a thousand
+other messages that are not even worth downloading, even in digest
+form. Luckily, this problem meets a tidy solution with LWP:
+I've written a short program that, on the first of
+every month, downloads the index of all the previous
+month's messages and reports the number of messages
+that has each topic as its subject.
+</p>
+
+<p>The trick is that the web pages that list this information are
+password-protected.  Moreover, the URL for the index of last
+month's posts is different every month, but in a
+fairly obvious way. The URL for March 2002, for example, is:
+</p>
+
+<pre class="code">http://www.unicode.org/mail-arch/unicode-ml/y2002-m03/</pre>
+
+<p>Deducing the URL for the month that has just ended is simple enough:</p>
+
+<pre class="code"><b class="emphasis-bold"># To be run on the first of every month..</b>.
+use POSIX ('strftime');
+my $last_month = strftime("y%Y-m%m", localtime(time - 24 * 60 * 60));
+# Since today is the first, one day ago (24*60*60 seconds) is in
+#  last month.
+my $url = "http://www.unicode.org/mail-arch/unicode-ml/$last_month/";</pre>
+
+<p>But getting the contents of that URL involves first providing the
+username and password <em class="emphasis">and</em> realm name. The
+Unicode web site doesn't publicly declare the realm
+name, because it's an irrelevant detail for users
+with interactive browsers, but we need to know it for our call to the
+<tt class="literal">credential</tt> method. To find out the realm name, try
+accessing the URL in an interactive browser. The realm will be shown
+in the authentication dialog box, as shown in <a href="ch11_03.htm#perllwp-CHP-11-FIG-1">Figure 11-1</a>. 
+</p>
+
+<p>In this case, it's
+"Unicode-MailList-Archives," which
+is all we needed to make our request:
+</p>
+
+<pre class="code">my $browser = LWP::UserAgent-&gt;new;
+$browser-&gt;credentials(
+  'www.unicode.org:80',  # Don't forget the ":80"!
+  # This is no secret...
+  'Unicode-MailList-Archives',
+  'unicode-ml' =&gt; 'unicode'
+);
+print "Getting topics for last month, $last_month\n",
+      " from $url\n";
+my $response = $browser-&gt;get($url);
+die "Error getting $url: ", $response-&gt;status_line
+  if $response-&gt;is_error;</pre>
+
+<p>If this fails (if the Unicode site's admins have
+changed the username or password or even the realm name), that will
+<tt class="literal">die</tt> with this error message:
+</p>
+
+<pre class="code">Error getting http://www.unicode.org/mail-arch/unicode-ml/y2002-m03/:
+401 Authorization Required at unicode_list001.pl line 21.</pre>
+
+<p>But assuming the authorization data is correct, the page is retrieved
+as if it were a normal, unprotected page. From there, counting the
+topics and noting the absolute URL of the first message of each
+thread is a matter of extracting data from the HTML source and
+reporting it concisely.
+</p>
+
+<pre class="code">my(%posts, %first_url);
+while( ${ $response-&gt;content_ref }
+ =~ m{&lt;li&gt;&lt;a href="(\d+.html)"&gt;&lt;strong&gt;(.*?)&lt;/strong&gt;}g
+   # Like: &lt;li&gt;&lt;a href="0127.html"&gt;&lt;strong&gt;Klingon&lt;/strong&gt;
+) {
+  my($url, $topic) = ($1,$2);
+ 
+  # Strip any number of "Re:" prefixes.
+  while( $topic =~ s/^Re:\s+//i ) {}
+ 
+  ++$posts{$topic};
+  use URI;   # For absolutizing URLs...
+  $first_url{$topic} ||= URI-&gt;new_abs($url, $response-&gt;base);
+}
+ 
+print "Topics:\n", reverse sort map   # Most common first:
+  sprintf("% 5s %s\n       %s\n",
+          $posts{$_}, $_, $first_url{$_}
+  ), keys %posts;</pre>
+
+<p>Typical output starts out like this:</p>
+
+<pre class="code">Getting topics for last month, y2002-m02
+ from http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/
+Topics:
+   86 Unicode and Security
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0021.html
+   47 ISO 3166 (country codes) Maintenance Agency Web pages move
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0390.html
+   41 Unicode and end users
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0260.html
+   27 Unicode Search Engines
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0360.html
+   22 Smiles, faces, etc
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0275.html
+   18 This spoofing and security thread
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0216.html
+   16 Standard Conventions and euro
+       http://www.unicode.org/mail-arch/unicode-ml/y2002-m02/0418.html</pre>
+
+<p>This continues for a few pages.</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

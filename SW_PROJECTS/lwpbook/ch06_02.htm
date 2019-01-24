@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Regular Expression Techniques (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch06_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:03:08 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch06_02' class='lwp lwp_ch06_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">6.2. Regular Expression Techniques</h2>
+
+<p>Web pages are designed to be <a name="INDEX-359" class="ipoint"
+></a>easy for humans to read, not for programs.
+Humans are very flexible in what they can read, and they can easily
+adapt to a new look and feel of the web page. But if the underlying
+HTML changes, a program written to extract information from the page
+will no longer work. Your challenge when writing a data-extraction
+program is to get a feel for the amount of natural variation between
+pages you'll want to download.
+</p>
+
+<p>The following are a set of techniques for you to use when creating
+regular expressions to extract data from web pages. If
+you're an experienced Perl programmer, you probably
+know most or all of them and can skip ahead to <a href="ch06_03.htm#perllwp-CHP-6-SECT-3">Section 6.3, "Troubleshooting"</a>.
+</p>
+
+<a name="perllwp-CHP-6-SECT-2.1"></a><div class="sect2">
+<h3 class="sect2">6.2.1. Anchor Your Match</h3>
+
+<p>An important decision is how <a name="INDEX-360" class="ipoint"
+></a><a name="INDEX-361" class="ipoint"
+></a>much
+surrounding text you put into your regular expression. Put in too
+much of this context and you run the risk of being too
+specific&#x2014;the natural variation from page to page causes your
+program to fail to extract some information it should have been able
+to get. Similarly, put in too little context and you run the risk of
+your regular expression erroneously matching elsewhere on the page.
+</p>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.2"></a><div class="sect2">
+<h3 class="sect2">6.2.2. Whitespace</h3>
+
+<p>Many HTML pages have
+<a name="INDEX-362" class="ipoint"
+></a><a name="INDEX-363" class="ipoint"
+></a>whitespace added to make the source easier
+to read or as a side effect of how they were produced. For example,
+notice the spaces around the number in this line:
+</p>
+
+<pre class="code">&lt;b&gt;Amazon.com Sales Rank: &lt;/b&gt; 4,070 &lt;/font&gt;&lt;br&gt;</pre>
+
+<p>Without checking, it's hard to guess whether every
+page has that space. You could check, or you could simply be flexible
+in what you accept:
+</p>
+
+<pre class="code">$html =~ m{Amazon\.com Sales Rank: &lt;/b&gt;<tt class="userinput"><b>\s*</b></tt>([\d,]+)<tt class="userinput"><b>\s*</b></tt>&lt;/font&gt;&lt;br&gt;} || die;</pre>
+
+<p>Now we can match the number regardless of the amount of whitespace
+around it. The <tt class="literal">\s</tt> wildcard matches any whitespace
+character.
+</p>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.3"></a><div class="sect2">
+<h3 class="sect2">6.2.3. Embedded Newlines</h3>
+
+<p>Beware of using <tt class="literal">\s</tt> when
+<a name="INDEX-364" class="ipoint"
+></a><a name="INDEX-365" class="ipoint"
+></a>you are matching across multiple lines,
+because <tt class="literal">\s</tt> matches newlines. You can construct a
+character class to represent "any whitespace but
+newlines":
+</p>
+
+<pre class="code">[^\S\n]</pre>
+
+<p>As a further caveat, the regexp dot
+"." normally matches any character
+<em class="emphasis">except</em> a newline. To make the dot match newlines
+as well, use the <tt class="literal">/s</tt> option. Now you can say
+<tt class="literal">m{&lt;b&gt;.*?&lt;/b&gt;}s</tt> and find the bold text
+even if it includes newlines. But this <tt class="literal">/s</tt> option
+doesn't change the meaning of <tt class="literal">^</tt>
+and <tt class="literal">$</tt> from their usual "start of
+string" and "end of string, or
+right before the newline at the end of the string if
+present." To change that, use the
+<tt class="literal">/m</tt> option, which makes <tt class="literal">^</tt> and
+<tt class="literal">$</tt> match the beginning and end of lines within the
+string. That is, with <tt class="literal">/m</tt>, a <tt class="literal">^</tt>
+matches the start of the string or right after any newline in the
+string; and a <tt class="literal">$</tt> then matches the end of the
+string, or right before any newline in the string.
+</p>
+
+<p>For example, to match the ISBN that starts out a line while ignoring
+any other occurrences of "ISBN" in
+the page, you might say:
+</p>
+
+<pre class="code">m{^ISBN: ([-0-9A-Za-z]+)}m</pre>
+
+<p>Incidentally, you might expect that because an ISBN is called a
+number, we'd use <tt class="literal">\d+</tt> to match it.
+However, ISBNs occasionally have letters in them and are sometimes
+shown with dashes; hence the <tt class="literal">[-0-9A-Za-z]</tt> range
+instead of the overly restrictive <tt class="literal">\d+</tt> range, which
+would fail to match an ISBN such as 038079439X or 0-8248-1898-9.
+</p>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.4"></a><div class="sect2">
+<h3 class="sect2">6.2.4. Minimal and Greedy Matches</h3>
+
+<p>If you want to extract <a name="INDEX-366" class="ipoint"
+></a><a name="INDEX-367" class="ipoint"
+></a><a name="INDEX-368" class="ipoint"
+></a><a name="INDEX-369" class="ipoint"
+></a>everything between
+two tags, there are two approaches:
+</p>
+
+<pre class="code">m{&lt;b&gt;(.*?)&lt;/b&gt;}i
+m{&lt;b&gt;([^&lt;]*)&lt;/b&gt;}i</pre>
+
+<p>The former uses minimal matching to match as little as possible
+between the <tt class="literal">&lt;b&gt;</tt> and the
+<tt class="literal">&lt;/b&gt;</tt>. The latter uses greedy matching to
+match as much text that doesn't contain a
+greater-than sign as possible between <tt class="literal">&lt;b&gt;</tt>
+and <tt class="literal">&lt;/b&gt;</tt>. The latter is marginally faster
+but won't successfully match text such as
+<tt class="literal">&lt;b&gt;&lt;i&gt;hi&lt;/i&gt;&lt;/b&gt;</tt>, whereas
+the former will.
+</p>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.5"></a><div class="sect2">
+<h3 class="sect2">6.2.5. Capture</h3>
+
+<p>To extract information from <a name="INDEX-370" class="ipoint"
+></a><a name="INDEX-371" class="ipoint"
+></a>a
+regular expression match, surround part of the regular expression in
+parentheses. This causes the regular expression engine to set the
+<tt class="literal">$1</tt>, <tt class="literal">$2</tt>, etc. variables to
+contain the portions of the string that match those parts of the
+pattern. For example:
+</p>
+
+<pre class="code">$string = '&lt;a href="there.html"&gt;go here now!&lt;/a&gt;';
+$string =~ m{ href="(.*?)"}i;       # extract destination of link
+$url = $1;</pre>
+
+<p>A match in scalar context returns true or false depending on whether
+the regular expression matched the string. A match in list context
+returns a list of <tt class="literal">$1</tt>, <tt class="literal">$2</tt>, ...
+captured text.
+</p>
+
+<pre class="code">$matched = $string =~ m{<em class="replaceable"><tt>RE</tt></em>};
+@matches = $string =~ m{<em class="replaceable"><tt>RE</tt></em>};</pre>
+
+<p>To group parts of a regular expression together without capturing,
+use the
+<tt class="literal">(?</tt>:<em class="replaceable"><tt>RE</tt></em><tt class="literal">)</tt>
+construct:
+</p>
+
+<pre class="code">$string = '&lt;a href="jumbo.html"&gt;&lt;img src="big.gif"&gt;&lt;/a&gt;';
+@links = $string =~ m{<tt class="userinput"><b>(?:href|src)</b></tt>="(.*?)"}g;
+print "Found @links\n";
+<b class="emphasis-bold">Found jumbo.html big.gif</b></pre>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.6"></a><div class="sect2">
+<h3 class="sect2">6.2.6. Repeated Matches</h3>
+
+<p>The <tt class="literal">/g</tt> modifier causes the
+<a name="INDEX-372" class="ipoint"
+></a><a name="INDEX-373" class="ipoint"
+></a><a name="INDEX-374" class="ipoint"
+></a>match to be repeated. In scalar
+context, the match continues from where the last match left off. Use
+this to extract information <em class="emphasis">one</em> match at a time.
+For example:
+</p>
+
+<pre class="code">$string = '&lt;img src="big.gif"&gt;&lt;img src="small.gif"&gt;';
+while ($string =~ m{src="(.*?)"}g) {
+  print "Found: $1\n";
+}
+<b class="emphasis-bold">Found: big.gif</b>
+<b class="emphasis-bold">Found: small.gif</b></pre>
+
+<p>In list context, <tt class="literal">/g</tt> causes
+<em class="emphasis">all</em> matching captured strings to be returned.
+Use this to extract all matches at once. For example:
+</p>
+
+<pre class="code">$string = '&lt;img src="big.gif"&gt;&lt;img src="small.gif"&gt;';
+@pix = $string =~ m{src="(.*?)"}g;
+print "Found @pix\n";
+<b class="emphasis-bold">Found big.gif small.gif</b></pre>
+
+<p>If your regular expression doesn't use capturing
+parentheses, the entire text that matches is returned:
+</p>
+
+<pre class="code">$string = '&lt;img src="big.gif"&gt;&lt;img src="small.gif"&gt;';
+@gifs = $string =~ m{\w+\.gif}g;
+print "Found @gifs\n";
+<b class="emphasis-bold">Found big.gif small.gif</b></pre>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.7"></a><div class="sect2">
+<h3 class="sect2">6.2.7. Develop from Components</h3>
+
+<p>There are many reasons <a name="INDEX-375" class="ipoint"
+></a><a name="INDEX-376" class="ipoint"
+></a>to break regular expressions into
+components&#x2014;it makes them easier to develop, debug, and
+maintain. Use the <tt class="literal">qr//</tt> operator to compile a chunk
+of a regular expression, then interpolate it into a larger regular
+expression without sacrificing performance:
+</p>
+
+<pre class="code">$string = '&lt;a href="jumbo.html"&gt;&lt;img src="big.gif"&gt;&lt;/a&gt;';
+$ATTRIBUTE = <tt class="userinput"><b>qr/href|src/</b></tt>;
+$INSIDE_QUOTES = <tt class="userinput"><b>qr/.*?/</b></tt>;
+@files = $string =~ <tt class="userinput"><b>m{(?:$ATTRIBUTE)="($INSIDE_QUOTES)"}g</b></tt>;
+print "Found @files\n";
+<b class="emphasis-bold">Found jumbo.html big.gif</b></pre>
+
+</div>
+<a name="perllwp-CHP-6-SECT-2.8"></a><div class="sect2">
+<h3 class="sect2">6.2.8. Use Multiple Steps</h3>
+
+<p>A common conceit <a name="INDEX-377" class="ipoint"
+></a><a name="INDEX-378" class="ipoint"
+></a>in programmers is to try to do
+everything with one regular expression. Don't be
+afraid to use two or more. This has the same advantages as building
+your regular expression from components: by only attempting to solve
+one part of the problem at each step, the final solution can be
+easier to read, debug, and maintain.
+</p>
+
+<p>For example, the front page of
+<a href="http://www.oreillynet.com/">http://www.oreillynet.com/</a> has several articles
+on it. Inspecting the HTML with View Source on the browser shows that
+each story looks like this:
+</p>
+
+<pre class="code">&lt;!-- itemtemplate --&gt;
+&lt;p class="medlist"&gt;&lt;b&gt;&lt;a href="http://www.oreillynet.com/pub/a/dotnet/2002/03/04
+/rotor.html"&gt;Uncovering Rotor -- A Shared Source CLI&lt;/a&gt;&lt;/b&gt;&amp;nbsp;^M
+ Recently, David Stutz and Stephen Walli hosted an informal, unannounced BOF at 
+BSDCon 2002 about Microsoft's Shared Source implementation of the ECMA CLI, also 
+known as Rotor. Although the source code for the Shared Source CLI wasn't yet 
+available, the BOF offered a preview of what's to come, as well as details about its 
+implementation and the motivation behind it. &amp;nbsp;[&lt;a href="http://www.oreillynet.
+com/dotnet/"&gt;.NET DevCenter&lt;/a&gt;]&lt;/p&gt;</pre>
+
+<p>That is, the article starts with the <tt class="literal">itemtemplate</tt>
+comment and ends with the <tt class="literal">&lt;/p&gt;</tt> tag. This
+suggests a main loop of:
+</p>
+
+<pre class="code">while ($html =~ m{&lt;!-- itemtemplate --&gt;(.*?)&lt;/p&gt;}gs) {
+  $chunk = $1;
+  # extract URL, title, and summary from $chunk
+}</pre>
+
+<p>It's surprisingly common
+<a name="INDEX-379" class="ipoint"
+></a>to see HTML comments indicating the
+structure of the HTML. Most dynamic web sites are generated from
+templates, the comments help the people who maintain the templates
+keep track of the various sections.
+</p>
+
+<p>Extracting the URL, title, and summary is straightforward.
+It's even a simple matter to use the standard
+Text::Wrap module to reformat the summary to make it easy to read:
+</p>
+
+<pre class="code">use Text::Wrap;
+
+while ($html =~ m{&lt;!-- itemtemplate --&gt;(.*?)&lt;/p&gt;}gs) {
+  $chunk = $1;
+  ($URL, $title, $summary) =
+     $chunk =~ m{href="(.*?)"&gt;(.*?)&lt;/a&gt;&lt;/b&gt;\s*&amp;nbsp;\s*(.*?)\[}i
+     or next;
+  $summary =~ s{&amp;nbsp;}{ }g;
+  print "$URL\n$title\n", wrap("  ", "  ", $summary), "\n\n";
+}</pre>
+
+<p>Running this, however, shows HTML still in the summary. Remove the
+tags with:
+</p>
+
+<pre class="code">$summary =~ s{&lt;.*?&gt;}{}sg;</pre>
+
+<p>The complete program is shown in <a name="INDEX-380" class="ipoint"
+></a><a href="ch06_02.htm#perllwp-CHP-6-EX-3">Example 6-3</a>.
+</p>
+
+<a name="perllwp-CHP-6-EX-3"></a><div class="example">
+<h4 class="objtitle">Example 6-3. orn-summary </h4>
+<pre class="code">#!/usr/bin/perl -w
+
+use LWP::Simple;
+use Text::Wrap;
+
+$html = get("http://www.oreillynet.com/") || die;
+
+while ($html =~ m{&lt;!-- itemtemplate --&gt;(.*?)&lt;/p&gt;}gs) {
+  $chunk = $1;
+  ($URL, $title, $summary) =
+     $chunk =~ m{href="(.*?)"&gt;(.*?)&lt;/a&gt;&lt;/b&gt;\s*&amp;nbsp;\s*(.*?)\[}i
+     or next;
+  $summary =~ s{&amp;nbsp;}{ }g;
+  $summary =~ s{&lt;.*?&gt;}{}sg;
+  print "$URL\n$title\n", wrap("  ", "  ", $summary), "\n\n";
+}</pre>
+</div>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

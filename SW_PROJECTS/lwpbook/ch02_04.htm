@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Fetching Documents Without LWP::Simple (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_04' class='lwp lwp_ch02_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">2.4. Fetching Documents Without LWP::Simple</h2>
+
+<p>LWP::Simple is convenient but not all <a name="INDEX-84" class="ipoint"
+></a>powerful. In particular, we
+can't make POST requests or set request headers or
+query response headers. To do these things, we need to go beyond
+LWP::Simple.
+</p>
+
+<p>The general all-purpose way to do HTTP GET queries is by using the
+<tt class="literal">do_GET(&#160;)</tt> subroutine shown in <a href="ch02_04.htm#perllwp-CHP-2-EX-5">Example 2-5</a>. 
+</p>
+
+<a name="perllwp-CHP-2-EX-5"></a><div class="example">
+<h4 class="objtitle">Example 2-5. The do_GET subroutine </h4>
+<pre class="code">use LWP;
+my $browser;
+sub do_GET {
+  # Parameters: the URL,
+  #  and then, optionally, any header lines: (key,value, key,value)
+  $browser = LWP::UserAgent-&gt;new( ) unless $browser;
+  my $resp = $browser-&gt;get(@_);
+  return ($resp-&gt;content, $resp-&gt;status_line, $resp-&gt;is_success, $resp)
+    if wantarray;
+  return unless $resp-&gt;is_success;
+  return $resp-&gt;content;
+}</pre>
+</div>
+
+<p>A full explanation of the internals of <tt class="literal">do_GET(&#160;)</tt>
+is <a name="INDEX-85" class="ipoint"
+></a><a name="INDEX-86" class="ipoint"
+></a>given in <a href="ch03_01.htm">Chapter 3, "The LWP Class Model"</a>. Until
+then, we'll be using it without fully understanding
+how it works.
+</p>
+
+<p>You can call the <tt class="literal">do_GET(&#160;)</tt> function in either
+scalar or list context:
+</p>
+
+<pre class="code"><em class="replaceable"><tt>doc</em> = do_GET(<em class="replaceable">URL </em>[<em class="replaceable">header, value, ...</tt></em>]);
+(<em class="replaceable"><tt>doc</em>, <em class="replaceable">status</em>, <em class="replaceable">successful</em>, <em class="replaceable">response</em>) = do_GET(<em class="replaceable">URL </em>[<em class="replaceable">header, value, ...</tt></em>]);</pre>
+
+<p>In scalar context, it returns the document or
+<tt class="literal">undef</tt> if there is an error. In list context, it
+returns the document (if any), the status line from the HTTP
+response, a Boolean value indicating whether the status code
+indicates a successful response, and an object we can interrogate to
+find out more about the response.
+</p>
+
+<p>Recall that assigning to <tt class="literal">undef</tt> discards that
+value. For example, this is how you fetch a document into a string
+and learn whether it is successful:
+</p>
+
+<pre class="code">($doc, undef, $successful, undef) = do_GET('http://www.suck.com/');</pre>
+
+<p>The optional header and value arguments to <tt class="literal">do_GET(
+)</tt> let you add headers to the request. For example, to
+attempt to fetch the German language version of the European Union
+home page:
+</p>
+
+<pre class="code">$body = do_GET("http://europa.eu.int/",
+  "Accept-language" =&gt; "de",
+);</pre>
+
+<p>The <tt class="literal">do_GET(&#160;)</tt> function that we'll
+use in this chapter provides the same basic convenience as
+LWP::Simple's <tt class="literal">get(&#160;)</tt> but without
+the limitations.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

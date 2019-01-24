@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Inside the do_GET and do_POST Functions (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch03_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch03_03' class='lwp lwp_ch03_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">3.3. Inside the do_GET and do_POST Functions</h2>
+
+<p>You now know enough <a name="INDEX-107" class="ipoint"
+></a><a name="INDEX-108" class="ipoint"
+></a><a name="INDEX-109" class="ipoint"
+></a><a name="INDEX-110" class="ipoint"
+></a>to follow the <tt class="literal">do_GET(&#160;)</tt>
+and <tt class="literal">do_POST(&#160;)</tt> functions introduced in <a href="ch02_01.htm">Chapter 2, "Web Basics"</a>. Let's look at
+<tt class="literal">do_GET(&#160;)</tt> first.
+</p>
+
+<p>Start by loading the module, then declare the
+<tt class="literal">$browser</tt> variable that will hold the user agent.
+It's declared outside the scope of the
+<tt class="literal">do_GET(&#160;)</tt> subroutine, so it's
+essentially a static variable, retaining its value between calls to
+the subroutine. For example, if you turn on support for HTTP cookies,
+this browser could persist between calls to <tt class="literal">do_GET(
+)</tt>, and cookies set by the server in one call would be sent
+back in a subsequent call.
+</p>
+
+<pre class="code">use LWP;
+my $browser;
+sub do_GET {</pre>
+
+<p>Next, create the user agent if it doesn't already
+exist:
+</p>
+
+<pre class="code">$browser = LWP::UserAgent-&gt;new( ) unless $browser;</pre>
+
+<p>Enable proxying, if you're behind
+<a name="INDEX-111" class="ipoint"
+></a>a firewall:
+</p>
+
+<pre class="code">$browser-&gt;env_proxy();</pre>
+
+<p>Then perform a GET request based on the subroutine's
+parameters:
+</p>
+
+<pre class="code">my $response = $browser-&gt;request(@_);</pre>
+
+<p>In list context, you return information provided by the response
+object: the content, status line, a Boolean indicating whether the
+status meant success, and the response object itself:
+</p>
+
+<pre class="code">return($response-&gt;content, $response-&gt;status_line, $response-&gt;is_success, $response)
+  if wantarray;</pre>
+
+<p>If there was a problem and you called in scalar context, we return
+<tt class="literal">undef</tt>:
+</p>
+
+<pre class="code">return unless $response-&gt;is_success;</pre>
+
+<p>Otherwise we return the content:</p>
+
+<pre class="code">  return $response-&gt;content;
+}</pre>
+
+<p>The <tt class="literal">do_POST(&#160;)</tt> subroutine is just like
+<tt class="literal">do_GET(&#160;)</tt>, only it uses the <tt class="literal">post(
+)</tt> method instead of <tt class="literal">get(&#160;)</tt>.
+</p>
+
+<p>The rest of this chapter is a detailed reference to the two classes
+we've covered so far: LWP::UserAgent and
+HTTP::Response.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

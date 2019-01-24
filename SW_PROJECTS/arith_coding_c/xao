@@ -1,0 +1,96 @@
+.  The process continues until the destination table is
+ * found.  The table pointed to by the LINKS array corresponds to the
+ * symbol found at the same offset in the STATS table.  The reason that
+ * LINKS is in a separate structure instead of being combined with
+ * STATS is to save space.  All of the leaf context nodes don't need
+ * next pointers, since they are in the highest order context.  In the
+ * leaf nodes, the LINKS array is a NULL pointers.
+ */
+typedef struct {
+                 struct context *next;
+               } LINKS;
+
+/*
+ * The CONTEXT structure holds all of the know information about
+ * a particular context.  The links and stats pointers are discussed
+ * immediately above here.  The max_index element gives the maximum
+ * index that can be applied to the stats or link array.  When the
+ * table is first created, and stats is set to NULL, max_index is set
+ * to -1.  As soon as single element is added to stats, max_index is
+ * incremented to 0.
+ *
+ * The lesser context pointer is a navigational aid.  It points to
+ * the context that is one less than the current order.  For example,
+ * if the current context is "ABC", the lesser_context pointer will
+ * point to "BC".  The reason for maintaining this pointer is that
+ * this particular bit of table searching is done frequently, but
+ * the pointer only needs to be built once, when the context is
+ * created.
+ */
+typedef struct context {
+                         int max_index;
+                         LINKS __handle *links;
+                         STATS __handle *stats;
+                         struct context *lesser_context;
+                       } CONTEXT;
+/*
+ * max_order is the maximum order that will be maintained by this
+ * program.  EXPAND-2 and COMP-2 both will modify this int based
+ * on command line parameters.
+ */
+int max_order=3;
+/*
+ * *contexts[] is an array of current contexts.  If I want to find
+ * the order 0 context for the current state of the model, I just
+ * look at contexts[0].  This array of context pointers is set up
+ * every time the model is updated.
+ */
+CONTEXT **contexts;
+/*
+ * current_order contains the current order of the model.  It starts
+ * at max_order, and is decremented every time an ESCAPE is sent.  It
+ * will only go down to -1 for normal symbols, but can go to -2 for
+ * EOF and FLUSH.
+ */
+int current_order;
+/*
+ * This variable tells COMP-2.C that the FLUSH symbol can be
+ * sent using this model.
+ */
+int flushing_enabled=1;
+/*
+ * This table contains the cumulative totals for the current context.
+ * Because this program is using exclusion, totals has to be calculated
+ * every time a context is used.  The scoreboard array keeps track of
+ * symbols that have appeared in higher order models, so that they
+ * can be excluded from lower order context total calculations.
+ */
+short int totals[ 258 ];
+char scoreboard[ 256 ];
+
+/*
+ * Local procedure declarations.
+ */
+void error_exit( char *message );
+void update_table( CONTEXT *table, unsigned char symbol );
+void rescale_table( CONTEXT *table );
+void totalize_table( CONTEXT *table );
+CONTEXT *shift_to_next_context( CONTEXT *table, unsigned char c, int order);
+CONTEXT *allocate_next_order_table( CONTEXT *table,
+                                    unsigned char symbol,
+                                    CONTEXT *lesser_context );
+
+/*
+ * This routine has to get everything set up properly so that
+ * the model can be maintained properly.  The first step is to create
+ * the *contexts[] array used later to find current context tables.
+ * The *contexts[] array indices go from -2 up to max_order, so
+ * the table needs to be fiddled with a little.  This routine then
+ * has to create the special order -2 and order -1 tables by hand,
+ * since they aren't quite like other tables.  Then the current
+ * context is set to \0, \0, \0, ... and the appropriate tables
+ * are built to support that context.  The current order is set
+ * to max_order, the scoreboard is cleared, and the system is
+ * ready to go.
+ */
+

@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Basic HTML::TokeParser Use (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch07_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:05:41 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch07_02' class='lwp lwp_ch07_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">7.2. Basic HTML::TokeParser Use</h2>
+
+<p>The HTML::TokeParser <a name="INDEX-409" class="ipoint"
+></a><a name="INDEX-410" class="ipoint"
+></a>module is a class for accessing HTML as
+tokens. An HTML::TokeParser object gives you one token at a time,
+much as a filehandle gives you one line at a time from a file. The
+HTML can be tokenized from a file or string. The tokenizer decodes
+entities in attributes, but not entities in text.
+</p>
+
+<p>Create a token stream object using one of these two constructors:</p>
+
+<pre class="code">my $stream = HTML::TokeParser-&gt;new($filename)
+  || die "Couldn't read HTML file $filename: $!";</pre>
+
+<p>or:</p>
+
+<pre class="code">my $stream = HTML::TokeParser-&gt;new( \$string_of_html );</pre>
+
+<p>Once you have that stream object, you get the next token by calling:</p>
+
+<pre class="code">my $token = $stream-&gt;get_token( );</pre>
+
+<p>The <tt class="literal">$token</tt> variable then holds an array reference,
+or <tt class="literal">undef</tt> if there's nothing left
+in the stream's file or string. This code processes
+every token in a document:
+</p>
+
+<pre class="code">my $stream = HTML::TokeParser-&gt;new($filename)
+  || die "Couldn't read HTML file $filename: $!";
+
+while(my $token = $stream-&gt;get_token) {
+  # ... consider $token ...
+}</pre>
+
+<p>The <tt class="literal">$token</tt> can have one of six kinds of values,
+distinguished first by the value of
+<tt class="literal">$token-&gt;[0]</tt>, as shown
+<a name="INDEX-411" class="ipoint"
+></a>in
+<a href="ch07_02.htm#perllwp-CHP-7-TABLE-1">Table 7-1</a>.
+</p>
+
+<a name="perllwp-CHP-7-TABLE-1"></a><h4 class="objtitle">Table 7-1. Token types </h4><table border="1" cellpadding="3">
+
+
+
+<tr>
+<th>
+<p>Token</p>
+</th>
+<th>
+<p>Values</p>
+</th>
+</tr>
+
+
+<tr>
+<td>
+<p>Start-tag</p>
+</td>
+<td><code class="code">["S",  $tag, $attribute_hashref, $attribute_order_arrayref, $source]</code></td>
+</tr>
+<tr>
+<td>
+<p>End-tag</p>
+</td>
+<td><code class="code">["E",  $tag, $source]</code></td>
+</tr>
+<tr>
+<td>
+<p>Text</p>
+</td>
+<td><code class="code">["T",  $text, $should_not_decode]</code></td>
+</tr>
+<tr>
+<td>
+<p>Comment</p>
+</td>
+<td><code class="code">["C",  $source]</code></td>
+</tr>
+<tr>
+<td>
+<p>Declaration</p>
+</td>
+<td><code class="code">["D",  $source]</code></td>
+</tr>
+<tr>
+<td>
+<p>Processing instruction</p>
+</td>
+<td><code class="code">["PI", $content, $source]</code></td>
+</tr>
+
+</table><p>
+
+<a name="perllwp-CHP-7-SECT-2.1"></a><div class="sect2">
+<h3 class="sect2">7.2.1. Start-Tag Tokens</h3>
+
+<p>If <tt class="literal">$token-&gt;[0]</tt> is <tt class="literal">"S"</tt>, the
+token <a name="INDEX-412" class="ipoint"
+></a><a name="INDEX-413" class="ipoint"
+></a>represents a start-tag:
+</p>
+
+<pre class="code">["S",  $tag, $attribute_hash, $attribute_order_arrayref, $source]</pre>
+
+<p>The components of this token are:</p>
+
+<dl>
+<dt><tt class="literal">$tag</tt></dt>
+<dd>
+The tag name, in lowercase.
+</dd>
+
+
+<dt><tt class="literal">$attribute_hashref</tt></dt>
+<dd>
+A reference to a hash encoding the attributes of this tag. The
+(lowercase) attribute names are the keys of the hash.
+
+</dd>
+
+
+<dt><tt class="literal">$attribute_order_arrayref</tt></dt>
+<dd>
+A reference to an array of (lowercase) attribute names, in case you
+need to access elements in order.
+
+</dd>
+
+
+<dt><tt class="literal">$source</tt></dt>
+<dd>
+The original HTML for this token.
+</dd>
+
+</dl>
+
+<p>The first three values are the most interesting ones, for most
+purposes.
+</p>
+
+<p>For example, parsing this HTML:</p>
+
+<pre class="code">&lt;IMG SRC="kirk.jpg" alt="Shatner in r&amp;ocirc;le of Kirk" WIDTH=352 height=522&gt;</pre>
+
+<p>gives this token:</p>
+
+<pre class="code">[
+  'S',
+  'img',
+  { 'alt' =&gt; 'Shatner in r&#xF4;le of Kirk',
+     'height' =&gt; '522', 'src' =&gt; 'kirk.jpg', 'width' =&gt; '352'
+  },
+  [ 'src', 'alt', 'width', 'height' ],
+  '&lt;IMG SRC="kirk.jpg" alt="Shatner in r&amp;ocirc;le of Kirk" WIDTH=352 height=522&gt;'
+]</pre>
+
+<p>Notice that the tag and attribute names have been lowercased, and the
+<tt class="literal">&amp;ocirc;</tt> entity decoded within the
+<tt class="literal">alt</tt> attribute.
+</p>
+
+</div>
+<a name="perllwp-CHP-7-SECT-2.2"></a><div class="sect2">
+<h3 class="sect2">7.2.2. End-Tag Tokens</h3>
+
+<p>When <tt class="literal">$token-&gt;[0]</tt> is <tt class="literal">"E"</tt>, the
+token <a name="INDEX-414" class="ipoint"
+></a><a name="INDEX-415" class="ipoint"
+></a>represents an end-tag:
+</p>
+
+<pre class="code">[ "E", $tag, $source ]</pre>
+
+<p>The components of this tag are:</p>
+
+<dl>
+<dt><tt class="literal">$tag</tt></dt>
+<dd>
+The lowercase name of the tag being closed.
+</dd>
+
+
+<dt><tt class="literal">$source</tt></dt>
+<dd>
+The original HTML for this token.
+</dd>
+
+</dl>
+
+<p>Parsing this HTML:</p>
+
+<pre class="code">&lt;/A&gt;</pre>
+
+<p>gives this token:</p>
+
+<pre class="code">[ 'E', 'a', '&lt;/A&gt;' ]</pre>
+
+</div>
+<a name="perllwp-CHP-7-SECT-2.3"></a><div class="sect2">
+<h3 class="sect2">7.2.3. Text Tokens</h3>
+
+<p>When <tt class="literal">$token-&gt;[0]</tt> is <tt class="literal">"T"</tt>, the
+token <a name="INDEX-416" class="ipoint"
+></a><a name="INDEX-417" class="ipoint"
+></a>represents text:
+</p>
+
+<pre class="code">["T", $text, $should_not_decode]</pre>
+
+<p>The elements of this array are:</p>
+
+<dl>
+<dt><tt class="literal">$text</tt></dt>
+<dd>
+The text, which may have entities.
+</dd>
+
+
+<dt><tt class="literal">$should_not_decode</tt></dt>
+<dd>
+A Boolean value true indicating that you should not decode the
+entities in <tt class="literal">$text</tt>.
+
+</dd>
+
+</dl>
+
+<p>Tokenizing this HTML:</p>
+
+<pre class="code">&amp;amp; the</pre>
+
+<p>gives this token:</p>
+
+<pre class="code">[ 'T',
+  ' &amp;amp; the',
+  ''
+]</pre>
+
+<p>The empty string is a false value, indicating that
+<a name="INDEX-418" class="ipoint"
+></a><a name="INDEX-419" class="ipoint"
+></a>there's nothing stopping
+us from decoding <tt class="literal">$text</tt> with
+<a name="INDEX-420" class="ipoint"
+></a><tt class="literal">decode_entities(&#160;)</tt> from
+HTML::Entities:
+</p>
+
+<pre class="code">decode_entities($token-&gt;[1]) if $token-&gt;[2];</pre>
+
+<p>Text inside <tt class="literal">&lt;script&gt;</tt>,
+<tt class="literal">&lt;style&gt;</tt>, <tt class="literal">&lt;xmp&gt;</tt>,
+<tt class="literal">&lt;listing&gt;</tt>, and
+<tt class="literal">&lt;plaintext&gt;</tt> tags is not supposed to be
+entity-decoded. It is for such text that
+<tt class="literal">$should_not_decode</tt> is true.
+</p>
+
+</div>
+<a name="perllwp-CHP-7-SECT-2.4"></a><div class="sect2">
+<h3 class="sect2">7.2.4. Comment Tokens</h3>
+
+<p>When <tt class="literal">$token-&gt;[0]</tt> is <tt class="literal">"C"</tt>, you
+have a <a name="INDEX-421" class="ipoint"
+></a><a name="INDEX-422" class="ipoint"
+></a>comment token:
+</p>
+
+<pre class="code">["C", $source]</pre>
+
+<p>The <tt class="literal">$source</tt> component of the token holds the
+original HTML of the comment. Most programs that process HTML simply
+ignore comments.
+</p>
+
+<p>Parsing this HTML</p>
+
+<pre class="code">&lt;!-- Shatner's best known r&amp;ocirc;le --&gt;</pre>
+
+<p>gives us this <tt class="literal">$token</tt> value:</p>
+
+<pre class="code">[ 'C', #0: we're a comment
+  '&lt;!-- Shatner's best known r&amp;ocirc;le --&gt;'  #1: source
+]</pre>
+
+</div>
+<a name="perllwp-CHP-7-SECT-2.5"></a><div class="sect2">
+<h3 class="sect2">7.2.5. Markup Declaration Tokens</h3>
+
+<p>When <tt class="literal">$token-&gt;[0]</tt> is <tt class="literal">"D"</tt>, you
+have a <a name="INDEX-423" class="ipoint"
+></a><a name="INDEX-424" class="ipoint"
+></a>declaration token:
+</p>
+
+<pre class="code">["D", $source]</pre>
+
+<p>The <tt class="literal">$source</tt> element of the array is the HTML of
+the declaration. Declarations rarely occur in HTML, and when they do,
+they are rarely of any interest. Almost all programs that process
+HTML ignore declarations.
+</p>
+
+<p>This HTML:</p>
+
+<pre class="code">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;</pre>
+
+<p>gives this token:</p>
+
+<pre class="code">[ 'D',
+  '&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;'
+]</pre>
+
+</div>
+<a name="perllwp-CHP-7-SECT-2.6"></a><div class="sect2">
+<h3 class="sect2">7.2.6. Processing Instruction Tokens</h3>
+
+<p>When <tt class="literal">$token-&gt;[0]</tt> is <tt class="literal">"PI"</tt>,
+the token represents a <a name="INDEX-425" class="ipoint"
+></a><a name="INDEX-426" class="ipoint"
+></a>processing instruction:
+</p>
+
+<pre class="code">[ "PI", $instruction, $source ]</pre>
+
+<p>The components are:</p>
+
+<dl>
+<dt><tt class="literal">$instruction</tt></dt>
+<dd>
+The processing instruction stripped of initial
+<tt class="literal">&lt;?</tt> and trailing <tt class="literal">&gt;</tt>.
+
+</dd>
+
+
+<dt><tt class="literal">$source</tt></dt>
+<dd>
+The original HTML for the processing instruction.
+</dd>
+
+</dl>
+
+<p>A processing instruction is an SGML <a name="INDEX-427" class="ipoint"
+></a>construct
+rarely used in HTML. Most programs extracting information from HTML
+ignore processing instructions. If you do handle processing
+instructions, be warned that in SGML (and thus HTML) a processing
+instruction ends with a greater-than (<tt class="literal">&gt;</tt>), but
+in XML (and thus XHTML), a processing instruction ends with a
+question mark and a greater-than sign (<tt class="literal">?&gt;</tt>).
+</p>
+
+<p>Tokenizing:</p>
+
+<pre class="code">&lt;?subliminal message&gt;</pre>
+
+<p>gives:</p>
+
+<pre class="code">[ 'PI', 'subliminal message', '&lt;?subliminal message&gt;' ]</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

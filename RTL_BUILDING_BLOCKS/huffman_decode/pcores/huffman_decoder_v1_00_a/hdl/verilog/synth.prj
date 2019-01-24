@@ -1,0 +1,2 @@
+verilog work "./user_logic.v"
+verilog work "./huffman_decoder_v1.v"

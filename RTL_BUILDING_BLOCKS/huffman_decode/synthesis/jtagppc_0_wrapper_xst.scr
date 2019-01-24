@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top jtagppc_0_wrapper
+-ifmt MIXED
+-ifn jtagppc_0_wrapper_xst.prj
+-ofn ../implementation/jtagppc_0_wrapper/jtagppc_0_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/jtagppc_0_wrapper}

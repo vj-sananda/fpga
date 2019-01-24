@@ -1,0 +1,22 @@
+$PushTransactionCtxQPLI             call=PushTransactionCtxQPLI
+$StatusTransactionQPLI              call=StatusTransactionQPLI              size=32
+$PopTransactionQPLI                 call=PopTransactionQPLI                 size=32
+$PushTransactionQPLI                call=PushTransactionQPLI
+$PopTransaction64QPLI               call=PopTransaction64QPLI               size=32
+$PushTransaction64QPLI              call=PushTransaction64QPLI
+$PopWrtDataQPLI                     call=PopWrtDataQPLI                     size=32
+$PushWrtDataQPLI                    call=PushWrtDataQPLI
+$TransferWrtDataQPLI                call=TransferWrtDataQPLI                size=32
+$StatusRdDataQPLI                   call=StatusRdDataQPLI                   size=32
+$PopRdDataQPLI                      call=PopRdDataQPLI                      size=32
+$PushRdDataQPLI                     call=PushRdDataQPLI
+$PopRdDoneQPLI                      call=PopRdDoneQPLI                      size=32
+$PushRdDoneQPLI                     call=PushRdDoneQPLI
+$PopRdReqQPLI                       call=PopRdReqQPLI                       size=32
+$PushRdReqQPLI                      call=PushRdReqQPLI
+$PopWaitQPLI                        call=PopWaitQPLI                        size=32
+$PushWaitQPLI                       call=PushWaitQPLI
+$PutSyncCntPLI                      call=PutSyncCntPLI
+$GetSyncCntPLI                      call=GetSyncCntPLI                      size=32
+$PutSyncFlagPLI                     call=PutSyncFlagPLI
+$GetSyncFlagPLI                     call=GetSyncFlagPLI                     size=32

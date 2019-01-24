@@ -1,0 +1,43 @@
+Naming Conventions:
+------------------
+
+All signals have suffixes of the form:
+
+ _[r,w].[c,d].{#} : choose 1 of the letters in each [] and
+                      concatenate to build suffix
+
+[r,w]: r=>register, w=>wire
+
+[c,d]: c=>control,  d=>datapath
+
+{#} : Optional. Reflects register stage number
+      Eg: pop_rc1, is a cycle  delayed from pop_rc
+          pop_rc2, is 2 cycles delayed from pop_rc 
+
+RULES
+-----
+1. In the combinatorial block :
+   1.1 Only *_w* signals must be on LHS. (get values assigned to them)
+   1.2 All signals must have a default assignment, before the case
+   1.3 Control signals that pulse must have a default assignment of 0
+   1.4 Signals that hold their value, must have a default assignment to their registered equivalent.
+       *_w* = *_r* ;
+       Eg: push_pending_wc = push_pending_rc ;
+   1.5 Conditional statements can use *_w* or *_r* signals.
+   1.6 A conditional statement cannot use a signal in a its conditional expression and also have an assignment to it.
+       Eg: if ( eom_detected_wc & fifo_full_rc )
+	      eom_detected_wc = 0;
+       (this will create a combinational loop).
+
+2. In the clocked block:
+   2.1 All Control signals must have a reset value., 
+   2.2 All Datapath signals need not have a reset value, like those registers in the middle of a pipeline.
+   2.3 Only *_r* signals must be on LHS.
+   2.4 Signal assignments will be of the form *_r* <= *_w* ;
+
+GUIDELINES
+----------
+1. In the combinatorial block :
+   1.1 Generally datapath signals will "hold" values, whereas control signals will not.
+   1.2 If a default assignment is missed, the synthesis tool will warn you about latches begin inferred.
+   

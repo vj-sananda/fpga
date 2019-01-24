@@ -1,0 +1,4 @@
+MO lfsr8_debruijn NULL ./lfsr8_debruijn.v vlg01/lfsr8__debruijn.bin 1210287861
+MO lfsr8_debruijn_xnor NULL ./lfsr8_debruijn_xnor.v vlg17/lfsr8__debruijn__xnor.bin 1210287016
+MO test NULL ./lfsr8.v vlg34/test.bin 1210287111
+MO lfsr8 NULL ./lfsr8.v vlg27/lfsr8.bin 1210287111

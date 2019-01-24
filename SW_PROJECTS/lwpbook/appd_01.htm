@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Language Tags (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appd_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 23:28:50 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appd_01' class='lwp lwp_appd_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Appendix D. Language Tags</h1>
+<p>Language tags are a system defined in RFC 3066, which is used in
+various Internet protocols and formats, including HTML, HTTP, and
+XML. For example, an HTTP request often has an
+<tt class="literal">Accept-Language</tt> header, an HTTP response can have
+a <tt class="literal">Content-Language</tt> header, and any HTML element
+can have a <tt class="literal">lang="en-US"</tt> or (in XML and XHTML) an
+<tt class="literal">xml:lang="en-US"</tt> attribute to indicate that its
+content is in that language.
+</p>
+
+<p>There are <em class="emphasis">many</em> more language tags than are
+presented here; for the full list, see documentation for the Perl
+module I18N::LangTags::List. This appendix lists major languages, in
+alphabetical order by their English names.
+</p>
+
+<blockquote class='aside'><a name="aside-langtags-list"></a>Note:
+the core Perl module I18N::LangTags::List
+contains (as data table and as <a href=
+"http://search.cpan.org/~sburke/I18N-LangTags/lib/I18N/LangTags/List.pm"
+ >documentation you can read now</a>)
+a much more complete list.  I had to keep the list below short for sake
+of brevity of the book.)
+</blockquote>
+
+<a name="appd-2-fm2xml"></a><table border="1" cellpadding="3">
+
+<tr><th>Tag</th><th>Language</th></tr>
+
+<tr><td><code>sq</code></td><td>Albanian</td></tr>
+<tr><td><code>ar</code></td><td>Arabic</td></tr>
+<tr><td><code>hy</code></td><td>Armenian</td></tr>
+<tr><td><code>as</code></td><td>Assamese</td></tr>
+<tr><td><code>eu</code></td><td>Basque</td></tr>
+<tr><td><code>be</code></td><td>Belarusian</td></tr>
+<tr><td><code>bn</code></td><td>Bengali/Bangla</td></tr>
+<tr><td><code>bg</code></td><td>Bulgarian</td></tr>
+<tr><td><code>ca</code></td><td>Catalan</td></tr>
+<tr><td><code>zh</code></td><td>Chinese</td></tr>
+<tr><td><code>zh-cn</code></td><td> &middot; Mainland Chinese</td></tr>
+<tr><td><code>zh-tw</code></td><td> &middot; Taiwan Chinese</td></tr>
+<tr><td><code>hr</code></td><td>Croatian</td></tr>
+<tr><td><code>cs</code></td><td>Czech</td></tr>
+<tr><td><code>da</code></td><td>Danish</td></tr>
+<tr><td><code>nl</code></td><td>Dutch</td></tr>
+<tr><td><code>en</code></td><td>English</td></tr>
+<tr><td><code>en-us</code></td><td> &middot; American English</td></tr>
+<tr><td><code>en-gb</code></td><td> &middot; British English</td></tr>
+<tr><td><code>et</code></td><td>Estonian</td></tr>
+<tr><td><code>fa</code></td><td>Farsi</td></tr>
+<tr><td><code>fi</code></td><td>Finnish</td></tr>
+<tr><td><code>fr</code></td><td>French</td></tr>
+<tr><td><code>fr-ca</code></td><td> &middot; Canadian French</td></tr>
+<tr><td><code>fr-fr</code></td><td> &middot; French French</td></tr>
+<tr><td><code>ga</code></td><td>Irish Gaelic</td></tr>
+<tr><td><code>gd</code></td><td>Scots Gaelic</td></tr>
+<tr><td><code>de</code></td><td>German</td></tr>
+<tr><td><code>el</code></td><td>Modern Greek</td></tr>
+<tr><td><code>grc</code></td><td>Ancient Greek</td></tr>
+<tr><td><code>gu</code></td><td>Gujarati</td></tr>
+<tr><td><code>haw</code></td><td>Hawaiian</td></tr>
+<tr><td><code>he</code></td><td>Hebrew</td></tr>
+<tr><td><code>hi</code></td><td>Hindi</td></tr>
+
+
+<tr><td><code>hu</code></td><td>Hungarian</td></tr>
+<tr><td><code>is</code></td><td>Icelandic</td></tr>
+<tr><td><code>id</code></td><td>Indonesian</td></tr>
+<tr><td><code>it</code></td><td>Italian</td></tr>
+<tr><td><code>ja</code></td><td>Japanese</td></tr>
+<tr><td><code>kn</code></td><td>Kannada</td></tr>
+<tr><td><code>ks</code></td><td>Kashmiri</td></tr>
+<tr><td><code>kok</code></td><td>Konkani</td></tr>
+<tr><td><code>ko</code></td><td>Korean</td></tr>
+<tr><td><code>la</code></td><td>Latin</td></tr>
+<tr><td><code>lv</code></td><td>Latvian</td></tr>
+<tr><td><code>lt</code></td><td>Lithuanian</td></tr>
+<tr><td><code>mk</code></td><td>Macedonian</td></tr>
+<tr><td><code>ms</code></td><td>Malay</td></tr>
+<tr><td><code>ml</code></td><td>Malayalam</td></tr>
+<tr><td><code>mt</code></td><td>Maltese</td></tr>
+<tr><td><code>mi</code></td><td>Maori</td></tr>
+<tr><td><code>mr</code></td><td>Marathi</td></tr>
+<tr><td><code>mni</code></td><td>Meithei/Manipuri</td></tr>
+<tr><td><code>ne</code></td><td>Nepali</td></tr>
+<tr><td><code>no</code></td><td>Norwegian</td></tr>
+<tr><td><code>nb</code></td><td>Norwegian Bokm&#xE5;l</td></tr>
+<tr><td><code>nn</code></td><td>Norwegian Nynorsk</td></tr>
+<tr><td><code>or</code></td><td>Oriya</td></tr>
+<tr><td><code>pl</code></td><td>Polish</td></tr>
+
+<tr><td><code>pt</code></td><td>Portuguese</td></tr>
+<tr><td><code>pt-br</code></td><td> &middot; Brazilian Portuguese</td></tr>
+<tr><td><code>pt-pt</code></td><td> &middot; European Portuguese</td></tr>
+<tr><td><code>pa</code></td><td>Punjabi</td></tr>
+<tr><td><code>ro</code></td><td>Romanian</td></tr>
+<tr><td><code>ru</code></td><td>Russian</td></tr>
+<tr><td><code>sa</code></td><td>Sanskrit</td></tr>
+<tr><td><code>sr</code></td><td>Serbian</td></tr>
+<tr><td><code>sd</code></td><td>Sindhi</td></tr>
+<tr><td><code>sk</code></td><td>Slovak</td></tr>
+<tr><td><code>sl</code></td><td>Slovene</td></tr>
+<tr><td><code>es</code></td><td>Spanish</td></tr>
+<tr><td><code>es-es</code></td><td> &middot; European Spanish</td></tr>
+<tr><td><code>es-mx</code></td><td> &middot; Mexican Spanish</td></tr>
+<tr><td><code>sv</code></td><td>Swedish</td></tr>
+<tr><td><code>tl</code></td><td>Tagalog</td></tr>
+<tr><td><code>ta</code></td><td>Tamil</td></tr>
+<tr><td><code>te</code></td><td>Telugu</td></tr>
+<tr><td><code>th</code></td><td>Thai</td></tr>
+<tr><td><code>tr</code></td><td>Turkish</td></tr>
+<tr><td><code>uk</code></td><td>Ukrainian</td></tr>
+<tr><td><code>ur</code></td><td>Urdu</td></tr>
+<tr><td><code>vi</code></td><td>Vietnamese</td></tr>
+<tr><td><code>cy</code></td><td>Welsh</td></tr>
+
+</table>
+
+<blockquote class='aside'><a name="aside-tee-loo-goo"></a>One
+of my more, uh, colicky consulting editors, had a some sort of fit
+of loud officiousness when he saw the above list.  <em>What's this
+Konkani?  and Tee-loo-goo?!  I've never heard of these languages!
+Who put this list together, who decided what got on this list?!</em>
+etc etc.
+
+<br><br>I replied, basically:
+<em>I</em> put the list together (this being my book, and
+welcome to it), and while I decidedly will not walk you down the list
+explaining how each line satisfies one or more exacting criterion,
+<abbr title="for your information!">FYI</abbr>, it's
+basically a combination of:
+<ul>
+<li>languages with huge numbers of speakers (Chinese, Spanish, Arabic)
+<li>the four big languages of New World (English, Spanish, Portuguese, and French)
+<li>the official languages of every European country
+<li>the official languages of India (by some criterion I've now
+forgotten&mdash; this is a <a href=
+ "http://en.wikipedia.org/wiki/Official_languages_of_India"
+ >complicated and ever-changing issue</a>)
+<li>the official languages of other important Eurasian countries
+(Korean, Thai, Farsi, Urdu)
+<li>plus whatever I felt like (Hawaiian, Hebrew, Basque, Ancient Greek)
+<li>minus whatever I felt like (sorry, Flemish, Walloon, Romansh,
+and Luxembourgish, euro-official though you may be)
+</ul>
+
+...and (I continued, to the colicky consulting editor), Konkani has more
+speakers than Danish (which you've heard of), and Telugu has more
+speakers than German (which you've heard of, and heard!), so failing
+to have ever heard of them is, well, just too bad for you.
+</blockquote>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

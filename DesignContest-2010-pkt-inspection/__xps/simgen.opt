@@ -1,0 +1,1 @@
+ -p virtex5 -lang vhdl   $(MICROBLAZE_0_BOOTLOOP)  -s mti -X E:/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/ -E E:/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/

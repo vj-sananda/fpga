@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top reset_block_wrapper
+-ifmt MIXED
+-ifn reset_block_wrapper_xst.prj
+-ofn ../implementation/reset_block_wrapper/reset_block_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/reset_block_wrapper}

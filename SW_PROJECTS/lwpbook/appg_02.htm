@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Modules and Their Functional Interfaces (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appg_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:46:55 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appg_02' class='lwp lwp_appg_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">G.2. Modules and Their Functional Interfaces</h2>
+
+<p>Modules are the main way that Perl provides for bundling up code for
+later use by yourself or others. As I'm sure you
+can't help noticing from reading <em class="emphasis">The Perl
+Journal</em>, CPAN (the Comprehensive Perl Archive Network) is
+the repository for modules (or groups of modules) that others have
+written, to do anything from composing music to accessing web pages.
+A good deal of those modules even come with every installation of
+Perl.
+</p>
+
+<p>One module that you may have used before, and which is fairly typical
+in its interface, is Text::Wrap. It comes with Perl, so you
+don't even need to install it from CPAN. You use it
+in a program of yours, by having your program code say early on:
+</p>
+
+<pre class="code">use Text::Wrap;</pre>
+
+<p>and after that, you can access a function called
+<tt class="literal">wrap</tt>, which inserts line-breaks in text that you
+feed it, so that the text will be wrapped to 72 (or however many)
+columns.
+</p>
+
+<p>The way this <tt class="literal">use Text::Wrap</tt> business works is that
+the module Text::Wrap exists as a file
+<em class="filename">Text/Wrap.pm</em> somewhere in one of your library
+directories. That file contains Perl code<a class='footnotylink' href="#FOOTNOTE-6">[6]</a> which, among other things, defines
+a function called <tt class="literal">Text::Wrap::wrap</tt>, and then
+exports that function, which means that when you say
+<tt class="literal">wrap</tt> after having said <tt class="literal">use</tt>
+<tt class="literal">Text::Wrap</tt>, you'll be actually
+calling the <tt class="literal">Text::Wrap::wrap</tt> function. Some
+modules don't export their functions, so you have to
+call them by their full name, like
+<tt class="literal">Text::Wrap::wrap(</tt><em class="replaceable"><tt>parameters</tt></em><tt class="literal">)</tt>.
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-6"></a>[6] And mixed
+in with the Perl code, there's documentation, which
+is what you read with <tt class="literal">perldoc Text::Wrap</tt>. The
+<em class="filename">perldoc</em> program simply ignores the code and
+formats the documentation text, whereas <tt class="literal">use
+Text::Wrap</tt> loads and runs the code while ignoring the
+documentation.</p> </blockquote>
+
+<p>Regardless of whether the typical module exports the functions it
+provides, a module is basically just a container for chunks of code
+that do useful things. The way the module allows for you to interact
+with it, is its interface. And when, like with Text::Wrap, its
+interface consists of functions, the module is said to have a
+<em class="emphasis">functional interface</em>.<a class='footnotylink' href="#FOOTNOTE-7">[7]</a>
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-7"></a>[7] The term
+"function" (and therefore
+"function<em class="emphasis">al</em>")
+has various senses. I'm using the term here in its
+broadest sense, to refer to routines&#x2014;bits of code that are
+called by some name and take parameters and return some value.</p>
+</blockquote>
+
+<p>Using modules with functional interfaces is
+straightforward&#x2014;instead of defining your own
+"wrap" function with <tt class="literal">sub
+wrap { ... }</tt>, you entrust <tt class="literal">use Text::Wrap</tt>
+to do that for you, along with whatever other functions its defines
+and exports, according to the module's
+documentation. Without too much bother, you can even write your own
+modules to contain your frequently used functions; I suggest having a
+look at the <em class="filename">perlmod</em> manpage for more leads on
+doing this.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

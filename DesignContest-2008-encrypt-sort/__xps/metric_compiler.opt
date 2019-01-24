@@ -1,0 +1,20 @@
+ppc405_0
+METRIC_SOURCES = metric/aes_core.c metric/main_tc.c metric/recordio_tc.c metric/msort.c metric/sortrecord_hw_plb.c drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.c drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.c 
+METRIC_HEADERS = metric/aes_core.h metric/recordio_tc.h metric/timer.h metric/sortrecord_hw_plb.h metric/msort.h drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.h drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.h 
+METRIC_CC = powerpc-eabi-gcc
+METRIC_CC_SIZE = powerpc-eabi-size
+METRIC_CC_OPT = -O3
+METRIC_CFLAGS = 
+METRIC_CC_SEARCH = # -B
+METRIC_LIBPATH = -L./ppc405_0/lib/ # -L
+METRIC_INCLUDES = -I./ppc405_0/include/  -Imetric/ -Idrivers/accel_sort_plb_v1_00_a/src/ # -I
+METRIC_LFLAGS = # -l
+METRIC_CC_PREPROC_FLAG = # -Wp,
+METRIC_CC_ASM_FLAG = # -Wa,
+METRIC_CC_LINKER_FLAG = # -Wl,
+METRIC_LINKER_SCRIPT = metric_linker_script
+METRIC_CC_DEBUG_FLAG = # -[g|gstabs]
+METRIC_CC_GLOBPTR_FLAG= -msdata=eabi
+METRIC_CC_START_ADDR_FLAG=  # -Wl,-defsym -Wl,_START_ADDR=
+METRIC_CC_STACK_SIZE_FLAG=  # -Wl,-defsym -Wl,_STACK_SIZE=
+METRIC_CC_HEAP_SIZE_FLAG=  # -Wl,-defsym -Wl,_HEAP_SIZE=

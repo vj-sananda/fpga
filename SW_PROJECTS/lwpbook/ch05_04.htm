@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Idiosyncrasies of HTML Forms (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:26 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_04' class='lwp lwp_ch05_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">5.4. Idiosyncrasies of HTML Forms</h2>
+
+<p>This section explains how the various form fields (hidden data, text
+boxes, etc.) are turned into data that is sent to the server. For
+information on the cosmetic features, such as the attributes that
+control how big the form object appears on the screen, see
+<cite>Web Design in a Nutshell</cite>
+(O'Reilly), <cite>HTML &amp; XHTML: The
+Definitive Guide</cite> (O'Reilly), or the
+W3C's explanation of HTML 4.01 forms at <a href="http://www.w3.org/TR/html401/interact/forms">http://www.w3.org/TR/html401/interact/forms</a>. 
+</p>
+
+<a name="perllwp-CHP-5-SECT-4.1"></a><div class="sect2">
+<h3 class="sect2">5.4.1. Hidden Elements</h3>
+
+<p>An input element <a name="INDEX-298" class="ipoint"
+></a><a name="INDEX-299" class="ipoint"
+></a>with
+<tt class="literal">type=hidden</tt> creates a form pair consisting of the
+value of its <tt class="literal">name</tt> attribute and the value of its
+<tt class="literal">value</tt> attribute. For example, this element:
+</p>
+
+<pre class="code">&lt;input type=hidden name="pie" value="meringue"&gt;</pre>
+
+<p>This doesn't display anything to the user, but when
+submitted, creates a form pair <tt class="literal">pie=meringue</tt>.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.2"></a><div class="sect2">
+<h3 class="sect2">5.4.2. Text Elements</h3>
+
+<p>An input element <a name="INDEX-300" class="ipoint"
+></a><a name="INDEX-301" class="ipoint"
+></a>with
+<tt class="literal">type=text</tt> (or with no <tt class="literal">type</tt>
+attribute at all) creates a one-line form box in which the user can
+type whatever she wants to send on this form. If
+there's a <tt class="literal">value</tt> attribute, its
+value is what's filled in when the form is first
+rendered, or when the user hits a Reset form button.
+</p>
+
+<p>For example, this element:</p>
+
+<pre class="code">&lt;input type=text name="pie_filling" value="cherry"&gt;</pre>
+
+<p>creates a form box with "cherry"
+filled in. If the user submits the form as is, this will make a form
+pair <tt class="literal">pie_filling=cherry</tt>. If the user changes this
+to <tt class="literal">cr&#xE8;me br&#xFB;l&#xE9;e</tt>,
+this will make a form pair <tt class="literal">pie_filling=cr&#xE8;me
+br&#xFB;l&#xE9;e</tt>, or, after it gets URL
+encoded, <tt class="literal">pie_filling=cr%E8me+br%FBl%E9e</tt>.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.3"></a><div class="sect2">
+<h3 class="sect2">5.4.3. Password Elements</h3>
+
+<p>An input element <a name="INDEX-302" class="ipoint"
+></a><a name="INDEX-303" class="ipoint"
+></a><a name="INDEX-304" class="ipoint"
+></a>with
+<tt class="literal">type=password</tt> works exactly as if it had
+<tt class="literal">type=text</tt>, except the characters on screen in that
+box are made unreadable to anyone who might be looking over the
+user's shoulder. This is typically done by showing
+every character of the current value as <tt class="literal">*</tt>. For
+example:
+</p>
+
+<pre class="code">&lt;input type=password name="pie_filling" value="cherry"&gt;</pre>
+
+<p>This will have the initial value <tt class="literal">cherry</tt>, except it
+will appear as <tt class="literal">******</tt>. If the user enters
+<tt class="literal">cr&#xE8;me br&#xFB;l&#xE9;e</tt>,
+that will be the current value, but it will display as
+<tt class="literal">************</tt>. The form pairs submitted are just as
+if it were <tt class="literal">type=text</tt>, that is,
+<tt class="literal">pie_filling=cherry</tt> or
+<tt class="literal">pie_filling=cr&#xE8;me
+br&#xFB;l&#xE9;e</tt>.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.4"></a><div class="sect2">
+<h3 class="sect2">5.4.4. Checkboxes</h3>
+
+<p>An input element <a name="INDEX-305" class="ipoint"
+></a><a name="INDEX-306" class="ipoint"
+></a><a name="INDEX-307" class="ipoint"
+></a>with
+<tt class="literal">type=checkbox</tt> creates an on/off form button. The
+user cannot change the value of the element beyond just turning it on
+or off. For example:
+</p>
+
+<pre class="code">&lt;input type=checkbox name="&#xE0; la mode" value="Pretty please!"&gt;</pre>
+
+<p>If the user checks this box and submits the form, it will send the
+form pair consisting of the element's
+<tt class="literal">name</tt> and <tt class="literal">value</tt>
+attribute's values. In this case, the pair is
+<tt class="literal">&#xE0;</tt> <tt class="literal">la mode=Pretty</tt>
+<tt class="literal">please!</tt>, or, after it gets URL encoded,
+<tt class="literal">%E0+la+mode=Pretty+please%21</tt>. Note that if there
+is no <tt class="literal">value</tt> attribute, you get the pair
+<em class="replaceable"><tt>name</tt></em><tt class="literal">=on</tt>, as if there
+were a <tt class="literal">value="on"</tt> in this element. Incidentally,
+the user doesn't typically see whatever is specified
+for the <tt class="literal">value</tt> attribute.
+</p>
+
+<p>Note that this differs from <tt class="literal">type=text</tt> input
+elements in this way: in <tt class="literal">type=text</tt> input elements,
+the <tt class="literal">value</tt> attribute sets the default value of the
+form, but in <tt class="literal">type=checkbox</tt> elements, the
+<tt class="literal">value</tt> attribute controls what value is sent if the
+checkbox is turned on when the form is submitted. By default, a
+checkbox is off upon rendering a new form (or when the user hits
+Reset); to make a checkbox element on by default, add the
+<tt class="literal">checked</tt> attribute:
+</p>
+
+<pre class="code">&lt;input type=checkbox name="&#xE0; la mode" ivalue="Pretty please!" <tt class="userinput"><b>checked</b></tt>&gt;</pre>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.5"></a><div class="sect2">
+<h3 class="sect2">5.4.5. Radio Buttons</h3>
+
+<p>Input elements <a name="INDEX-308" class="ipoint"
+></a><a name="INDEX-309" class="ipoint"
+></a>with
+<tt class="literal">type=radio</tt> behave like checkboxes, except that
+turning one radio button element on will turn off any other radio
+button elements with the same <tt class="literal">name</tt> value in that
+form. As the name "radio button"
+suggests, this is meant to be like the station preset buttons on many
+models of old car radios, where pressing in one button would make any
+selected one pop out.
+</p>
+
+<p>Moreover, there is typically no <a name="INDEX-310" class="ipoint"
+></a><a name="INDEX-311" class="ipoint"
+></a>way to turn off a radio button except
+by selecting another in the same group. An example group of radio
+buttons:
+</p>
+
+<pre class="code">&lt;input type=radio name="&#xE0; la mode" value="nope" checked&gt;
+ nope &lt;br&gt;
+&lt;input type=radio name="&#xE0; la mode" value="w/lemon" &gt;
+ with lemon sorbet &lt;br&gt;
+&lt;input type=radio name="&#xE0; la mode" value="w/vanilla" &gt;
+ with vanilla ice cream&lt;br&gt;
+&lt;input type=radio name="&#xE0; la mode" value="w/chocolate" &gt;
+ with chocolate ice cream &lt;br&gt;</pre>
+
+<p>By default, the <tt class="literal">nope</tt> element is on. If the user
+submits this form unchanged, this will send the form pair
+<tt class="literal">&#xE0;</tt> <tt class="literal">la</tt>
+<tt class="literal">mode=nope</tt>. Selecting the second option
+("with lemon sorbet") also
+deselects the first one (or whatever other
+"&#xE0; la mode" element is
+selected), and if the user submits this, it well send the form pair
+<tt class="literal">&#xE0; la mode=w/lemon</tt>.
+</p>
+
+<p>Note that the checked attribute can be used to turn a
+<tt class="literal">type=radio</tt> element on by default, just as with
+<tt class="literal">type=checkbox</tt> elements. Different browsers behave
+differently when a radio button group has no checked element in it,
+or more than one. If you need to emulate the behavior of a particular
+browser in that case, experiment with the
+<em class="filename">formpairs.pl</em> program explained earlier, to see
+what form pair(s) are sent.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.6"></a><div class="sect2">
+<h3 class="sect2">5.4.6. Submit Buttons</h3>
+
+<p>An input <a name="INDEX-312" class="ipoint"
+></a><a name="INDEX-313" class="ipoint"
+></a><a name="INDEX-314" class="ipoint"
+></a><a name="INDEX-315" class="ipoint"
+></a>element with
+<tt class="literal">type=submit</tt> produces a button that, when pressed,
+submits the form data. There are two types of submit buttons: with or
+without a <tt class="literal">name</tt> attribute.
+</p>
+
+<pre class="code">&lt;input type=submit value="Go!"&gt;</pre>
+
+<p>The <tt class="literal">name</tt>-less element forms a button on screen
+that says "Go!". When pressed, that
+button submits the form data.
+</p>
+
+<pre class="code">&lt;input type=submit value="Go!" name="verb"&gt;</pre>
+
+<p>This displays the same as the <tt class="literal">name</tt>-less element,
+but when pressed, it also creates a form pair in the form it submits,
+consisting of <tt class="literal">verb=Go!</tt> (or after URL encoding,
+<tt class="literal">verb=Go%21</tt>). Note that the
+<tt class="literal">value</tt> attribute is doing double duty here,
+supplying both the value to be submitted as well as what should be
+displayed on the face of the button.
+</p>
+
+<p>The purpose of this sort of button is to distinguish which of several
+submit buttons is pressed. Consider a form that contains these three
+submit buttons:
+</p>
+
+<pre class="code">&lt;input type=submit name="what_to_do" value="Continue Shopping"&gt;
+&lt;input type=submit name="what_to_do" value="Check Out"&gt;
+&lt;input type=submit name="what_to_do" value="Erase Order"&gt;</pre>
+
+<p>All of these will submit the form, but only if the first one is
+pressed will there be a <tt class="literal">what_to_do=Continue</tt>
+<tt class="literal">Shopping</tt> pair in the form data; only if the second
+one is pressed will there be a <tt class="literal">what_to_do=Check</tt>
+<tt class="literal">Out</tt> pair in the form data; and only if the third
+one is pressed will there be a <tt class="literal">what_to_do=Erase</tt>
+<tt class="literal">Order</tt> pair in the form data.
+</p>
+
+<p>Note, incidentally, that in some cases, it is possible to submit a
+form without pressing a submit button! This is not specified in the
+HTML standard, but many browsers have the feature that if a form
+contains only one <tt class="literal">type=text</tt> field, if the user
+hits Enter while the cursor is in that field, the form is submitted.
+For example, consider this form:
+</p>
+
+<pre class="code">&lt;form type=get action="searcher.cgi"&gt;
+  &lt;input type=hidden name="session" value="3.14159"&gt;
+  &lt;input type=text name="key" value=""&gt;
+  &lt;input type=submit name="verb" value="Search!"&gt;
+&lt;/form&gt;</pre>
+
+<p>If the user types "meringue" in the
+input box, then hits the "Search!"
+button with the mouse pointer, there will be
+<em class="emphasis">three</em> form pairs submitted:
+<tt class="literal">session=3.14159</tt>, <tt class="literal">key=meringue</tt>,
+and <tt class="literal">verb=Search!</tt>. But if the user merely types
+"meringue" in the input box and
+hits the Enter key, there will be only <em class="emphasis">two</em> form
+pairs submitted: <tt class="literal">session=3.14159</tt> and
+<tt class="literal">key=meringue</tt>. No form pair for the submit button
+is sent then, because it wasn't actually pressed.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.7"></a><div class="sect2">
+<h3 class="sect2">5.4.7. Image Buttons</h3>
+
+<p>An input element <a name="INDEX-316" class="ipoint"
+></a><a name="INDEX-317" class="ipoint"
+></a><a name="INDEX-318" class="ipoint"
+></a><a name="INDEX-319" class="ipoint"
+></a>with <tt class="literal">type=image</tt> is
+somewhat like a <tt class="literal">type=submit</tt> element, except
+instead of producing a button that the user presses in order to
+submit the form, it produces an inline image that the user clicks on
+to submit the form.
+</p>
+
+<p>Also, whereas a <tt class="literal">type=submit</tt> button generates one
+form pair when pressed,
+<em class="replaceable"><tt>name</em><tt class="literal">=</tt><em class="replaceable">value</tt></em>,
+from the element's <tt class="literal">name</tt> and
+<tt class="literal">value</tt> attributes, a <tt class="literal">type=image</tt>
+element generates two form pairs when pressed:
+<em class="replaceable"><tt>name</em><tt class="literal">.x=</tt><em class="replaceable">across</tt></em>
+and
+<em class="replaceable"><tt>name</em><tt class="literal">.y=</tt><em class="replaceable">down</tt></em>,
+reflecting the point in the image where the user's
+pointer was when he clicked on it. An example of typical
+<tt class="literal">type=image</tt> element syntax will illustrate this:
+</p>
+
+<pre class="code">&lt;input type=image name="woohah" src="do_it.gif"&gt;</pre>
+
+<p>And suppose that <em class="filename">do_it.gif</em> is an image 100
+pixels wide by 40 high, and looks like the image in <a href="ch05_04.htm#perllwp-CHP-5-FIG-1">Figure 5-1</a>. 
+</p>
+
+<a name="perllwp-CHP-5-FIG-1"></a><div class="figure"><img src="figs/plwp_0501.gif"
+  alt="Figure 5-1. A sample submit button"
+title="Figure 5-1. A sample submit button"
+ /></div><h4 class="objtitle">Figure 5-1. A sample submit button</h4>
+
+<p>If the user clicks the pointer over the absolute top-leftmost pixel
+of that image as drawn by the above <tt class="literal">&lt;input</tt>
+<tt class="literal">type=image</tt> <tt class="literal">...&gt;</tt> element
+inside a larger form element, it will submit the form along with two
+form pairs: <tt class="literal">woohah.x=0</tt> and
+<tt class="literal">woohah.y=0</tt>. If the user instead clicks the pointer
+over the four-corners design in the middle of the
+"O" in "DO
+IT!", this happens to be 38 pixels from the left
+edge of the image, and 19 pixels from the top edge of the image, the
+form is submitted with the two form pairs
+<tt class="literal">woohah.x=38</tt> and <tt class="literal">woohah.y=19</tt>.
+</p>
+
+<p>While this imagemap-like feature of input
+<tt class="literal">type=image</tt> elements would obviously be quite
+useful for, say, click-to-zoom maps, most uses of input
+<tt class="literal">type=image</tt> elements are actually merely cosmetic,
+and the inlined image is just a fancy-looking version of the submit
+button. As such, the programs that process most such forms will just
+ignore the values of the <tt class="literal">name.x</tt> and
+<tt class="literal">name.y</tt> form pairs.
+</p>
+
+<p>Consider this simple form:</p>
+
+<pre class="code">&lt;form type=post action="searcher.cgi"&gt;
+  &lt;input type=hidden name="session" value="3.14159"&gt;
+  &lt;input type=text name="key" value=""&gt;
+  &lt;input type=image name="in-english" src="usa_flag.png"&gt;
+  &lt;input type=image name="in-spanish" src="mex_flag.png"&gt;
+&lt;/form&gt;</pre>
+
+<p>This will render an input box followed by a U.S. flag image, then a
+Mexican flag image. There are three possible ways this can be
+submitted. First, if the user selects the input box to plant the
+cursor there, types "chocolate",
+and presses Enter, this will submit the form (via a POST method) to
+the form <em class="filename">searcher.cgi</em> with just two form pairs:
+<tt class="literal">session=3.14159</tt> and
+<tt class="literal">key=chocolate</tt>.
+</p>
+
+<p>Secondly, if the user types
+"chocolate", then puts the pointer
+over the U.S. flag and clicks it, it will submit the form with four
+form pairs: <tt class="literal">session=3.14159</tt>,
+<tt class="literal">key=chocolate</tt>, <tt class="literal">in-english.x=12</tt>,
+and <tt class="literal">in-english.y=34</tt>, where 12 and 34 are the
+across and down coordinates of the point in the U.S. flag where the
+user clicked.
+</p>
+
+<p>Or thirdly, if the user types
+"chocolate", then puts the pointer
+over the Mexican flag and clicks it, it will submit the form with
+four form pairs: <tt class="literal">session=3.14159</tt>,
+<tt class="literal">key=chocolate</tt>, <tt class="literal">in-spanish.x=12</tt>,
+and <tt class="literal">in-spanish.y=34</tt>, where 12 and 34 are the
+across and down coordinates of the point in the Mexican flag where
+the user clicked.
+</p>
+
+<p>Incidentally, the HTML specifications do not say how browsers should
+behave when there is no
+<tt class="literal">name=</tt><em class="replaceable"><tt>whatever</tt></em> attribute
+present in an input <tt class="literal">type=image</tt> element, but common
+practice is to create form pairs with keys named <tt class="literal">x</tt>
+and <tt class="literal">y</tt> (i.e., <tt class="literal">x=38</tt> and
+<tt class="literal">y=19</tt>).
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.8"></a><div class="sect2">
+<h3 class="sect2">5.4.8. Reset Buttons</h3>
+
+<p>A <tt class="literal">type=reset</tt> input <a name="INDEX-320" class="ipoint"
+></a><a name="INDEX-321" class="ipoint"
+></a><a name="INDEX-322" class="ipoint"
+></a><a name="INDEX-323" class="ipoint"
+></a>element
+produces no form pair and does not submit the form. It merely creates
+a button that the user can press to reset the form's
+contents to their default values, back to the way they were when the
+form was first rendered. The <tt class="literal">value</tt> attribute is
+used only to put text on the button's face. For
+example:
+</p>
+
+<pre class="code">&lt;input type=reset value="Nevermind"&gt;</pre>
+
+<p>This creates a reset button with the text
+"Nevermind" on it. It has no other
+effect.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.9"></a><div class="sect2">
+<h3 class="sect2">5.4.9. File Selection Elements</h3>
+
+<p>A <tt class="literal">type=file</tt> input element provides
+<a name="INDEX-324" class="ipoint"
+></a><a name="INDEX-325" class="ipoint"
+></a><a name="INDEX-326" class="ipoint"
+></a><a name="INDEX-327" class="ipoint"
+></a>some
+set of controls with which the user can select a local file. Usually
+this appears as a "Browse..."
+button that brings up an "Open
+File..." window and a text box that lists the name
+of whatever file is selected. When a file is selected, it sets the
+value of the form pair as the content of the file. File parameters,
+however, work in quite a different way from regular forms, and we
+deal with them in the <a href="ch05_07.htm#perllwp-CHP-5-SECT-7">Section 5.7, "File Uploads"</a>
+section later in this chapter.
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.10"></a><div class="sect2">
+<h3 class="sect2">5.4.10. Textarea Elements</h3>
+
+<p>A <tt class="literal">textarea</tt> element is like
+<a name="INDEX-328" class="ipoint"
+></a><a name="INDEX-329" class="ipoint"
+></a>an
+<tt class="literal">&lt;input</tt> <tt class="literal">type=text</tt>
+<tt class="literal">...&gt;</tt> element, except the user can enter many
+lines of text instead of just one. Moreover, the syntax is different.
+Whereas an <tt class="literal">&lt;input</tt> <tt class="literal">type=text</tt>
+<tt class="literal">...&gt;</tt> element consists of just one tag, with the
+default content in the <tt class="literal">value</tt> attribute, like so:
+</p>
+
+<pre class="code">&lt;input type=text name="pairname" value="default content"&gt;</pre>
+
+<p>a <tt class="literal">textarea</tt> element consists of a start-tag,
+default content, and an end-tag:
+</p>
+
+<pre class="code">&lt;textarea name="pairname"&gt;Default content, first line.
+Another line.
+The last line.&lt;/textarea&gt;</pre>
+
+</div>
+<a name="perllwp-CHP-5-SECT-4.11"></a><div class="sect2">
+<h3 class="sect2">5.4.11. Select Elements and Option Elements</h3>
+
+<p>One final construct <a name="INDEX-330" class="ipoint"
+></a><a name="INDEX-331" class="ipoint"
+></a>for
+expressing <a name="INDEX-332" class="ipoint"
+></a><a name="INDEX-333" class="ipoint"
+></a>form
+controls is a <tt class="literal">select</tt> element containing some
+number of <tt class="literal">option</tt> elements. This is usually
+rendered as a drop-down/pop-up menu or occasionally as a scrollable
+list. In either case, the behavior is the same: the user selects an
+option from the list. The syntax is:
+</p>
+
+<pre class="code">&lt;select name="&#xE0; la mode"&gt;
+  &lt;option value="nope"&gt;Nope&lt;/option&gt;
+  &lt;option value="w/lemon"&gt;with lemon sorbet&lt;/option&gt;
+  &lt;option value="w/vanilla"&gt;with vanilla ice cream&lt;/option&gt;
+  &lt;option value="w/chocolate"&gt;with chocolate ice cream&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>That is, one <tt class="literal">select</tt> element with
+<a name="INDEX-334" class="ipoint"
+></a><a name="INDEX-335" class="ipoint"
+></a>a
+<tt class="literal">name=</tt><em class="replaceable"><tt>string</tt></em> attribute
+contains some <tt class="literal">option</tt> elements, each of which has a
+<tt class="literal">value=</tt><em class="replaceable"><tt>string</tt></em> attribute.
+The <tt class="literal">select</tt> element generates one form pair, using
+the select element's
+<em class="replaceable"><tt>name</tt></em><tt class="literal">=string</tt> attribute
+and the <tt class="literal">value=</tt><em class="replaceable"><tt>string</tt></em>
+attribute from the chosen <tt class="literal">option</tt> element. So in
+the example above, if the user chooses the option that showed on the
+screen as "with lemon sorbet", this
+sends the form pair <tt class="literal">&#xE0;</tt>
+<tt class="literal">la</tt> <tt class="literal">mode=w/lemon</tt>, or, once
+it's URL encoded,
+<tt class="literal">%E0+la+mode=w%2Flemon</tt>. 
+</p>
+
+<p>Any <tt class="literal">option</tt> elements that have no
+<tt class="literal">value=</tt><em class="replaceable"><tt>string</tt></em> attribute
+get their values from the content of the element. So these
+<tt class="literal">option</tt> elements:
+</p>
+
+<pre class="code">&lt;option&gt;This &amp;amp; That&lt;/option&gt;
+&lt;option&gt;And the other</pre>
+
+<p>mean the same thing as:</p>
+
+<pre class="code">&lt;option <tt class="userinput"><b>value="This &amp;amp; That"</b></tt>&gt;This &amp;amp; That&lt;/option&gt;
+&lt;option <tt class="userinput"><b>value="And the other"</b></tt>&gt;And the other&lt;/option&gt;</pre>
+
+<p>When the form is first rendered, the first element is typically
+selected by default, and selecting any other deselects it. By
+providing a selected attribute in an <tt class="literal">option</tt>
+element, you can force it to be the selected one when the form first
+renders, just as the <tt class="literal">checked</tt> attribute does for
+checkbox input elements. Also, the <tt class="literal">&lt;/option&gt;</tt>
+end-tag is optional.
+</p>
+
+<p>Putting all that together, this code:</p>
+
+<pre class="code">&lt;select name="pie_filling"&gt;
+  &lt;option&gt;Apple crunch
+  &lt;option <tt class="userinput"><b>selected</b></tt>&gt;Pumpkin
+  &lt;option value="Mince-meat"&gt;Mince
+  &lt;option&gt;Blueberry
+  &lt;option&gt;Quince
+&lt;/select&gt;</pre>
+
+<p>means the same thing as this code:</p>
+
+<pre class="code">&lt;select name="pie_filling"&gt;
+  &lt;option value="Apple crunch"&gt;Apple crunch&lt;/option&gt;
+  &lt;option value="Pumpkin"&gt;Pumpkin&lt;/option&gt;
+  &lt;option value="Mince-meat"&gt;Mince&lt;/option&gt;
+  &lt;option value="Blueberry" <tt class="userinput"><b>selected</b></tt>&gt;Blueberry&lt;/option&gt;
+  &lt;option value="Quince"&gt;Quince&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>with the single exception that when the first one is rendered on the
+screen, it starts out with
+"Pumpkin" selected by default,
+whereas in the second one,
+"Blueberry" is selected by default.
+</p>
+
+<p>There are two other kinds <a name="INDEX-336" class="ipoint"
+></a>of
+differences in the code: the latter has
+<tt class="literal">&lt;/option&gt;</tt> tags, but the former does not, and
+the former leaves out some <tt class="literal">value="..."</tt> attributes
+where the latter always has them. However, neither of these two kinds
+of differences are significant; the browser sees both blocks of code
+as meaning the same thing.
+</p>
+
+<p>If the <tt class="literal">select</tt> element has a
+<tt class="literal">multiple</tt> attribute, as here:
+</p>
+
+<pre class="code">&lt;select name="&#xE0; la mode" <tt class="userinput"><b>multiple</b></tt>&gt;
+  &lt;option value="nope"&gt;Nope&lt;/option&gt;
+  &lt;option value="w/lemon"&gt;with lemon sorbet&lt;/option&gt;
+  &lt;option value="w/vanilla"&gt;with vanilla ice cream&lt;/option&gt;
+  &lt;option value="w/chocolate"&gt;with chocolate ice cream&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>the user is allowed to select more than one option at a time. (And
+incidentally, this typically forces the options to appear as a
+scrollable list instead of as a drop-down/pop-up menu.) This
+<tt class="literal">multiple</tt> feature is rarely used in practice.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

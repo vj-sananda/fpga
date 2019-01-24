@@ -1,0 +1,126 @@
+tine just has to set a bit in the current byte
+ * if requested to.  After that, it updates the mask.  If the mask
+ * shows that the current byte is filled up, it is time to go to the
+ * next character in the buffer.  If the next character is past the
+ * end of the buffer, it is time to flush the buffer.
+ */
+void output_bit( FILE *stream, int bit )
+{
+    if ( bit )
+        *current_byte |= output_mask;
+    output_mask >>= 1;
+    if ( output_mask == 0 )
+    {
+        output_mask = 0x80;
+        current_byte++;
+        if ( current_byte == ( buffer + BUFFER_SIZE ) )
+        {
+            fwrite( buffer, 1, BUFFER_SIZE, stream );
+            current_byte = buffer;
+        }
+        *current_byte = 0;
+    }
+}
+
+/*
+ * When the encoding is done, there will still be a lot of bits and
+ * bytes sitting in the buffer waiting to be sent out.  This routine
+ * is called to clean things up at that point.
+ */
+void flush_output_bitstream( FILE *stream )
+{
+    fwrite( buffer, 1, (size_t)( current_byte - buffer ) + 1, stream );
+    current_byte = buffer;
+}
+
+/*
+ * Bit oriented input is set up so that the next time the input_bit
+ * routine is called, it will trigger the read of a new block.  That
+ * is why input_bits_left is set to 0.
+ */
+void initialize_input_bitstream()
+{
+    input_bits_left = 0;
+    input_bytes_left = 1;
+    past_eof = 0;
+}
+
+/*
+ * This routine reads bits in from a file.  The bits are all sitting
+ * in a buffer, and this code pulls them out, one at a time.  When the
+ * buffer has been emptied, that triggers a new file read, and the
+ * pointers are reset.  This routine is set up to allow for two dummy
+ * bytes to be read in after the end of file is reached.  This is because
+ * we have to keep feeding bits into the pipeline to be decoded so that
+ * the old stuff that is 16 bits upstream can be pushed out.
+ */
+short int input_bit( FILE *stream )
+{
+    if ( input_bits_left == 0 )
+    {
+        current_byte++;
+        input_bytes_left--;
+        input_bits_left = 8;
+        if ( input_bytes_left == 0 )
+        {
+            input_bytes_left = fread( buffer, 1, BUFFER_SIZE, stream );
+            if ( input_bytes_left == 0 )
+            {
+                if ( past_eof )
+                {
+                    fprintf( stderr, "Bad input file\n" );
+                    exit( -1 );
+                }
+                else
+                {
+                    past_eof = 1;
+                    input_bytes_left = 2;
+                }
+            }
+            current_byte = buffer;
+        }
+    }
+    input_bits_left--;
+    return ( ( *current_byte >> input_bits_left ) & 1 );
+}
+
+/*
+ * When monitoring compression ratios, we need to know how many
+ * bytes have been output so far.  This routine takes care of telling
+ * how many bytes have been output, including pending bytes that
+ * haven't actually been written out.
+ */
+long bit_ftell_output( FILE *stream )
+{
+    long total;
+
+    total = ftell( stream );
+    total += current_byte - buffer;
+    total += underflow_bits/8;
+    return( total );
+}
+
+/*
+ * When monitoring compression ratios, we need to know how many bits
+ * have been read in so far.  This routine tells how many bytes have
+ * been read in, excluding bytes that are pending in the buffer.
+ */
+long bit_ftell_input( FILE *stream )
+{
+    return( ftell( stream ) - input_bytes_left + 1 );
+}
+
+/*
+ * Listing 13 -- churn.c
+ *
+ * This is a utility program used to test compression/decompression
+ * programs for accuracy, speed, and compression ratios.  Calling
+ * CHURN.EXE with a single argument will cause CHURN to compress then
+ * decompress every file in the specified directory tree, checking the
+ * compression ratio and the accuracy of the operation.  This is a good
+ * program to run overnight when you think your new algorithm works
+ * properly.
+ *
+ * This program will presently compile using TopSpeed C, Turbo C/C++,
+ * and QuickC.  The DOS directory structure-specific calls aren't
+ * portable to *NIX, VMS, etc.  They all need their own versions of

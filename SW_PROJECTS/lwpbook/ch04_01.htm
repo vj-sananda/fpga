@@ -1,0 +1,540 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>URLs (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch04_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:44:15 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch04_01' class='lwp lwp_ch04_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 4. URLs</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="ch04_01.htm">Parsing URLs<br />
+    Relative URLs</a><br />
+<a href="ch04_03.htm">Converting Absolute URLs to Relative</a><br />
+<a href="ch04_04.htm">Converting Relative URLs to Absolute</a><br /></p></div><p>Now that you've seen how LWP models HTTP requests
+and responses, let's study the facilities it
+provides for working with URLs. A URL tells you how to get to
+something: "use HTTP with this host and request
+this," "connect via FTP to this
+host and retrieve this file," or
+"send email to this address."
+</p>
+
+<p>The great variety inherent in URLs is both a blessing and a curse. On
+one hand, you can stretch the URL syntax to address almost any type
+of network resource. However, this very flexibility means attempts to
+parse arbitrary URLs with regular expressions rapidly run into a
+quagmire of special cases.
+</p>
+
+<p>The LWP suite of modules provides the URI class to manage URLs. This
+chapter describes how to create objects that represent URLs, extract
+information from those objects, and convert between absolute and
+relative URLs. This last task is particularly useful for link
+checkers and spiders, which take partial URLs from HTML links and
+turn those into absolute URLs to request.
+</p>
+<div class="sect1"><a name="perllwp-CHP-4-SECT-1"></a>
+<h2 class="sect1">4.1. Parsing URLs</h2>
+
+<p>Rather than attempt <a name="INDEX-181" class="ipoint"
+></a><a name="INDEX-182" class="ipoint"
+></a>to
+pull apart URLs with regular expressions, which is difficult to do in
+a way that works with all the many types of URLs, you should use the
+URI class. When you create an object representing a URL, it has
+attributes for each part of a URL (scheme, username, hostname, port,
+etc.). Make method calls to get and set these attributes.
+</p>
+
+<p><a href="ch04_01.htm#perllwp-CHP-4-EX-1">Example 4-1</a> creates a URI
+<a name="INDEX-183" class="ipoint"
+></a><a name="INDEX-184" class="ipoint"
+></a>object
+representing a complex URL, then calls methods to discover the
+various components of the URL.
+</p>
+
+<a name="perllwp-CHP-4-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 4-1. Decomposing a URL </h4>
+<pre class="code">use URI;
+my $url = URI-&gt;new('http://user:pass@example.int:4345/hello.php?user=12');
+print "Scheme: ", $url-&gt;scheme( ), "\n";
+print "Userinfo: ", $url-&gt;userinfo( ), "\n";
+print "Hostname: ", $url-&gt;host( ), "\n";
+print "Port: ", $url-&gt;port( ), "\n";
+print "Path: ", $url-&gt;path( ), "\n";
+print "Query: ", $url-&gt;query( ), "\n";</pre>
+</div>
+
+<p><a href="ch04_01.htm#perllwp-CHP-4-EX-1">Example 4-1</a> prints:</p>
+
+<pre class="code"><b class="emphasis-bold">Scheme: http</b>
+<b class="emphasis-bold">Userinfo: user:pass</b>
+<b class="emphasis-bold">Hostname: example.int</b>
+<b class="emphasis-bold">Port: 4345</b>
+<b class="emphasis-bold">Path: /hello.php</b>
+<b class="emphasis-bold">Query: user=12</b></pre>
+
+<p>Besides reading the parts of a URL, methods
+<a name="INDEX-185" class="ipoint"
+></a><a name="INDEX-186" class="ipoint"
+></a><a name="INDEX-187" class="ipoint"
+></a>such as <tt class="literal">host(&#160;)</tt> can also
+alter the parts of a URL, using the familiar convention that
+<tt class="literal">$object-&gt;method</tt> reads an
+attribute's value and
+<tt class="literal">$object-&gt;method(</tt><em class="replaceable"><tt>newvalue</tt></em><tt class="literal">)</tt>
+alters an attribute:
+</p>
+
+<pre class="code">use URI;
+my $uri = URI-&gt;new("http://www.perl.com/I/like/pie.html");
+$uri-&gt;host('testing.perl.com');
+print $uri,"\n";
+<tt class="userinput"><b>http://testing.perl.com/I/like/pie.html</b></tt></pre>
+
+<p>Now let's look at the methods in more depth.</p>
+
+<a name="perllwp-CHP-4-SECT-1.1"></a><div class="sect2">
+<h3 class="sect2">4.1.1. Constructors</h3>
+
+<p>An object of the URI class
+<a name="INDEX-188" class="ipoint"
+></a><a name="INDEX-189" class="ipoint"
+></a><a name="INDEX-190" class="ipoint"
+></a><a name="INDEX-191" class="ipoint"
+></a><a name="INDEX-192" class="ipoint"
+></a>represents a URL. (Actually, a URI object
+can also represent a kind of URL-like string called a URN, but
+you're unlikely to run into one of those any time
+soon.) To create a URI object from a string containing a URL, use the
+<tt class="literal">new(&#160;)</tt> constructor:
+</p>
+
+<pre class="code">$url = URI-&gt;new(<em class="replaceable"><tt>url</tt></em><tt> [, <em class="replaceable">scheme</em></tt> ]);</pre>
+
+<p>If <em class="replaceable"><tt>url</tt></em> is a <a name="INDEX-193" class="ipoint"
+></a><a name="INDEX-194" class="ipoint"
+></a><a name="INDEX-195" class="ipoint"
+></a>relative URL (a fragment such as
+<tt class="literal">staff/alicia.html</tt>),
+<em class="replaceable"><tt>scheme</tt></em> determines the scheme you plan for
+this URL to have (<tt class="literal">http</tt>, <tt class="literal">ftp</tt>,
+etc.). But in most cases, you call <tt class="literal">URI-&gt;new</tt>
+only when you know you won't have a relative URL;
+for relative URLs or URLs that just <em class="emphasis">might</em> be
+relative, use the <tt class="literal">URI-&gt;new_abs</tt> method,
+<a name="INDEX-196" class="ipoint"
+></a><a name="INDEX-197" class="ipoint"
+></a>discussed
+below.
+</p>
+
+<p>The URI module strips <a name="INDEX-198" class="ipoint"
+></a><a name="INDEX-199" class="ipoint"
+></a><a name="INDEX-200" class="ipoint"
+></a>out quotes, angle brackets, and
+<a name="INDEX-201" class="ipoint"
+></a><a name="INDEX-202" class="ipoint"
+></a><a name="INDEX-203" class="ipoint"
+></a>whitespace from the new URL. So
+these statements all create identical URI objects:
+</p>
+
+<pre class="code">$url = URI-&gt;new('&lt;http://www.oreilly.com/&gt;');
+$url = URI-&gt;new('"http://www.oreilly.com/"');
+$url = URI-&gt;new('          http://www.oreilly.com/');
+$url = URI-&gt;new('http://www.oreilly.com/   ');</pre>
+
+<p>The URI class automatically escapes any <a name="INDEX-204" class="ipoint"
+></a>characters that the URL standard (RFC
+2396) says can't appear in a URL. So these two are
+equivalent:
+</p>
+
+<pre class="code">$url = URI-&gt;new('http://www.oreilly.com/bad page');
+$url = URI-&gt;new('http://www.oreilly.com/bad%20page');</pre>
+
+<p>If you already have a URI object, <a name="INDEX-205" class="ipoint"
+></a>the
+<tt class="literal">clone(&#160;)</tt> method <a name="INDEX-206" class="ipoint"
+></a><a name="INDEX-207" class="ipoint"
+></a>will produce another URI object with
+identical attributes:
+</p>
+
+<pre class="code">$copy = $url-&gt;clone( );</pre>
+
+<p><a href="ch04_01.htm#perllwp-CHP-4-EX-2">Example 4-2</a> clones a URI object and changes an
+attribute.
+</p>
+
+<a name="perllwp-CHP-4-EX-2"></a><div class="example">
+<h4 class="objtitle">Example 4-2. Cloning a URI </h4>
+<pre class="code">use URI;
+my $url = URI-&gt;new('http://www.oreilly.com/catalog/');
+$dup = $url-&gt;clone( );
+$url-&gt;path('/weblogs');
+print "Changed path: ", $url-&gt;path( ), "\n";
+print "Original path: ", $dup-&gt;path( ), "\n";</pre>
+</div>
+
+<p>When run, <a href="ch04_01.htm#perllwp-CHP-4-EX-2">Example 4-2</a> prints:</p>
+
+<pre class="code"><b class="emphasis-bold">Changed path: /weblogs</b>
+<b class="emphasis-bold">Original path: /catalog/</b></pre>
+
+</div>
+<a name="perllwp-CHP-4-SECT-1.2"></a><div class="sect2">
+<h3 class="sect2">4.1.2. Output</h3>
+
+<p>Treat a URI object as a <a name="INDEX-208" class="ipoint"
+></a><a name="INDEX-209" class="ipoint"
+></a><a name="INDEX-210" class="ipoint"
+></a>string and you'll get
+the URL:
+</p>
+
+<pre class="code">$url = URI-&gt;new('http://www.example.int');
+$url-&gt;path('/search.cgi');
+print "The URL is now: $url\n";
+<b class="emphasis-bold">The URL is now: http://www.example.int/search.cgi</b></pre>
+
+<p>You might find it useful to <em class="emphasis">normalize</em> the URL
+<a name="INDEX-211" class="ipoint"
+></a>before
+printing it:
+</p>
+
+<pre class="code">$url-&gt;canonical( );</pre>
+
+<p>Exactly what this does depends on the specific type of URL, but it
+typically converts the hostname to lowercase, removes the port if
+it's the default port (for example, <em class="emphasis">http://www.eXample.int:80</em> becomes <em class="emphasis">http://www.example.int</em>), makes escape
+sequences uppercase (e.g., <tt class="literal">%2e</tt> becomes
+<tt class="literal">%2E</tt>), and unescapes characters that
+don't need to be escaped (e.g.,
+<tt class="literal">%41</tt> becomes <tt class="literal">A</tt>). In <a href="ch12_01.htm">Chapter 12, "Spiders"</a>, we'll walk through a program
+that harvests data but avoids harvesting the same URL more than once.
+It keeps track of the URLs it's visited in a hash
+called <tt class="literal">%seen_url_before</tt>; if
+there's an entry for a given URL,
+it's been harvested. The trick is to
+<a name="INDEX-212" class="ipoint"
+></a>call
+<tt class="literal">canonical</tt> on all URLs before entering them into
+that hash and before checking whether one exists in that hash. If not
+for calling <tt class="literal">canonical</tt>, you might have visited
+<em class="emphasis">http://www.example.int:80</em> in the
+past, and might be planning to visit <em class="emphasis">http://www.EXample.int</em>, and you would see no
+duplication there. But when you call <tt class="literal">canonical</tt> on
+both, they both become <em class="emphasis">http://www.example.int</em>, so you can tell
+you'd be harvesting the same URL twice. If you think
+such duplication problems might arise in your programs, when in
+doubt, call <tt class="literal">canonical</tt> right when you construct the
+URL, like so:
+</p>
+
+<pre class="code">$url = URI-&gt;new('http://www.example.int')-&gt;canonical;</pre>
+
+</div>
+<a name="perllwp-CHP-4-SECT-1.3"></a><div class="sect2">
+<h3 class="sect2">4.1.3. Comparison</h3>
+
+<p>To compare two URLs, <a name="INDEX-213" class="ipoint"
+></a><a name="INDEX-214" class="ipoint"
+></a><a name="INDEX-215" class="ipoint"
+></a><a name="INDEX-216" class="ipoint"
+></a>use the <tt class="literal">eq(&#160;)</tt> method:
+</p>
+
+<pre class="code">if ($url_one-&gt;eq(<em class="replaceable"><tt>url_two</tt></em>)) { ... }</pre>
+
+<p>For example:</p>
+
+<pre class="code">use URI;
+my $url_one = URI-&gt;new('http://www.example.int');
+my $url_two = URI-&gt;new('http://www.example.int/search.cgi');
+$url_one-&gt;path('/search.cgi');
+if ($url_one-&gt;eq($url_two)) {
+  print "The two URLs are equal.\n";
+}
+<b class="emphasis-bold">The two URLs are equal</b>.</pre>
+
+<p>Two URLs are equal if they are represented by the same string when
+normalized. The <tt class="literal">eq(&#160;)</tt> method is faster than the
+<tt class="literal">eq</tt> string operator:
+</p>
+
+<pre class="code">if ($url_one eq $url_two) { ... } # inefficient!</pre>
+
+<p>To see if two values refer not just to the same URL, but to the same
+URI object, use the <tt class="literal">==</tt> operator:
+</p>
+
+<pre class="code">if ($url_one == $url_two) { ... }</pre>
+
+<p>For example:</p>
+
+<pre class="code">use URI;
+my $url = URI-&gt;new('http://www.example.int');
+$that_one = $url;
+if ($that_one == $url) {
+  print "Same object.\n";
+}
+<b class="emphasis-bold">Same object</b>.</pre>
+
+</div>
+<a name="perllwp-CHP-4-SECT-1.4"></a><div class="sect2">
+<h3 class="sect2">4.1.4. Components of a URL</h3>
+
+<p>A generic URL <a name="INDEX-217" class="ipoint"
+></a>looks
+like <a href="ch04_01.htm#perllwp-CHP-4-FIG-1">Figure 4-1</a>.
+</p>
+
+<a name="perllwp-CHP-4-FIG-1"></a><div class="figure">
+<img src="figs/plwp_0401.gif" alt="Figure 4-1"
+ width="100%"
+/></div><h4 class="objtitle">Figure 4-1. Components of a URL</h4>
+
+<p>The URI class provides <a name="INDEX-218" class="ipoint"
+></a>methods to access each component. Some
+components are available only on some schemes (for example,
+<tt class="literal">mailto:</tt> URLs do not support the
+<em class="replaceable"><tt>userinfo</tt></em>,
+<em class="replaceable"><tt>host</tt></em>, or <tt><em class="replaceable">port</em></tt>
+components).
+</p>
+
+<p>In addition to the <a name="INDEX-219" class="ipoint"
+></a><a name="INDEX-220" class="ipoint"
+></a><a name="INDEX-221" class="ipoint"
+></a><a name="INDEX-222" class="ipoint"
+></a><a name="INDEX-223" class="ipoint"
+></a><a name="INDEX-224" class="ipoint"
+></a><a name="INDEX-225" class="ipoint"
+></a><a name="INDEX-226" class="ipoint"
+></a><a name="INDEX-227" class="ipoint"
+></a><a name="INDEX-228" class="ipoint"
+></a><a name="INDEX-229" class="ipoint"
+></a><a name="INDEX-230" class="ipoint"
+></a><a name="INDEX-231" class="ipoint"
+></a><a name="INDEX-232" class="ipoint"
+></a><a name="INDEX-233" class="ipoint"
+></a>obvious
+<tt class="literal">scheme(&#160;)</tt>, <tt class="literal">userinfo(&#160;)</tt>,
+<tt class="literal">host(&#160;)</tt>, <tt class="literal">port(&#160;)</tt>,
+<tt class="literal">path(&#160;)</tt>, <tt class="literal">query(&#160;)</tt>, and
+<tt class="literal">fragment(&#160;)</tt> methods, there are some useful but
+less-intuitive ones.
+</p>
+
+<dl>
+<dt><tt class="literal">$url-&gt;path_query([</tt><tt><em class="replaceable">newval</em></tt><tt class="literal">]);</tt></dt>
+<dd>
+The path and query components as a single string, e.g.,
+<tt class="literal">/hello.php?user=21</tt>.
+
+</dd>
+
+
+<dt><tt class="literal">$url-&gt;path_segments([</tt><tt><em
+ class="replaceable">segment</em></tt><tt class="literal">, ...]);</tt></dt>
+<dd>
+In scalar context, it is the same as <tt class="literal">path(&#160;)</tt>, but
+in list context, it returns a list of path segments (directories and
+maybe a filename). For example:
+
+<!-- </dd></dl> -->
+
+<pre class="code">$url = URI-&gt;new('http://www.example.int/eye/sea/ewe.cgi');
+@bits = $url-&gt;path_segments( );
+for ($i=0; $i &lt; @bits; $i++) {
+  print "$i {$bits[$i]}\n";
+}
+print "\n\n";
+<b class="emphasis-bold">0 {}</b>
+<b class="emphasis-bold">1 {eye}</b>
+<b class="emphasis-bold">2 {sea}</b>
+<b class="emphasis-bold">3 {ewe.cgi}</b></pre>
+
+<!-- <dl> -->
+
+<dt><tt class="literal">$url-&gt;host_port([</tt><tt><em class="replaceable">newval</em></tt><tt class="literal">])</tt></dt>
+<dd>
+The hostname and port as one value, e.g.,
+<tt class="literal">www.example.int:8080</tt>. 
+
+</dd>
+
+
+<dt><tt class="literal">$url-&gt;default_port( );</tt></dt>
+<dd>
+The default port for this scheme (e.g., 80 for
+<tt class="literal">http</tt> and 21 for <tt class="literal">ftp</tt>).
+
+</dd>
+
+</dl>
+
+<p>For a URL that simply lacks one of those parts, the method for that
+part generally returns <tt class="literal">undef</tt>:
+</p>
+
+<pre class="code">use URI;
+my $uri = URI-&gt;new("http://stuff.int/things.html");
+my $query = $uri-&gt;query;
+print defined($query) ? "Query: &lt;$query&gt;\n" : "No query\n";
+<tt class="userinput"><b>No query</b></tt></pre>
+
+<p>However, some kinds of URLs <tt class="literal">can't</tt> have certain
+components. For example, a <tt class="literal">mailto</tt>: URL
+doesn't have a <em class="replaceable"><tt>host</tt></em>
+component, so code that calls <tt class="literal">host(&#160;)</tt> on a
+<tt class="literal">mailto</tt>: URL will die. For example:
+</p>
+
+<pre class="code">use URI;
+my $uri = URI-&gt;new('mailto:hey-you@mail.int');
+print $uri-&gt;host;
+<tt class="userinput"><b>Can't locate object method "host" via package "URI::mailto"</b></tt></pre>
+
+<p>This has real-world implications. Consider extracting
+<a name="INDEX-234" class="ipoint"
+></a>all the URLs in a document and going
+through them like this:
+</p>
+
+<pre class="code">foreach my $url (@urls) {
+  $url = URI-&gt;new($url);
+  my $hostname = <tt class="userinput"><b>$url-&gt;host;</b></tt>
+  next unless $Hosts_to_ignore{$hostname};
+  <em class="replaceable"><tt>...otherwise ...</tt></em>
+}</pre>
+
+<p>This will die on a <tt class="literal">mailto:</tt> URL, which
+doesn't <a name="INDEX-235" class="ipoint"
+></a>have a <tt class="literal">host(&#160;)</tt> method.
+You can avoid this by using <tt class="literal">can(&#160;)</tt> to see if
+<a name="INDEX-236" class="ipoint"
+></a><a name="INDEX-237" class="ipoint"
+></a>you can call a given method:
+</p>
+
+<pre class="code">foreach my $url (@urls) {
+  $url = URI-&gt;new($url);
+  next unless <tt class="userinput"><b>$url-&gt;can('host');</b></tt>
+  my $hostname = $url-&gt;host;
+  ...</pre>
+
+<p>or a bit less directly:</p>
+
+<pre class="code">foreach my $url (@urls) {
+  $url = URI-&gt;new($url);
+  <tt class="userinput"><b>unless('http' eq $url-&gt;scheme)</b></tt> {
+    print "Odd, $url is not an http url!  Skipping.\n";
+    next;
+  }
+  my $hostname = $url-&gt;host;
+<em class="replaceable"><tt>  ...and so forth...</tt></em></pre>
+
+<p>Because all URIs offer a <tt class="literal">scheme</tt> method, and all
+<tt class="literal">http</tt>: URIs provide a <tt class="literal">host(&#160;)</tt>
+method, this is assuredly safe.<a class='footnotylink' href="#FOOTNOTE-1">[1]</a> For the curious, what URI schemes allow for
+what is explained in the documentation for the URI class, as well as
+the documentation for some specific subclasses like URI::ldap.
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-1"></a>[1] Of the methods
+illustrated above, <tt class="literal">scheme</tt>,
+<tt class="literal">path</tt>, and <tt class="literal">fragment</tt> are the only
+ones that are <em class="emphasis">always</em> provided. It would be
+surprising to find a fragment on a <tt class="literal">mailto:</tt>
+URL&#x2014;and who knows what it would mean&#x2014;but
+it's syntactically possible. In practical terms,
+this means even if you have a <tt class="literal">mailto:</tt> URL, you can
+call <tt class="literal">$url-&gt;fragment</tt> without it being an
+error.</p> </blockquote>
+
+</div>
+<a name="perllwp-CHP-4-SECT-1.5"></a><div class="sect2">
+<h3 class="sect2">4.1.5. Queries</h3>
+
+<p>The URI class has two <a name="INDEX-238" class="ipoint"
+></a><a name="INDEX-239" class="ipoint"
+></a>methods for dealing with query data
+above and beyond the <tt class="literal">query</tt>( ) and
+<tt class="literal">path_query(&#160;)</tt> methods <a name="INDEX-240" class="ipoint"
+></a><a name="INDEX-241" class="ipoint"
+></a><a name="INDEX-242" class="ipoint"
+></a><a name="INDEX-243" class="ipoint"
+></a>we've already discussed.
+</p>
+
+<p>In the very early days of the web, queries were simply text strings.
+Spaces were encoded as plus (<tt class="literal">+</tt>) characters:
+</p>
+
+<pre class="code">http://www.example.int/search?i+like+pie</pre>
+
+<p>The <tt class="literal">query_keywords(&#160;)</tt> method works
+<a name="INDEX-244" class="ipoint"
+></a><a name="INDEX-245" class="ipoint"
+></a>with these types of queries, accepting and
+returning a list of keywords:
+</p>
+
+<pre class="code">@words = $url-&gt;query_keywords([<em class="replaceable"><tt>keywords</tt></em>, ...]);</pre>
+
+<p>For example:</p>
+
+<pre class="code">use URI;
+my $url = URI-&gt;new('http://www.example.int/search?i+like+pie');
+@words = $url-&gt;query_keywords( );
+print $words[-1], "\n";
+<b class="emphasis-bold">pie</b></pre>
+
+<p>More modern queries accept a list
+<a name="INDEX-246" class="ipoint"
+></a><a name="INDEX-247" class="ipoint"
+></a><a name="INDEX-248" class="ipoint"
+></a>of named values. A name and its
+value are separated by an equals sign (<tt class="literal">=</tt>), and
+such pairs are separated from each other with ampersands
+(<tt class="literal">&amp;</tt>):
+</p>
+
+<pre class="code">http://www.example.int/search?food=pie&amp;action=like</pre>
+
+<p>The <tt class="literal">query_form(&#160;)</tt> method lets you
+<a name="INDEX-249" class="ipoint"
+></a><a name="INDEX-250" class="ipoint"
+></a>treat each such query as a list of keys and
+values:
+</p>
+
+<pre class="code">@params = $url-&gt;query_form([<em class="replaceable"><tt>key</tt></em><tt>,<em class="replaceable">value</em></tt>,...);</pre>
+
+<p>For example:</p>
+
+<pre class="code">use URI;
+my $url = URI-&gt;new('http://www.example.int/search?food=pie&amp;action=like');
+@params = $url-&gt;query_form( );
+for ($i=0; $i &lt; @params; $i++) {
+  print "$i {$params[$i]}\n";
+}
+<b class="emphasis-bold">0 {food}</b>
+<b class="emphasis-bold">1 {pie}</b>
+<b class="emphasis-bold">2 {action}</b>
+<b class="emphasis-bold">3 {like}</b></pre>
+
+</div>
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

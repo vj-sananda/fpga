@@ -1,0 +1,1316 @@
+Release 7.1.01i - xst H.42
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "huffman_decoder_0_wrapper_xst.prj"
+Verilog Include Directory          : {F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a\hdl\verilog\ }
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/huffman_decoder_0_wrapper/huffman_decoder_0_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : huffman_decoder_0_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+RTL Output                         : YES
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation/huffman_decoder_0_wrapper}
+
+=========================================================================
+
+WARNING:Xst:29 - Optimization Effort not specified
+The following parameters have been added:
+Optimization Effort                : 1
+
+=========================================================================
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/inferred_lut4.vhd" in Library proc_common_v2_00_a.
+Entity <inferred_lut4> compiled.
+Entity <inferred_lut4> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_bit.vhd" in Library proc_common_v2_00_a.
+Entity <pf_counter_bit> compiled.
+Entity <pf_counter_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder_bit.vhd" in Library proc_common_v2_00_a.
+Entity <pf_adder_bit> compiled.
+Entity <pf_adder_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter.vhd" in Library proc_common_v2_00_a.
+Entity <pf_counter> compiled.
+Entity <pf_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter.vhd" in Library proc_common_v2_00_a.
+Entity <pf_occ_counter> compiled.
+Entity <pf_occ_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter_top.vhd" in Library proc_common_v2_00_a.
+Entity <pf_occ_counter_top> compiled.
+Entity <pf_occ_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_top.vhd" in Library proc_common_v2_00_a.
+Entity <pf_counter_top> compiled.
+Entity <pf_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder.vhd" in Library proc_common_v2_00_a.
+Entity <pf_adder> compiled.
+Entity <pf_adder> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/pf_dly1_mux.vhd" in Library wrpfifo_v1_01_b.
+Entity <pf_dly1_mux> compiled.
+Entity <pf_dly1_mux> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" in Library proc_common_v2_00_a.
+Package <proc_common_pkg> compiled.
+Package body <proc_common_pkg> compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/counter_bit.vhd" in Library proc_common_v2_00_a.
+Entity <counter_bit> compiled.
+Entity <counter_bit> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/ipif_control_wr.vhd" in Library wrpfifo_v1_01_b.
+Entity <ipif_control_wr> compiled.
+Entity <ipif_control_wr> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_dp_cntl.vhd" in Library wrpfifo_v1_01_b.
+Entity <wrpfifo_dp_cntl> compiled.
+Entity <wrpfifo_dp_cntl> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_dpram_select.vhd" in Library proc_common_v2_00_a.
+Entity <pf_dpram_select> compiled.
+Entity <pf_dpram_select> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl16_fifo.vhd" in Library proc_common_v2_00_a.
+Entity <srl16_fifo> compiled.
+Entity <srl16_fifo> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/ipif_control_rd.vhd" in Library rdpfifo_v1_01_b.
+Entity <ipif_control_rd> compiled.
+Entity <ipif_control_rd> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_dp_cntl.vhd" in Library rdpfifo_v1_01_b.
+Entity <rdpfifo_dp_cntl> compiled.
+Entity <rdpfifo_dp_cntl> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_pkg.vhd" in Library proc_common_v2_00_a.
+Package <ipif_pkg> compiled.
+Package body <ipif_pkg> compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/srl_fifo3.vhd" in Library opb_ipif_v3_01_a.
+Entity <srl_fifo3> compiled.
+Entity <srl_fifo3> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/counter.vhd" in Library proc_common_v2_00_a.
+Entity <Counter> compiled.
+Entity <Counter> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_flex_addr_cntr.vhd" in Library opb_ipif_v3_01_a.
+Entity <opb_flex_addr_cntr> compiled.
+Entity <opb_flex_addr_cntr> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/direct_path_cntr_ai.vhd" in Library proc_common_v2_00_a.
+Entity <direct_path_cntr_ai> compiled.
+Entity <direct_path_cntr_ai> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" in Library proc_common_v2_00_a.
+Entity <pselect> compiled.
+Entity <pselect> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_be_gen.vhd" in Library opb_ipif_v3_01_a.
+Entity <opb_be_gen> compiled.
+Entity <opb_be_gen> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr.vhd" in Library opb_ipif_v3_01_a.
+Entity <brst_addr_cntr> compiled.
+Entity <brst_addr_cntr> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr_reg.vhd" in Library opb_ipif_v3_01_a.
+Entity <brst_addr_cntr_reg> compiled.
+Entity <brst_addr_cntr_reg> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/write_buffer.vhd" in Library opb_ipif_v3_01_a.
+Entity <write_buffer> compiled.
+Entity <write_buffer> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_muxcy.vhd" in Library proc_common_v2_00_a.
+Entity <or_muxcy> compiled.
+Entity <or_muxcy> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_steer.vhd" in Library proc_common_v2_00_a.
+Entity <IPIF_Steer> compiled.
+Entity <IPIF_Steer> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/reset_mir.vhd" in Library opb_ipif_v3_01_a.
+Entity <reset_mir> compiled.
+Entity <reset_mir> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/interrupt_control_v1_00_a/hdl/vhdl/interrupt_control.vhd" in Library interrupt_control_v1_00_a.
+Entity <interrupt_control> compiled.
+Entity <interrupt_control> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_top.vhd" in Library rdpfifo_v1_01_b.
+Entity <rdpfifo_top> compiled.
+Entity <rdpfifo_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_top.vhd" in Library wrpfifo_v1_01_b.
+Entity <wrpfifo_top> compiled.
+Entity <wrpfifo_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/family.vhd" in Library proc_common_v2_00_a.
+WARNING:HDLParsers:3530 - Time stamp of file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/family.vhd" is newer than current system time.
+Package <family> compiled.
+Package body <family> compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" in Library opb_ipif_v3_01_a.
+Entity <opb_bam> compiled.
+Entity <opb_bam> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_ipif.vhd" in Library opb_ipif_v3_01_a.
+Entity <opb_ipif> compiled.
+Entity <opb_ipif> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_gate.vhd" in Library proc_common_v2_00_a.
+Entity <or_gate> compiled.
+Entity <or_gate> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo2.vhd" in Library proc_common_v2_00_a.
+Entity <srl_fifo2> compiled.
+Entity <srl_fifo2> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/valid_be.vhd" in Library proc_common_v2_00_a.
+Entity <valid_be> compiled.
+Entity <valid_be> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ld_arith_reg.vhd" in Library proc_common_v2_00_a.
+Entity <ld_arith_reg> compiled.
+Entity <ld_arith_reg> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/mux_onehot.vhd" in Library proc_common_v2_00_a.
+Entity <mux_onehot> compiled.
+Entity <mux_onehot> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/down_counter.vhd" in Library proc_common_v2_00_a.
+Entity <down_counter> compiled.
+Entity <down_counter> (Architecture <simulation>) compiled.
+Compiling vhdl file "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" in Library huffman_decoder_v1_00_a.
+Entity <huffman_decoder> compiled.
+Entity <huffman_decoder> (Architecture <IMP>) compiled.
+Compiling vhdl file "F:/fpga/proj/huffman_decode/synthesis/../hdl/huffman_decoder_0_wrapper.vhd" in Library work.
+Entity <huffman_decoder_0_wrapper> compiled.
+Entity <huffman_decoder_0_wrapper> (Architecture <STRUCTURE>) compiled.
+Compiling verilog file "F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/user_logic.v"
+Module <user_logic> compiled
+Compiling verilog file "F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/huffman_decoder_v1.v"
+Module <huffman_decoder_v1> compiled
+No errors in compilation
+Analysis of file <"huffman_decoder_0_wrapper_xst.prj"> succeeded.
+ 
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <huffman_decoder_0_wrapper> (Architecture <STRUCTURE>).
+    Set user-defined property "X_CORE_INFO =  huffman_decoder_v1_00_a" for unit <huffman_decoder_0_wrapper>.
+Instantiating component <huffman_decoder> from Library <huffman_decoder_v1_00_a>.
+WARNING:Xst:37 - Unknown property "SIGIS".
+WARNING:Xst:37 - Unknown property "SIGIS".
+Entity <huffman_decoder_0_wrapper> analyzed. Unit <huffman_decoder_0_wrapper> generated.
+
+Analyzing generic Entity <huffman_decoder> (Architecture <imp>).
+	C_BASEADDR = <u>01111110001000000000000000000000
+	C_HIGHADDR = <u>01111110001000001111111111111111
+	C_OPB_AWIDTH = 32
+	C_OPB_DWIDTH = 32
+	C_FAMILY = "virtex2p"
+WARNING:Xst:37 - Unknown property "SIGIS".
+WARNING:Xst:37 - Unknown property "SIGIS".
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_CS' of component 'opb_ipif'.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_CE' of component 'opb_ipif'.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_Addr' of component 'opb_ipif'.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_AddrValid' of component 'opb_ipif'.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_RNW' of component 'opb_ipif'.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_Burst' of component 'opb_ipif'.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'IP2INTC_Irpt' of component 'opb_ipif'.
+WARNING:Xst:753 - "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd" line 439: Unconnected output port 'Bus2IP_Freeze' of component 'opb_ipif'.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+Entity <huffman_decoder> analyzed. Unit <huffman_decoder> generated.
+
+Analyzing generic Entity <opb_ipif> (Architecture <imp>).
+	C_ARD_ID_ARRAY = (100, 7, 8, 5, 6)
+	C_ARD_ADDR_RANGE_ARRAY = (<u>0000000000000000000000000000000001111110001000000000000000000000, <u>0000000000000000000000000000000001111110001000000000000011111111, <u>0000000000000000000000000000000001111110001000000000000100000000, <u>0000000000000000000000000000000001111110001000000000000111111111, <u>0000000000000000000000000000000001111110001000000000001000000000, <u>0000000000000000000000000000000001111110001000000000001011111111, <u>0000000000000000000000000000000001111110001000000000001100000000, <u>0000000000000000000000000000000001111110001000000000001111111111, <u>0000000000000000000000000000000001111110001000000000010000000000, <u>0000000000000000000000000000000001111110001000000000010011111111)
+	C_ARD_DWIDTH_ARRAY = (32, 32, 32, 32, 32)
+	C_ARD_NUM_CE_ARRAY = (2, 2, 1, 2, 1)
+	C_ARD_DEPENDENT_PROPS_ARRAY = ((0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (16384, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (16384, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+	C_PIPELINE_MODEL = 5
+	C_DEV_BLK_ID = 0
+	C_DEV_MIR_ENABLE = 0
+	C_OPB_AWIDTH = 32
+	C_OPB_DWIDTH = 32
+	C_FAMILY = "virtex2p"
+	C_IP_INTR_MODE_ARRAY = (0)
+	C_DEV_BURST_ENABLE = 0
+	C_INCLUDE_ADDR_CNTR = 0
+	C_INCLUDE_WR_BUF = 0
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+Entity <opb_ipif> analyzed. Unit <opb_ipif> generated.
+
+Analyzing generic Entity <opb_bam> (Architecture <implementation>).
+	C_ARD_ID_ARRAY = (100, 7, 8, 5, 6)
+	C_ARD_ADDR_RANGE_ARRAY = (<u>0000000000000000000000000000000001111110001000000000000000000000, <u>0000000000000000000000000000000001111110001000000000000011111111, <u>0000000000000000000000000000000001111110001000000000000100000000, <u>0000000000000000000000000000000001111110001000000000000111111111, <u>0000000000000000000000000000000001111110001000000000001000000000, <u>0000000000000000000000000000000001111110001000000000001011111111, <u>0000000000000000000000000000000001111110001000000000001100000000, <u>0000000000000000000000000000000001111110001000000000001111111111, <u>0000000000000000000000000000000001111110001000000000010000000000, <u>0000000000000000000000000000000001111110001000000000010011111111)
+	C_ARD_DWIDTH_ARRAY = (32, 32, 32, 32, 32)
+	C_ARD_NUM_CE_ARRAY = (2, 2, 1, 2, 1)
+	C_ARD_DEPENDENT_PROPS_ARRAY = ((0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (16384, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (16384, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+	C_PIPELINE_MODEL = 5
+	C_DEV_BLK_ID = 0
+	C_DEV_MIR_ENABLE = 0
+	C_OPB_AWIDTH = 32
+	C_OPB_DWIDTH = 32
+	C_FAMILY = "virtex2p"
+	C_IP_INTR_MODE_ARRAY = (0)
+	C_DEV_BURST_ENABLE = 0
+	C_INCLUDE_ADDR_CNTR = 0
+	C_INCLUDE_WR_BUF = 0
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2108: Unconnected output port 'Rd_Data_Out' of component 'IPIF_Steer'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2108: Unconnected output port 'BE_Out' of component 'IPIF_Steer'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2134: Unconnected output port 'Wr_Data_Out' of component 'IPIF_Steer'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2134: Unconnected output port 'Rd_Data_Out' of component 'IPIF_Steer'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2157: Unconnected output port 'Wr_Data_Out' of component 'IPIF_Steer'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2157: Unconnected output port 'BE_Out' of component 'IPIF_Steer'.
+WARNING:Xst:819 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2288: The following signals are missing in the process sensitivity list:
+   bus2ip_rnw_s1.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2962: Unconnected output port 'RFIFO2DMA_AlmostEmpty' of component 'rdpfifo_top'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2962: Unconnected output port 'RFIFO2DMA_Empty' of component 'rdpfifo_top'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 2962: Unconnected output port 'RFIFO2DMA_Occupancy' of component 'rdpfifo_top'.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 3078: Unconnected output port 'WFIFO2DMA_AlmostFull' of component 'wrpfifo_top'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 3078: Unconnected output port 'WFIFO2DMA_Full' of component 'wrpfifo_top'.
+WARNING:Xst:753 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd" line 3078: Unconnected output port 'WFIFO2DMA_Vacancy' of component 'wrpfifo_top'.
+WARNING:Xst:1748 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 244: VHDL Assertion Statement with non constant condition is ignored.
+INFO:Xst:1304 - Contents of register <opb_seqaddr_s0> in unit <opb_bam> never changes during circuit operation. The register is replaced by logic.
+INFO:Xst:1304 - Contents of register <opb_seqaddr_d1> in unit <opb_bam> never changes during circuit operation. The register is replaced by logic.
+INFO:Xst:1304 - Contents of register <opb_seqaddr_s0_d1> in unit <opb_bam> never changes during circuit operation. The register is replaced by logic.
+INFO:Xst:1304 - Contents of register <last_burstrd_xferack_d1> in unit <opb_bam> never changes during circuit operation. The register is replaced by logic.
+INFO:Xst:1304 - Contents of register <bus2ip_burst_s1_d1> in unit <opb_bam> never changes during circuit operation. The register is replaced by logic.
+INFO:Xst:1304 - Contents of register <last_burstrd_xferack_d2> in unit <opb_bam> never changes during circuit operation. The register is replaced by logic.
+Entity <opb_bam> analyzed. Unit <opb_bam> generated.
+
+Analyzing generic Entity <pselect> (Architecture <imp>).
+	C_AB = 21
+	C_AW = 32
+	C_BAR = <u>01111110001000000000000000000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect> analyzed. Unit <pselect> generated.
+
+Analyzing generic Entity <pselect.0> (Architecture <imp>).
+	C_AB = 3
+	C_AW = 11
+	C_BAR = <u>00000000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.0> analyzed. Unit <pselect.0> generated.
+
+Analyzing generic Entity <pselect.1> (Architecture <imp>).
+	C_AB = 1
+	C_AW = 1
+	C_BAR = <u>0
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.1> analyzed. Unit <pselect.1> generated.
+
+Analyzing generic Entity <pselect.2> (Architecture <imp>).
+	C_AB = 1
+	C_AW = 1
+	C_BAR = <u>1
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.2> analyzed. Unit <pselect.2> generated.
+
+Analyzing generic Entity <pselect.3> (Architecture <imp>).
+	C_AB = 3
+	C_AW = 11
+	C_BAR = <u>00100000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.3> analyzed. Unit <pselect.3> generated.
+
+Analyzing generic Entity <pselect.4> (Architecture <imp>).
+	C_AB = 3
+	C_AW = 11
+	C_BAR = <u>01000000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.4> analyzed. Unit <pselect.4> generated.
+
+Analyzing generic Entity <pselect.5> (Architecture <imp>).
+	C_AB = 3
+	C_AW = 11
+	C_BAR = <u>01100000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.5> analyzed. Unit <pselect.5> generated.
+
+Analyzing generic Entity <pselect.6> (Architecture <imp>).
+	C_AB = 3
+	C_AW = 11
+	C_BAR = <u>10000000000
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" line 195: Generating a Black Box for component <MUXCY>.
+Entity <pselect.6> analyzed. Unit <pselect.6> generated.
+
+Analyzing generic Entity <IPIF_Steer> (Architecture <imp>).
+	C_DWIDTH = 32
+	C_SMALLEST = 32
+	C_AWIDTH = 32
+Entity <IPIF_Steer> analyzed. Unit <IPIF_Steer> generated.
+
+Analyzing generic Entity <or_muxcy> (Architecture <implementation>).
+	C_NUM_BITS = 4
+Entity <or_muxcy> analyzed. Unit <or_muxcy> generated.
+
+Analyzing generic Entity <rdpfifo_top> (Architecture <implementation>).
+	C_MIR_ENABLE = <u>0
+	C_BLOCK_ID = 0
+	C_FIFO_DEPTH_LOG2X = 9
+	C_FIFO_WIDTH = 32
+	C_INCLUDE_PACKET_MODE = <u>1
+	C_INCLUDE_VACANCY = <u>1
+	C_SUPPORT_BURST = <u>1
+	C_IPIF_DBUS_WIDTH = 32
+	C_VIRTEX_II = <u>1
+Instantiating component <pf_dpram_select> from Library <proc_common_v2_00_a>.
+Entity <rdpfifo_top> analyzed. Unit <rdpfifo_top> generated.
+
+Analyzing generic Entity <ipif_control_rd> (Architecture <implementation>).
+	C_MIR_ENABLE = <u>0
+	C_BLOCK_ID = 0
+	C_INTFC_TYPE = 2
+	C_VERSION_MAJOR = 1
+	C_VERSION_MINOR = 1
+	C_VERSION_REV = 1
+	C_FIFO_WIDTH = 32
+	C_DP_ADDRESS_WIDTH = 9
+	C_SUPPORT_BURST = <u>1
+	C_IPIF_DBUS_WIDTH = 32
+Entity <ipif_control_rd> analyzed. Unit <ipif_control_rd> generated.
+
+Analyzing generic Entity <rdpfifo_dp_cntl> (Architecture <implementation>).
+	C_DP_ADDRESS_WIDTH = 9
+	C_INCLUDE_PACKET_MODE = <u>1
+	C_INCLUDE_VACANCY = <u>1
+Instantiating component <pf_occ_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_occ_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_adder> from Library <proc_common_v2_00_a>.
+Entity <rdpfifo_dp_cntl> analyzed. Unit <rdpfifo_dp_cntl> generated.
+
+Analyzing generic Entity <pf_occ_counter_top> (Architecture <implementation>).
+	C_COUNT_WIDTH = 10
+Entity <pf_occ_counter_top> analyzed. Unit <pf_occ_counter_top> generated.
+
+Analyzing generic Entity <pf_occ_counter> (Architecture <implementation>).
+	C_COUNT_WIDTH = 10
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter.vhd" line 154: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter.vhd" line 182: Generating a Black Box for component <MUXCY>.
+Entity <pf_occ_counter> analyzed. Unit <pf_occ_counter> generated.
+
+Analyzing Entity <pf_counter_bit> (Architecture <implementation>).
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_bit.vhd" line 190: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_bit.vhd" line 197: Generating a Black Box for component <XORCY>.
+Entity <pf_counter_bit> analyzed. Unit <pf_counter_bit> generated.
+
+Analyzing generic Entity <inferred_lut4> (Architecture <implementation>).
+	INIT = <u>0011011011000110
+Entity <inferred_lut4> analyzed. Unit <inferred_lut4> generated.
+
+Analyzing generic Entity <pf_counter_top> (Architecture <implementation>).
+	C_COUNT_WIDTH = 9
+Entity <pf_counter_top> analyzed. Unit <pf_counter_top> generated.
+
+Analyzing generic Entity <pf_counter> (Architecture <implementation>).
+	C_COUNT_WIDTH = 9
+Entity <pf_counter> analyzed. Unit <pf_counter> generated.
+
+Analyzing generic Entity <pf_adder> (Architecture <implementation>).
+	C_REGISTERED_RESULT = <u>0
+	C_COUNT_WIDTH = 10
+Entity <pf_adder> analyzed. Unit <pf_adder> generated.
+
+Analyzing generic Entity <pf_adder_bit> (Architecture <implementation>).
+	C_REGISTERED_RESULT = <u>0
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder_bit.vhd" line 192: Generating a Black Box for component <MUXCY>.
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder_bit.vhd" line 199: Generating a Black Box for component <XORCY>.
+Entity <pf_adder_bit> analyzed. Unit <pf_adder_bit> generated.
+
+Analyzing generic Entity <inferred_lut4.7> (Architecture <implementation>).
+	INIT = <u>0000000001101001
+Entity <inferred_lut4.7> analyzed. Unit <inferred_lut4.7> generated.
+
+Analyzing generic Entity <pf_dpram_select> (Architecture <implementation>).
+	C_DP_DATA_WIDTH = 32
+	C_DP_ADDRESS_WIDTH = 9
+	C_VIRTEX_II = <u>1
+WARNING:Xst:766 - "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_dpram_select.vhd" line 725: Generating a Black Box for component <RAMB16_S36_S36>.
+Entity <pf_dpram_select> analyzed. Unit <pf_dpram_select> generated.
+
+Analyzing generic Entity <wrpfifo_top> (Architecture <implementation>).
+	C_MIR_ENABLE = <u>0
+	C_BLOCK_ID = 0
+	C_FIFO_DEPTH_LOG2X = 9
+	C_FIFO_WIDTH = 32
+	C_INCLUDE_PACKET_MODE = <u>1
+	C_INCLUDE_VACANCY = <u>1
+	C_SUPPORT_BURST = <u>1
+	C_IPIF_DBUS_WIDTH = 32
+	C_VIRTEX_II = <u>1
+Instantiating component <pf_dpram_select> from Library <proc_common_v2_00_a>.
+Entity <wrpfifo_top> analyzed. Unit <wrpfifo_top> generated.
+
+Analyzing generic Entity <ipif_control_wr> (Architecture <implementation>).
+	C_MIR_ENABLE = <u>0
+	C_BLOCK_ID = 0
+	C_INTFC_TYPE = 3
+	C_VERSION_MAJOR = 1
+	C_VERSION_MINOR = 1
+	C_VERSION_REV = 1
+	C_FIFO_WIDTH = 32
+	C_DP_ADDRESS_WIDTH = 9
+	C_SUPPORT_BURST = <u>1
+	C_IPIF_DBUS_WIDTH = 32
+Entity <ipif_control_wr> analyzed. Unit <ipif_control_wr> generated.
+
+Analyzing generic Entity <wrpfifo_dp_cntl> (Architecture <implementation>).
+	C_DP_ADDRESS_WIDTH = 9
+	C_INCLUDE_PACKET_MODE = <u>1
+	C_INCLUDE_VACANCY = <u>1
+Instantiating component <pf_occ_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_occ_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_counter_top> from Library <proc_common_v2_00_a>.
+Instantiating component <pf_adder> from Library <proc_common_v2_00_a>.
+Entity <wrpfifo_dp_cntl> analyzed. Unit <wrpfifo_dp_cntl> generated.
+
+Analyzing generic Entity <pf_dly1_mux> (Architecture <implementation>).
+	C_MUX_WIDTH = 12
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Instantiating component <inferred_lut4> from Library <proc_common_v2_00_a>.
+Entity <pf_dly1_mux> analyzed. Unit <pf_dly1_mux> generated.
+
+Analyzing generic Entity <inferred_lut4.8> (Architecture <implementation>).
+	INIT = <u>1111111000010000
+Entity <inferred_lut4.8> analyzed. Unit <inferred_lut4.8> generated.
+
+Analyzing module <user_logic>.
+	c_width = 32
+	p_width = 32
+	p_width_msb = 31
+	cz_width = 32
+	c_dwidth = 32
+	c_num_ce = 2
+	c_rdfifo_dwidth = 32
+	c_rdfifo_depth = 512
+	c_wrfifo_dwidth = 32
+	c_wrfifo_depth = 512
+WARNING:Xst:905 - "F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/user_logic.v" line 324: The signals <rdy_rc> are missing in the sensitivity list of always block.
+Module <user_logic> is correct for synthesis.
+ 
+Analyzing module <huffman_decoder_v1>.
+	c_width = 4
+	vlc_width = 5
+	vlcz_width = 5
+	p_width = 32
+	p_width_msb = 31
+	EOM = 8
+	EOM_LENGTH = 4
+	Calling function <lookup_2bit>.
+	Calling function <lookup_3bit>.
+	Calling function <lookup_4bit>.
+	Calling function <lookup_5bit>.
+Module <huffman_decoder_v1> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <huffman_decoder_v1>.
+    Related source file is "F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/huffman_decoder_v1.v".
+WARNING:Xst:646 - Signal <eom_detect_wc> is assigned but never used.
+WARNING:Xst:646 - Signal <idata_expanded_wd> is assigned but never used.
+    Found finite state machine <FSM_0> for signal <fsm_cs>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 4                                              |
+    | Outputs            | 5                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 000                                            |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 6-bit comparator lessequal for signal <$n0000> created at line 189.
+    Found 6-bit addsub for signal <$n0007> created at line 110.
+    Found 36-bit shifter logical left for signal <$n0011> created at line 167.
+    Found 7-bit adder for signal <$n0012> created at line 121.
+    Found 36-bit shifter logical left for signal <$n0013> created at line 121.
+    Found 5-bit comparator greatequal for signal <$n0017> created at line 152.
+    Found 4-bit comparator greatequal for signal <$n0018> created at line 144.
+    Found 4-bit comparator lessequal for signal <$n0019> created at line 144.
+    Found 3-bit comparator greatequal for signal <$n0020> created at line 136.
+    Found 3-bit comparator lessequal for signal <$n0021> created at line 136.
+    Found 2-bit comparator lessequal for signal <$n0022> created at line 128.
+    Found 6-bit 4-to-1 multiplexer for signal <$old_bits_left_wc_439>.
+    Found 6-bit register for signal <bits_left_rc>.
+    Found 1-bit register for signal <code_detect_rc>.
+    Found 4-bit register for signal <code_rc>.
+    Found 2-bit register for signal <idx_rc>.
+    Found 4-bit 3-to-1 multiplexer for signal <lookup_4bit/1/lookup_4bit>.
+    Found 36-bit register for signal <pdata_rd>.
+    Found 1-bit register for signal <pop_rc>.
+    Found 1-bit 4-to-1 multiplexer for signal <pop_wc>.
+    Found 1-bit register for signal <push_rc>.
+    Found 1-bit 4-to-1 multiplexer for signal <push_wc>.
+    Found 3-bit register for signal <shift_len_rc>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred  54 D-type flip-flop(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred   7 Comparator(s).
+	inferred  12 Multiplexer(s).
+	inferred   2 Combinational logic shifter(s).
+Unit <huffman_decoder_v1> synthesized.
+
+
+Synthesizing Unit <inferred_lut4_1>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/inferred_lut4.vhd".
+    Found 16x1-bit ROM for signal <$n0001> created at line 89.
+    Summary:
+	inferred   1 ROM(s).
+Unit <inferred_lut4_1> synthesized.
+
+
+Synthesizing Unit <pf_dly1_mux>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/pf_dly1_mux.vhd".
+WARNING:Xst:1780 - Signal <count_Result_Reg> is never used or assigned.
+Unit <pf_dly1_mux> synthesized.
+
+
+Synthesizing Unit <wrpfifo_dp_cntl>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_dp_cntl.vhd".
+WARNING:Xst:647 - Input <Burst_wr_xfer> is never used.
+WARNING:Xst:646 - Signal <dummy_empty> is assigned but never used.
+WARNING:Xst:646 - Signal <dummy_almost_empty> is assigned but never used.
+WARNING:Xst:646 - Signal <rdreq_dly1> is assigned but never used.
+WARNING:Xst:646 - Signal <int_almost_empty_dly1> is assigned but never used.
+WARNING:Xst:646 - Signal <dummy_full> is assigned but never used.
+WARNING:Xst:646 - Signal <dummy_almost_full> is assigned but never used.
+    Register <ld_addr_read_into_mark> equivalent to <ld_occ_norm_into_mark> has been removed
+    Register <enable_rd_addr_inc> equivalent to <enable_rd_addr_decr> has been removed
+    Register <enable_mark_addr_inc> equivalent to <enable_mark_addr_decr> has been removed
+    Register <ld_occ_mark_into_norm> equivalent to <ld_addr_mark_into_read> has been removed
+    Found finite state machine <FSM_1> for signal <trans_state>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 13                                             |
+    | Inputs             | 3                                              |
+    | Outputs            | 11                                             |
+    | Clock              | Bus_clk (rising_edge)                          |
+    | Reset              | Bus_rst (positive)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 0000                                           |
+    | Power Up State     | 0000                                           |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <back_to_back_rd>.
+    Found 1-bit register for signal <bkup_recover>.
+    Found 1-bit register for signal <enable_mark_addr_decr>.
+    Found 1-bit register for signal <enable_rd_addr_decr>.
+    Found 1-bit register for signal <enable_wr_addr_inc>.
+    Found 1-bit register for signal <hold_ack>.
+    Found 1-bit register for signal <int_empty_dly1>.
+    Found 1-bit register for signal <int_full_dly1>.
+    Found 1-bit register for signal <int_full_dly2>.
+    Found 1-bit register for signal <int_rdack>.
+    Found 1-bit register for signal <ld_addr_mark_into_read>.
+    Found 1-bit register for signal <ld_occ_norm_into_mark>.
+    Found 1-bit register for signal <rdack_dly1>.
+    Found 1-bit register for signal <valid_read>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred  14 D-type flip-flop(s).
+Unit <wrpfifo_dp_cntl> synthesized.
+
+
+Synthesizing Unit <ipif_control_wr>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/ipif_control_wr.vhd".
+WARNING:Xst:646 - Signal <reg_rdce1> is assigned but never used.
+WARNING:Xst:646 - Signal <reg_rdce3> is assigned but never used.
+WARNING:Xst:646 - Signal <reg_rdreq> is assigned but never used.
+WARNING:Xst:646 - Signal <reg_wrce2> is assigned but never used.
+WARNING:Xst:646 - Signal <reg_wrce3> is assigned but never used.
+WARNING:Xst:646 - Signal <reg_write_req> is assigned but never used.
+    Found 1-bit register for signal <Fifo_Reset>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0012>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0013>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0015>.
+    Found 1-bit register for signal <burst_wr_xfer>.
+    Found 1-bit register for signal <fifo_errack_inhibit>.
+    Found 1-bit register for signal <rd_access_error>.
+    Found 1-bit register for signal <reg_almostfull>.
+    Found 1-bit register for signal <reg_deadlock>.
+    Found 1-bit register for signal <reg_full>.
+    Found 1-bit register for signal <reg_rdce2>.
+    Found 1-bit register for signal <reg_read_ack>.
+    Found 1-bit register for signal <reg_read_req>.
+    Found 10-bit register for signal <reg_vacancy>.
+    Found 1-bit register for signal <reg_wrce1>.
+    Found 1-bit register for signal <reg_wrreq>.
+    Found 1-bit register for signal <sw_reset_error>.
+    Found 1-bit register for signal <wr_access_error>.
+    Summary:
+	inferred  24 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+Unit <ipif_control_wr> synthesized.
+
+
+Synthesizing Unit <inferred_lut4_0>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/inferred_lut4.vhd".
+    Found 16x1-bit ROM for signal <$n0001> created at line 89.
+    Summary:
+	inferred   1 ROM(s).
+Unit <inferred_lut4_0> synthesized.
+
+
+Synthesizing Unit <pf_adder_bit>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder_bit.vhd".
+WARNING:Xst:646 - Signal <addsub_result_Reg> is assigned but never used.
+Unit <pf_adder_bit> synthesized.
+
+
+Synthesizing Unit <pf_counter>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter.vhd".
+    Found 1-bit xor2 for signal <carry_active_high>.
+Unit <pf_counter> synthesized.
+
+
+Synthesizing Unit <inferred_lut4>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/inferred_lut4.vhd".
+    Found 16x1-bit ROM for signal <$n0001> created at line 89.
+    Summary:
+	inferred   1 ROM(s).
+Unit <inferred_lut4> synthesized.
+
+
+Synthesizing Unit <pf_counter_bit>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_bit.vhd".
+Unit <pf_counter_bit> synthesized.
+
+
+Synthesizing Unit <pf_occ_counter>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter.vhd".
+WARNING:Xst:646 - Signal <alu_cy<0>> is assigned but never used.
+    Found 1-bit xor2 for signal <carry_out_select_di>.
+    Found 1-bit xor2 for signal <carry_start>.
+Unit <pf_occ_counter> synthesized.
+
+
+Synthesizing Unit <pf_adder>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder.vhd".
+WARNING:Xst:646 - Signal <alu_cy<0>> is assigned but never used.
+Unit <pf_adder> synthesized.
+
+
+Synthesizing Unit <pf_counter_top>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_top.vhd".
+WARNING:Xst:646 - Signal <sig_carry_out> is assigned but never used.
+    Found 1-bit xor2 for signal <sig_cnt_enable>.
+Unit <pf_counter_top> synthesized.
+
+
+Synthesizing Unit <pf_occ_counter_top>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter_top.vhd".
+WARNING:Xst:646 - Signal <sig_carry_out> is assigned but never used.
+WARNING:Xst:646 - Signal <sig_going_full> is assigned but never used.
+    Found 1-bit 4-to-1 multiplexer for signal <lower_set>.
+    Found 1-bit xor2 for signal <sig_cnt_enable>.
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <pf_occ_counter_top> synthesized.
+
+
+Synthesizing Unit <pf_dpram_select>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_dpram_select.vhd".
+WARNING:Xst:646 - Signal <port_b_data_in> is assigned but never used.
+WARNING:Xst:646 - Signal <port_b_data_out<35:32>> is assigned but never used.
+WARNING:Xst:646 - Signal <port_a_data_out> is assigned but never used.
+Unit <pf_dpram_select> synthesized.
+
+
+Synthesizing Unit <rdpfifo_dp_cntl>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_dp_cntl.vhd".
+WARNING:Xst:646 - Signal <dummy_empty> is assigned but never used.
+WARNING:Xst:646 - Signal <dummy_almost_empty> is assigned but never used.
+WARNING:Xst:646 - Signal <int_almost_empty_dly1> is assigned but never used.
+WARNING:Xst:646 - Signal <dummy_full> is assigned but never used.
+WARNING:Xst:646 - Signal <dummy_almost_full> is assigned but never used.
+    Register <ld_addr_write_into_mark> equivalent to <ld_occ_norm_into_mark> has been removed
+    Register <enable_rd_addr_inc> equivalent to <enable_rd_addr_decr> has been removed
+    Register <ld_occ_mark_into_norm> equivalent to <ld_addr_mark_into_write> has been removed
+    Found finite state machine <FSM_2> for signal <trans_state>.
+    -----------------------------------------------------------------------
+    | States             | 8                                              |
+    | Transitions        | 12                                             |
+    | Inputs             | 3                                              |
+    | Outputs            | 9                                              |
+    | Clock              | Bus_clk (rising_edge)                          |
+    | Reset              | Bus_rst (positive)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 000                                            |
+    | Power Up State     | 000                                            |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <enable_mark_addr_inc>.
+    Found 1-bit register for signal <enable_rd_addr_decr>.
+    Found 1-bit register for signal <enable_wr_addr_inc>.
+    Found 1-bit register for signal <hold_ack>.
+    Found 1-bit register for signal <int_empty_dly1>.
+    Found 1-bit register for signal <int_full_dly1>.
+    Found 1-bit register for signal <int_full_dly2>.
+    Found 1-bit register for signal <ld_addr_mark_into_write>.
+    Found 1-bit register for signal <ld_occ_norm_into_mark>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   9 D-type flip-flop(s).
+Unit <rdpfifo_dp_cntl> synthesized.
+
+
+Synthesizing Unit <ipif_control_rd>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/ipif_control_rd.vhd".
+WARNING:Xst:647 - Input <Bus_WrReq> is never used.
+WARNING:Xst:1780 - Signal <fifo_rd_req> is never used or assigned.
+    Found 1-bit register for signal <Fifo_rst>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0013>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0015>.
+    Found 1-bit register for signal <burst_rd_xfer>.
+    Found 1-bit register for signal <fifo_errack_inhibit>.
+    Found 1-bit register for signal <rd_access_error>.
+    Found 1-bit register for signal <reg_almostempty>.
+    Found 1-bit register for signal <reg_deadlock>.
+    Found 1-bit register for signal <reg_empty>.
+    Found 10-bit register for signal <reg_occupancy>.
+    Found 1-bit register for signal <reg_rdce2>.
+    Found 1-bit register for signal <reg_rdreq>.
+    Found 1-bit register for signal <reg_read_ack>.
+    Found 1-bit register for signal <reg_read_req>.
+    Found 1-bit register for signal <reg_wrce1>.
+    Found 1-bit register for signal <sw_reset_error>.
+    Found 1-bit register for signal <wr_access_error>.
+    Summary:
+	inferred  24 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+Unit <ipif_control_rd> synthesized.
+
+
+Synthesizing Unit <wrpfifo_top>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/wrpfifo_v1_01_b/hdl/vhdl/wrpfifo_top.vhd".
+Unit <wrpfifo_top> synthesized.
+
+
+Synthesizing Unit <rdpfifo_top>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_top.vhd".
+WARNING:Xst:647 - Input <Bus_DBus<0:27>> is never used.
+WARNING:Xst:646 - Signal <sig_srl_rdreq> is assigned but never used.
+Unit <rdpfifo_top> synthesized.
+
+
+Synthesizing Unit <or_muxcy>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_muxcy.vhd".
+Unit <or_muxcy> synthesized.
+
+
+Synthesizing Unit <IPIF_Steer>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_steer.vhd".
+WARNING:Xst:647 - Input <Addr> is never used.
+WARNING:Xst:647 - Input <Decode_size> is never used.
+Unit <IPIF_Steer> synthesized.
+
+
+Synthesizing Unit <pselect_6>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<3:10>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_6> synthesized.
+
+
+Synthesizing Unit <pselect_5>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<3:10>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_5> synthesized.
+
+
+Synthesizing Unit <pselect_4>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<3:10>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_4> synthesized.
+
+
+Synthesizing Unit <pselect_3>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<3:10>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_3> synthesized.
+
+
+Synthesizing Unit <pselect_2>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_2> synthesized.
+
+
+Synthesizing Unit <pselect_1>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_1> synthesized.
+
+
+Synthesizing Unit <pselect_0>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<3:10>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<1>> is never used or assigned.
+Unit <pselect_0> synthesized.
+
+
+Synthesizing Unit <pselect>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd".
+WARNING:Xst:647 - Input <A<21:31>> is never used.
+WARNING:Xst:1780 - Signal <lut_out<6>> is never used or assigned.
+Unit <pselect> synthesized.
+
+
+Synthesizing Unit <opb_bam>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd".
+WARNING:Xst:647 - Input <IP2Bus_Clk> is never used.
+WARNING:Xst:647 - Input <IP2Bus_AddrAck> is never used.
+WARNING:Xst:647 - Input <IP2Bus_IntrEvent<0>> is never used.
+WARNING:Xst:647 - Input <OPB_seqAddr> is never used.
+WARNING:Xst:646 - Signal <reset2bus_error> is assigned but never used.
+WARNING:Xst:646 - Signal <intr2bus_toutsup> is assigned but never used.
+WARNING:Xst:1780 - Signal <wrbuf_addrack> is never used or assigned.
+WARNING:Xst:646 - Signal <intr2bus_ack> is assigned but never used.
+WARNING:Xst:1780 - Signal <wrdata_ack> is never used or assigned.
+WARNING:Xst:646 - Signal <Bus2IP_RdReq> is assigned but never used.
+WARNING:Xst:646 - Signal <last_wr_xferack_d2> is assigned but never used.
+WARNING:Xst:646 - Signal <rdfifo2intr_deadlock> is assigned but never used.
+WARNING:Xst:646 - Signal <ipic_pstage_ce> is assigned but never used.
+WARNING:Xst:646 - Signal <intr2bus_postedwrinh> is assigned but never used.
+WARNING:Xst:646 - Signal <intr2bus_data> is assigned but never used.
+WARNING:Xst:646 - Signal <last_xferack_d2> is assigned but never used.
+WARNING:Xst:646 - Signal <next_opb_addr_cntr_out<0:28>> is assigned but never used.
+WARNING:Xst:646 - Signal <next_opb_addr_cntr_out<30:31>> is assigned but never used.
+WARNING:Xst:646 - Signal <reset2bus_data> is assigned but never used.
+WARNING:Xst:646 - Signal <reset2bus_ack> is assigned but never used.
+WARNING:Xst:646 - Signal <last_xferack_s0> is assigned but never used.
+WARNING:Xst:1780 - Signal <cycle_abort_d1> is never used or assigned.
+WARNING:Xst:646 - Signal <wrbuf_errack> is assigned but never used.
+WARNING:Xst:646 - Signal <wrbuf_xferack> is assigned but never used.
+WARNING:Xst:646 - Signal <reset2bus_toutsup> is assigned but never used.
+WARNING:Xst:653 - Signal <last_wr_xferack> is used but never assigned. Tied to value 0.
+WARNING:Xst:646 - Signal <Bus2IP_WrReq> is assigned but never used.
+WARNING:Xst:1780 - Signal <bus2ip_addr_s0> is never used or assigned.
+WARNING:Xst:646 - Signal <last_burstrd_xferack_d2> is assigned but never used.
+WARNING:Xst:646 - Signal <address_load> is assigned but never used.
+WARNING:Xst:646 - Signal <intr2bus_retry> is assigned but never used.
+WARNING:Xst:646 - Signal <wrbuf_empty> is assigned but never used.
+WARNING:Xst:646 - Signal <reset2bus_retry> is assigned but never used.
+WARNING:Xst:646 - Signal <reset2bus_postedwrinh> is assigned but never used.
+WARNING:Xst:646 - Signal <opb_xfer_done> is assigned but never used.
+WARNING:Xst:646 - Signal <wrbuf_addrcntr_en> is assigned but never used.
+WARNING:Xst:646 - Signal <opb_seqaddr_s0_d1> is assigned but never used.
+WARNING:Xst:646 - Signal <wrfifo2intr_deadlock> is assigned but never used.
+WARNING:Xst:646 - Signal <wrbuf_addrcntr_rst> is assigned but never used.
+WARNING:Xst:1780 - Signal <bus2ip_be_s0> is never used or assigned.
+WARNING:Xst:1780 - Signal <bus2ip_cs_s0_d1> is never used or assigned.
+WARNING:Xst:646 - Signal <last_pw_xferack_d2> is assigned but never used.
+WARNING:Xst:1780 - Signal <cycle_active> is never used or assigned.
+WARNING:Xst:1780 - Signal <cs_to_or_for_dsize_bit<0>> is never used or assigned.
+WARNING:Xst:646 - Signal <cs_to_or_for_dsize_bit<1:2>> is assigned but never used.
+WARNING:Xst:646 - Signal <opb_xfer_start> is assigned but never used.
+WARNING:Xst:646 - Signal <wrbuf_retry> is assigned but never used.
+WARNING:Xst:646 - Signal <intr2bus_error> is assigned but never used.
+    Found 5-bit register for signal <bus2ip_cs_hit_s0_d1>.
+    Found 5-bit register for signal <ip2bus_postedwrinh_s2>.
+    Found 5-bit register for signal <ip2bus_postedwrinh_s2_d1>.
+    Found 5-bit register for signal <ip2bus_postedwrinh_s2_d2>.
+    Found 1-bit register for signal <last_pw_xferack_d1>.
+    Found 1-bit register for signal <last_xferack_d1>.
+    Found 1-bit register for signal <last_xferack_d1_s0>.
+    Found 5-bit register for signal <new_pw_s0_d1>.
+    Found 32-bit register for signal <opb_abus_s0>.
+    Found 4-bit register for signal <opb_be_s0>.
+    Found 32-bit register for signal <opb_dbus_s0>.
+    Found 1-bit register for signal <opb_rnw_s0>.
+    Found 1-bit register for signal <opb_select_s0>.
+    Found 1-bit register for signal <postedwrack_s2>.
+    Found 32-bit register for signal <sln_dbus_s2>.
+    Found 1-bit register for signal <sln_errack_s2>.
+    Found 1-bit register for signal <sln_retry_s1_d1>.
+    Found 1-bit register for signal <sln_retry_s1_d2>.
+    Found 1-bit register for signal <sln_retry_s2>.
+    Found 1-bit register for signal <sln_toutsup_s2>.
+    Found 1-bit register for signal <sln_xferack_s1_d1>.
+    Found 1-bit register for signal <sln_xferack_s1_d2>.
+    Found 1-bit register for signal <sln_xferack_s2>.
+    Summary:
+	inferred 139 D-type flip-flop(s).
+Unit <opb_bam> synthesized.
+
+
+Synthesizing Unit <user_logic>.
+    Related source file is "F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a/hdl/verilog/user_logic.v".
+WARNING:Xst:647 - Input <WFIFO2IP_AlmostEmpty> is never used.
+WARNING:Xst:647 - Input <RFIFO2IP_AlmostFull> is never used.
+WARNING:Xst:647 - Input <WFIFO2IP_Occupancy> is never used.
+WARNING:Xst:647 - Input <Bus2IP_BE> is never used.
+WARNING:Xst:647 - Input <RFIFO2IP_Vacancy> is never used.
+WARNING:Xst:646 - Signal <ip2rfifo_wrrelease> is assigned but never used.
+WARNING:Xst:646 - Signal <ip2rfifo_wrrestore> is assigned but never used.
+WARNING:Xst:646 - Signal <ip2rfifo_wrmark> is assigned but never used.
+WARNING:Xst:646 - Signal <ip2wfifo_rdmark> is assigned but never used.
+WARNING:Xst:646 - Signal <ip2wfifo_rdrelease> is assigned but never used.
+WARNING:Xst:646 - Signal <ip2wfifo_rdrestore> is assigned but never used.
+    Found finite state machine <FSM_3> for signal <fifo_cntl_cs>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 6                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 3                                              |
+    | Clock              | Bus2IP_Clk (rising_edge)                       |
+    | Reset              | Bus2IP_Reset (positive)                        |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 000                                            |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_4> for signal <fifo_wr_cntl_cs>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 7                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 2                                              |
+    | Clock              | Bus2IP_Clk (rising_edge)                       |
+    | Reset              | Bus2IP_Reset (positive)                        |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 00                                             |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <IP2RFIFO_WrReq>.
+    Found 1-bit register for signal <IP2WFIFO_RdReq>.
+    Found 32-bit 4-to-1 multiplexer for signal <$n0005> created at line 292.
+    Found 32-bit 4-to-1 multiplexer for signal <$n0006> created at line 292.
+    Found 32-bit adder for signal <$n0007> created at line 300.
+    Found 32-bit adder for signal <$n0008> created at line 302.
+    Found 1-bit 4-to-1 multiplexer for signal <ip2wfifo_rdreq_cmb>.
+    Found 32-bit register for signal <ldata_rd>.
+    Found 32-bit 4-to-1 multiplexer for signal <ldata_wd>.
+    Found 1-bit register for signal <rdy_rc>.
+    Found 32-bit register for signal <result_rd>.
+    Found 32-bit 4-to-1 multiplexer for signal <result_wd>.
+    Found 32-bit 4-to-1 multiplexer for signal <slv_ip2bus_data>.
+    Found 32-bit register for signal <slv_reg0>.
+    Found 32-bit register for signal <slv_reg1>.
+    Summary:
+	inferred   2 Finite State Machine(s).
+	inferred 131 D-type flip-flop(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred 161 Multiplexer(s).
+Unit <user_logic> synthesized.
+
+
+Synthesizing Unit <opb_ipif>.
+    Related source file is "C:/EDK/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_ipif.vhd".
+Unit <opb_ipif> synthesized.
+
+
+Synthesizing Unit <huffman_decoder>.
+    Related source file is "F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd".
+WARNING:Xst:653 - Signal <ZERO_IP2Bus_PostedWrInh> is used but never assigned. Tied to value 00000.
+WARNING:Xst:653 - Signal <iIP2WFIFO_RdRelease> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <iIP2WFIFO_RdRestore> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <ZERO_IP2Bus_IntrEvent<0>> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <iIP2RFIFO_WrRelease> is used but never assigned. Tied to value 0.
+WARNING:Xst:646 - Signal <iBus2IP_RdCE<2:7>> is assigned but never used.
+WARNING:Xst:653 - Signal <iIP2RFIFO_WrRestore> is used but never assigned. Tied to value 0.
+WARNING:Xst:653 - Signal <iIP2RFIFO_WrMark> is used but never assigned. Tied to value 0.
+WARNING:Xst:646 - Signal <iBus2IP_WrCE<2:7>> is assigned but never used.
+WARNING:Xst:653 - Signal <iIP2WFIFO_RdMark> is used but never assigned. Tied to value 0.
+Unit <huffman_decoder> synthesized.
+
+
+Synthesizing Unit <huffman_decoder_0_wrapper>.
+    Related source file is "F:/fpga/proj/huffman_decode/synthesis/../hdl/huffman_decoder_0_wrapper.vhd".
+Unit <huffman_decoder_0_wrapper> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Analyzing FSM <FSM_4> for best encoding.
+Optimizing FSM <FSM_4> on signal <fifo_wr_cntl_cs[1:2]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 01    | 01
+ 11    | 10
+-------------------
+Analyzing FSM <FSM_3> for best encoding.
+Optimizing FSM <FSM_3> on signal <fifo_cntl_cs[1:2]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 00
+ 001   | 01
+ 100   | 10
+-------------------
+Analyzing FSM <FSM_2> for best encoding.
+Optimizing FSM <FSM_2> on signal <trans_state[1:3]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 000
+ 001   | 010
+ 010   | 101
+ 011   | 011
+ 100   | 001
+ 101   | 100
+ 110   | 110
+ 111   | 111
+-------------------
+Analyzing FSM <FSM_1> for best encoding.
+Optimizing FSM <FSM_1> on signal <trans_state[1:9]> with one-hot encoding.
+--------------------
+ State | Encoding
+--------------------
+ 0000  | 000000001
+ 0001  | 000000100
+ 0010  | 000100000
+ 0011  | 000001000
+ 0100  | 001000000
+ 0101  | 000000010
+ 0110  | 000010000
+ 0111  | 010000000
+ 1000  | 100000000
+--------------------
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <FSM_0> on signal <fsm_cs[1:3]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 000
+ 001   | 001
+ 010   | 011
+ 011   | 010
+ 100   | 110
+-------------------
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# FSMs                             : 5
+# ROMs                             : 126
+ 16x1-bit ROM                      : 126
+# Adders/Subtractors               : 4
+ 32-bit adder                      : 2
+ 6-bit addsub                      : 1
+ 7-bit adder                       : 1
+# Registers                        : 110
+ 1-bit register                    : 90
+ 10-bit register                   : 2
+ 2-bit register                    : 1
+ 3-bit register                    : 1
+ 32-bit register                   : 7
+ 36-bit register                   : 1
+ 4-bit register                    : 2
+ 5-bit register                    : 5
+ 6-bit register                    : 1
+# Comparators                      : 7
+ 2-bit comparator lessequal        : 1
+ 3-bit comparator greatequal       : 1
+ 3-bit comparator lessequal        : 1
+ 4-bit comparator greatequal       : 1
+ 4-bit comparator lessequal        : 1
+ 5-bit comparator greatequal       : 1
+ 6-bit comparator lessequal        : 1
+# Multiplexers                     : 19
+ 1-bit 4-to-1 multiplexer          : 12
+ 32-bit 4-to-1 multiplexer         : 5
+ 4-bit 3-to-1 multiplexer          : 1
+ 6-bit 4-to-1 multiplexer          : 1
+# Logic shifters                   : 2
+ 36-bit shifter logical left       : 2
+# Xors                             : 24
+ 1-bit xor2                        : 24
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_31> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_be_s0_1> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_30> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_be_s0_0> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <reg_wrreq> is unconnected in block <I_IPIF_INTERFACE_BLOCK>.
+WARNING:Xst:1291 - FF/Latch <burst_wr_xfer> is unconnected in block <I_IPIF_INTERFACE_BLOCK>.
+WARNING:Xst:1290 - Hierarchical block <I_STEER_BE> is unconnected in block <OPB_BAM_I>.
+   It will be removed from the design.
+WARNING:Xst:1291 - FF/Latch <opb_be_s0_3> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_be_s0_2> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_24> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_25> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_26> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_27> is unconnected in block <OPB_BAM_I>.
+WARNING:Xst:1291 - FF/Latch <opb_abus_s0_28> is unconnected in block <OPB_BAM_I>.
+Register <ld_addr_mark_into_read> equivalent to <trans_state_FFd3> has been removed
+Register <ip2bus_postedwrinh_s2_0> equivalent to <ip2bus_postedwrinh_s2_1> has been removed
+Register <ip2bus_postedwrinh_s2_1> equivalent to <ip2bus_postedwrinh_s2_2> has been removed
+Register <ip2bus_postedwrinh_s2_2> equivalent to <ip2bus_postedwrinh_s2_3> has been removed
+Register <ip2bus_postedwrinh_s2_3> equivalent to <ip2bus_postedwrinh_s2_4> has been removed
+Register <ip2bus_postedwrinh_s2_d1_0> equivalent to <ip2bus_postedwrinh_s2_d1_1> has been removed
+Register <ip2bus_postedwrinh_s2_d1_1> equivalent to <ip2bus_postedwrinh_s2_d1_2> has been removed
+Register <ip2bus_postedwrinh_s2_d1_2> equivalent to <ip2bus_postedwrinh_s2_d1_3> has been removed
+Register <ip2bus_postedwrinh_s2_d1_3> equivalent to <ip2bus_postedwrinh_s2_d1_4> has been removed
+Register <ip2bus_postedwrinh_s2_d2_0> equivalent to <ip2bus_postedwrinh_s2_d2_1> has been removed
+Register <ip2bus_postedwrinh_s2_d2_1> equivalent to <ip2bus_postedwrinh_s2_d2_2> has been removed
+Register <ip2bus_postedwrinh_s2_d2_2> equivalent to <ip2bus_postedwrinh_s2_d2_3> has been removed
+Register <ip2bus_postedwrinh_s2_d2_3> equivalent to <ip2bus_postedwrinh_s2_d2_4> has been removed
+WARNING:Xst:1710 - FF/Latch  <ip2bus_postedwrinh_s2_4> (without init value) has a constant value of 0 in block <opb_bam>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <ip2bus_postedwrinh_s2_d1_4> (without init value) has a constant value of 0 in block <opb_bam>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <ip2bus_postedwrinh_s2_d2_4> (without init value) has a constant value of 0 in block <opb_bam>.
+WARNING:Xst:1710 - FF/Latch  <ld_occ_norm_into_mark> (without init value) has a constant value of 0 in block <wrpfifo_dp_cntl>.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch  <trans_state_FFd5> has a constant value of 0 in block <wrpfifo_dp_cntl>.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch  <trans_state_FFd6> has a constant value of 0 in block <wrpfifo_dp_cntl>.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch  <trans_state_FFd8> has a constant value of 0 in block <wrpfifo_dp_cntl>.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch  <trans_state_FFd1> has a constant value of 0 in block <wrpfifo_dp_cntl>.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch  <trans_state_FFd3> has a constant value of 0 in block <wrpfifo_dp_cntl>.
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:/Xilinx.
+
+Optimizing unit <huffman_decoder_0_wrapper> ...
+
+Optimizing unit <user_logic> ...
+WARNING:Xst:1710 - FF/Latch  <result_rd_26> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_25> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_24> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_23> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_22> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_21> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_20> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_19> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_18> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_17> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_16> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_15> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_14> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_13> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_12> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_11> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_10> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_9> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_8> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_7> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_6> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_5> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_4> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_30> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_28> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_27> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_29> (without init value) has a constant value of 0 in block <user_logic>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <result_rd_31> (without init value) has a constant value of 0 in block <user_logic>.
+
+Optimizing unit <opb_bam> ...
+
+Optimizing unit <pf_dly1_mux> ...
+
+Optimizing unit <pselect> ...
+
+Optimizing unit <huffman_decoder_v1> ...
+
+Optimizing unit <wrpfifo_dp_cntl> ...
+
+Optimizing unit <rdpfifo_dp_cntl> ...
+
+Optimizing unit <ipif_control_wr> ...
+
+Optimizing unit <pf_occ_counter_top> ...
+
+Optimizing unit <pf_counter> ...
+
+Optimizing unit <pf_occ_counter> ...
+
+Optimizing unit <ipif_control_rd> ...
+
+Mapping all equations...
+WARNING:Xst:1710 - FF/Latch  <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_retry_s2> (without init value) has a constant value of 0 in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_retry_s1_d1> (without init value) has a constant value of 0 in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_toutsup_s2> (without init value) has a constant value of 0 in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_retry_s1_d2> (without init value) has a constant value of 0 in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_31> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_be_s0_1> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_30> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_be_s0_0> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_be_s0_3> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_be_s0_2> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_24> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_25> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_26> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_27> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_28> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_wrreq> is unconnected in block <huffman_decoder_0_wrapper>.
+WARNING:Xst:1291 - FF/Latch <huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/burst_wr_xfer> is unconnected in block <huffman_decoder_0_wrapper>.
+Building and optimizing final netlist ...

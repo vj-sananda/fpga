@@ -1,0 +1,98 @@
+# XST (Creating Lso File) : 
+stimulus.lso
+# xst flow : RunXST
+stimulus_summary.html
+# xst flow : RunXST
+stimulus.syr
+stimulus.prj
+stimulus.sprj
+stimulus.ana
+stimulus.stx
+stimulus.cmd_log
+stimulus.ngc
+stimulus.ngr
+# xst flow : RunXST
+stimulus_summary.html
+# Implmentation : Translate
+__projnav/ednTOngd_tcl.rsp
+"f:\fpga\proj\llist_fifo/_ngo"
+stimulus.ngd
+stimulus_ngdbuild.nav
+stimulus.bld
+llist_fifo.ucf.untf
+stimulus.cmd_log
+# Implementation : Map
+stimulus_summary.html
+# Implementation : Map
+stimulus_map.ncd
+stimulus.ngm
+stimulus.pcf
+stimulus.nc1
+stimulus.mrp
+stimulus_map.mrp
+stimulus.mdf
+stimulus.cmd_log
+MAP_NO_GUIDE_FILE_CPF "stimulus"
+stimulus_map.ngm
+# Implmentation : Post-Place & Route Timing
+__projnav/ncdTOtwr_tcl.rsp
+stimulus.twr
+stimulus.twx
+stimulus.tsi
+stimulus.cmd_log
+# Implementation : Place & Route
+stimulus_summary.html
+# Implmentation : Place & Route
+__projnav/nc1TOncd_tcl.rsp
+stimulus.ncd
+stimulus.par
+stimulus.pad
+stimulus_pad.txt
+stimulus_pad.csv
+stimulus.pad_txt
+stimulus.dly
+reportgen.log
+stimulus.xpi
+stimulus.grf
+stimulus.itr
+stimulus_last_par.ncd
+stimulus.placed_ncd_tracker
+stimulus.routed_ncd_tracker
+stimulus.cmd_log
+PAR_NO_GUIDE_FILE_CPF "stimulus"
+# Generate Programming File
+__projnav/stimulus_ncdTOut_tcl.rsp
+__projnav/bitgen.rsp
+bitgen.ut
+stimulus.ut
+# Generate Programming File
+stimulus.bgn
+stimulus.rbt
+stimulus.ll
+stimulus.msk
+stimulus.drc
+stimulus.nky
+stimulus.bit
+stimulus.bin
+stimulus.isc
+stimulus.cmd_log
+# Configure Device (iMPACT)
+stimulus.prm
+stimulus.isc
+stimulus.svf
+xilinx.sys
+stimulus.mcs
+stimulus.exo
+stimulus.hex
+stimulus.tek
+stimulus.dst
+stimulus.dst_compressed
+stimulus.mpm
+_impact.cmd
+_impact.log
+# xst flow : RunXST
+stimulus_summary.html
+# xst flow : RunXST
+stimulus_summary.html
+# xst flow : RunXST
+stimulus_summary.html

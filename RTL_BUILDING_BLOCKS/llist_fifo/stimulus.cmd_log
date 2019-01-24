@@ -1,0 +1,6 @@
+xst -intstyle ise -ifn __projnav/stimulus.xst -ofn stimulus.syr
+ngdbuild -intstyle ise -dd "f:\fpga\proj\llist_fifo/_ngo" -nt timestamp -uc llist_fifo.ucf  -p xc2vp30-ff896-7 stimulus_cs.ngc stimulus.ngd
+map -intstyle ise -p xc2vp30-ff896-7 -cm area -pr b -k 4 -c 100 -tx off -o stimulus_map.ncd stimulus.ngd stimulus.pcf
+par -w -intstyle ise -ol std -t 1 stimulus_map.ncd stimulus.ncd stimulus.pcf
+trce -intstyle ise -e 3 -l 3 -s 7 -xml stimulus stimulus.ncd -o stimulus.twr stimulus.pcf
+bitgen -intstyle ise -f stimulus.ut stimulus.ncd

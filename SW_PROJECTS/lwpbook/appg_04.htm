@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>What Can You Do with Objects? (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appg_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appg_04' class='lwp lwp_appg_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">G.4. What Can You Do with Objects?</h2>
+
+<p>You've seen that you can make objects and call
+object methods with them. But what are object methods for? The answer
+depends on the class:
+</p>
+
+<p>A Net::FTP object represents a session between your computer and an
+FTP server. So the methods you call on a Net::FTP object are for
+doing whatever you'd need to do across an FTP
+connection. You make the session and log in:
+</p>
+
+<pre class="code">my $session = Net::FTP-&gt;new('ftp.aol.com');
+die "Couldn't connect!" unless defined $session;
+  # The class method call to "new" will return
+  # the new object if it goes OK, otherwise it
+  # will return undef.
+ 
+$session-&gt;login('sburke', 'p@ssw3rD')
+ || die "Did I change my password again?";
+  # The object method "login" will give a true
+  # return value if actually logs in, otherwise
+  # it'll return false.</pre>
+
+<p>You can use the session object to change directory on that session:</p>
+
+<pre class="code">$session-&gt;cwd("/home/sburke/public_html")
+   || die "Hey, that was REALLY supposed to work!";
+ # if the cwd fails, it'll return false</pre>
+
+<p>...get files from the machine at the other end of the session:</p>
+
+<pre class="code">foreach my $f ('log_report_ua.txt', 'log_report_dom.txt',
+               'log_report_browsers.txt')
+{
+  $session-&gt;get($f) || warn "Getting $f failed!"
+};</pre>
+
+<p>...and plenty else, ending finally with closing the connection:</p>
+
+<pre class="code">$session-&gt;quit( );</pre>
+
+<p>In short, object methods are for doing things related to (or with)
+whatever the object represents. For FTP sessions,
+it's about sending commands to the server at the
+other end of the connection, and that's about
+it&#x2014;there, methods are for doing something to the world outside
+the object, and the objects is just something that specifies what bit
+of the world (well, what FTP session) to act upon.
+</p>
+
+<p>With most other classes, however, the object itself stores some kind
+of information, and it typically makes no sense to do things with
+such an object without considering the data that's
+in the object.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

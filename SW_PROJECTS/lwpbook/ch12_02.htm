@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>A User Agent for Robots (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch12_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch12_02' class='lwp lwp_ch12_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">12.2. A User Agent for Robots</h2>
+
+<p>So far in this book, we've been using
+<a name="INDEX-670" class="ipoint"
+></a><a name="INDEX-671" class="ipoint"
+></a>one type of
+user-agent object: objects of the class LWP::UserAgent. This is
+generally appropriate for a program that makes only a few undemanding
+requests of a remote server. But for cases in which we want to be
+quite sure that the robot behaves itself, the best way to start is by
+using LWP::RobotUA instead of LWP::UserAgent.
+</p>
+
+<p>An LWP::RobotUA object is like an LWP::UserAgent object, with these
+exceptions:
+</p>
+
+<ul><li>
+<p>Instead of calling <tt class="literal">$browser = LWP::UserAgent-&gt;new(
+)</tt>, you call:
+</p>
+
+<pre class="code">$robot = LWP::RobotUA-&gt;new( 'botname/1.2', 'me@myhost.int' )</pre>
+
+<p>Specify a reasonably unique name for the bot (with an
+<em class="replaceable"><tt>X</em><tt class="literal">.</tt><em class="replaceable">Y</tt></em>
+version number) and an email address where you can be contacted about
+the program, if anyone needs to do so.
+</p>
+</li>
+
+<li>
+<p>When you call <tt class="literal">$robot-&gt;get(...)</tt> or any other
+method that performs a request (<tt class="literal">head(&#160;)</tt>,
+<tt class="literal">post(&#160;)</tt>, <tt class="literal">request(&#160;)</tt>,
+<tt class="literal">simple_request(&#160;)</tt>), LWP calls <tt class="literal">sleep(
+)</tt> to wait until enough time has passed since the last
+request was made to that server.
+</p>
+</li><li>
+<p>When you request anything from a given HTTP server using an
+LWP::RobotUA <tt class="literal">$robot</tt> object, LWP will make sure it
+has consulted that server's
+<em class="filename">robots.txt</em> file, where the
+server's administrator can stipulate that certain
+parts of his server are off limits to some or all bots. If you
+request something that's off limits, LWP
+won't actually request it, and will return a
+response object with a 403 (Forbidden) error, with the explanation
+"Forbidden by robots.txt."
+</p>
+
+<p>For specifics on <em class="emphasis">robots.txt</em>
+files, see the documentation for the LWP module called
+WWW::RobotRules, and also be sure to read <a href="http://www.robotstxt.org/wc/robots.html">http://www.robotstxt.org/wc/robots.html</a>.
+</p>
+</li></ul>
+<p>Besides having all the attributes of an LWP::UserAgent object, an
+LWP::RobotUA object has one additional interesting attribute,
+<tt class="literal">$robot-&gt;delay($minutes)</tt>, which controls how
+long this object should wait between requests to the same host. The
+current default value is one minute. Note that you can set it to a
+non-integer number of minutes. For example, to set the delay to seven
+seconds, use <tt class="literal">$robot-&gt;delay(7/60)</tt>.
+</p>
+
+<p>So we can take our <em class="emphasis">New York Times</em> program from
+<a href="ch11_01.htm">Chapter 11, "Cookies, Authentication,and Advanced Requests"</a> and make it into a scrupulously
+well-behaved robot by changing this one line:
+</p>
+
+<pre class="code">my $browser = LWP::UserAgent-&gt;new( );</pre>
+
+<p>to this:</p>
+
+<pre class="code">use LWP::RobotUA;
+my $browser = LWP::RobotUA-&gt;new( 'JamiesNYTBot/1.0',
+  'jamie@newsjunkie.int' # my address
+);
+$browser-&gt;delay(5/60); # 5 second delay between requests</pre>
+
+<p>We may not notice any particular effect on how the program behaves,
+but it makes quite sure that the <tt class="literal">$browser</tt> object
+won't perform its requests too quickly, nor request
+anything the <em class="emphasis">Times</em>'s webmaster
+thinks robots shouldn't request.
+</p>
+
+<p>In new programs, I typically use <tt class="literal">$robot</tt> as the
+variable for holding LWP::RobotUA objects instead of
+<tt class="literal">$browser</tt>. But this is a merely cosmetic
+difference; nothing requires us to replace every
+<tt class="literal">$browser</tt> with <tt class="literal">$robot</tt> in the
+<em class="emphasis">Times</em> program when we change it from using an
+LWP::UserAgent object to an LWP::RobotUA object.
+</p>
+
+<p>You <em class="emphasis">can</em> freely use LWP::RobotUA anywhere you
+could use LWP::UserAgent, in a Type One or Type Two spider. And you
+<em class="emphasis">really should</em> use LWP::RobotUA as the basis for
+any Type Three or Type Four spiders. You should use it not just so
+you can effortlessly abide by <em class="emphasis">robots.txt</em> rules, but also so that you
+don't have to remember to write in
+<tt class="literal">sleep</tt> statements all over your programs to keep it
+from using too much of the remote server's
+bandwidth&#x2014;or yours!
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

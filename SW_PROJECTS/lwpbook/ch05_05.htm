@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>POST Example: License Plates (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_05"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_05' class='lwp lwp_ch05_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">5.5. POST Example: License Plates</h2>
+
+<p>Second only to the <a name="INDEX-337" class="ipoint"
+></a><a name="INDEX-338" class="ipoint"
+></a>issues
+surrounding tattooing and tattoo removal, the hardest decision one
+ever has to make is, upon moving to California and buying a
+convertible, what personalized license plate should one get? In the
+past, this was a slow and embarrassing process, requiring one to go
+to the Motor Vehicles office, shuffle up to the clerk, and meekly
+request "HOTBABE," only to receive
+the crushing news that someone else has, somehow, already thought of
+that and taken it as her own personalized license plate. While there
+are 66,220,518,000 possible combinations,<a class='footnotylink' href="#FOOTNOTE-2">[2]</a> it is apparently a devoted pursuit of
+the state's 30-odd million residents to think of
+personalized license plates. As with Internet domain names, if you
+can think of it, someone probably already has it.
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-2"></a>[2] This is
+based on the formula: <tt class="literal">$c</tt> <tt class="literal">+=</tt>
+<tt class="literal">35</tt> <tt class="literal">**</tt> <tt class="literal">$_</tt>
+<tt class="literal">-</tt> <tt class="literal">10</tt> <tt class="literal">**</tt>
+<tt class="literal">$_</tt> <tt class="literal">for</tt> <tt class="literal">2</tt>
+<tt class="literal">..</tt> <tt class="literal">7;</tt> <tt class="literal">print</tt>
+<tt class="literal">$c;</tt>. (The 35 is because letter O is treated as
+digit zero. The 10 is because all-digit plates are not
+allowed.)</p> </blockquote>
+
+<p>But now the California Department of Motor Vehicles has understood
+our plight, and has put up the web site plates.ca.gov so that we can sit at home and
+use the Web to see which of our license plate ideas is available. It
+has a simple HTML form interface, shown in <a href="ch05_05.htm#perllwp-CHP-5-FIG-2">Figure 5-2</a>. 
+</p>
+
+<a name="perllwp-CHP-5-FIG-2"></a><div class="figure"><img src="figs/plwp_0502.gif"
+  alt="Figure 5-2: California License Plate Search"
+title="Figure 5-2: California License Plate Search"
+/></div><h4 class="objtitle">Figure 5-2. California License Plate Search</h4>
+
+<p>However, it's so draining to have to plant the mouse
+in the search box, type "PL8DV8" or
+whatever other license plate you want, mouse over to the submit
+button and press it, see the next screen report either
+"Plate configuration PL8DV8 is
+unavailable" or "this plate is
+tentatively acceptable and available," then mouse
+over to the Back button, press it, and so on for every possibility
+that occurs to us. Just as a true power user would never use the web
+interface to <em class="emphasis">whois</em> but would instead insist on
+the command-line tool, we too would be happiest with a command-line
+interface to this license plate search form.
+</p>
+
+<a name="perllwp-CHP-5-SECT-5.1"></a><div class="sect2">
+<h3 class="sect2">5.5.1. The Form</h3>
+
+<p>Viewing the source of <a name="INDEX-339" class="ipoint"
+></a><a name="INDEX-340" class="ipoint"
+></a>the search form at <a href="http://plates.ca.gov/search/">http://plates.ca.gov/search/</a> shows that,
+omitting some table-formatting codes, it really just consists of:
+</p>
+
+<pre class="code">&lt;form method=POST action="search.php3"&gt;
+&lt;input type=text size=7 name=plate maxlength=7&gt;
+&lt;br&gt;
+2. Choose a search option.
+&lt;br&gt;
+&lt;input type=submit value="Check Plate Availability" name="search"&gt;
+&lt;br&gt;Use this method to see if your exact configuration is available.
+&lt;br&gt;
+&lt;input type=submit value="See Existing Similar Plates" name="search"&gt;
+...
+Enter 2 to 7 letters or letters and numbers (number only plates are no
+longer offered)
+...
+&lt;/form&gt;</pre>
+
+<p>From what we learned earlier about how different kinds of form
+elements produce different kinds of pairs, we can deduce that filling
+"PL8DV8" in the
+<tt class="literal">type=text</tt> box, then pressing the
+"Check Plate Availability" button
+will cause two form pairs to be submitted:
+<tt class="literal">plate=PL8DV8</tt> and <tt class="literal">search=Check Plate
+Availability</tt>.
+</p>
+
+<p>In each case, the first part of the form pair comes from the
+element's <tt class="literal">name</tt> attribute. With
+the first pair, we follow the rule for text input elements, and get
+the <tt class="literal">value</tt> from whatever the user has typed into
+that box (or whatever is there by default). With either submit
+button, we follow the rule for <tt class="literal">type=submit</tt>
+elements and make a form pair from the <tt class="literal">value</tt>
+attribute (if there is such an attribute and if this is the button
+that the user is pressing in order to submit the form).
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-5.2"></a><div class="sect2">
+<h3 class="sect2">5.5.2. Use formpairs.pl</h3>
+
+<p>We can save a <a name="INDEX-341" class="ipoint"
+></a><a name="INDEX-342" class="ipoint"
+></a>local copy of the
+form's HTML source and edit the form
+element's <tt class="literal">action</tt> attribute to
+point to some server where we've set up as a CGI the
+<em class="emphasis">formpairs.pl</em> program from earlier in this
+chapter. The form element will then read:
+</p>
+
+<pre class="code">&lt;form method=POST action="http://someserver.int/cgi-bin/formpairs.pl"&gt;</pre>
+
+<p>If we then open the local copy of the form in our browser, fill in
+"PL8DV8" in the search box, and hit
+the first Submit button, <em class="filename">formpairs.pl</em> will
+report:
+</p>
+
+<pre class="code"><b class="emphasis-bold">POST data:</b>
+(
+  "plate" =&gt; "PL8DV8",
+  "search" =&gt; "Check Plate Availability",
+)</pre>
+
+<p>Our idea of what form pairs get sent was correct! (The second button
+would predictably send a <tt class="literal">"search"</tt> value of
+<tt class="literal">"See</tt> <tt class="literal">Existing</tt>
+<tt class="literal">Similar</tt> <tt class="literal">Plates"</tt>, but that
+function is outside the scope of our interest.)
+</p>
+
+</div>
+<a name="perllwp-CHP-5-SECT-5.3"></a><div class="sect2">
+<h3 class="sect2">5.5.3. Translating This into LWP</h3>
+
+<p>Simply put that list of form pairs into a call to
+<tt class="literal">$browser-&gt;post(url</tt>,
+<em class="replaceable"><tt>pairs_arrayref</tt></em><tt class="literal">)</tt>.
+Specifically, the call will look like this:
+</p>
+
+<pre class="code">my $response = $browser-&gt;post(
+  'http://plates.ca.gov/search/search.php3',
+  [
+    'plate'  =&gt; $plate,
+    'search' =&gt; 'Check Plate Availability'
+  ],
+);</pre>
+
+<p>Knowing this, it's simple to write code that takes
+an argument from the command line and puts it into
+<tt class="literal">$plate</tt>, performs the above POST request, then
+checks the response. <a href="ch05_05.htm#perllwp-CHP-5-EX-3">Example 5-3</a> is the complete
+program.
+</p>
+
+<a name="perllwp-CHP-5-EX-3"></a><div class="example">
+<h4 class="objtitle">Example 5-3. pl8.pl </h4>
+<pre class="code">#!/usr/bin/perl -w
+# pl8.pl -  query California license plate database
+ 
+use strict;
+use LWP::UserAgent;
+my $plate = $ARGV[0] || die "Plate to search for?\n";
+$plate = uc $plate;
+$plate =~ tr/O/0/;  # we use zero for letter-oh
+die "$plate is invalid.\n"
+ unless $plate =~ m/^[A-Z0-9]{2,7}$/
+    and $plate !~ m/^\d+$/;  # no all-digit plates
+ 
+my $browser = LWP::UserAgent-&gt;new;
+my $response = $browser-&gt;post(
+  'http://plates.ca.gov/search/search.php3',
+  [
+    'plate'  =&gt; $plate,
+    'search' =&gt; 'Check Plate Availability'
+  ],
+);
+die "Error: ", $response-&gt;status_line
+ unless $response-&gt;is_success;
+ 
+if($response-&gt;content =~ m/is unavailable/) {
+  print "$plate is already taken.\n";
+} elsif($response-&gt;content =~ m/and available/) {
+  print "$plate is AVAILABLE!\n";
+} else {
+  print "$plate... Can't make sense of response?!\n";
+}
+exit;</pre>
+</div>
+
+<p>Saved into <em class="filename">pl8.pl</em>, it runs happily from the
+command line:
+</p>
+
+<pre class="code">% perl pl8.pl
+<tt class="userinput"><b>Plate to search for?</b></tt>
+% perl pl8.pl 314159
+<tt class="userinput"><b>314159 is invalid.</b></tt>
+% perl pl8.pl pl8dv8
+<tt class="userinput"><b>PL8DV8 is AVAILABLE!</b></tt>
+% perl pl8.pl elbarto
+<tt class="userinput"><b>ELBART0 is already taken.</b></tt>
+% perl pl8.pl ilikepie
+<tt class="userinput"><b>ILIKEPIE is invalid.</b></tt>
+% perl pl8.pl pieman
+<tt class="userinput"><b>PIEMAN is already taken.</b></tt>
+% perl pl8.pl pielady
+<tt class="userinput"><b>PIELADY is already taken.</b></tt>
+% perl pl8.pl pieboy
+<tt class="userinput"><b>PIEB0Y is AVAILABLE!</b></tt>
+% perl pl8.pl piegirl
+<tt class="userinput"><b>PIEGIRL is AVAILABLE!</b></tt>
+% perl pl8.pl shazbot
+<tt class="userinput"><b>SHAZB0T is already taken.</b></tt>
+% perl pl8.pl lwpbot
+<tt class="userinput"><b>LWPB0T is AVAILABLE!</b></tt></pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

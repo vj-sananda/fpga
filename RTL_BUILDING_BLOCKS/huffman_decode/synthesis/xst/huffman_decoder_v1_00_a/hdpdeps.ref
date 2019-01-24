@@ -1,0 +1,12 @@
+V2 7
+FL F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd 2005/04/10.01:33:42 H.42
+EN huffman_decoder_v1_00_a/HUFFMAN_DECODER 1122082449 \
+      FL F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PB ieee/STD_LOGIC_UNSIGNED 1106404634 LB OPB_IPIF_V3_01_A \
+      LB HUFFMAN_DECODER_V1_00_A PB proc_common_v2_00_a/IPIF_PKG 1122082400 \
+      PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384
+AR huffman_decoder_v1_00_a/HUFFMAN_DECODER/IMP 1122082450 \
+      FL F:/fpga/proj/huffman_decode/pcores/huffman_decoder_v1_00_a/hdl/vhdl/huffman_decoder.vhd \
+      EN huffman_decoder_v1_00_a/HUFFMAN_DECODER 1122082449 \
+      CP OPB_IPIF_V3_01_A/OPB_IPIF CP USER_LOGIC

@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Generated-from: 1171064325000;type=2
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.xilinx.mdt.edk.xdsgen; singleton:=true
+Bundle-Version: 9.1.0
+Bundle-ClassPath: xdsgen.jar,
+ console.jar
+Bundle-Activator: com.xilinx.mdt.edk.xdsgen.XdsgenPlugin
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: com.xilinx.mdt.edk.xdsgen,
+ com.xilinx.mdt.edk.xdsgen.actions
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.ui.console,
+ org.eclipse.core.runtime,
+ com.xilinx.mdt.edk.portability
+Eclipse-AutoStart: true

@@ -1,0 +1,128 @@
+
+# Time-stamp: "2007-04-16 16:11:11 AKDT sburke@cpan.org"
+
+Here's a key to the markup:
+	[page-number]: serious technical mistake
+	{page-number}: minor technical mistake
+	<page-number>: important language/formatting problem
+	(page-number): language change or minor formatting problem
+	?page-number?: reader question or request for clarification
+
+
+NOTE FROM THE AUTHOR
+
+SECOND NOTE FROM THE AUTHOR:
+
+I said in Chapter 1, in the section on "Brittleness":
+"As somewhat of a lesson in brittleness, in this book I show you data on
+various web sites (Amazon.com, the BBC News web site, and many others) and
+show how to write programs to extract data from them.  However, that code
+is fragile.  Some sites get redesigned only every few years; Amazon.com
+seems to change something every few weeks.  So while I've made every effort
+to have the code be accurate for the web sites as they exist at the time of
+this writing, I hope you will consider the programs in this book valuable
+as learning tools even after the sites they communicate with will have
+changed beyond recognition."
+
+Well, even though it's been only a few weeks since the book went to press,
+already many of the sites have changed enough to break some of the
+extractor programs that are examples in the book.  With some sites (like
+Amazon), that was expected -- it was just a matter of happening sooner
+rather than later.  With others (like the California DMV server, or the
+Weather Underground), I'm a bit surprised that the changes happened so soon.
+
+In some of the program files at http://examples.oreilly.com/perllwp/
+I have added a few comments noting where some of the screen-scraper
+programs have already broken because of changes in the site that they pull
+from.
+I leave it as an exercise to readers to try on their own to get some of
+those extractors working.  It'll be good practice in retuning brittle
+programs!  After all, when you write your extractors from stratch, they'll
+eventually break too.
+
+   -- Sean M. Burke
+        August 1, 2002
+
+======================================================================
+
+
+{7}, Table 1-1
+Several things wrong with the table contents.  Here it is, all fixed:
+
+Distribution     CPAN directory              Minimal Version Needed
+
+libwww-perl      modules/by-module/Net       5.68
+URI              modules/by-module/URI       1.23
+libnet           modules/by-module/Net       1.12
+HTML-Tagset      modules/by-module/HTML      3.03
+HTML-Parser      modules/by-module/HTML      3.27
+HTML-Tree        modules/by-module/HTML      3.17
+MIME-Base64      modules/by-module/MIME      2.16
+Compress-Zlib    modules/by-module/Compress  1.19
+Digest-MD5       modules/by-module/Digest    2.23
+
+
+
+{7} in the paragraph before heading "Unpack and configure"
+Change both instances of
+authors/id/G/GA/GAAS
+to
+modules/by-module/MIME
+
+TODO: rewrite installation
+
+
+======================================================================
+	 BELOW HERE JUST STUPID STUFF PROBABLY NOT WORTH DOING
+
+
+(11) example 1-1
+change "use LWP::Simple;" to "use LWP::Simple 1.36;"
+
+(11) example 1-2
+change "use LWP;" to "use LWP 5.58;"
+
+(12) example 1-3
+change "use LWP::UserAgent;" to "use LWP::UserAgent 2.003;"
+
+(13) example 1-5
+change "use HTML::TreeBuilder;" to "use HTML::TreeBuilder 3.13;"
+
+(24) example 2-5
+change "use LWP;" to "use LWP 5.58;"
+
+(31) third code line
+change "use LWP;" to "use LWP 5.58;"
+
+(48) first code line
+change "use URI;" to "use URI 1.23;"
+
+(61) example 5-1
+change "use URI;" to "use URI 1.23;"
+
+(85) first code line
+change "use LWP::Simple;" to "use LWP::Simple 1.36;"
+
+{98, 99}  All the code in this section:
+Sorry, this code doesn't work anymore -- Weather Underground has changed
+their HTML at least twice since the book went to press. You're on your
+own with getting it to work -- and (the hard part) KEEPING it working.
+
+(105) third code line
+change "use HTML::TokeParser;" to "use HTML::TokeParser 2.24;"
+
+(122) three lines under the new heading "First Code"
+change "use HTML::TokeParser;" to "use HTML::TokeParser 2.24;"
+
+(134) example 9-2
+change "use HTML::TreeBuilder 3;" to "use HTML::TreeBuilder 3.13;"
+
+(149) example 10-1
+change "use HTML::TreeBuilder;" to "use HTML::TreeBuilder 3.13;"
+
+(166) last codeblock
+change "use HTTP::Cookies;" to "use HTTP::Cookies 1.30;"
+
+(181) second code line
+change "use LWP::RobotUA;" to "use LWP::RobotUA 1.19;"
+

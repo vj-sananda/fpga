@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Installing LWP (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch01_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:38:08 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch01_03' class='lwp lwp_ch01_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">1.3. Installing LWP</h2>
+
+<p>LWP and the associated modules are
+<a name="INDEX-22" class="ipoint"
+></a><a name="INDEX-23" class="ipoint"
+></a>available
+in various distributions free from the Comprehensive Perl Archive
+<a name="INDEX-24" class="ipoint"
+></a>Network (CPAN). The main distributions
+are listed at the start of <a href="appa_01.htm">Appendix A, "LWP Modules"</a>, although the
+details of which modules are in which distributions change
+occasionally.
+</p>
+
+<p>If you're using ActivePerl for
+<a name="INDEX-25" class="ipoint"
+></a><a name="INDEX-26" class="ipoint"
+></a>Windows or MacPerl
+for Mac OS 9, you already have LWP. If you're on
+Unix and you don't already have LWP installed,
+you'll need to install it from CPAN using
+instructions given in the next section.
+</p>
+
+<p>To test whether you already have LWP installed:</p>
+
+<pre class="code">% perl -MLWP -le "print(LWP-&gt;VERSION)"</pre>
+
+<p>(The second character in <tt class="literal">-le</tt> is a lowercase L, not
+a digit one.)
+</p>
+
+<p>If you see:</p>
+
+<pre class="code">Can't locate LWP in @INC (@INC contains: <em class="replaceable"><tt>...lots of paths...</tt></em>).
+BEGIN failed--compilation aborted.</pre>
+
+<p>or if you see a version number lower than 5.64, you need to install
+LWP on your system.
+</p>
+
+<p>There are two ways to install modules: using the CPAN shell or the
+old-fashioned manual way.
+</p>
+
+<a name="perllwp-CHP-1-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">1.3.1. Installing LWP from the CPAN Shell</h3>
+
+<p>The CPAN shell is a command-line environment
+<a name="INDEX-27" class="ipoint"
+></a><a name="INDEX-28" class="ipoint"
+></a><a name="INDEX-29" class="ipoint"
+></a>for automatically downloading,
+building, and installing modules from CPAN.
+</p>
+
+<a name="perllwp-CHP-1-SECT-3.1.1"></a><div class="sect3">
+<h3 class="sect3">1.3.1.1. Configuring</h3>
+
+<p>If you have never used the CPAN shell, you will need to configure it
+before you can use it. It will prompt you for some information before
+building its configuration file.
+</p>
+
+<p>Invoke the CPAN shell by entering the following command at a system
+shell prompt:
+</p>
+
+<pre class="code">% perl -MCPAN -eshell</pre>
+
+<p>If you've never run it before,
+you'll see this:
+</p>
+
+<pre class="code">We have to reconfigure CPAN.pm due to following uninitialized parameters:</pre>
+
+<p>followed by a number of questions. For each question, the default
+answer is typically fine, but you may answer otherwise if you know
+that the default setting is wrong or not optimal. Once
+you've answered all the questions, a configuration
+file is created and you can start working with the CPAN shell.
+</p>
+
+</div>
+
+<a name="perllwp-CHP-1-SECT-3.1.2"></a><div class="sect3">
+<h3 class="sect3">1.3.1.2. Obtaining help</h3>
+
+<p>If you need help at any time, you can read the CPAN
+shell's manual page by typing
+<tt class="literal">perldoc</tt> <tt class="literal">CPAN</tt> or by starting up
+the CPAN shell (with <tt class="literal">perl</tt>
+<tt class="literal">-MCPAN</tt> <tt class="literal">-eshell</tt> at a system
+shell prompt) and entering <tt class="literal">h</tt> at the
+<tt class="literal">cpan&gt;</tt> prompt:
+</p>
+
+<pre class="code">cpan&gt; h
+ 
+Display Information
+ command  argument          description
+ a,b,d,m  WORD or /REGEXP/  about authors, bundles, distributions, modules
+ i        WORD or /REGEXP/  about anything of above
+ r        NONE              reinstall recommendations
+ ls       AUTHOR            about files in the author's directory
+ 
+Download, Test, Make, Install...
+ get                        download
+ make                       make (implies get)
+ test      MODULES,         make test (implies make)
+ install   DISTS, BUNDLES   make install (implies test)
+ clean                      make clean
+ look                       open subshell in these dists' directories
+ readme                     display these dists' README files
+ 
+Other
+ h,?           display this menu       ! perl-code   eval a perl command
+ o conf [opt]  set and query options   q             quit the cpan shell
+ reload cpan   load CPAN.pm again      reload index  load newer indices
+ autobundle    Snapshot                force cmd     unconditionally do cmd</pre>
+
+</div>
+
+<a name="perllwp-CHP-1-SECT-3.1.3"></a><div class="sect3">
+<h3 class="sect3">1.3.1.3. Installing LWP</h3>
+
+<p>All you have to do is enter:</p>
+
+<pre class="code">cpan&gt; install Bundle::LWP</pre>
+
+<p>The CPAN shell will show messages explaining what
+it's up to. You may need to answer questions to
+configure the various modules (e.g., libnet asks for mail hosts and
+so on for testing purposes).
+</p>
+
+<p>After much activity, you should then have a fresh copy of LWP on your
+system, with far less work than installing it manually one
+distribution at a time. At the time of this writing, <tt class="literal">install
+Bundle::LWP</tt> installs not just the libwww-perl distribution,
+but also URI and HTML-Parser. It does not install the HTML-Tree
+distribution that we'll use in <a href="ch09_01.htm">Chapter 9, "HTML Processing with Trees"</a> and <a href="ch10_01.htm">Chapter 10, "Modifying HTML with Trees"</a>. To do that,
+enter:
+</p>
+
+<pre class="code">cpan&gt; install HTML::Tree</pre>
+
+<p>These commands do not install the HTML-Format distribution, which was
+also once part of the LWP distribution. I do not discuss HTML-Format
+in this book, but if you want to install it so that you have a
+complete LWP installation, enter this command:
+</p>
+
+<pre class="code">cpan&gt; install HTML::Format</pre>
+
+<p>Remember, LWP may be just about the most popular distribution in
+CPAN, but that's not all there is! Look around the
+web-related parts of CPAN (I prefer the interface at <a href="http://search.cpan.org">http://search.cpan.org</a>, but you can also try
+<a href="http://kobesearch.cpan.org">http://kobesearch.cpan.org</a>) as
+there are dozens of modules, from WWW::Automate to SOAP::Lite, that
+can simplify your web-related tasks.
+</p>
+
+</div>
+</div>
+<a name="perllwp-CHP-1-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">1.3.2. Installing LWP Manually</h3>
+
+<p>The normal Perl module <a name="INDEX-30" class="ipoint"
+></a><a name="INDEX-31" class="ipoint"
+></a><a name="INDEX-32" class="ipoint"
+></a>installation procedure is summed up in
+the document <em class="filename">perlmodinstall</em>. You can read this
+by running <tt class="literal">perldoc</tt>
+<tt class="literal">perlmodinstall</tt> at a shell prompt or online at
+<a href="http://theoryx5.uwinnipeg.ca/CPAN/perl/pod/perlmodinstall.html">http://theoryx5.uwinnipeg.ca/CPAN/perl/pod/perlmodinstall.html</a>.
+</p>
+
+<p>CPAN is a network of a large collection of Perl software and
+documentation. See the CPAN FAQ at <a href="http://www.cpan.org/misc/cpan-faq.html">http://www.cpan.org/misc/cpan-faq.html</a> for
+more information about CPAN and modules.
+</p>
+
+<a name="perllwp-CHP-1-SECT-3.2.1"></a><div class="sect3">
+<h3 class="sect3">1.3.2.1. Download distributions</h3>
+
+<p>First, download the module
+<a name="INDEX-33" class="ipoint"
+></a><a name="INDEX-34" class="ipoint"
+></a>distributions.
+LWP requires several other modules to operate successfully.
+You'll need to install the distributions given in
+<a href="ch01_03.htm#perllwp-CHP-1-TABLE-1">Table 1-1</a>, in the order in which they are listed.
+</p>
+
+<a name="perllwp-CHP-1-TABLE-1"></a>
+<h4 class="objtitle">Table 1-1. Modules used in this book </h4><table border="1" cellpadding="3">
+
+
+
+<tr>
+<th>
+<p>Distribution</p>
+</th>
+<th>
+<p>CPAN directory</p>
+</th>
+</tr>
+
+
+<tr>
+<td>
+<p>MIME-Base64</p>
+</td>
+<td>
+<p><em class="filename">authors/id/G/GA/GAAS</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>libnet</p>
+</td>
+<td>
+<p><em class="filename">authors/id/G/GB/GBAAR</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>HTML-Tagset</p>
+</td>
+<td>
+<p><em class="filename">authors/id/S/SBURKE</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>HTML-Parser</p>
+</td>
+<td>
+<p><em class="filename">authors/id/G/GA/GAAS</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>URI</p>
+</td>
+<td>
+<p><em class="filename">authors/id/G/GA/GAAS/URI</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Compress-Zlib</p>
+</td>
+<td>
+<p><em class="filename">authors/id/P/PM/PMQS/Compress-Zlib</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Digest-MD5</p>
+</td>
+<td>
+<p><em class="filename">authors/id/G/GA/GAAS/Digest-MD5</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>libwww-perl</p>
+</td>
+<td>
+<p><em class="filename">authors/id/G/GA/GAAS/libwww-perl</em></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>HTML-Tree</p>
+</td>
+<td>
+<p><em class="filename">authors/id/S/SB/SBURKE/HTML-Tree</em></p>
+</td>
+</tr>
+
+</table><p>
+
+<p>Fetch these modules from one of the FTP or web sites that form CPAN,
+listed at <a href="http://www.cpan.org/SITES.html">http://www.cpan.org/SITES.html</a> and
+<a href="http://mirror.cpan.org">http://mirror.cpan.org</a>. Sometimes
+CPAN has several versions of a module in the
+<em class="filename">authors</em> directory. Be sure to check the version
+number and get the latest.
+This book is about the latest version of LWP!  Upgrade now!
+</p>
+
+<p>For example to install MIME-Base64, you might first fetch <a href="http://www.cpan.org/authors/id/G/GA/GAAS/">http://www.cpan.org/authors/id/G/GA/GAAS/</a> to
+see which versions are there, then fetch <a href="http://www.cpan.org/authors/id/G/GA/GAAS/MIME-Base64-2.12.tar.gz">http://www.cpan.org/authors/id/G/GA/GAAS/MIME-Base64-2.12.tar.gz</a>
+and install that.
+</p>
+
+</div>
+
+<a name="perllwp-CHP-1-SECT-3.2.2"></a><div class="sect3">
+<h3 class="sect3">1.3.2.2. Unpack and configure</h3>
+
+<p>The distributions are gzipped tar <a name="INDEX-35" class="ipoint"
+></a>archives of source code.
+Extracting a distribution creates a directory, and in that directory
+is a <em class="filename">Makefile.PL</em> Perl program that builds a
+<em class="filename">Makefile</em> for you.
+</p>
+
+<pre class="code">% tar xzf MIME-Base64-2.12.tar.gz
+% cd MIME-Base64-2.12
+% perl Makefile.PL
+Checking if your kit is complete...
+Looks good
+Writing Makefile for MIME::Base64</pre>
+
+</div>
+
+<a name="perllwp-CHP-1-SECT-3.2.3"></a><div class="sect3">
+<h3 class="sect3">1.3.2.3. Make, test, and install</h3>
+
+<p>Compile the code with the <tt class="literal">make</tt> command:</p>
+
+<pre class="code">% make
+cp Base64.pm blib/lib/MIME/Base64.pm
+cp QuotedPrint.pm blib/lib/MIME/QuotedPrint.pm
+/usr/bin/perl -I/opt/perl5/5.6.1/i386-freebsd -I/opt/perl5/5.6.1
+/opt/perl5/5.6.1/ExtUtils/xsubpp  -typemap
+/opt/perl5/5.6.1/ExtUtils/typemap Base64.xs &gt; Base64.xsc &amp;&amp; mv
+  Base64.xsc Base64.c
+cc -c  -fno-strict-aliasing -I/usr/local/include -O    -DVERSION=\"2.12\"
+  -DXS_VERSION=\"2.12\" -DPIC -fpic -I/opt/perl5/5.6.1/i386-freebsd/CORE
+Base64.c
+Running Mkbootstrap for MIME::Base64 ( )
+chmod 644 Base64.bs
+rm -f blib/arch/auto/MIME/Base64/Base64.so
+LD_RUN_PATH="" cc -o blib/arch/auto/MIME/Base64/Base64.so  -shared
+  -L/opt Base64.o
+chmod 755 blib/arch/auto/MIME/Base64/Base64.so
+cp Base64.bs blib/arch/auto/MIME/Base64/Base64.bs
+chmod 644 blib/arch/auto/MIME/Base64/Base64.bs
+Manifying blib/man3/MIME::Base64.3
+Manifying blib/man3/MIME::QuotedPrint.3</pre>
+
+<p>Then make sure everything works on your system with <tt class="literal">make
+test</tt>:
+</p>
+
+<pre class="code">% make test
+PERL_DL_NONLAZY=1 /usr/bin/perl -Iblib/arch -Iblib/lib 
+-I/opt/perl5/5.6.1/i386-freebsd -I/opt/perl5/5.6.1 -e 'use Test::Harness
+  qw(&amp;runtests $verbose); $verbose=0; runtests @ARGV;' t/*.t
+t/base64..........ok
+t/quoted-print....ok
+t/unicode.........skipped test on this platform
+All tests successful, 1 test skipped.
+Files=3, Tests=306,  1 wallclock secs ( 0.52 cusr +  0.06 csys =  0.58 CPU)</pre>
+
+<p>If it passes the tests, install it with <tt class="literal">make</tt>
+<tt class="literal">install</tt> (as the superuser):
+</p>
+
+<pre class="code"># make install
+Installing /opt/perl5/site_perl/5.6.1/i386-freebsd/auto/MIME/Base64/Base64.so
+Installing /opt/perl5/site_perl/5.6.1/i386-freebsd/auto/MIME/Base64/Base64.bs
+Files found in blib/arch: installing files in blib/lib into architecture
+  dependent library tree
+Installing /opt/perl5/site_perl/5.6.1/i386-freebsd/MIME/Base64.pm
+Installing /opt/perl5/site_perl/5.6.1/i386-freebsd/MIME/QuotedPrint.pm
+Installing /usr/local/man/man3/MIME::Base64.3
+Installing /usr/local/man/man3/MIME::QuotedPrint.3
+Writing /opt/perl5/site_perl/5.6.1/i386-freebsd/auto/MIME/Base64/.packlist
+Appending installation info to /opt/perl5/5.6.1/i386-freebsd/perllocal.pod</pre>
+
+</div>
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

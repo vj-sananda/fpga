@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: Babelfish (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_07"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_07' class='lwp lwp_ch02_07' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">2.7. Example: Babelfish</h2>
+
+<p>Submitting a POST query to Babelfish <a name="INDEX-95" class="ipoint"
+></a><a name="INDEX-96" class="ipoint"
+></a><a name="INDEX-97" class="ipoint"
+></a>is
+as simple as:
+</p>
+
+<pre class="code">my ($content, $message, $is_success) = do_POST(
+  'http://babelfish.altavista.com/translate.dyn',
+  [ 'urltext' =&gt; "I like pie", 'lp' =&gt; "en_fr", 'enc' =&gt; 'utf8' ],
+);</pre>
+
+<p>If the request succeeded (<tt class="literal">$is_success</tt> will tell us
+this), <tt class="literal">$content</tt> will be an HTML page that contains
+the translation text. At time of this writing, the translation is
+inside the only <tt class="literal">textarea</tt> element on the page, so
+it can be extracted with just this regexp:
+</p>
+
+<pre class="code">$content =~ m{&lt;textarea.*?&gt;(.*?)&lt;/textarea&gt;}is;</pre>
+
+<p>The translated text is now in <tt class="literal">$1</tt>, if the match
+succeeded.
+</p>
+
+<p>Knowing this, it's easy to wrap this whole procedure
+up in a function that takes the text to translate and a specification
+of what language from and to, and returns the translation. <a href="ch02_07.htm#perllwp-CHP-2-EX-8">Example 2-8</a> is such a function.
+</p>
+
+<a name="perllwp-CHP-2-EX-8"></a><div class="example">
+<h4 class="objtitle">Example 2-8. Using Babelfish to translate </h4>
+<pre class="code">sub translate {
+  my ($text, $language_path) = @_;
+
+  my ($content, $message, $is_success) = do_POST(
+    'http://babelfish.altavista.com/translate.dyn',
+    [ 'urltext' =&gt; $text, 'lp' =&gt; $language_path, 'enc' =&gt; 'utf8' ],
+  );
+  die "Error in translation $language_path: $message\n"
+   unless $is_success;
+
+  if ($content =~ m{&lt;textarea.*?&gt;(.*?)&lt;/textarea&gt;}is) {
+    my $translation;
+    $translation = $1;
+    # Trim whitespace:
+    $translation =~ s/\s+/ /g;
+    $translation =~ s/^ //s;
+    $translation =~ s/ $//s;
+    return $translation;
+  } else {
+    die "Can't find translation in response to $language_path";
+  }
+}</pre>
+</div>
+
+<p>The <tt class="literal">translate(&#160;)</tt> subroutine constructs
+<a name="INDEX-98" class="ipoint"
+></a>the
+request and extracts the translation from the response, cleaning up
+any whitespace that may surround it. If the request
+couldn't be completed, the subroutine throws an
+exception by calling <tt class="literal">die(&#160;)</tt>.
+</p>
+
+<p>The <tt class="literal">translate(&#160;)</tt> subroutine could be used to
+automate on-demand translation of important content from one language
+to another. But machine translation is still a fairly new technology,
+and the real value of it is to be found in translating from English
+into another language and then back into English, just for fun.
+(Incidentally, there's a CPAN module that takes care
+of all these details for you, called Lingua::Translate, but here
+we're interested in how to carry out the task,
+rather than whether someone's already figured it out
+and posted it to CPAN.)
+</p>
+
+<p>The <em class="emphasis">alienate</em> program given in <a href="ch02_07.htm#perllwp-CHP-2-EX-9">Example 2-9</a> does just this (the definitions of
+<tt class="literal">translate(&#160;)</tt> and <tt class="literal">do_POST(&#160;)</tt>
+have been omitted from the listing for brevity).
+</p>
+
+<a name="perllwp-CHP-2-EX-9"></a><div class="example">
+<h4 class="objtitle">Example 2-9. The alienate program </h4>
+<pre class="code">#!/usr/bin/perl -w
+# alienate - translate text
+use strict;
+my $lang;
+if (@ARGV and $ARGV[0] =~ m/^-(\w\w)$/s) {
+  # If the language is specified as a switch like "-fr"
+  $lang = lc $1;
+  shift @ARGV;
+} else {
+  # Otherwise just pick a language at random:
+  my @languages = qw(it fr de es ja pt);
+  # I.e.: Italian, French, German, Spanish, Japanese, Portugese.
+  $lang = $languages[rand @languages];
+}
+
+die "What to translate?\n" unless @ARGV;
+my $in = join(' ', @ARGV);
+
+print " =&gt; via $lang =&gt; ",
+  translate(
+    translate($in, 'en_' . $lang),
+    $lang . '_en'
+  ), "\n";
+exit;
+
+# definitions of do_POST() and translate( ) go here</pre>
+</div>
+
+<p>Call the alienate program like this:</p>
+
+<pre class="code">% alienate [-<em class="replaceable"><tt>lang</em>] <em class="replaceable">phrase</tt></em></pre>
+
+<p>Specify a language with -<em class="replaceable"><tt>lang</tt></em>, for example
+<tt class="literal">-fr</tt> to translate via French. If you
+don't specify a language, one will be randomly
+chosen for you. The phrase to translate is taken from the command
+line following any switches.
+</p>
+
+<p>Here are some runs of <em class="emphasis">alienate</em>:</p>
+
+<pre class="code">% alienate -de "Pearls before swine!"
+<b class="emphasis-bold">=&gt; via de =&gt; Beads before pigs!</b>
+
+% alienate "Bond, James Bond"
+<b class="emphasis-bold">=&gt; via fr =&gt; Link, Link Of James</b>
+
+% alienate "Shaken, not stirred"
+<b class="emphasis-bold">=&gt; via pt =&gt; Agitated, not agitated</b>
+
+% alienate -it "Shaken, not stirred"
+<b class="emphasis-bold">=&gt; via it =&gt; Mental patient, not stirred</b>
+
+% alienate -it "Guess what! I'm a computer!"
+<b class="emphasis-bold">=&gt; via it =&gt; Conjecture that what! They are a calculating!</b>
+
+% alienate 'It was more fun than a barrel of monkeys'
+<b class="emphasis-bold">=&gt; via de =&gt; It was more fun than a barrel drop hammer</b>
+
+% alienate -ja 'It was more fun than a barrel of monkeys'
+<b class="emphasis-bold">=&gt; via ja =&gt; That the barrel of monkey at times was many pleasures</b></pre>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

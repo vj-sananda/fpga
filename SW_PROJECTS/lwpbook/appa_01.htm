@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>LWP Modules (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appa_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 23:56:36 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appa_01' class='lwp lwp_appa_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Appendix A. LWP Modules</h1>
+<p>While the text of this book has covered the
+<a href=
+ "http://search.cpan.org/~gaas/libwww-perl/"
+ >LWP</a> modules that you need
+to know about to get things done, there are many additional modules
+in LWP. Most of them are behind the scenes or have limited use that
+we couldn't spare the space to discuss. But if you
+want to further your knowledge of LWP's internals,
+here's a roadmap to get you started.
+</p>
+
+<p>These are the LWP modules, listed alphabetically, from the CPAN
+distributions most current at time of writing, libwww-perl v5.64, URI
+v1.18, HTML-Parser v3.26, HTML-Tree v3.11, and HTML-Format v1.23.
+Especially noteworthy modules have an
+"*" in front of their names.
+</p>
+
+<a name="appa-2-fm2xml"></a><table border="1" cellpadding="3">
+
+
+
+<tr><th>Module</th><th>Description</th></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=File::Listing">File::Listing</a></td>
+<td>Module for parsing directory listings. Used by Net::FTP.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Form">HTML::Form</a></td>
+<td>Class for objects representing HTML forms.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::FormatPS">HTML::FormatPS</a></td>
+<td>Class for objects that can render HTML::TreeBuilder tree contents as
+PostScript.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Formatter">HTML::Formatter</a></td>
+<td>Internal base class for HTML::FormatPS and HTML::FormatText.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::FormatText">HTML::FormatText</a></td>
+<td>Class for objects that can render HTML::TreeBuilder tree contents as
+plain text.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Entities">HTML::Entities</a></td>
+<td>Useful module providing functions that &amp;-encode/decode strings
+(such as <tt class="literal">C.</tt> <tt class="literal">&amp;</tt>
+<tt class="literal">E.</tt> <tt class="literal">Bront&#xEB;</tt> to and
+from <tt class="literal">C.</tt> <tt class="literal">&amp;amp;</tt>
+<tt class="literal">E.</tt> <tt class="literal">Bront&amp;euml;</tt>).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Filter">HTML::Filter</a></td>
+<td>Deprecated class for HTML parsers that reproduce their input by
+default.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::HeadParser">HTML::HeadParser</a></td>
+<td>Parse &lt;HEAD&gt; section of an HTML document.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::LinkExtor">HTML::LinkExtor</a></td>
+<td>Class for HTML parsers that parse out links.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::PullParser">HTML::PullParser</a></td>
+<td>Semi-internal base class used by HTML::TokeParser.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::TokeParser">HTML::TokeParser</a></td>
+<td>Friendly token-at-a-time HTML pull-parser class.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Parser">HTML::Parser</a></td>
+<td>Base class for HTML parsers; used by the friendlier HTML::TokeParser
+and HTML::TreeBuilder.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::AsSubs">HTML::AsSubs</a></td>
+<td>Semi-deprecated module providing functions that each construct an
+HTML::Element object.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Element">HTML::Element</a></td>
+<td>Class for objects that each represent an HTML element.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Parse">HTML::Parse</a></td>
+<td>Deprecated module that provides functions accessing HTML::TreeBuilder.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Tree">HTML::Tree</a></td>
+<td>Module that exists just so you can run <tt class="literal">perldoc</tt>
+<tt class="literal">HTML-Tree</tt>.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTML::TreeBuilder">HTML::TreeBuilder</a></td>
+<td>Class for objects representing an HTML tree into which you can parse
+source.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Cookies">HTTP::Cookies</a></td>
+<td>Class for objects representing databases of cookies.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Daemon">HTTP::Daemon</a></td>
+<td>Base class for writing HTTP server daemons.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Date">HTTP::Date</a></td>
+<td>Module for date conversion routines. Used by various LWP protocol
+modules.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Headers">HTTP::Headers</a></td>
+<td>Class for objects representing the group of headers in an
+HTTP::Response or HTTP::Request object.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Headers::Auth">HTTP::Headers::Auth</a></td>
+<td>Experimental/internal for improving HTTP::Headers's
+authentication support.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Headers::ETag">HTTP::Headers::ETag</a></td>
+<td>Experimental/internal module adding HTTP ETag support to
+HTTP::Headers.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Headers::Util">HTTP::Headers::Util</a></td>
+<td>Module providing string functions used internally by various other
+LWP modules.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Message">HTTP::Message</a></td>
+<td>Base class for methods common to HTTP::Response and HTTP::Request.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Negotiate">HTTP::Negotiate</a></td>
+<td>Module implementing an algorithm for content negotiation. Not widely
+used.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Request">HTTP::Request</a></td>
+<td>Class for objects representing a request that carried out with an
+LWP::UserAgent object.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Request::Common">HTTP::Request::Common</a></td>
+<td>Module providing functions used for constructing common kinds of
+HTTP::Request objects.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Response">HTTP::Response</a></td>
+<td>Class for objects representing the result of an HTTP::Request that
+was carried out.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=HTTP::Status">HTTP::Status</a></td>
+<td>Module providing functions and constants involving HTTP status codes.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=LWP">LWP</a></td>
+<td>Module that exists merely so you can say "use
+LWP" and have all the common LWP modules (notably
+LWP::UserAgent, HTTP::Request, and HTTP::Response). Saying
+<tt class="literal">"use LWP5.64"</tt> also asserts that the current LWP
+distribution had better be Version 5.64 or later. The module also
+contains generous documentation.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Authen::Basic">LWP::Authen::Basic</a></td>
+<td>Module used internally by LWP::UserAgent for doing common
+("Basic") HTTP authentication
+responses.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Authen::Digest">LWP::Authen::Digest</a></td>
+<td>Module used internally by LWP::UserAgent for doing less-common HTTP
+Digest authentication responses.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::ConnCache">LWP::ConnCache</a></td>
+<td>Class used internally by some LWP::Protocol::protocol modules to
+reuse socket connections.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Debug">LWP::Debug</a></td>
+<td>Module for routines useful in tracing how LWP performs requests.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::MediaTypes">LWP::MediaTypes</a></td>
+<td>Module used mostly internally for guessing the MIME type of a file or
+URL.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::MemberMixin">LWP::MemberMixin</a></td>
+<td>Base class used internally for accessing object attributes.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol">LWP::Protocol</a></td>
+<td>Mostly internal base class for accessing and managing LWP protocols.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::data">LWP::Protocol::data</a></td>
+<td>Internal class that handles the new <tt class="literal">data:</tt> URL
+scheme (RFC 2397).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::file">LWP::Protocol::file</a></td>
+<td>Internal class that handles the <tt class="literal">file:</tt> URL scheme.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::ftp">LWP::Protocol::ftp</a></td>
+<td>Internal class that handles the <tt class="literal">ftp:</tt> URL scheme.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::GHTTP">LWP::Protocol::GHTTP</a></td>
+<td>Internal class for handling <tt class="literal">http:</tt> URL scheme using
+the HTTP::GHTTP library.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::gopher">LWP::Protocol::gopher</a></td>
+<td>Internal class that handles the <tt class="literal">gopher:</tt> URL scheme.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::http">LWP::Protocol::http</a></td>
+<td>Internal class that normally handles the <tt class="literal">http:</tt> URL
+scheme.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::http10">LWP::Protocol::http10</a></td>
+<td>Internal class that handles the <tt class="literal">http:</tt> URL scheme
+via just HTTP v1.0 (without the 1.1 extensions and features).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::https">LWP::Protocol::https</a></td>
+<td>Internal class that normally handles the <tt class="literal">https:</tt>
+URL scheme, assuming you have an SSL library installed.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::https10">LWP::Protocol::https10</a></td>
+<td>Internal class that handles the <tt class="literal">https:</tt> URL scheme,
+if you don't want HTTP v1.1 extensions.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::mailto">LWP::Protocol::mailto</a></td>
+<td>Internal class that handles the <tt class="literal">mailto:</tt> URL
+scheme; yes, it sends mail!</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::nntp">LWP::Protocol::nntp</a></td>
+<td>Internal class that handles the <tt class="literal">nntp:</tt> and
+<tt class="literal">news:</tt> URL schemes.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Protocol::nogo">LWP::Protocol::nogo</a></td>
+<td>Internal class used in handling requests to unsupported protocols.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::RobotUA">LWP::RobotUA</a></td>
+<td>Class based on LWP::UserAgent, for objects representing virtual
+browsers that obey robots.txt files and don't abuse
+remote servers.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::Simple">LWP::Simple</a></td>
+<td>Module providing the <tt class="literal">get</tt>, <tt class="literal">head</tt>,
+<tt class="literal">getprint</tt>, <tt class="literal">getstore</tt>, and
+<tt class="literal">mirror</tt> shortcut functions.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=LWP::UserAgent">LWP::UserAgent</a></td>
+<td>Class for objects representing "virtual
+browsers."</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=Net::HTTP">Net::HTTP</a></td>
+<td>Internal class used for HTTP socket connections.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=Net::HTTP::Methods">Net::HTTP::Methods</a></td>
+<td>Internal class used for HTTP socket connections.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=Net::HTTP::NB">Net::HTTP::NB</a></td>
+<td>Internal class used for HTTP socket connections with nonblocking
+sockets.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=Net::HTTPS">Net::HTTPS</a></td>
+<td>Internal class used for HTTP Secure socket connections.</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=URI">URI</a></td>
+<td>Main class for objects representing URIs/URLs, relative or absolute.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_foreign">URI::_foreign</a></td>
+<td>Internal class for objects representing URLs for schemes for which we
+don't have a specific class.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_generic">URI::_generic</a></td>
+<td>Internal base class for just about all URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_login">URI::_login</a></td>
+<td>Internal base class for connection URLs such as
+<tt class="literal">telnet:</tt>, <tt class="literal">rlogin:</tt>, and
+<tt class="literal">ssh:</tt>.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_query">URI::_query</a></td>
+<td>Internal base class providing methods for URL types that can have
+query strings (such as <tt class="literal">foo://...?bar</tt>).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_segment">URI::_segment</a></td>
+<td>Internal class for representing some return values from
+<tt class="literal">$url-&gt;path_segments(&#160;)</tt> calls.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_server">URI::_server</a></td>
+<td>Internal base class for URL types where the first bit represents a
+server name (most of them except <tt class="literal">mailto:</tt>).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::_userpass">URI::_userpass</a></td>
+<td>Internal class providing methods for URL types with an optional
+<tt class="literal">user[:pass]</tt> part (such as
+<tt class="literal">ftp://itsme:foo@secret.int/</tt>).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::data">URI::data</a></td>
+<td>Class for objects representing the new <tt class="literal">data:</tt> URLs
+(RFC 2397).</td></tr>
+<tr><td>*<a href="http://search.cpan.org/search?mode=module&amp;query=URI::Escape">URI::Escape</a></td>
+<td>Module for functions that URL-encode and URL-decode strings (such as
+<tt class="literal">pot</tt> <tt class="literal">pie</tt> to and from
+<tt class="literal">pot%20pie</tt>). </td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file">URI::file</a></td>
+<td>Class for objects representing <tt class="literal">file:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::Base">URI::file::Base</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::FAT">URI::file::FAT</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs under legacy
+MSDOS (with 8.3 filenames).</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::Mac">URI::file::Mac</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs under legacy
+(before v10) MacOS.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::OS2">URI::file::OS2</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs under OS/2.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::QNX">URI::file::QNX</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs under QNX.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::Unix">URI::file::Unix</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs under Unix.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::file::Win32">URI::file::Win32</a></td>
+<td>Internal base class for <tt class="literal">file:</tt> URLs under MS
+Windows.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::ftp">URI::ftp</a></td>
+<td>Class for objects representing <tt class="literal">ftp:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::gopher">URI::gopher</a></td>
+<td>Class for objects representing <tt class="literal">gopher:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::Heuristic">URI::Heuristic</a></td>
+<td>Module for functions that expand abbreviated URLs such as <em class="emphasis">ora.com</em>.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::http">URI::http</a></td>
+<td>Class for objects representing <tt class="literal">http:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::https">URI::https</a></td>
+<td>Class for objects representing <tt class="literal">https:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::ldap">URI::ldap</a></td>
+<td>Class for objects representing <tt class="literal">ldap:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::mailto">URI::mailto</a></td>
+<td>Class for objects representing <tt class="literal">mailto:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::news">URI::news</a></td>
+<td>Class for objects representing <tt class="literal">news:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::nntp">URI::nntp</a></td>
+<td>Class for objects representing <tt class="literal">nntp:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::pop">URI::pop</a></td>
+<td>Class for objects representing <tt class="literal">pop:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::rlogin">URI::rlogin</a></td>
+<td>Class for objects representing <tt class="literal">rlogin:</tt> login URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::rsync">URI::rsync</a></td>
+<td>Class for objects representing <tt class="literal">rsync:</tt> URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::snews">URI::snews</a></td>
+<td>Class for objects representing <tt class="literal">snews:</tt> (Secure
+News) URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::ssh">URI::ssh</a></td>
+<td>Class for objects representing <tt class="literal">ssh:</tt> login URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::telnet">URI::telnet</a></td>
+<td>Class for objects representing <tt class="literal">telnet:</tt> login URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::URL">URI::URL</a></td>
+<td>Deprecated class that is like URI; use URI instead.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=URI::WithBase">URI::WithBase</a></td>
+<td>Like the class URI, but objects of this class can
+"remember" their base URLs.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=WWW::RobotsRules">WWW::RobotsRules</a></td>
+<td>Class for objects representing restrictions parsed from various
+<em class="filename">robots.txt</em> files.</td></tr>
+<tr><td>&nbsp;<a href="http://search.cpan.org/search?mode=module&amp;query=WWW::RobotRules::AnyDBM_File">WWW::<wbr>RobotRules::<wbr>AnyDBM_File</a></td>
+<td>Subclass of WWW::RobotRules that uses a DBM file to cache its
+contents.</td></tr>
+
+</table>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

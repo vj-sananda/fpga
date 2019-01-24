@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Deleting Images (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch10_02"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:19:32 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch10_02' class='lwp lwp_ch10_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">10.2. Deleting Images</h2>
+
+<p>Instead of altering
+<a name="INDEX-575" class="ipoint"
+></a><a name="INDEX-576" class="ipoint"
+></a><a name="INDEX-577" class="ipoint"
+></a><a name="INDEX-578" class="ipoint"
+></a>nodes
+or extracting data from them, it's common to want to
+just delete them. For example, consider that we have the task of
+taking normally complex and image-rich web pages and making unadorned
+text-only versions of them, such as one would print out or paste into
+email. Each document in question has one big table with three rows,
+like this:
+</p>
+
+<pre class="code">&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Shatner and Kunis Sweep the Oscars&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;
+  &lt;tr class="top_button_bar"&gt;
+    <em>...appalling amounts of ad banners and button bars...</em>
+  &lt;/tr&gt;
+  &lt;tr class="main"&gt;
+    &lt;td class="left_geegaws"&gt;
+      <em>...yet more ads and button bars...</em>
+    &lt;/td&gt;
+    &lt;td class="story"&gt;
+
+    &lt;h1&gt;Shatner and Kunis Sweep the Oscars&lt;/h1&gt;
+  
+    &lt;img src="shatner_kunis_awards.jpg" align=left&gt;
+  
+    &lt;p&gt;Stars of &lt;cite&gt;American Psycho II&lt;/cite&gt; walked away with four
+       Academy Awards...
+  
+    &lt;/td&gt;
+    &lt;td class="right_geegaws"&gt;
+      <em>...even more ads...</em>
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr class="bottom_button_bar"&gt;
+    <em>...ads, always ads...</em>
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;hr&gt;Copyright 2002, United Lies Syndicate
+&lt;/html&gt;</pre>
+
+<p>The simplified version of such a page <a name="INDEX-579" class="ipoint"
+></a><a name="INDEX-580" class="ipoint"
+></a>should omit all images and elements of the
+class <tt class="literal">top_button_bar</tt>,
+<tt class="literal">bottom_button_bar</tt>,
+<tt class="literal">left_geegaws</tt>, and
+<tt class="literal">right_geegaws</tt>. This can be implemented with a
+simple call to <tt class="literal">look_down</tt>:
+</p>
+
+<pre class="code">use HTML::TreeBuilder;
+my $root = HTML::TreeBuilder-&gt;new;
+$root-&gt;parse_file('rewriters1/in002.html') || die $!;
+ 
+foreach my $d ($root-&gt;look_down(
+<tt class="userinput"><b>  sub {</b></tt>
+<tt class="userinput"><b>    return 1 if $_[0]-&gt;tag eq 'img';   # we're looking for images</b></tt>
+ <tt class="userinput"><b>   # no class means ignore it</b></tt>
+<tt class="userinput"><b>    my $class = $_[0]-&gt;attr('class') || return 0;</b></tt>
+<tt class="userinput"><b>    return 1 if $class eq 'top_button_bar' or $class eq 'right_geegaws'</b></tt>
+<tt class="userinput"><b>             or $class eq 'bottom_button_bar' or $class eq 'left_geegaws';</b></tt>
+<tt class="userinput"><b>    return 0;</b></tt>
+<tt class="userinput"><b>  }</b></tt>
+)) {
+  $d-&gt;delete;
+}
+ 
+open(OUT, "&gt;rewriters1/out002.html") || die "Can't write: $!";
+print OUT $root-&gt;as_HTML(undef, '  '); # two-space indent in output
+close(OUT);
+$root-&gt;delete; # done with it, so delete it</pre>
+
+<p>The call to <tt class="literal">$d-&gt;delete</tt> detaches the node in
+<tt class="literal">$d</tt> from its parent, then destroys it along with
+all its descendant nodes. The resulting file looks like this:
+</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Shatner and Kunis Sweep the Oscars&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;table&gt;
+      &lt;tr class="main"&gt;
+        &lt;td class="story"&gt;
+          &lt;h1&gt;Shatner and Kunis Sweep the Oscars&lt;/h1&gt;
+          &lt;p&gt;Stars of &lt;cite&gt;American Psycho II&lt;/cite&gt; walked <em class="replaceable"><tt>[...]</tt></em> &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;hr&gt;Copyright 2002, United Lies Syndicate &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>One pragmatic point here: the list returned by the
+<tt class="literal">look_down(&#160;)</tt> call will contain the two
+<tt class="literal">tr</tt> and <tt class="literal">td</tt> elements, any images
+they contain, and also images elsewhere in the document. When we
+delete one of those <tt class="literal">tr</tt> or <tt class="literal">td</tt>
+nodes, we are also implicitly deleting every one of its descendant
+nodes, including some <tt class="literal">img</tt> elements that we are
+about to hit in a subsequent iteration through <tt class="literal">look_down(
+)</tt>'s return list.
+</p>
+
+<p>This isn't a problem in this case, because deleting
+an already deleted node is a harmless no-operation. The larger point
+here is that when <tt class="literal">look_down(&#160;)</tt> finds a matching
+node (as with a <tt class="literal">left_geegaws td</tt> node, in our
+example), that doesn't stop it from looking below
+that node for more matches. If you need that kind of behavior,
+you'll need to implement it in your own traverser,
+as discussed in <a href="ch09_01.htm">Chapter 9, "HTML Processing with Trees"</a>.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

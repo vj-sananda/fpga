@@ -1,0 +1,13 @@
+-batch 
+-create accel_sort_plb 
+-ver 1.00.a 
+-dir F:\fpga\proj\DesignContest08_vjs_64bit 
+-lang verilog 
+-bus plb s 
+-burst 
+-rfifo 1 64 128 
+-wfifo 1 64 128 
+-regn 4 64 
+-xps 
+-ise 
+-driver 

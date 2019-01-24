@@ -1,0 +1,12 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top huffman_decoder_0_wrapper
+-ifmt MIXED
+-ifn huffman_decoder_0_wrapper_xst.prj
+-ofn ../implementation/huffman_decoder_0_wrapper/huffman_decoder_0_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/huffman_decoder_0_wrapper}
+-vlgincdir {F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a\hdl\verilog\ }

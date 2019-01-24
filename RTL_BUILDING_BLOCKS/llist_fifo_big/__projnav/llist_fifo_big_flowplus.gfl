@@ -1,0 +1,6 @@
+# XST flow : Creating project file
+stimulus.prj
+# xst flow : RunXST
+stimulus.prj
+__projnav/stimulus.xst
+./xst

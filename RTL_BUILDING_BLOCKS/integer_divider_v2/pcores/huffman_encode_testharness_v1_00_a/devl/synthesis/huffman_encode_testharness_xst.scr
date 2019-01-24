@@ -1,0 +1,11 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn F:\fpga\proj\huffman_encode\pcores\huffman_encode_testharness_v1_00_a\devl\synthesis\huffman_encode_testharness_xst.prj
+-top huffman_encode_testharness
+-p virtex2p
+-ofn F:\fpga\proj\huffman_encode\pcores\huffman_encode_testharness_v1_00_a\devl\synthesis\huffman_encode_testharness_xst.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /

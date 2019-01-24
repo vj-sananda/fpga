@@ -1,0 +1,8 @@
+// File: F:\fpga\proj\DesignContest08_vjs_64bit_blk4\implementation\system.bmm
+
+ADDRESS_BLOCK isocm_bram RAMB16 [0xfffff000:0xffffffff]
+	BUS_BLOCK
+	isocm_bram/isocm_bram/ramb16_s36_s36_0 [63:32] ;
+	isocm_bram/isocm_bram/ramb16_s36_s36_1 [31:0] ;
+	END_BUS_BLOCK;
+END_ADDRESS_BLOCK;

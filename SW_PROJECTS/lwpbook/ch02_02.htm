@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>An HTTP Transaction (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_02"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 22:29:13 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_02' class='lwp lwp_ch02_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">2.2. An HTTP Transaction</h2>
+
+<p>The Hypertext Transfer Protocol (HTTP) is <a name="INDEX-61" class="ipoint"
+></a>used to fetch most
+documents on the Web. It is formally specified in RFC 2616, but this
+section explains everything you need to know to use LWP.
+</p>
+
+<p>HTTP is a server/client protocol: the server has the file, and the
+client wants it. In regular web surfing, the client is a web browser
+such as Mozilla or Internet Explorer. The URL for a document
+identifies the server, which the browser contacts and requests the
+document from. The server returns either in error
+("file not found") or success (in
+which case the document is attached).
+</p>
+
+<p><a href="ch02_02.htm#perllwp-CHP-2-EX-1">Example 2-1</a> contains a sample request from a client.</p>
+
+<a name="perllwp-CHP-2-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 2-1. An HTTP request </h4>
+<pre class="code">GET /daily/2001/01/05/1.html HTTP/1.1
+Host: www.suck.com
+User-Agent: Super Duper Browser 14.6
+<i>[blank line]</i></pre>
+</div>
+
+<p>A successful response is given in <a href="ch02_02.htm#perllwp-CHP-2-EX-2">Example 2-2</a>.</p>
+
+<a name="perllwp-CHP-2-EX-2"></a><div class="example">
+<h4 class="objtitle">Example 2-2. A successful HTTP response </h4>
+<pre class="code">HTTP/1.1 200 OK
+Content-type: text/html
+Content-length: 24204
+<i>[blank line]</i>
+<i>[and then 24,204 bytes of HTML code]</i></pre>
+</div>
+
+<p>A response indicating failure is given in <a href="ch02_02.htm#perllwp-CHP-2-EX-3">Example 2-3</a>. 
+</p>
+
+<a name="perllwp-CHP-2-EX-3"></a><div class="example">
+<h4 class="objtitle">Example 2-3. An unsuccessful HTTP response </h4>
+<pre class="code">HTTP/1.1 404 Not Found
+Content-type: text/html
+Content-length: 135
+  
+&lt;html&gt;&lt;head&gt;&lt;title&gt;Not Found&lt;/title&gt;&lt;/head&gt;&lt;body&gt;
+Sorry, the object you requested was not found.
+&lt;/body&gt;&lt;html&gt;
+<i>[and then the server closes the connection]</i></pre>
+</div>
+
+<a name="perllwp-CHP-2-SECT-2.1"></a><div class="sect2">
+<h3 class="sect2">2.2.1. Request</h3>
+
+<p>An HTTP request has <a name="INDEX-62" class="ipoint"
+></a>three parts: the request line, the
+headers, and the body of the request (normally used to pass form
+parameters).
+</p>
+
+<p>The request line says what the client wants
+<a name="INDEX-63" class="ipoint"
+></a><a name="INDEX-64" class="ipoint"
+></a>to do (the
+<em class="emphasis">method</em>), what it wants to do it to (the
+<em class="emphasis">path</em>), and what protocol it's
+speaking. Although the HTTP standard defines several methods, the
+most common are GET and POST. The path is part of the URL being
+requested (in <a href="ch02_02.htm#perllwp-CHP-2-EX-1">Example 2-1</a> the path is
+<em class="emphasis">/daily/2001/01/05/1.html</em>). The protocol version
+is generally <tt class="literal">HTTP/1.1</tt>.
+</p>
+
+<p>Each header line consists of a
+<a name="INDEX-65" class="ipoint"
+></a>key and a value (for example,
+<tt class="literal">User-Agent:</tt>
+<tt class="literal">SuperDuperBrowser/14.6</tt>). In versions of HTTP
+previous to 1.1, header lines were optional. In HTTP 1.1, the
+<tt class="literal">Host</tt>: header must be present, to name the server
+to which the browser is talking. This is the
+"server" part of the URL being
+requested (e.g., <em class="emphasis">www.suck.com</em>). The headers are
+terminated with a blank line, which must be present regardless of
+whether there are any headers.
+</p>
+
+<p>The optional message body can contain arbitrary data. If a body is
+sent, the request's <tt class="literal">Content-Type</tt>
+and <tt class="literal">Content-Length</tt> headers help the server decode
+the data. GET queries don't have any attached data,
+so this area is blank (that is, nothing is sent by the browser). For
+our purposes, only POST queries use this third part of the HTTP
+request.
+</p>
+
+<p>The following are the most useful headers sent in an HTTP request.</p>
+
+<dl>
+<dt><tt class="literal">Host</tt>: <tt><em class="replaceable">www.youthere.int</em></tt></dt>
+<dd>
+This mandatory header line tells the server the hostname from the URL
+being requested. It may sound odd to be telling a server its own
+name, but this header line was added in HTTP 1.1 to deal with cases
+where a single HTTP server answers requests for several different
+hostnames.
+
+</dd>
+
+
+<dt><tt class="literal">User-Agent</tt>: <tt><em class="replaceable">Thing/1.23 details...</em></tt></dt>
+<dd>
+This optional header line identifies the make and model of this
+browser (virtual or otherwise). For an interactive browser,
+it's usually something like
+<tt class="literal">Mozilla/4.76</tt> <tt class="literal">[en]</tt>
+<tt class="literal">(Win98;</tt> <tt class="literal">U)</tt> or
+<tt class="literal">Mozilla/4.0</tt> <tt class="literal">(compatible;</tt>
+<tt class="literal">MSIE</tt> <tt class="literal">5.12;</tt>
+<tt class="literal">Mac_PowerPC)</tt>. By default, LWP sends a
+<tt class="literal">User-Agent</tt> header of
+<tt class="literal">libwww-perl/5.64</tt> (or whatever your exact LWP
+version is).
+
+</dd>
+
+
+<dt><tt class="literal">Referer</tt>: <tt><em class="replaceable">http://www.thingamabob.int/stuff.html</em></tt></dt>
+<dd>
+This optional header line tells the remote server the URL of the page
+that contained a link to the page being requested.
+
+<blockquote class='aside'><a name="aside-referer"></a>"Refe<u>rr</u>er"
+would be a more correct English
+spelling of the word, but "Refe<u>r</u>er" got frozen into the spec years
+ago.  Maybe the blame lies on a UK (or Irish, Indian, etc) person
+mistakenly assuming that "referer" would be a correct US spelling, the
+way that UK "trave<u>ll</u>er" does become "trave<u>l</u>er" in the US.  Admittedly,
+it <em>is</em> a <a href= "http://amazon.com/dp/0801879566"
+ >confusing</a> enough <a href=
+ "http://www.dwcummings.com/aes/"  >issue</a>.
+</blockquote>
+
+</dd>
+
+
+<dt><tt class="literal">Accept-Language</tt>: <tt><em class="replaceable">en-US, en, es, de</em></tt></dt>
+<dd>
+This optional header line tells the remote server the natural
+languages in which the user would prefer to see content, using
+language tags. For example, the above list means the user would
+prefer content in U.S. English, or (in order of decreasing
+preference) any kind of English, Spanish, or German. (<a href="appd_01.htm">Appendix D, "Language Tags"</a> lists the most common language tags.) Many
+browsers do not send this header, and those that do usually send the
+default header appropriate to the version of the browser that the
+user installed. For example, if the browser is Netscape with a
+Spanish-language interface, it would probably send
+<tt class="literal">Accept-Language:</tt> <tt class="literal">es</tt>, unless the
+user has dutifully gone through the browser's
+preferences menus to specify other languages.
+
+</dd>
+
+</dl>
+
+<blockquote class='aside'><a name="aside-dot-int"></a>"www.youthere.int"?&nbsp;
+Yes, there's
+an ".int" TLD.&nbsp;  It's for international treaty organizations
+(like <a href= "http://who.int">the World Health Organization</a>
+or <a href="http://www.nato.int/">NATO</a>),
+which means that it will likely be permanently free of
+clever (or even non-acronymic) domain names.&nbsp;  So I use it
+extensively as my suffix for nonsense hostnames throughout this book.
+
+<br><br>But little did I know when I wrote the book, that 
+<a href= "http://tools.ietf.org/html/rfc2606"
+ >RFC&nbsp;2606</a> had already reserved <code>example.com/.net/.org</code>
+for just the purpose of having an example domain name for use in,
+well, books about the Web, and other such documentation.
+</blockquote>
+
+
+
+</div>
+<a name="perllwp-CHP-2-SECT-2.2"></a><div class="sect2">
+<h3 class="sect2">2.2.2. Response</h3>
+
+<p>The server's response also <a name="INDEX-66" class="ipoint"
+></a>has three parts: the status line, some
+headers, and an optional body.
+</p>
+
+<p>The status line states <a name="INDEX-67" class="ipoint"
+></a>which protocol the server is speaking,
+then gives a numeric status code and a short message. For example,
+"HTTP/1.1 404 Not Found." The
+numeric status codes are grouped&#x2014;200-299 are success, 400-499
+are permanent failures, and so on. A full list of HTTP status codes
+is given in <a href="appb_01.htm">Appendix B, "HTTP Status Codes"</a>.
+</p>
+
+<p>The header lines let the
+<a name="INDEX-68" class="ipoint"
+></a>server send additional information
+about the response. For example, if authentication is required, the
+server uses headers to indicate the type of authentication. The most
+common header&#x2014;almost always present for both successful and
+unsuccessful requests&#x2014;is <tt class="literal">Content-Type</tt>, which
+helps the browser interpret the body. Headers are terminated with a
+blank line, which must be present even if no headers are sent.
+</p>
+
+<p>Many responses contain a <tt class="literal">Content-Length</tt> line that
+specifies the length, in bytes, of the body. However, this line is
+rarely present on dynamically generated pages, and because you never
+know which pages are dynamically generated, you
+can't rely on that header line being there.
+</p>
+
+<p>(Other, rarer header lines are used for specifying that the content
+has moved to a given URL, or that the server wants the browser to
+send HTTP cookies, and so on; however, these things are generally
+handled for you automatically by LWP.)
+</p>
+
+<p>The body of the response follows the blank line and can be any
+arbitrary data. In the case of a typical web request, this is the
+HTML document to be displayed. If an error occurs, the message body
+doesn't contain the document that was requested but
+usually consists of a server-generated error message (generally in
+HTML, but sometimes not) explaining the error.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

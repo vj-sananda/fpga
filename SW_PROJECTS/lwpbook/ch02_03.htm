@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>LWP::Simple (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_03"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 02:36:22 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_03' class='lwp lwp_ch02_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">2.3. LWP::Simple</h2>
+
+<p>GET is the simplest and most <a name="INDEX-69" class="ipoint"
+></a>common type of HTTP request. Form
+parameters may be supplied in the URL, but there is never a body to
+the request. The LWP::Simple module has several functions for quickly
+fetching a document with a GET request. Some functions return the
+document, others save or print the document.
+</p>
+
+<a name="perllwp-CHP-2-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">2.3.1. Basic Document Fetch</h3>
+
+<p>The LWP::Simple module's <tt class="literal">get(&#160;)</tt>
+function <a name="INDEX-70" class="ipoint"
+></a><a name="INDEX-71" class="ipoint"
+></a><a name="INDEX-72" class="ipoint"
+></a>takes <a name="INDEX-73" class="ipoint"
+></a>a
+URL and returns the body of the document:
+</p>
+
+<pre class="code">$document = get("http://www.suck.com/daily/2001/01/05/1.html");</pre>
+
+<p>If the document can't be fetched, <tt class="literal">get(
+)</tt> returns <tt class="literal">undef</tt>. Incidentally, if LWP
+requests that URL and the server replies that it has moved to some
+other URL, LWP requests that other URL and returns that.
+</p>
+
+<p>With LWP::Simple's <tt class="literal">get(&#160;)</tt>
+function, there's no way to set headers to be sent
+with the GET request or get more information about the response, such
+as the status code. These are important things, because some web
+servers have copies of documents in different languages and use the
+HTTP language header to determine which document to return. Likewise,
+the HTTP response code can let us distinguish between permanent
+failures (e.g., "404 Not Found")
+and temporary failures ("505 Service [Temporarily]
+Unavailable").
+</p>
+
+<p>Even the most common type of nontrivial web robot (a link checker),
+benefits from access to response codes. A 403
+("Forbidden," usually because of
+file permissions) could be automatically corrected, whereas a 404
+("Not Found") error implies an
+out-of-date link that requires fixing. But if you want access to
+these codes or other parts of the response besides just the main
+content, your task is no longer a simple one, and so you
+shouldn't use LWP::Simple for it. The
+"simple" in LWP::Simple refers not
+just to the style of its interface, but also to the kind of tasks for
+which it's meant.
+</p>
+
+<!--
+TODO:
+http://www.suck.com/daily/2001/01/05/1.html
+-->
+
+
+</div>
+<a name="perllwp-CHP-2-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">2.3.2. Fetch and Store</h3>
+
+<p>One way to get the status <a name="INDEX-74" class="ipoint"
+></a><a name="INDEX-75" class="ipoint"
+></a><a name="INDEX-76" class="ipoint"
+></a>code is to use
+LWP::Simple's <tt class="literal">getstore(&#160;)</tt>
+function, which writes the document to a file and returns the status
+code from the response:
+</p>
+
+<pre class="code">$status = getstore("http://www.suck.com/daily/2001/01/05/1.html",
+                   "/tmp/web.html");</pre>
+
+<p>There are two problems with this. The first is that the document is
+now stored in a file instead of in a variable where you can process
+it (extract information, convert to another format, etc.). This is
+readily solved by reading the file using Perl's
+built-in <tt class="literal">open(&#160;)</tt> and <tt class="literal">&lt;FH&gt;</tt>
+operators; see below for an example.
+</p>
+
+<p>The other problem is that a status code by itself
+isn't very useful: how do you know whether it was
+successful? That is, does the file contain a document? LWP::Simple
+offers the <tt class="literal">is_success(&#160;)</tt> and <tt class="literal">is_error(
+)</tt> functions to answer that question:
+</p>
+
+<pre class="code">$successful = is_success(<em class="replaceable"><tt>status</tt></em>);
+$failed     = is_error(<em class="replaceable"><tt>status</tt></em>);</pre>
+
+<p>If the status code <em class="replaceable"><tt>status</tt></em> indicates a
+successful request (is in the 200-299 range), <tt class="literal">is_success(
+)</tt> returns true. If <em class="replaceable"><tt>status</tt></em> is an
+error (400-599), <tt class="literal">is_error(&#160;)</tt> returns true. For
+example, this bit of code saves the BookTV (CSPAN2) listings schedule
+and emits a message if Gore Vidal is mentioned:
+</p>
+
+<pre class="code">use strict;
+use warnings;
+use LWP::Simple;
+my $url  = 'http://www.booktv.org/schedule/';
+my $file = 'booktv.html';
+my $status = <tt class="userinput"><b>getstore</b></tt>($url, $file);
+die "Error $status on $url" unless <tt class="userinput"><b>is_success</b></tt>($status);
+open(IN, "&lt;$file") || die "Can't open $file: $!";
+while (&lt;IN&gt;) {
+  if (m/Gore\s+Vidal/) {
+    print "Look!  Gore Vidal!  $url\n";
+    last;
+  }
+}
+close(IN);</pre>
+
+</div>
+<a name="perllwp-CHP-2-SECT-3.3"></a><div class="sect2">
+<h3 class="sect2">2.3.3. Fetch and Print</h3>
+
+<p>LWP::Simple also <a name="INDEX-77" class="ipoint"
+></a><a name="INDEX-78" class="ipoint"
+></a><a name="INDEX-79" class="ipoint"
+></a>exports the <tt class="literal">getprint(&#160;)</tt>
+function:
+</p>
+
+<pre class="code">$status = getprint(<em class="replaceable"><tt>url</tt></em>);</pre>
+
+<p>The document is printed to the currently selected output filehandle
+(usually STDOUT). In other respects, it behaves like
+<tt class="literal">getstore(&#160;)</tt>. This can be very handy in one-liners
+such as:
+</p>
+
+<pre class="code">% perl -MLWP::Simple -e "getprint('http://cpan.org/RECENT')||die" | grep Apache</pre>
+
+<p>That retrieves <a href="http://cpan.org/RECENT">http://cpan.org/RECENT</a>, which lists the past
+week's uploads in CPAN (it's a
+plain text file, not HTML), then sends it to STDOUT, where
+<tt class="literal">grep</tt> passes through the lines that contain
+"Apache."
+</p>
+
+</div>
+<a name="perllwp-CHP-2-SECT-3.4"></a><div class="sect2">
+<h3 class="sect2">2.3.4. Previewing with HEAD</h3>
+
+<p>LWP::Simple also <a name="INDEX-80" class="ipoint"
+></a><a name="INDEX-81" class="ipoint"
+></a><a name="INDEX-82" class="ipoint"
+></a><a name="INDEX-83" class="ipoint"
+></a>exports the <tt class="literal">head(&#160;)</tt>
+function, which asks the server, "If I were to
+request this item with GET, what headers would it
+have?" This is useful when you are checking links.
+Although, not all servers support HEAD requests properly, if
+<tt class="literal">head(&#160;)</tt> says the document is retrievable, then it
+almost definitely is. (However, if <tt class="literal">head(&#160;)</tt> says
+it's not, that might just be because the server
+doesn't support HEAD requests.)
+</p>
+
+<p>The return value of <tt class="literal">head(&#160;)</tt> depends on whether you
+call it in scalar context or list context. In scalar context, it is
+simply:
+</p>
+
+<pre class="code">$is_success = head(<em class="replaceable"><tt>url</tt></em>);</pre>
+
+<p>If the server answers the HEAD request with a successful status code,
+this returns a true value. Otherwise, it returns a false value. You
+can use this like so:
+</p>
+
+<pre class="code">die "I don't think I'll be able to get $url" unless head($url);</pre>
+
+<p>Regrettably, however, some old servers, and most CGIs running on
+newer servers, do not understand HEAD requests. In that case, they
+should reply with a "405 Method Not
+Allowed" message, but some actually respond as if
+you had performed a GET request. With the minimal interface that
+<tt class="literal">head(&#160;)</tt> provides, you can't
+really deal with either of those cases, because you
+can't get the status code on unsuccessful requests,
+nor can you get the content (which, in theory, there should never be
+any).
+</p>
+
+<p>In list context, <tt class="literal">head(&#160;)</tt> returns a list of five
+values, if the request is successful:
+</p>
+
+<pre class="code">(<em class="replaceable"><tt>content_type, document_length, modified_time, expires, server</tt></em>)
+    = head(<em class="replaceable"><tt>url</tt></em>);</pre>
+
+<p>The <em class="replaceable"><tt>content_type</tt></em> value is the MIME type
+string of the form <em class="replaceable"><tt>type/subtype</tt></em>; the most
+common MIME types are listed in <a href="appc_01.htm">Appendix C, "Common MIME Types"</a>. The
+<em class="replaceable"><tt>document_length</tt></em> value is whatever is in
+the <tt class="literal">Content-Length</tt> header, which, if present,
+should be the number of bytes in the document that you would have
+gotten if you'd performed a GET request. The
+<em class="replaceable"><tt>modified_time</tt></em> value is the contents of the
+<tt class="literal">Last-Modified</tt> header converted to a number like
+you would get from Perl's <tt class="literal">time(&#160;)</tt>
+function. For normal files (GIFs, HTML files, etc.), the
+<tt class="literal">Last-Modified</tt> value is just the modification time
+of that file, but dynamically generated content will not typically
+have a <tt class="literal">Last-Modified</tt> header.
+</p>
+
+<p>The last two values are rarely useful; the
+<em class="replaceable"><tt>expires</tt></em> value is a time (expressed as a
+number like you would get from Perl's <tt class="literal">time(
+)</tt> function) from the seldom used <tt class="literal">Expires</tt>
+header, indicating when the data should no longer be considered
+valid. The <em class="replaceable"><tt>server</tt></em> value is the contents of
+the <tt class="literal">Server</tt> header line that the server can send,
+to tell you what kind of software it's running. A
+typical value is <tt class="literal">Apache/1.3.22 (Unix)</tt>.
+</p>
+
+<p>An unsuccessful request, in list context, returns an empty list. So
+when you're copying the return list into a bunch of
+scalars, they will each get assigned <tt class="literal">undef</tt>. Note
+also that you don't need to save all the
+values&#x2014;you can save just the first few, as in <a href="ch02_03.htm#perllwp-CHP-2-EX-4">Example 2-4</a>. 
+</p>
+
+<a name="perllwp-CHP-2-EX-4"></a><div class="example">
+<h4 class="objtitle">Example 2-4. Link checking with HEAD </h4>
+<pre class="code">use strict;
+use LWP::Simple;
+foreach my $url (
+  'http://us.a1.yimg.com/us.yimg.com/i/ww/m5v9.gif',
+  'http://hooboy.no-such-host.int/',
+  'http://www.yahoo.com',
+  'http://www.ora.com/ask_tim/graphics/asktim_header_main.gif',
+  'http://www.guardian.co.uk/',
+  'http://www.pixunlimited.co.uk/siteheaders/Guardian.gif',
+) {
+  print "\n$url\n";
+
+<b class="emphasis-bold">  my ($type, $length, $mod) = head($url);</b>
+<b class="emphasis-bold">  # so we don't even save the expires or server values!</b>
+
+  unless (defined $type) {
+    print "Couldn't get $url\n";
+    next;
+  }
+  print "That $type document is ", $length || "???", " bytes long.\n";
+  if ($mod) {
+    my $ago = time( ) - $mod;
+    print "It was modified $ago seconds ago; that's about ",
+      int(.5 + $ago / (24 * 60 * 60)), " days ago, at ",
+      scalar(localtime($mod)), "!\n";
+  } else {
+    print "I don't know when it was last modified.\n";
+  }
+}</pre>
+</div>
+
+<p>Currently, that program prints the following, when run:</p>
+
+<pre class="code"><b class="emphasis-bold">http://us.a1.yimg.com/us.yimg.com/i/ww/m5v9.gif</b>
+<b class="emphasis-bold">That image/gif document is 5611 bytes long</b>.
+<b class="emphasis-bold">It was modified 251207569 seconds ago; that's about 2907 days ago, at Thu Apr 14 18:00:00 1994!</b>
+
+<b class="emphasis-bold">http://hooboy.no-such-host.int/</b>
+<b class="emphasis-bold">Couldn't get http://hooboy.no-such-host.int/</b>
+
+<b class="emphasis-bold">http://www.yahoo.com</b>
+<b class="emphasis-bold">That text/html document is ??? bytes long</b>.
+<b class="emphasis-bold">I don't know when it was last modified</b>.
+
+<b class="emphasis-bold">http://www.ora.com/ask_tim/graphics/asktim_header_main.gif</b>
+<b class="emphasis-bold">That image/gif document is 8588 bytes long</b>.
+<b class="emphasis-bold">It was modified 62185120 seconds ago; that's about 720 days ago, at Mon Apr 10 12:14:13 2000!</b>
+
+<b class="emphasis-bold">http://www.guardian.co.uk/</b>
+<b class="emphasis-bold">That text/html document is ??? bytes long</b>.
+<b class="emphasis-bold">I don't know when it was last modified</b>.
+
+<b class="emphasis-bold">http://www.pixunlimited.co.uk/siteheaders/Guardian.gif</b>
+<b class="emphasis-bold">That image/gif document is 4659 bytes long</b>.
+<b class="emphasis-bold">It was modified 24518302 seconds ago; that's about 284 days ago, at Wed Jun 20 11:14:33 2001!</b></pre>
+
+<p>Incidentally, if you are using the very popular CGI.pm module, be
+aware that it exports a function called <tt class="literal">head(&#160;)</tt>
+too. To avoid a clash, you can just tell LWP::Simple to export every
+function it normally would except for <tt class="literal">head(&#160;)</tt>:
+</p>
+
+<pre class="code">use LWP::Simple qw(<tt class="userinput"><b>!head</b></tt>);
+use CGI qw(:standard);</pre>
+
+<p>If not for that <tt class="literal">qw(!head)</tt>, LWP::Simple would
+export <tt class="literal">head(&#160;)</tt>, then CGI would export
+<tt class="literal">head(&#160;)</tt> (as it's in that
+module's <tt class="literal">:standard</tt> group), which
+would clash, producing a mildly cryptic warning such as
+"Prototype mismatch: sub main::head ($) vs
+none." Because any program using the CGI library is
+almost definitely a CGI script, any such warning (or, in fact, any
+message to STDERR) is usually enough to abort that CGI with a
+"500 Internal Server Error"
+message.
+</p>
+
+
+<blockquote class='aside'><a name="aside-suck"></a> So, the example
+URL in <code>get("<a href=
+"http://www.suck.com/daily/2001/01/05/1.html"
+>http://www.suck.com/daily/2001/01/05/1.html</a>")</code> was just some
+random fun, but it generated a flurry of angry letters to the
+publisher!&nbsp; Well, not exactly.&nbsp; It was a single letter from
+a reader.&nbsp; Or, really, it was one short email message from
+someone with a bellsouth.net address.&nbsp; He said:
+
+
+<br><br><code>From: <i>[some guy]</i>@bellsouth.net
+<br>Subject: Perl LWP: Poor quality web page selection
+
+<br><br>
+I recently purchased Perl & LWP, written by Sean Burke.  The technical
+<br>content is fine.
+<br>However, I feel there was a poor selection with web pages in perl lwp
+<br>examples in the book.
+<br>Page 20 and several other pages give technical examples with the web page
+http://www.suck.com.
+<br>I was dissapointed in Orielly books when I saw the content of www.suck.com.
+
+<br><br>Please keep you books your clean.</code>
+
+<br><br>Presumably his poor grammar, spelling, and formatting are due
+simply to the supreme shock that he had just suffered in seeing
+<a href="http://www.suck.com/daily/2000/06/19/" >such</a>
+<a href="http://www.suck.com/daily/98/03/18/" >things</a> as
+appear at <a href=
+"http://www.keepgoing.org/issue20_giant/the_big_fish.html"
+>suck.com</a>.&nbsp; We must imagine him barely able to type at all,
+even once his valet had carried him to the fainting-couch, loosened
+his ascot, and fanned him nervously.
+
+<br><br>And I confess that I have failed to, uh, keep me books my clean
+-- my <a href= "http://interglacial.com/rtf/" >RTF book</a> contains
+a dirty limerick... in Latin!&nbsp;  Oh, I'm incorrigible!!
+</blockquote>
+
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

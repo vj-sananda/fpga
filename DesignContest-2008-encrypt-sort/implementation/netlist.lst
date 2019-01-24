@@ -1,0 +1,20 @@
+F:\fpga\proj\DesignContest08_vjs_64bit_blk4\implementation\system.ngc 1115323572
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/plb_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/opb_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/plb2opb_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/rs232_uart_1_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/ddr_512mb_64mx64_rank2_row13_col10_cl2_5_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/sysclk_inv_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/clk90_inv_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/ddr_clk90_inv_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/dcm_0_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/dcm_1_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/accel_sort_plb_0_wrapper.ngc 1115323553
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/ppc405_0_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/ppc405_1_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/jtagppc_0_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/reset_block_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/iocm_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/iocm_cntlr_wrapper.ngc 1115323144
+F:/fpga/proj/DesignContest08_vjs_64bit_blk4/implementation/isocm_bram_wrapper.ngc 1115323144
+OK

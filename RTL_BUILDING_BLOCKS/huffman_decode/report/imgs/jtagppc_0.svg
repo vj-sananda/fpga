@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
+<svg width="332" height="204">
+<?xml-stylesheet href="MdtXdsSVG_Render.css" type="text/css"?>
+  <defs>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_TRS_BifArrowEast">
+      <path class="bif" d="M   0    0,       L      14 5       L   0  10       Z" style="stroke:none; fill:#888888; fill-opacity:1"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_TRS_BifBody">
+      <use x="46" y="0" xlink:href="#MOD_TRS_BifArrowEast"/>
+      <rect x="0" y="3" width="46" height="4" style="fill:#888888; fill-opacity:1; stroke:none"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="HCurve" overflow="visible">
+      <path d="m 0  0,      a 16 16, 0,0,0, 32,0,     z" style="fill:#F0F0F0;fill-opacity:1;stroke:black;stroke-width:1.5"/>
+      <line x1="0" y1="0" x2="32" y2="0" style="stroke:#F0F0F0;stroke-width:3"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_StandardBody">
+      <rect x="0" y="0" width="300" height="140" style="fill:#F0F0F0;  fill-opacity: 1.0; stroke:#000000; stroke-width:1"/>
+      <rect x="60" y="16" width="180" height="108" style="fill:#FFFFFF; fill-opacity: 1.0; stroke:#000000; stroke-width:1.5"/>
+      <use x="134" y="16" xlink:href="#HCurve"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_MPort">
+      <rect width="8" height="8" style="fill:#888888;stroke-width:1;stroke:black;"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_SPort">
+      <line x1="0" y1="0" x2="8" y2="0" style="stroke:#888888;stroke-width:2;stroke-opacity:1"/>
+    </symbol>
+    <symbol xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" id="MOD_PortClk">
+      <line x1="0" y1="0" x2="7" y2="3" style="stroke:#000000;stroke-width:1;stroke-opacity:1"/>
+      <line x1="7" y1="3" x2="0" y2="7" style="stroke:#000000;stroke-width:1;stroke-opacity:1"/>
+    </symbol>
+  </defs>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" x="16" y="16" xlink:href="#MOD_StandardBody"/>
+  <text xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" class="iptype" x="166" y="90">jtagppc_cntlr</text>
+  <text xmlns:svg="http://www.w3.org/2000/svg" xmlns:exsl="http://exslt.org/common" xmlns:xlink="http://www.w3.org/1999/xlink" class="iplabel" x="166" y="102">jtagppc_0</text>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="16" y="96" xlink:href="#MOD_TRS_BifBody"/>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="256" y="96" xlink:href="#MOD_TRS_BifBody"/>
+  <text style="fill:#000000;     stroke:none;      font-size:6pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="100" y="103">JTAGPPC0</text>
+  <text style="fill:#000000;     stroke:none;      font-size:6pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="232" y="103">JTAGPPC0</text>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="16" y="122" xlink:href="#MOD_TRS_BifBody"/>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" x="256" y="122" xlink:href="#MOD_TRS_BifBody"/>
+  <text style="fill:#000000;     stroke:none;      font-size:6pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="100" y="129">JTAGPPC1</text>
+  <text style="fill:#000000;     stroke:none;      font-size:6pt;     font-style:normal;     fill-opacity:1.0;     font-weight:900;      text-anchor:middle;     font-family:Arial,Helvetica,sans-serif" x="232" y="129">JTAGPPC1</text>
+</svg>

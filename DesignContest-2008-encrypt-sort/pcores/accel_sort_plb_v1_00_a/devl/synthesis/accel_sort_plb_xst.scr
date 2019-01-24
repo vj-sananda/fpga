@@ -1,0 +1,11 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn F:\fpga\proj\DesignContest08_vjs_64bit\pcores\accel_sort_plb_v1_00_a\devl\synthesis\accel_sort_plb_xst.prj
+-top accel_sort_plb
+-p virtex2p
+-ofn F:\fpga\proj\DesignContest08_vjs_64bit\pcores\accel_sort_plb_v1_00_a\devl\synthesis\accel_sort_plb_xst.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /

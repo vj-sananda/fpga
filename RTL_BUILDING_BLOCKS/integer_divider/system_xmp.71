@@ -1,0 +1,92 @@
+#Please do not modify this file by hand
+XmpVersion: 7.1
+IntStyle: default
+MHS File: system.mhs
+MSS File: system.mss
+NPL File: projnav/system.ise
+Architecture: virtex2p
+Device: xc2vp30
+Package: ff896
+SpeedGrade: -7
+UseProjNav: 0
+AddToNPL: 0
+PNImportBitFile: 
+PNImportBmmFile: 
+UserCmd1: 
+UserCmd1Type: 0
+UserCmd2: 
+UserCmd2Type: 0
+SynProj: xst
+ReloadPbde: 0
+MainMhsEditor: 0
+InsertNoPads: 0
+HdlLang: VHDL
+Simulator: mti
+SimModel: BEHAVIORAL
+SimXLib: 
+SimEdkLib: 
+MixLangSim: 1
+UcfFile: data/system.ucf
+LockAddr: ppc405_0,C_ISOCM_DCR_BASEADDR
+LockAddr: ppc405_0,C_DSOCM_DCR_BASEADDR
+LockAddr: ppc405_1,C_ISOCM_DCR_BASEADDR
+LockAddr: ppc405_1,C_DSOCM_DCR_BASEADDR
+LockAddr: plb,C_BASEADDR
+LockAddr: opb,C_BASEADDR
+LockAddr: plb2opb,C_DCR_BASEADDR
+LockAddr: RS232_Uart_1,C_BASEADDR
+LockAddr: LEDs_4Bit,C_BASEADDR
+LockAddr: DIPSWs_4Bit,C_BASEADDR
+LockAddr: plb_bram_if_cntlr_1,C_BASEADDR
+LockAddr: ppc405_0,C_ISOCM_DCR_BASEADDR
+LockAddr: ppc405_0,C_DSOCM_DCR_BASEADDR
+LockAddr: ppc405_1,C_ISOCM_DCR_BASEADDR
+LockAddr: ppc405_1,C_DSOCM_DCR_BASEADDR
+LockAddr: plb,C_BASEADDR
+LockAddr: opb,C_BASEADDR
+LockAddr: plb2opb,C_DCR_BASEADDR
+LockAddr: RS232_Uart_1,C_BASEADDR
+LockAddr: LEDs_4Bit,C_BASEADDR
+LockAddr: DIPSWs_4Bit,C_BASEADDR
+LockAddr: plb_bram_if_cntlr_1,C_BASEADDR
+Processor: ppc405_0
+BootLoop: 1
+XmdStub: 0
+Processor: ppc405_1
+BootLoop: 0
+XmdStub: 0
+SwProj: TestApp_Memory
+Processor: ppc405_0
+Executable: TestApp_Memory/executable.elf
+Source: TestApp_Memory/src/TestApp_Memory.c
+DefaultInit: EXECUTABLE
+InitBram: 0
+Active: 1
+CompilerOptLevel: 2
+GlobPtrOpt: 0
+DebugSym: 1
+AsmOpt: 
+LinkOpt: 
+ProgStart: 
+StackSize: 
+HeapSize: 
+LinkerScript: TestApp_Memory/src/TestApp_Memory_LinkScr
+ProgCCFlags: 
+SwProj: TestApp_Peripheral
+Processor: ppc405_0
+Executable: TestApp_Peripheral/executable.elf
+Source: TestApp_Peripheral/src/TestApp_Peripheral.c
+Source: drivers/huffman_encode_testharness_v1_00_a/src/test1.c
+DefaultInit: EXECUTABLE
+InitBram: 0
+Active: 1
+CompilerOptLevel: 2
+GlobPtrOpt: 0
+DebugSym: 1
+AsmOpt: 
+LinkOpt: 
+ProgStart: 
+StackSize: 
+HeapSize: 
+LinkerScript: TestApp_Peripheral/src/TestApp_Peripheral_LinkScr
+ProgCCFlags: 

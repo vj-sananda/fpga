@@ -1,0 +1,12 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn "E:\work\FPGA_PROJECTS\ML509\ml509_dpi\pcores\kraaken_dpi_v3_00_a\devl\synthesis\kraaken_dpi_xst.prj"
+-top kraaken_dpi
+-p virtex5
+-ofn "E:\work\FPGA_PROJECTS\ML509\ml509_dpi\pcores\kraaken_dpi_v3_00_a\devl\synthesis\kraaken_dpi_xst.ngc"
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-work_lib kraaken_dpi_v3_00_a

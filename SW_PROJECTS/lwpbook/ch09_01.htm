@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>HTML Processing with Trees (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch09_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:40:43 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch09_01' class='lwp lwp_ch09_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 9. HTML Processing with Trees</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-9-SECT-1">Introduction to Trees</a><br />
+<a href="ch09_02.htm">HTML::TreeBuilder</a><br />
+<a href="ch09_03.htm">Processing</a><br />
+<a href="ch09_04.htm">Example: BBC News</a><br />
+<a href="ch09_05.htm">Example: Fresh Air</a><br /></p></div><p>Treating HTML as a stream
+<a name="INDEX-502" class="ipoint"
+></a>of tokens is an
+imperfect solution to the problem of extracting information from
+HTML. In particular, the token model obscures the hierarchical nature
+of markup. Nested structures such as lists within lists or tables
+within tables are difficult to process as just tokens. Such
+structures are best represented as trees, and the HTML::Element class
+<a name="INDEX-503" class="ipoint"
+></a><a name="INDEX-504" class="ipoint"
+></a>does
+just this.
+</p>
+
+<p>This chapter teaches you how to use the HTML::TreeBuilder module to
+construct trees from HTML, and how to process those trees to extract
+information. <a href="ch10_01.htm">Chapter 10, "Modifying HTML with Trees"</a> shows how to modify HTML
+using trees.
+</p>
+<div class="sect1"><a name="perllwp-CHP-9-SECT-1"></a>
+<h2 class="sect1">9.1. Introduction to Trees</h2>
+
+<p>The HTML in <a href="ch09_01.htm#perllwp-CHP-9-EX-1">Example 9-1</a> can be
+<a name="INDEX-505" class="ipoint"
+></a><a name="INDEX-506" class="ipoint"
+></a>represented by the tree in <a href="ch09_01.htm#perllwp-CHP-9-FIG-1">Figure 9-1</a>. 
+</p>
+
+<a name="perllwp-CHP-9-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 9-1. Simple HTML </h4>
+<pre class="code">&lt;ul&gt;
+  &lt;li&gt;Ice cream.&lt;/li&gt;
+  &lt;li&gt;Whipped cream.
+  &lt;li&gt;Hot apple pie &lt;br&gt;(mmm pie)&lt;/li&gt;
+&lt;/ul&gt;</pre>
+</div>
+
+<a name="perllwp-CHP-9-FIG-1"></a><div class="figure"><img src="figs/plwp_0901.gif"
+alt="Figure 9-1: HTML tree" title="Figure 9-1: HTML tree"
+width="424" height="241" /></div><h4 class="objtitle">Figure 9-1. HTML tree</h4>
+
+<p>In the language of trees, each part of the tree (such as
+<tt class="literal">html</tt>, <tt class="literal">li</tt>,
+<tt class="literal">Ice</tt> <tt class="literal">cream.</tt>, and
+<tt class="literal">br)</tt> is a <em class="emphasis">node</em>. There are two
+kinds of nodes in
+<a name="INDEX-507" class="ipoint"
+></a><a name="INDEX-508" class="ipoint"
+></a><a name="INDEX-509" class="ipoint"
+></a><a name="INDEX-510" class="ipoint"
+></a><a name="INDEX-511" class="ipoint"
+></a><a name="INDEX-512" class="ipoint"
+></a>an
+HTML tree: <em class="emphasis">text nodes</em>,which are strings with no
+tags, and <em class="emphasis">elements</em>, which symbolize not mere
+strings, but things that can have attributes (such as
+<tt class="literal">align=left</tt>), and which generally came from an open
+tag (such as <tt class="literal">&lt;li&gt;</tt>), and were possibly closed
+by an end-tag (such as <tt class="literal">&lt;/li&gt;</tt>).
+</p>
+
+<p>When several nodes are contained by another, as
+<a name="INDEX-513" class="ipoint"
+></a><a name="INDEX-514" class="ipoint"
+></a><a name="INDEX-515" class="ipoint"
+></a><a name="INDEX-516" class="ipoint"
+></a>the
+<tt class="literal">li</tt> elements are contained by the
+<tt class="literal">ul</tt> element, the contained ones are called
+<em class="emphasis">children</em>. Children <a name="INDEX-517" class="ipoint"
+></a><a name="INDEX-518" class="ipoint"
+></a>of the same element are called
+<em class="emphasis">siblings</em>. For example, <tt class="literal">head</tt>
+and <tt class="literal">body</tt> are siblings, as they are both children
+of the <tt class="literal">html</tt> element. Text nodes
+can't have children; only elements can have
+children.
+</p>
+
+<p><a href="ch09_01.htm#perllwp-CHP-9-EX-1">Example 9-1</a> shows <a name="INDEX-519" class="ipoint"
+></a><a name="INDEX-520" class="ipoint"
+></a>the difference between a
+<em class="emphasis">tag</em> and an <em class="emphasis">element</em>. A tag
+is a piece of markup source, such as the string
+<tt class="literal">&lt;li&gt;</tt>. An element is a feature of the tree
+that you get by parsing the source that contains tags. The
+relationship between the two isn't always easy to
+figure out by just looking at the source, because HTML lets you omit
+closing tags (such as <tt class="literal">&lt;/li&gt;</tt>) and in some
+cases omit entire groups of tags (such as
+<tt class="literal">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;...&lt;/body&gt;&lt;/html&gt;</tt>,
+as were omitted above but showed up in the tree anyway). This is
+unlike XML, where there are exactly as many elements in the tree as
+there are <tt class="literal">&lt;foo&gt;...&lt;/foo&gt;</tt> tag pairs in
+the source.
+</p>
+
+<p>Trees let you work with elements and ignore the way the HTML was
+marked up. If you're processing the tree shown in
+<a href="ch09_01.htm#perllwp-CHP-9-FIG-1">Figure 9-1</a>, you don't need to
+worry about whether the <tt class="literal">&lt;/li&gt;</tt> tag was or was
+not present.
+</p>
+
+<p>In LWP, each element in a tree is an HTML::Element object. The
+HTML::TreeBuilder module parses HTML and constructs a tree for you.
+The parsing options in a given HTML::TreeBuilder object control the
+nature of the final tree (for example, whether comments are ignored
+or represented in the tree). Once you have a tree, you can call
+methods on it that search for bits of content and emit parts of it as
+HTML or text. In the next chapter, we even see how to move nodes
+around within the tree, and from tree to tree.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

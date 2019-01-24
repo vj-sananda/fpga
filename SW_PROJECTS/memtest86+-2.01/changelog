@@ -1,0 +1,20 @@
+Memtest86+ V2.01 changelog
+--------------------------
+
+	- Solved a major bug in Memory Address Errors Reporting
+	- Patched for Intel-Powered Mac
+	- Pass duration 20% reduced 
+	- Solved a incoherency with pass progress indicator
+	- Patched Makefile to compile on x86_64
+	- Added support for 45 nm Mobile Core 2 w/ 3 Mo L2
+	- Corrected Intel 3-Series (P35/X38) chipset init 
+  - Corrected a bug with SPD Display and ESB6300
+  - Correct a detection bug on P965/G965 C-Stepping
+  - Added support for i945GM/PM/GME & i946PL/GZ
+  - Added support for iGM965/iGL960/iPM965/iGME965/iGLE960
+  - Added detection for SiS 649/656/671/672
+  - Added detection for i430MX/i430TX
+	- Added an optional beep mode (pass completed w/o error)
+	- Removed the blinking cursor
+	- Bootable Memtest86+ ISO more compatible
+	- Reverted Test #0 to cached

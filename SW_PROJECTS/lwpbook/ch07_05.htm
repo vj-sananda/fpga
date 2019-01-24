@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>More HTML::TokeParser Methods (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch07_05"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 22:30:48 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch07_05' class='lwp lwp_ch07_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">7.5. More HTML::TokeParser Methods</h2>
+
+<p><a href="ch07_03.htm#perllwp-CHP-7-EX-1">Example 7-1</a> illustrates that often
+<a name="INDEX-451" class="ipoint"
+></a><a name="INDEX-452" class="ipoint"
+></a>you
+aren't interested in every kind of token in a
+stream, but care only about tokens of a certain kind. The
+HTML::TokeParser interface supports this with
+<a name="INDEX-453" class="ipoint"
+></a><a name="INDEX-454" class="ipoint"
+></a><a name="INDEX-455" class="ipoint"
+></a><a name="INDEX-456" class="ipoint"
+></a><a name="INDEX-457" class="ipoint"
+></a><a name="INDEX-458" class="ipoint"
+></a>three methods, <tt class="literal">get_tag(
+)</tt>, <tt class="literal">get_text(&#160;)</tt>, and
+<tt class="literal">get_trimmed_text(&#160;)</tt> that do something other than
+simply get the next token.
+</p>
+
+<dl>
+<dt><tt class="literal">$text_string = $stream-&gt;get_text( );</tt></dt>
+<dd>
+If the next token is text, return its value.
+</dd>
+
+
+<dt><tt class="literal">$text_string = $stream-&gt;get_text('foo');</tt></dt>
+<dd>
+Return all text up to the next <tt class="literal">foo</tt> start-tag.
+</dd>
+
+
+<dt><tt class="literal">$text_string = $stream-&gt;get_text('/bar');</tt></dt>
+<dd>
+Return all text up to the next <tt class="literal">/bar</tt> end-tag.
+</dd>
+
+
+
+<dt><tt class="literal">$text = $stream-&gt;get_trimmed_text( );</tt></dt>
+<dt><tt class="literal">$text = $stream-&gt;get_trimmed_text('foo');</tt></dt>
+<dt><tt class="literal">$text = $stream-&gt;get_trimmed_text('/bar');</tt></dt>
+<dd>
+Like <tt class="literal">get_text(&#160;)</tt> calls, except with initial and
+final whitespace removed, and all other whitespace collapsed.
+
+</dd>
+
+
+<dt><tt class="literal">$tag_ref = $stream-&gt;get_tag( );</tt></dt>
+<dd>
+Return the next start-tag or end-tag token.
+</dd>
+
+
+<dt><tt class="literal">$tag_ref = $stream-&gt;get_tag('foo', '/bar', 'baz');</tt></dt>
+<dd>
+Return the next <tt class="literal">foo</tt> start-tag,
+<tt class="literal">/bar</tt> end-tag, or <tt class="literal">baz</tt> start-tag.
+
+</dd>
+
+</dl>
+
+<p>We will explain these methods in detail in the following sections.</p>
+
+<a name="perllwp-CHP-7-SECT-5.1"></a><div class="sect2">
+<h3 class="sect2">7.5.1. The get_text( ) Method</h3>
+
+<p>The <tt class="literal">get_text(&#160;)</tt> syntax is:</p>
+
+<pre class="code">$text_string = $stream-&gt;get_text( );</pre>
+
+<p>If <tt class="literal">$stream</tt>'s next token is
+<a name="INDEX-459" class="ipoint"
+></a><a name="INDEX-460" class="ipoint"
+></a>text, this gets it, resolves any entities in
+it, and returns its string value. Otherwise, this returns an empty
+string.
+</p>
+
+<p>For example, if you are parsing this snippet:</p>
+
+<pre class="code">&lt;h1 lang='en-GB'&gt;Shatner Reprises Kirk R&amp;ocirc;le&lt;/h1&gt;</pre>
+
+<p>and have just parsed the token for <tt class="literal">h1</tt>,
+<tt class="literal">$stream-&gt;get_text(&#160;)</tt> returns
+"Shatner Reprises Kirk
+R&#xF4;le." If you call it again (and again
+and again), it will return the empty string, because the next token
+waiting is not a text token but an <tt class="literal">h1</tt> end-tag
+token.
+</p>
+
+
+</div>
+<a name="perllwp-CHP-7-SECT-5.2"></a><div class="sect2">
+<h3 class="sect2">7.5.2. The get_text( ) Method with Parameters</h3>
+
+<p>The syntax for <tt class="literal">get_text(&#160;)</tt> with parameters is:</p>
+
+<pre class="code">$text_string = $stream-&gt;get_text('foo');
+$text_string = $stream-&gt;get_text('/bar');</pre>
+
+<p>Specifying a <tt class="literal">foo</tt> or <tt class="literal">/bar</tt>
+parameter <a name="INDEX-461" class="ipoint"
+></a><a name="INDEX-462" class="ipoint"
+></a>changes the
+meaning of <tt class="literal">get_text(&#160;)</tt>. If you specify a tag, you
+get all the text up to the next time that tag occurs (or until the
+end of the file, if that tag never occurs).
+</p>
+
+<p>For however many text tokens are found, their text values are taken,
+entity sequences are resolved, and they are combined and returned.
+(All the other sorts of tokens seen along the way are just ignored.)
+</p>
+
+<p>Note that the tag name that you specify (whether
+<tt class="literal">foo</tt> or <tt class="literal">/bar</tt>) must be in
+lowercase.
+</p>
+
+<p>This sounds complex, but it works out well in real use. For example,
+imagine you've got this snippet:
+</p>
+
+<pre class="code">&lt;h1 lang='en-GB'&gt;Star of &lt;cite&gt;Star Trek&lt;/cite&gt; in New R&amp;ocirc;le&lt;/h1&gt;
+   &lt;cite&gt;American Psycho II&lt;/cite&gt; in Production.
+   &lt;!-- I'm not making this up, folks. --&gt;
+   &lt;br&gt;Shatner to play FBI profiler.</pre>
+
+<p>and that you've just parsed the token for
+<tt class="literal">h1</tt>. Calling <tt class="literal">$stream-&gt;get_text(
+)</tt>, simply gets <tt class="literal">Star</tt>
+<tt class="literal">of</tt> . If, however, the task you're
+performing is the extraction of the text content of
+<tt class="literal">&lt;h1&gt;</tt> elements, then what's
+called for is:
+</p>
+
+<pre class="code">$stream-&gt;get_text('/h1')</pre>
+
+<p>This returns <tt class="literal">Star of Star Trek in New
+R&#xF4;le</tt>. 
+</p>
+
+<p>Calling:</p>
+
+<pre class="code">$stream-&gt;get_text('br')</pre>
+
+<p>returns:</p>
+
+<pre class="code">"Star of Star Trek in New R&#xF4;le\n  American Psycho II in Production.\n   \n  "</pre>
+
+<p>And if you instead called
+<tt class="literal">$stream-&gt;get_text('schlock')</tt> and there is no
+<tt class="literal">&lt;schlock...&gt;</tt> in the rest of the document,
+you will get <tt class="literal">Star</tt> <tt class="literal">of</tt>
+<tt class="literal">Star</tt> <tt class="literal">Trek</tt> <tt class="literal">in</tt>
+<tt class="literal">New</tt> <tt class="literal">R&#xF4;le\n</tt>
+<tt class="literal">American</tt> <tt class="literal">Psycho</tt>
+<tt class="literal">II</tt> <tt class="literal">in</tt>
+<tt class="literal">Production.\n</tt> <tt class="literal">\n</tt>
+<tt class="literal">Shatner</tt> <tt class="literal">to</tt>
+<tt class="literal">play</tt> <tt class="literal">FBI</tt>
+<tt class="literal">profiler.\n</tt>, plus whatever text there is in the
+rest of the document.
+</p>
+
+
+<p>Note that this never introduces whitespace where
+it's not there in the original. So if
+you're parsing this:
+</p>
+
+<pre class="code">&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;Height&lt;th&gt;Weight&lt;th&gt;Shoe Size&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;6' 2"&lt;th&gt;180lbs&lt;th&gt;n/a&lt;/tr&gt;
+&lt;/table&gt;</pre>
+
+<p>and you've just parsed the <tt class="literal">table</tt>
+token, if you call:
+</p>
+
+<pre class="code">$stream-&gt;get_text('/table')</pre>
+
+<p>you'll get back:</p>
+
+<pre class="code">"\nHeightWeightShoe Size\n6' 2"180lbsn/a\n"</pre>
+
+<p>Not all nontext tokens are ignored by <tt class="literal">$stream-&gt;get_text(
+)</tt>. Some tags receive special treatment: if an
+<tt class="literal">img</tt> or <tt class="literal">applet</tt> tag is seen, it
+is treated as if it were a text token; if it has an
+<tt class="literal">alt</tt> attribute, its value is used as the content of
+the virtual text token; otherwise, you get just the uppercase tag
+name in brackets: <tt class="literal">[IMG]</tt> or
+<tt class="literal">[APPLET]</tt>. For further information on altering and
+expanding this feature, see perldoc HTML::TokeParser in the
+documentation for the <tt class="literal">get_text</tt> method, and
+possibly even the surprisingly short HTML::TokeParser source code.
+</p>
+
+<p>If you just want to turn off such special treatment for all tags:</p>
+
+<pre class="code">$stream-&gt;{'textify'} = {}</pre>
+
+<p>This is the only case of the <tt class="literal">$object-&gt;{'thing'}</tt>
+syntax we'll discuss in this book. In no other case
+does an object require us to access its internals directly like this,
+because it has no method for more normal access. For more information
+on this particular syntax, see perldoc perlref's
+documentation on hash references.
+</p>
+
+<blockquote class="aside"><a name="aside-american-psycho2"></a>
+Remember when I said "&lt;!-- I'm not making this up, folks. --&gt;", about
+<cite>American Psycho II</cite>?
+<br>I <b>dare</b> you to look: <a href=
+ "http://us.imdb.com/title/tt0283877/"
+ >http://us.imdb.com/title/tt0283877/</a>
+</blockquote>
+
+</div>
+<a name="perllwp-CHP-7-SECT-5.3"></a><div class="sect2">
+<h3 class="sect2">7.5.3. The get_trimmed_text( ) Method</h3>
+
+<p>The syntax for the <tt class="literal">get_trimmed_text(&#160;)</tt> method is:</p>
+
+<pre class="code">$text = $stream-&gt;get_trimmed_text( );
+$text = $stream-&gt;get_trimmed_text('foo');
+$text = $stream-&gt;get_trimmed_text('/bar');</pre>
+
+<p>These work exactly like the <a name="INDEX-463" class="ipoint"
+></a><a name="INDEX-464" class="ipoint"
+></a>corresponding <tt class="literal">$stream-&gt;get_text(
+)</tt> calls, except any leading and trailing whitespace is
+removed and each sequence of whitespace is replaced with a single
+space.
+</p>
+
+<p>Returning to our news example:</p>
+
+<pre class="code">$html = &lt;&lt;&lt;EOF ;
+&lt;h1 lang='en-GB'&gt;Star of &lt;cite&gt;Star Trek&lt;/cite&gt; in New R&amp;ocirc;le&lt;/h1&gt;
+   &lt;cite&gt;American Psycho II&lt;/cite&gt; in Production.
+   &lt;!-- I'm not making this up, folks. --&gt;
+   &lt;br&gt;Shatner to play FBI profiler.
+EOF
+$stream = HTML::TokeParser-&gt;new(\$html);
+$stream-&gt;get_token( );                      # skip h1</pre>
+
+<p>The <tt class="literal">get_text(&#160;)</tt> method would return
+<tt class="literal">Star</tt> <tt class="literal">of</tt> (with the trailing
+space), while the <tt class="literal">get_trimmed_text(&#160;)</tt> method would
+return <tt class="literal">Star</tt> <tt class="literal">of</tt> (no trailing
+space).
+</p>
+
+<p>Similarly, <tt class="literal">$stream-&gt;get_text('br')</tt> would return:</p>
+
+<pre class="code">"Star of Star Trek in New R&#xF4;le\n  American Psycho II in Production.\n   \n  "</pre>
+
+<p>whereas <tt class="literal">$stream-&gt;get_trimmed_text ('br')</tt> would
+return:
+</p>
+
+<pre class="code">"Star of Star Trek in New R&#xF4;le American Psycho II in Production."</pre>
+
+<p>Notice that the medial newline-space-space became a single space, and
+the final newline-space-space-newline-space-space was simply removed.
+</p>
+
+<p>The caveat that <tt class="literal">get_text(&#160;)</tt> does not introduce any
+new whitespace applies also to <tt class="literal">get_trimmed_text(
+)</tt>. So where, in the last example in <tt class="literal">get_text(
+)</tt>, you would have gotten
+<tt class="literal">\nHeightWeightShoe</tt> <tt class="literal">Size\n6'</tt>
+<tt class="literal">2"180lbsn/a\n</tt>, <tt class="literal">get_trimmed_text(
+)</tt> would return <tt class="literal">HeightWeightShoe</tt>
+<tt class="literal">Size</tt> <tt class="literal">6'</tt>
+<tt class="literal">2"180lbsn/a</tt>. 
+</p>
+
+</div>
+<a name="perllwp-CHP-7-SECT-5.4"></a><div class="sect2">
+<h3 class="sect2">7.5.4. The get_tag( ) Method</h3>
+
+<p>The syntax for the <tt class="literal">get_tag(&#160;)</tt> method
+<a name="INDEX-465" class="ipoint"
+></a><a name="INDEX-466" class="ipoint"
+></a>is:
+</p>
+
+<pre class="code">$tag_reference = $stream-&gt;get_tag( );</pre>
+
+<p>This returns the next start-tag or end-tag token (throwing out
+anything else it has to skip to get there), except while
+<tt class="literal">get_token(&#160;)</tt> would return start and end-tags in
+these formats:
+</p>
+
+<pre class="code">['S', 'hr', {'class','Ginormous'}, ['class'], '&lt;hr class=Ginormous&gt;']
+['E', 'p' , '&lt;/P&gt;']</pre>
+
+<p><tt class="literal">get_tag(&#160;)</tt> instead returns them in this format:</p>
+
+<pre class="code">['hr', {'class','Ginormous'}, ['class'], '&lt;hr class=Ginormous&gt;']
+['/p' , '&lt;/P&gt;']</pre>
+
+<p>That is, the first item has been taken away, and end-tag names start
+with <tt class="literal">/</tt>.
+</p>
+
+<a name="perllwp-CHP-7-SECT-5.4.1"></a><div class="sect3">
+<h3 class="sect3">7.5.4.1. Start-tags</h3>
+
+<p>Unless <tt class="literal">$tag-&gt;[0]</tt> begins with a
+<tt class="literal">/</tt>, the tag represents a start-tag:
+</p>
+
+<pre class="code">[$tag, $attribute_hash, $attribute_order_arrayref, $source]</pre>
+
+<p>The components of this token are:</p>
+
+<dl>
+<dt><tt class="literal">$tag</tt></dt>
+<dd>
+The tag name, in lowercase.
+</dd>
+
+
+<dt><tt class="literal">$attribute_hashref</tt></dt>
+<dd>
+A reference to a hash encoding the attributes of this tag. The
+(lowercase) attribute names are the keys of the hash.
+
+</dd>
+
+
+<dt><tt class="literal">$attribute_order_arrayref</tt></dt>
+<dd>
+A reference to an array of (lowercase) attribute names, in case you
+need to access elements in order.
+
+</dd>
+
+
+<dt><tt class="literal">$source</tt></dt>
+<dd>
+The original HTML for this token.
+</dd>
+
+</dl>
+
+<p>The first two values are the most interesting ones, for most purposes.</p>
+
+<p>For example, parsing this HTML with <tt class="literal">$stream-&gt;get_tag(
+)</tt> :
+</p>
+
+<pre class="code">&lt;IMG SRC="kirk.jpg" alt="Shatner in r&amp;ocirc;le of Kirk" WIDTH=352 height=522&gt;</pre>
+
+<p>gives this tag:</p>
+
+<pre class="code">[
+  'img',
+  { 'alt' =&gt; 'Shatner in r&#xF4;le of Kirk',
+     'height' =&gt; '522', 'src' =&gt; 'kirk.jpg', 'width' =&gt; '352'
+  },
+  [ 'src', 'alt', 'width', 'height' ],
+  '&lt;IMG SRC="kirk.jpg" alt="Shatner in r&amp;ocirc;le of Kirk" WIDTH=352 height=522&gt;'
+]</pre>
+
+<p>Notice that the tag and attribute names have been lowercased, and the
+<tt class="literal">&amp;ocirc;</tt> entity decoded within the
+<tt class="literal">alt</tt> attribute.
+</p>
+
+</div>
+
+<a name="perllwp-CHP-7-SECT-5.4.2"></a><div class="sect3">
+<h3 class="sect3">7.5.4.2. End-tags</h3>
+
+<p>When <tt class="literal">$tag-&gt;[0]</tt> does begin with a
+<tt class="literal">/</tt>, the token <a name="INDEX-467" class="ipoint"
+></a>represents an
+end-tag:
+</p>
+
+<pre class="code">[ "/$tag", $source ]</pre>
+
+<p>The components of this tag are:</p>
+
+<dl>
+<dt><tt class="literal">$tag</tt></dt>
+<dd>
+The lowercase name of the tag being closed, with a leading
+<tt class="literal">/</tt>.
+
+</dd>
+
+
+<dt><tt class="literal">$source</tt></dt>
+<dd>
+The original HTML for this token.
+</dd>
+
+</dl>
+
+<p>Parsing this HTML with <tt class="literal">$stream-&gt;get_tag(&#160;)</tt> :</p>
+
+<pre class="code">&lt;/A&gt;</pre>
+
+<p>gives this tag:</p>
+
+<pre class="code">[ '/a', '&lt;/A&gt;' ]</pre>
+
+<p>Note that if <tt class="literal">get_tag(&#160;)</tt> reads to the end of the
+stream and finds no tag tokens, it will return
+<tt class="literal">undef</tt>.
+</p>
+
+</div>
+</div>
+<a name="perllwp-CHP-7-SECT-5.5"></a><div class="sect2">
+<h3 class="sect2">7.5.5. The get_tag( ) Method with Parameters</h3>
+
+<p>Pass a list of tags, to skip through <a name="INDEX-468" class="ipoint"
+></a><a name="INDEX-469" class="ipoint"
+></a>the tokens
+until a matching tag is found:
+</p>
+
+<pre class="code">$tag_reference = $stream-&gt;get_tag('foo', '/bar', 'baz');</pre>
+
+<p>This returns the next start-tag or end-tag that matches any of the
+strings you provide (throwing out anything it has to skip to get
+there). Note that the tag name(s) that you provide as parameters must
+be in lowercase.
+</p>
+
+<p>If <tt class="literal">get_tag(&#160;)</tt> reads to the end of the stream and
+finds no matching tag tokens, it will return
+<tt class="literal">undef</tt>. For example, this code's
+<tt class="literal">get_tag(&#160;)</tt> looks for <tt class="literal">img</tt>
+start-tags:
+</p>
+
+<pre class="code">while (my $img_tag = $stream-&gt;get_tag('img')) {
+  my $i = $img_tag-&gt;[1];            # attributes of this img tag
+  my @lack = grep !exists $i-&gt;{$_}, qw(alt height width);
+  print "Missing for ", $i-&gt;{'src'} || "????", ": @lack\n" if @lack;
+}</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>The Gory Details (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appg_08"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appg_08' class='lwp lwp_appg_08' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">G.8. The Gory Details</h2>
+
+<p>For sake of clarity of explanation, I had to oversimplify some of the
+facts about objects. Here's a few of the gorier
+details:
+</p>
+
+<ul><li>
+<p>Every example I gave of a constructor was a class method. But object
+methods can be constructors, too, if the class was written to work
+that way: <tt class="literal">$new</tt> <tt class="literal">=</tt>
+<tt class="literal">$old-&gt;copy</tt>, <tt class="literal">$node_y =
+$node_x-&gt;new_subnode</tt>, or the like.
+</p>
+</li><li>
+<p>I've given the impression that
+there's two kinds of methods: object methods and
+class methods. In fact, the same method can be both, because
+it's not the kind of method it is, but the kind of
+calls it's written to accept&#x2014;calls that pass
+an object, or calls that pass a class name.
+</p>
+</li><li>
+<p>The term "object value"
+isn't something you'll find used
+much anywhere else. It's just my shorthand for what
+would properly be called an "object
+reference" or "reference to a
+blessed item." In fact, people usually say
+"object" when they properly mean a
+reference to that object.
+</p>
+</li><li>
+<p>I mentioned creating objects with <em class="emphasis">con</em>structors,
+but I didn't mention destroying them with
+<em class="emphasis">de</em>structor&#x2014;a destructor is a kind of
+method that you call to tidy up the object once
+you're done with it, and want it to neatly go away
+(close connections, delete temporary files, free up memory, etc.).
+But because of the way Perl handles memory, most modules
+won't require the user to know about destructors.
+</p>
+</li><li>
+<p>I said that class method syntax has to have the class name, as in
+<tt class="literal">$session</tt> <tt class="literal">=</tt>
+<tt class="literal">Net::FTP-&gt;new($host)</tt>. Actually, you can instead
+use any expression that returns a class name:
+<tt class="literal">$ftp_class</tt> <tt class="literal">=</tt>
+<tt class="literal">'Net::FTP';</tt> <tt class="literal">$session</tt>
+<tt class="literal">=</tt> <tt class="literal">$ftp_class-&gt;new($host)</tt>.
+Moreover, instead of the method name for object- or class-method
+calls, you can use a scalar holding the method name:
+<tt class="literal">$foo-&gt;$method($host)</tt>. But, in practice, these
+syntaxes are rarely useful.
+</p>
+</li></ul>
+<p>And finally, to learn about objects from the perspective of writing
+your own classes, see the <em class="filename">perltoot</em>
+documentation, or Damian Conway's exhaustive and
+clear book <em class="emphasis">Object Oriented Perl</em> (Manning
+Publications, 1999).
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

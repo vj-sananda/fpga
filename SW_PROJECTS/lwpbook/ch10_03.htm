@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Detaching and Reattaching (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch10_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch10_03' class='lwp lwp_ch10_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">10.3. Detaching and Reattaching</h2>
+
+<p>Suppose that the output of
+<a name="INDEX-581" class="ipoint"
+></a><a name="INDEX-582" class="ipoint"
+></a>our
+above rewriter is not satisfactory. While its output contains an
+apparently harmless one-cell one-row table, this is somehow
+troublesome when the president of the company tries viewing that web
+page on his cellphone/PDA, which has a typically limited
+understanding of HTML. Some experimentation shows that any web pages
+with tables in them will deeply confuse the boss's
+PDA.
+</p>
+
+<p>So your task should be changed to this: find the one interesting cell
+in the table (the <tt class="literal">td</tt> with
+<tt class="literal">class="story"</tt>), detach it, then replace the table
+with the <tt class="literal">td</tt>, and delete the table. This is a
+complex series of actions, but luckily every one of them is directly
+translatable into an HTML::Element method.
+<a name="INDEX-583" class="ipoint"
+></a>The result is <a href="ch10_03.htm#perllwp-CHP-10-EX-2">Example 10-2</a>. 
+</p>
+
+<a name="perllwp-CHP-10-EX-2"></a><div class="example">
+<h4 class="objtitle">Example 10-2. Detaching and reattaching nodes </h4>
+<pre class="code">use strict;
+use HTML::TreeBuilder;
+my $root = HTML::TreeBuilder-&gt;new;
+$root-&gt;parse_file('rewriters1/in002.html') || die $!;
+
+my $good_td = $root-&gt;look_down( '_tag', 'td',  'class', 'story', );
+die "No good td?!" unless $good_td;      # sanity checking
+my $big_table = $root-&gt;look_down( '_tag', 'table' );
+die "No big table?!" unless $big_table;  # sanity checking
+
+$good_td-&gt;detach;
+$big_table-&gt;replace_with($good_td);
+  # Yes, there's even a method for replacing one node with another!
+
+open(OUT, "&gt;rewriters1/out002b.html") || die "Can't write: $!";
+print OUT $root-&gt;as_HTML(undef, '  '); # two-space indent in output
+close(OUT);
+$root-&gt;delete; # done with it, so delete it</pre>
+</div>
+
+<p>The resulting document looks like this:</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Shatner and Kunis Sweep the Oscars&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;td class="story"&gt;
+      &lt;h1&gt;Shatner and Kunis Sweep the Oscars&lt;/h1&gt;
+      &lt;p&gt;Stars of &lt;cite&gt;American Psycho II&lt;/cite&gt; walked <em class="replaceable"><tt>[...]</tt></em> &lt;/td&gt;
+    &lt;hr&gt;Copyright 2002, United Lies Syndicate &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>One problem, though: we have a <tt class="literal">td</tt> outside of a
+table. Simply change it from a <tt class="literal">td</tt> element into
+something innocuous, such as a <tt class="literal">div</tt>, and while
+we're at it, delete that class attribute:
+</p>
+
+<pre class="code">$good_td-&gt;tag('div'); 
+$good_td-&gt;attr('class', undef);</pre>
+
+<p>That makes the output look like this:</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Shatner and Kunis Sweep the Oscars&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;h1&gt;Shatner and Kunis Sweep the Oscars&lt;/h1&gt;
+      &lt;p&gt;Stars of &lt;cite&gt;American Psycho II&lt;/cite&gt; walked <em class="replaceable"><tt>[...]</tt></em> &lt;/div&gt;
+    &lt;hr&gt;Copyright 2002, United Lies Syndicate &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>An alternative is not to detach and save the <tt class="literal">td</tt> in
+the first place, but to detach and save only its content.
+That's simple enough:
+</p>
+
+<pre class="code">my @good_content = $good_td-&gt;content_list;
+foreach my $c (@good_content) {
+  $c-&gt;detach if ref $c;
+    # text nodes aren't objects, so aren't really "attached" anyhow
+}</pre>
+
+<a name="perllwp-CHP-10-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">10.3.1. The detach_content( ) Method</h3>
+
+<p>The above task is so common <a name="INDEX-584" class="ipoint"
+></a><a name="INDEX-585" class="ipoint"
+></a><a name="INDEX-586" class="ipoint"
+></a>that there's a
+method for it, called <tt class="literal">detach_content(&#160;)</tt>, which
+detaches and returns the content of the node on which
+it's called. So we can simply modify our program to
+read:
+</p>
+
+<pre class="code">my @good_content = $good_td-&gt;detach_content;
+  
+$big_table-&gt;replace_with(@good_content);
+$big_table-&gt;delete;</pre>
+
+<p>However you chose to express the node-moving operations, the parse
+tree looks like this:
+</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Shatner and Kunis Sweep the Oscars&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Shatner and Kunis Sweep the Oscars&lt;/h1&gt;
+    &lt;p&gt;Stars of &lt;cite&gt;American Psycho II&lt;/cite&gt; walked <em class="replaceable"><tt>[...]</tt></em>
+    &lt;hr&gt;Copyright 2002, United Lies Syndicate &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>In fact, every HTML::Element method that allows you to attach a node
+someplace (as <tt class="literal">replace_with</tt> does) will first detach
+that node if it's already attached elsewhere. So you
+could actually skip the whole <tt class="literal">detach_content(&#160;)</tt>
+process step and just write this:
+</p>
+
+<pre class="code">$big_table-&gt;replace_with( $good_td-&gt;content_list );
+$big_table-&gt;delete;</pre>
+
+<p>It does the same thing and results in the same output.</p>
+
+</div>
+<a name="perllwp-CHP-10-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">10.3.2. Constraints</h3>
+
+<p>There are some constraints on <a name="INDEX-587" class="ipoint"
+></a><a name="INDEX-588" class="ipoint"
+></a><a name="INDEX-589" class="ipoint"
+></a>what you can expect
+<tt class="literal">replace_with(&#160;)</tt> to do, but these are just three
+constraints against fairly odd things that you would probably not try
+anyway. Namely, the documentation says you can't
+replace an element with multiple instances of itself; you
+can't replace an element with one (or more) of its
+siblings; and you can't replace an element that has
+no parent, because replacing an element inherently means altering the
+content list of its parent.
+</p>
+
+<p>Many methods in the HTML::Element documentation have similar
+constraints spelled out, although the typical programmer will never
+find them to be an obstacle in and of themselves. If one of those
+constraints is violated, it is typically a sign that something is
+conceptually wrong elsewhere in the program.
+</p>
+
+<p>For example, if you try
+<tt class="literal">$element-&gt;replace_with(...)</tt> and are surprised
+by an error message that "the target node has no
+parent," it is almost definitely because you either
+already replaced the element with something (leaving it parentless)
+or deleted it (leaving it parentless, contentless, and
+attributeless). For example, that error message would result if our
+program had this:
+</p>
+
+<pre class="code">$big_table-&gt;delete;
+$big_table-&gt;replace_with( $good_td-&gt;content_list );
+# Wrong!</pre>
+
+<p>instead of this:</p>
+
+<pre class="code">$big_table-&gt;replace_with( $good_td-&gt;content_list );
+$big_table-&gt;delete;
+# Right.</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

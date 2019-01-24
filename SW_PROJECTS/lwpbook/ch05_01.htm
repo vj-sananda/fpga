@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Forms (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 21:08:47 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_01' class='lwp lwp_ch05_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 5. Forms</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-5-SECT-1">Elements of an HTML Form</a><br />
+<a href="ch05_02.htm">LWP and GET Requests</a><br />
+<a href="ch05_03.htm">Automating Form Analysis</a><br />
+<a href="ch05_04.htm">Idiosyncrasies of HTML Forms</a><br />
+<a href="ch05_05.htm">POST Example: License Plates</a><br />
+<a href="ch05_06.htm">POST Example: ABEBooks.com</a><br />
+<a href="ch05_07.htm">File Uploads</a><br />
+<a href="ch05_08.htm">Limits on Forms</a><br /></p></div>
+
+<p>Much of the interesting data of the Web is accessible only through
+HTML forms. This chapter shows you how to write programs to submit
+form data and get the resulting page. In covering this unavoidably
+complex topic, we consider packing form data into GET and POST
+requests, how each type of HTML form element produces form data, and
+how to automate the process of submitting form data and processing
+the responses.
+</p>
+
+<p>The basic model for the Web is that the typical item is a
+"document" with a known URL, and
+when you want to access it (whether it's the
+<em class="emphasis">Rhoda</em> episode guide, or the front page of
+today's <em class="emphasis">Boston Globe</em>), you just
+get it, no questions asked. Even when there are cookies or HTTP
+authentication involved, these are basically just addenda to the
+process of requesting the known URL from the appropriate server. But
+some web resources require parameters beyond just their URL,
+parameters that are generally fed in by the user through HTML forms,
+and that the browser then sends either as dynamic parts of a URL (in
+the case of a GET request) or as content of a POST request.
+</p>
+
+<p>A program on the
+<a name="INDEX-273" class="ipoint"
+></a>receiving end of form
+data may simply use it as a query for searching other data, such as
+scanning all the RFCs and listing the ones by specific authors. Or a
+program may store the data, as with taking the
+user's data and saving it as a new post to a message
+base. Or a program may do grander things with the user-provided data,
+such as debiting the credit card number provided, logging the
+products being ordered, and putting them on the roster of items to be
+sent out. The details of writing those kinds of programs are covered
+in uncountable books on CGI, mod_perl, ASP, and the like. You are
+probably familiar with writing server-side programs in at least one
+of these frameworks, probably through having written CGIs in Perl,
+maybe with the huge and hugely popular Perl library, CGI.pm.
+</p>
+
+<p>But what we are interested in here is the process of data getting
+from HTML forms into those server-side programs. Once you understand
+that process, you can write LWP programs that simulate that process,
+by providing the same kind of data as a real live user would provide
+keying data into a real live browser.
+</p>
+<div class="sect1"><a name="perllwp-CHP-5-SECT-1"></a>
+<h2 class="sect1">5.1. Elements of an HTML Form</h2>
+
+<p>A good example of a <a name="INDEX-274" class="ipoint"
+></a><a name="INDEX-275" class="ipoint"
+></a>straightforward form is the U.S.
+Census Bureau's Gazetteer (geographical index)
+system. The search form, at <a href="http://www.census.gov/cgi-bin/gazetteer">http://www.census.gov/cgi-bin/gazetteer</a>,
+consists of:
+</p>
+
+<pre class="code"><tt class="userinput"><b>&lt;form method=get action=/cgi-bin/gazetteer&gt;</b></tt>
+&lt;hr noshade&gt;
+&lt;h3&gt;
+&lt;font size=+2&gt;S&lt;/font&gt;earch for a &lt;font size=+2&gt;P&lt;/font&gt;lace in the
+&lt;font size=+2&gt;US&lt;/font&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+Name: <tt class="userinput"><b>&lt;input name="city" size=15&gt;</b></tt>
+State (optional): <tt class="userinput"><b>&lt;input name="state" size=3&gt;&lt;br&gt;</b></tt>
+or a 5-digit zip code: <tt class="userinput"><b>&lt;input name="zip" size=8&gt;</b></tt>
+&lt;p&gt;
+<tt class="userinput"><b>&lt;input type="submit" value="Search"&gt;</b></tt>
+<tt class="userinput"><b>&lt;/form&gt;</b></tt></pre>
+
+<p>We've highlighted the interesting bits. The method
+<a name="INDEX-276" class="ipoint"
+></a>attribute of the
+<tt class="literal">&lt;form&gt;</tt> tag says whether to use GET or POST
+to submit the form data. The action attribute gives the URL to
+receive the form data. The components of a form are text fields,
+drop-down lists, checkboxes, and so on, each identified by a name.
+Here <a name="INDEX-277" class="ipoint"
+></a>the <tt class="literal">&lt;input&gt;</tt> tags
+define text fields with the names <tt class="literal">city</tt> and
+<tt class="literal">state</tt>, <tt class="literal">zip</tt>, and a submit button called
+<tt class="literal">Search</tt>. The browser submits the state of the form
+components (what's been typed into the text boxes,
+which checkboxes are checked, which submit button you pressed) as a
+set of
+<em class="replaceable"><tt>name</tt></em><tt><tt class="literal">=</tt><em class="replaceable">value</em></tt>
+pairs. If you typed "Dulce" into
+the <tt class="literal">city</tt> field, part of the
+browser's request for <em class="emphasis">/cgi-bin/gazetteer</em> would be
+<tt class="literal">city=Dulce</tt>.
+</p>
+
+<p>Which part of the request contains the submitted
+<em class="replaceable"><tt>name</tt></em><tt><tt class="literal">=</tt><em class="replaceable">value</em></tt>
+pairs depends on whether it's a GET or POST request.
+GET requests encode the pairs in the URL being requested, each pair
+separated by an ampersand (<tt class="literal">&amp;)</tt> character, while
+POST requests encode them in the body of the request, one pair per
+line. In both cases the names and values are URL encoded.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>When Regular Expressions Aren't Enough (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch06_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch06_04' class='lwp lwp_ch06_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">6.4. When Regular Expressions Aren't Enough</h2>
+
+<p>Regular expressions are powerful, but they can't
+describe everything. In particular, nested structures (for example,
+lists containing lists, with any amount of nesting possible) and
+comments are tricky. While <a name="INDEX-386" class="ipoint"
+></a><a name="INDEX-387" class="ipoint"
+></a>you can use regular expressions
+to extract the components of the HTML and then attempt to keep track
+of whether you're in a comment or to which nested
+array you're adding elements, these types of
+programs rapidly balloon in complexity and become maintenance
+nightmares.
+</p>
+
+<p>The best thing to do in these situations
+<a name="INDEX-388" class="ipoint"
+></a><a name="INDEX-389" class="ipoint"
+></a><a name="INDEX-390" class="ipoint"
+></a>is to
+use a real HTML tokenizer or parser such as HTML::Parser,
+HTML::TokeParser, and HTML::TreeBuilder (all demonstrated in the next
+chapter), and forego your regular expressions.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

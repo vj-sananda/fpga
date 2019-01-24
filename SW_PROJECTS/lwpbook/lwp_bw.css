@@ -1,0 +1,42 @@
+
+/*
+ Time-stamp: "2007-03-28 17:48:03 AKDT sburke@cpan.org"
+
+ alternate stylesheet, for people who have vision problems,
+ or otherwise just find white-on-black easier to read.
+*/
+
+
+@import url("lwpstyle.css");
+@media screen {
+
+  * {
+    color: white;
+    background-color: black;
+  }
+
+  body, .navbar td, p.morelink, .bigindex, .indextop, .indexbottom {
+    color: white;
+    background-color: black;
+  }
+
+  p.morelink { border-color: white; }
+
+  h1 { color: red; }
+
+  /* TODO: better a:link colors and things */
+
+  a:link    { color: #99f; }
+  a:visited { color: #f8f; }
+  a:link:active  { color: #f99; }
+ 
+  a:link:hover,  a:visited:hover,
+  a:link:hover *,  a:visited:hover *  { background-color: #700; }
+
+  pre {
+    background-color: black;
+    color: #8f8;
+    border-color: #080;
+  }
+
+}

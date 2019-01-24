@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>What's in an Object? (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appg_05"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:47:49 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appg_05' class='lwp lwp_appg_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">G.5. What's in an Object?</h2>
+
+<p>An object is (with rare exceptions) a data structure containing a
+bunch of attributes, each of which has a value, as well as a name
+that you use when you read or set the attribute's
+value. Some of the object's attributes are private,
+meaning you'll never see them documented because
+they're not for you to read or write; but most of
+the object's documented attributes are at least
+readable, and usually writeable, by you. Net::FTP objects are a bit
+thin on attributes, so we'll use objects from the
+class Business::US_Amort for this example. Business::US_Amort is a
+very simple class (available from CPAN) that I wrote for making
+calculations to do with loans (specifically, amortization, using
+U.S.-style algorithms).
+</p>
+
+<p>An object of the class Business::US_Amort represents a loan with
+particular parameters, i.e., attributes. The most basic attributes of
+a "loan object" are its interest
+rate, its principal (how much money it's for), and
+its term (how long it'll take to
+repay). You need to set these attributes before anything else can be
+done with the object. The way to get at those attributes for loan
+objects is just like the way to get at attributes for any
+class's objects: through accessors. An
+<em class="emphasis">accessor</em> is simply any method that accesses
+(whether reading or writing, a.k.a. getting or putting) some
+attribute in the given object. Moreover, accessors are the
+<em class="emphasis">only</em> way that you can change an
+object's attributes. (If a module's
+documentation wants you to know about any other way,
+it'll tell you.)
+</p>
+
+<p>Usually, for simplicity's sake, an accessor is named
+after the attribute it reads or writes. With Business::US_Amort
+objects, the accessors you need to use first are
+<tt class="literal">principal</tt>, <tt class="literal">interest_rate</tt>, and
+<tt class="literal">term</tt>. Then, with at least those attributes set,
+you can call the <tt class="literal">run</tt> method to figure out several
+things about the loan. Then you can call various accessors, like
+<tt class="literal">total_paid_toward_interest</tt>, to read the results:
+</p>
+
+<pre class="code">use Business::US_Amort;
+my $loan = Business::US_Amort-&gt;new;
+# Set the necessary attributes:
+$loan-&gt;principal(123654);
+$loan-&gt;interest_rate(9.25);
+$loan-&gt;term(20); # twenty years
+
+# NOW we know enough to calculate:
+$loan-&gt;run;
+
+# And see what came of that:
+print
+  "Total paid toward interest: A WHOPPING ",
+  $loan-&gt;total_paid_interest, "!!\n";</pre>
+
+<p>This illustrates a convention that's common with
+accessors: calling the accessor with no arguments (as with
+<tt class="literal">$loan-&gt;total_paid_interest)</tt> usually means to
+read the value of that attribute, but providing a value (as with
+<tt class="literal">$loan-&gt;term(20)</tt>) means you want that attribute
+to be set to that value. This stands to reason: why would you be
+providing a value, if not to set the attribute to that value?
+</p>
+
+<p>Although a loan's term, principal, and interest
+rates are all single numeric values, an object's
+values can be any kind of scalar, or an array, or even a hash.
+Moreover, an attribute's value(s) can be objects
+themselves. For example, consider MIDI files (as I wrote about in
+TPJ#13): a MIDI file usually consists of several tracks. A MIDI file
+is complex enough to merit being an object with attributes like its
+overall tempo, the file-format variant it's in, and
+the list of instrument tracks in the file. But tracks themselves are
+complex enough to be objects too, with attributes like their
+track-type, a list of MIDI commands if they're a
+MIDI track, or raw data if they're not. So I ended
+up writing the MIDI modules so that the
+"tracks" attribute of a MIDI::Opus
+object is an array of objects from the class MIDI::Track. This may
+seem like a runaround&#x2014;you ask what's in one
+object, and get <em class="emphasis">another</em> object, or several! But
+in this case, it exactly reflects what the module is for&#x2014;MIDI
+files contain MIDI tracks, which contain data.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

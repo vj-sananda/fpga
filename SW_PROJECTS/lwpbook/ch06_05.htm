@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: Extracting Links from a Bookmark File (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch06_05"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch06_05' class='lwp lwp_ch06_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">6.5. Example: Extracting Links from a Bookmark File</h2>
+
+<p>Suppose we want to delegate <a name="INDEX-391" class="ipoint"
+></a><a name="INDEX-392" class="ipoint"
+></a><a name="INDEX-393" class="ipoint"
+></a>to a Perl program the task of
+checking URLs in my Netscape bookmark file. I'm told
+that this isn't the same format as is used in newer
+Netscapes. But, antiquarian that I am, I still use Netscape 4.76, and
+this is what the file looks like:
+</p>
+
+<pre class="code">&lt;!DOCTYPE NETSCAPE-Bookmark-file-1&gt;
+&lt;!-- This is an automatically generated file.
+It will be read and overwritten.
+Do Not Edit! --&gt;
+&lt;TITLE&gt;Bookmarks for Sean M. Burke&lt;/TITLE&gt;
+&lt;H1&gt;Bookmarks for Sean M. Burke&lt;/H1&gt;
+
+&lt;DL&gt;&lt;p&gt;
+  &lt;DT&gt;&lt;H3 ADD_DATE="911669103"&gt;Personal Toolbar Folder&lt;/H3&gt;
+  &lt;DL&gt;&lt;p&gt;
+    &lt;DT&gt;&lt;A HREF="http://libros.unm.edu/" ADD_DATE="908672224" ...
+    &lt;DT&gt;&lt;A HREF="http://www.melvyl.ucop.edu/" ADD_DATE="900184542" ...
+    &lt;DT&gt;&lt;A HREF="http://www.guardian.co.uk/" ADD_DATE="935897798" ...
+    &lt;DT&gt;&lt;A HREF="http://www.booktv.org/schedule/" ADD_DATE="935897798" ...
+    &lt;DT&gt;&lt;A HREF="http://www.suck.com/" ADD_DATE="942604862" ...
+    ...and so on...</pre>
+
+<p>There are three important things we should note here:</p>
+
+<ul><li>
+<p>Each bookmark item is on a line of its own. This means we can use the
+handy Perl idioms for line-at-a-time processing such as
+<tt class="literal">while(&lt;IN&gt;)</tt> <tt class="literal">{...}</tt> or
+<tt class="literal">@lines</tt> <tt class="literal">=</tt>
+<tt class="literal">&lt;IN&gt;</tt>.
+</p>
+</li><li>
+<p>Every URL is absolute. There are no relative URLs such as
+<tt class="literal">HREF="../stuff.html"</tt>. That means we
+don't have to bother with making URLs absolute (not
+yet, at least).
+</p>
+</li><li>
+<p>The only thing we want from this file is the URL in the
+<tt class="literal">HREF="...</tt><em class="replaceable"><tt>url</tt></em><tt class="literal">..."</tt>
+part of the line&#x2014;and if there is no <tt class="literal">HREF</tt> on
+the line, we can ignore this line. This practically begs us to use a
+Perl regexp!
+</p>
+</li></ul>
+<p>So we scan the file one line at a time, find URLs in lines that have
+a
+<tt class="literal">HREF="...</tt><em class="replaceable"><tt>url</tt></em><tt class="literal">..."</tt>
+in them, then check those URLs. <a href="ch06_05.htm#perllwp-CHP-6-EX-4">Example 6-4</a> shows
+such a program.
+</p>
+
+<a name="perllwp-CHP-6-EX-4"></a><div class="example">
+<h4 class="objtitle">Example 6-4. bookmark-checker </h4>
+<pre class="code">#!/usr/bin/perl -w
+# bookmark-checker - check URLs in Netscape bookmark file
+
+use strict;
+use LWP;
+my $browser;
+my $bmk_file = $ARGV[0]
+  || 'c:/Program Files/Netscape/users/sburke/bookmark.htm';
+open(BMK, "&lt;$bmk_file") or die "Can't read-open $bmk_file: $!";
+
+while (&lt;BMK&gt;) {
+  check_url($1) if m/ HREF="([^"\s]+)" /;
+}
+
+print "# Done after ", time - $^T, "s\n";
+exit;
+
+my %seen;  # for tracking which URLs we've already checked
+
+sub check_url {
+  # Try to fetch the page and report failure if it can't be found
+  # This routine even specially reports if the URL has changed
+  # to be on a different host.
+
+  my $url = URI-&gt;new( $_[0] )-&gt;canonical;
+
+  # Skip mailto: links, and in fact anything not http:...
+  return unless $url-&gt;scheme( ) eq 'http';
+
+  # Kill anything like '#staff' in 'http://luddites.int/them.txt#staff'
+  $url-&gt;fragment(undef);
+
+  # Kill anything like the currently quite useless but
+  # occasionally occurring 'jschmo@' in
+  #  'http://jschmo@luddites.int/them.txt'
+  # (It's useless because it doesn't actually show up
+  # in the request to the server in any way.)
+  $url-&gt;userinfo(undef);
+ 
+  return if $seen{$url};  # silently skip duplicates
+  $seen{$url} = 1;  
+
+  init_browser( ) unless $browser;
+  my $response = $browser-&gt;head($url);
+  my $found = URI-&gt;new( $response-&gt;request-&gt;url )-&gt;canonical;
+  $seen{$found} = 1; # so we don't check it later.
+
+  # If the server complains that it doesn't understand "HEAD",
+  #  (405 is "Method Not Allowed"), then retry it with "GET":
+  $response = $browser-&gt;get($found) if $response-&gt;code == 405;
+
+  if($found ne $url) {
+    if($response-&gt;is_success) {
+      # Report the move, only if it's a very different URL.
+      # That is, different schemes, or different hosts.
+      if(
+        $found-&gt;scheme ne $url-&gt;scheme
+       or
+        lc( $found-&gt;can('host') ? $found-&gt;host : '' )
+         ne
+        lc(   $url-&gt;can('host') ?   $url-&gt;host : '' )
+      ) {
+        print "MOVED: $url\n    -&gt; $found\n",
+      }
+
+    } else {
+      print "MOVED: $url\n    -&gt; $found\n",
+        "       but that new URL is bad: ",
+        $response-&gt;status_line( ), "\n"
+    }
+  } elsif($response-&gt;is_success) {
+    print "## okay: $url\n";
+  } else {
+    print "$url is bad! ", $response-&gt;status_line, "\n";
+  }
+  return;
+}
+
+sub init_browser {
+  $browser = LWP::UserAgent-&gt;new;
+
+  # Speak only HTTP - no mailto or FTP or anything.
+  $browser-&gt;protocols_allowed( [ 'http' ] );
+
+  # And any other initialization we might need to do.
+
+  return $browser;
+}</pre>
+</div>
+
+<p>And for this rigidly formatted input file, our line-at-a-time
+regexp-based approach works just fine; our simple loop:
+</p>
+
+<pre class="code">while (&lt;BMK&gt;) { check_url($1) if m/ HREF="([^"\s]+)" / }</pre>
+
+<p>really does catch every URL in my Netscape bookmark file.</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

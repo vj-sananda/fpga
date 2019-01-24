@@ -1,0 +1,11 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn C:\work\ringbuf\pcores/test_v1_00_a/devl/synthesis/test_xst.prj
+-top test
+-p virtex2p
+-ofn C:\work\ringbuf\pcores/test_v1_00_a/devl/synthesis/test_xst.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /

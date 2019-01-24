@@ -1,0 +1,3 @@
+MO tb NULL ./GCD_Perf.v vlg26/tb.bin 1213979651
+MO mkGCD NULL ./mkGCD.v vlg5E/mk_g_c_d.bin 1213978921
+MO GCD_Perf NULL ./GCD_Perf.v vlg66/_g_c_d___perf.bin 1213979651

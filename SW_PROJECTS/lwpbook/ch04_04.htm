@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Converting Relative URLs to Absolute (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch04_04"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch04_04' class='lwp lwp_ch04_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">4.4. Converting Relative URLs to Absolute</h2>
+
+<p>By far the most common task <a name="INDEX-267" class="ipoint"
+></a><a name="INDEX-268" class="ipoint"
+></a><a name="INDEX-269" class="ipoint"
+></a><a name="INDEX-270" class="ipoint"
+></a>involving URLs is converting
+relative URLs to absolute ones. The <tt class="literal">new_abs(&#160;)</tt>
+method does <a name="INDEX-271" class="ipoint"
+></a><a name="INDEX-272" class="ipoint"
+></a>all the hard work:
+</p>
+
+<pre class="code">$abs_url = URI-&gt;new_abs(<em class="replaceable"><tt>relative</em>, <em class="replaceable">base</tt></em>);</pre>
+
+<p>If <em class="replaceable"><tt>rel_url</tt></em> is actually an absolute URL,
+<em class="replaceable"><tt>base_url</tt></em> is ignored. This lets you pass
+all URLs from a document through <tt class="literal">new_abs(&#160;)</tt>,
+rather than trying to work out which are relative and which are
+absolute. So if you process the HTML at <em class="emphasis">http://www.oreilly.com/catalog/</em> and you find
+a link to <em class="emphasis">pperl3/toc.html</em>, you
+can get the full URL like this:
+</p>
+
+<pre class="code">$abs_url = URI-&gt;new_abs('pperl3/toc.html', 'http://www.oreilly.com/catalog/');</pre>
+
+<p>Another example:</p>
+
+<pre class="code">use URI;
+my $base_url = "http://w3.thing.int/stuff/diary.html";
+my $rel_url  = "../minesweeper_hints/";
+my $abs_url  = URI-&gt;new_abs($rel_url, $base_url);
+print $abs_url, "\n";
+<b class="emphasis-bold">http://w3.thing.int/minesweeper_hints/</b></pre>
+
+<p>You can even pass the output of <tt class="literal">new_abs</tt> to the
+<tt class="literal">canonical</tt> method that we discussed earlier, to get
+the normalized absolute representation of a URL. So if
+you're parsing possibly relative, oddly escaped URLs
+in a document (each in <tt class="literal">$href</tt>, such as
+you'd get from an <tt class="literal">&lt;a
+href="..."&gt;</tt> tag), the expression to remember is this:
+</p>
+
+<pre class="code">$new_abs = URI-&gt;new_abs($href, $abs_base)-&gt;canonical;</pre>
+
+<p>You'll see this expression come up often in the rest
+of the book.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

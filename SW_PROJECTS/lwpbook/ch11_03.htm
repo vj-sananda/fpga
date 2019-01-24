@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Authentication (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch11_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:55:54 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch11_03' class='lwp lwp_ch11_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">11.3. Authentication</h2>
+
+<p>HTTP Basic Authentication is the
+<a name="INDEX-638" class="ipoint"
+></a><a name="INDEX-639" class="ipoint"
+></a>most common type of
+authentication supported at the level of HTTP. The exchange works
+like this:
+</p>
+
+<ol><li>
+The browser makes a request for a URL.
+</li><li>
+<p>The page is protected by Basic Authentication, so the server replies
+with a 401 Unauthorized status code. The response
+<a name="INDEX-640" class="ipoint"
+></a><a name="INDEX-641" class="ipoint"
+></a>has
+a <tt class="literal">WWW-Authenticate</tt> header that specifies the
+authentication method ("basic") and
+the realm. "Realm" here is jargon
+for a string that identifies the locked-off area, which the browser
+is about to use in the next step.
+</p>
+</li><li>
+<p>The browser displays an "enter your username and
+password for <em class="replaceable"><tt>realm</tt></em>"
+dialog box. <a href="ch11_03.htm#perllwp-CHP-11-FIG-1">Figure 11-1</a> shows the dialog box for a
+part of www.unicode.org whose
+realm name is
+"Unicode-MailList-Archives."
+</p>
+</li><li>
+<p>The browser requests the URL again, this
+<a name="INDEX-642" class="ipoint"
+></a>time with an
+<tt class="literal">Authorization</tt> header that encodes the username and
+password.
+</p>
+</li><li>
+<p>If the username and password are verified, the server sends the
+document in a normal successful HTTP response. If the username and
+password aren't correct, we go back to step 2.
+</p>
+</li></ol>
+<a name="perllwp-CHP-11-FIG-1"></a><div class="figure"><img src="figs/plwp_1101.gif"
+  alt="Figure 11-1: Authentication dialog box" 
+title="Figure 11-1: Authentication dialog box" 
+ /></div><h4 class="objtitle">Figure 11-1. Authentication dialog box</h4>
+
+<a name="perllwp-CHP-11-SECT-3.1"></a><div class="sect2">
+<h3 class="sect2">11.3.1. Comparing Cookies with Basic Authentication</h3>
+
+<p>Like cookies, LWP implements HTTP Basic Authentication with
+attributes of an LWP::UserAgent object. There
+<a name="INDEX-643" class="ipoint"
+></a><a name="INDEX-644" class="ipoint"
+></a>are basic differences, however.
+</p>
+
+<p>There's no such thing as an explicit HTTP error
+message that means "you needed to send me a proper
+cookie, so try again!". The
+"Register Now!" page that the
+<em class="emphasis">New York Times</em> site returned is not an error in
+any HTTP sense; as far as the browser is concerned, it asked for
+something, and got it.
+</p>
+
+<p>LWP's interface for HTTP cookies and HTTP Basic
+Authentication is different. To get an LWP::UserAgent browser object
+to implement cookies, one assigns it an object of class HTTP::Cookies
+(or a subclass), which represents a little database of cookies that
+this browser knows about. But there is no corresponding class for
+groups of username/password pairs, although I informally refer to the
+set of passwords that a user agent can consult as its
+"key ring."
+</p>
+
+</div>
+<a name="perllwp-CHP-11-SECT-3.2"></a><div class="sect2">
+<h3 class="sect2">11.3.2. Authenticating via LWP</h3>
+
+<p>To add a username and
+<a name="INDEX-645" class="ipoint"
+></a><a name="INDEX-646" class="ipoint"
+></a>password to a browser
+object's key ring, call the
+<tt class="literal">credentials</tt> method on a user agent object:
+</p>
+
+<pre class="code">$browser-&gt;credentials(
+  '<em class="replaceable"><tt>servername</em>:<em class="replaceable">portnumber</tt></em>',
+  '<em class="replaceable"><tt>realm-name</tt></em>',
+  '<em class="replaceable"><tt>username</em>' =&gt; '<em class="replaceable">password</tt></em>'
+);</pre>
+
+<p>In most cases, the port number is 80, the default TCP/IP port for
+HTTP. For example:
+</p>
+
+<pre class="code">my $browser = LWP::UserAgent-&gt;new;
+$browser-&gt;agent('ReportsBot/1.01');
+
+$browser-&gt;credentials(
+  'reports.mybazouki.com:80',
+  'web_server_usage_reports',
+  'plinky' =&gt; 'banjo123'
+);
+
+my $response = $browser-&gt;get(
+  'http://reports.mybazouki.com/this_week/'
+);</pre>
+
+<p>One can call the <tt class="literal">credentials</tt> method any number of
+times, to add all the server-port-realm-username-password keys to the
+browser's key ring, regardless of whether
+they'll actually be needed. For example, you could
+read them all in from a datafile at startup:
+</p>
+
+<pre class="code">my $browser = LWP::UserAgent-&gt;new( );
+if(open(KEYS, "&lt; keyring.dat")) {
+  while(&lt;KEYS&gt;) {
+    chomp;
+    my @info = split "\t", $_, -1;
+    $browser-&gt;credential(@info) if @info == 4;
+  };
+  close(KEYS);
+}</pre>
+
+</div>
+<a name="perllwp-CHP-11-SECT-3.3"></a><div class="sect2">
+<h3 class="sect2">11.3.3. Security</h3>
+
+<p>Clearly, storing lots of passwords in a
+<a name="INDEX-647" class="ipoint"
+></a><a name="INDEX-648" class="ipoint"
+></a><a name="INDEX-649" class="ipoint"
+></a>plain text file is not terribly good
+security practice, but the obvious alternative is not much better:
+storing the same data in plain text in a Perl file. One could make a
+point of prompting the user for the information every time,<a class='footnotylink' href="#FOOTNOTE-5">[5]</a> instead of storing it anywhere at all, but clearly this
+is useful only for interactive programs (as opposed to a programs run
+by <em class="filename">crontab</em>, for example).
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-5"></a>[5]
+In fact, Ave Wrigley wrote a module to do exactly that.
+It's not part of the LWP distribution, but
+it's available in CPAN as LWP::AuthenAgent. The
+author describes it as "a simple subclass of
+LWP::UserAgent to allow the user to type in username/password
+information if required for authentication."</p>
+</blockquote>
+
+<p>In any case, HTTP Basic Authentication is not the height of security:
+the username and password are normally sent unencrypted. This and
+other security shortcomings with HTTP Basic Authentication are
+explained in greater detail in RFC 2617. See the <a href="ch00_01.htm">the Preface</a> for information on where to get a copy of RFC
+2617.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

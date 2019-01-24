@@ -1,0 +1,99 @@
+void initialize_model()
+{
+    int i;
+    CONTEXT *null_table;
+    CONTEXT *control_table;
+
+    current_order = max_order;
+    contexts = (CONTEXT **) calloc( sizeof( CONTEXT * ), 10 );
+    if ( contexts == NULL )
+        error_exit( "Failure #1: allocating context table!" );
+    contexts += 2;
+    null_table = (CONTEXT *) calloc( sizeof( CONTEXT ), 1 );
+    if ( null_table == NULL )
+        error_exit( "Failure #2: allocating null table!" );
+    null_table->max_index = -1;
+    contexts[ -1 ] = null_table;
+    for ( i = 0 ; i <= max_order ; i++ )
+        contexts[ i ] = allocate_next_order_table( contexts[ i-1 ],
+                                               0,
+                                               contexts[ i-1 ] );
+    handle_free( (char __handle *) null_table->stats );
+    null_table->stats =
+         (STATS __handle *) handle_calloc( sizeof( STATS ) * 256 );
+    if ( null_table->stats == NULL )
+        error_exit( "Failure #3: allocating null table!" );
+    null_table->max_index = 255;
+    for ( i=0 ; i < 256 ; i++ )
+    {
+        null_table->stats[ i ].symbol = (unsigned char) i;
+        null_table->stats[ i ].counts = 1;
+    }
+
+    control_table = (CONTEXT *) calloc( sizeof(CONTEXT), 1 );
+    if ( control_table == NULL )
+        error_exit( "Failure #4: allocating null table!" );
+    control_table->stats =
+         (STATS __handle *) handle_calloc( sizeof( STATS ) * 2 );
+    if ( control_table->stats == NULL )
+        error_exit( "Failure #5: allocating null table!" );
+    contexts[ -2 ] = control_table;
+    control_table->max_index = 1;
+    control_table->stats[ 0 ].symbol = -FLUSH;
+    control_table->stats[ 0 ].counts = 1;
+    control_table->stats[ 1 ].symbol =- DONE;
+    control_table->stats[ 1 ].counts = 1;
+
+    for ( i = 0 ; i < 256 ; i++ )
+        scoreboard[ i ] = 0;
+}
+/*
+ * This is a utility routine used to create new tables when a new
+ * context is created.  It gets a pointer to the current context,
+ * and gets the symbol that needs to be added to it.  It also needs
+ * a pointer to the lesser context for the table that is to be
+ * created.  For example, if the current context was "ABC", and the
+ * symbol 'D' was read in, add_character_to_model would need to
+ * create the new context "BCD".  This routine would get called
+ * with a pointer to "BC", the symbol 'D', and a pointer to context
+ * "CD".  This routine then creates a new table for "BCD", adds it
+ * to the link table for "BC", and gives "BCD" a back pointer to
+ * "CD".  Note that finding the lesser context is a difficult
+ * task, and isn't done here.  This routine mainly worries about
+ * modifying the stats and links fields in the current context.
+ */
+
+CONTEXT *allocate_next_order_table( CONTEXT *table,
+                                    unsigned char symbol,
+                                    CONTEXT *lesser_context )
+{
+    CONTEXT *new_table;
+    int i;
+    unsigned int new_size;
+
+    for ( i = 0 ; i <= table->max_index ; i++ )
+        if ( table->stats[ i ].symbol == symbol )
+            break;
+    if ( i > table->max_index )
+    {
+        table->max_index++;
+        new_size = sizeof( LINKS );
+        new_size *= table->max_index + 1;
+        if ( table->links == NULL )
+            table->links = (LINKS __handle *) handle_calloc( new_size );
+        else
+            table->links = (LINKS __handle *)
+                 handle_realloc( (char __handle *) table->links, new_size );
+        new_size = sizeof( STATS );
+        new_size *= table->max_index + 1;
+        if ( table->stats == NULL )
+            table->stats = (STATS __handle *) handle_calloc( new_size );
+        else
+            table->stats = (STATS __handle *)
+                handle_realloc( (char __handle *) table->stats, new_size );
+        if ( table->links == NULL )
+            error_exit( "Failure #6: allocating new table" );
+        if ( table->stats == NULL )
+            error_exit( "Failure #7: allocating new table" );
+        table->stats[ i ].symbol = symbol;
+        table->s

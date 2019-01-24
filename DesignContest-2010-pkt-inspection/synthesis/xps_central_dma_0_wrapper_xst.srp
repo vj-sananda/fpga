@@ -1,0 +1,1899 @@
+Release 10.1.03 - xst K.39 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "xps_central_dma_0_wrapper_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc5vlx110tff1136-1
+Output File Name                   : "../implementation/xps_central_dma_0_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : xps_central_dma_0_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation/xps_central_dma_0_wrapper}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/family_support.vhd" in Library proc_common_v2_00_a.
+Package <family_support> compiled.
+Package body <family_support> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" in Library proc_common_v2_00_a.
+Package <proc_common_pkg> compiled.
+Package body <proc_common_pkg> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/inferred_lut4.vhd" in Library proc_common_v2_00_a.
+Entity <inferred_lut4> compiled.
+Entity <inferred_lut4> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/muxf_struct_f.vhd" in Library proc_common_v2_00_a.
+Entity <muxf_struct> compiled.
+Entity <muxf_struct> (Architecture <imp>) compiled.
+Entity <muxf_struct_f> compiled.
+Entity <muxf_struct_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_bit.vhd" in Library proc_common_v2_00_a.
+Entity <pf_counter_bit> compiled.
+Entity <pf_counter_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" in Library proc_common_v2_00_a.
+Entity <cntr_incr_decr_addn_f> compiled.
+Entity <cntr_incr_decr_addn_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/dynshreg_f.vhd" in Library proc_common_v2_00_a.
+Entity <dynshreg_f> compiled.
+Entity <dynshreg_f> (Architecture <behavioral>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder_bit.vhd" in Library proc_common_v2_00_a.
+Entity <pf_adder_bit> compiled.
+Entity <pf_adder_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter.vhd" in Library proc_common_v2_00_a.
+Entity <pf_counter> compiled.
+Entity <pf_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter.vhd" in Library proc_common_v2_00_a.
+Entity <pf_occ_counter> compiled.
+Entity <pf_occ_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/counter_bit.vhd" in Library proc_common_v2_00_a.
+Entity <counter_bit> compiled.
+Entity <counter_bit> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_muxcy.vhd" in Library proc_common_v2_00_a.
+Entity <or_muxcy> compiled.
+Entity <or_muxcy> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_rbu_f.vhd" in Library proc_common_v2_00_a.
+Entity <srl_fifo_rbu_f> compiled.
+Entity <srl_fifo_rbu_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/family.vhd" in Library proc_common_v2_00_a.
+Package <family> compiled.
+Package body <family> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_occ_counter_top.vhd" in Library proc_common_v2_00_a.
+Entity <pf_occ_counter_top> compiled.
+Entity <pf_occ_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_counter_top.vhd" in Library proc_common_v2_00_a.
+Entity <pf_counter_top> compiled.
+Entity <pf_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_adder.vhd" in Library proc_common_v2_00_a.
+Entity <pf_adder> compiled.
+Entity <pf_adder> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/counter.vhd" in Library proc_common_v2_00_a.
+Entity <Counter> compiled.
+Entity <Counter> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/coregen_comp_defs.vhd" in Library proc_common_v2_00_a.
+Package <coregen_comp_defs> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/common_types_pkg.vhd" in Library proc_common_v2_00_a.
+Package <Common_Types> compiled.
+WARNING:HDLParsers:3534 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/common_types_pkg.vhd" Line 171. In the function Get_RLOC_Name, not all control paths contain a return statement.
+Package body <Common_Types> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/conv_funs_pkg.vhd" in Library proc_common_v2_00_a.
+Package <conv_funs_pkg> compiled.
+Package body <conv_funs_pkg> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/addsub.vhd" in Library proc_common_v2_00_a.
+Entity <addsub> compiled.
+Entity <addsub> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/direct_path_cntr.vhd" in Library proc_common_v2_00_a.
+Entity <direct_path_cntr> compiled.
+Entity <direct_path_cntr> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/direct_path_cntr_ai.vhd" in Library proc_common_v2_00_a.
+Entity <direct_path_cntr_ai> compiled.
+Entity <direct_path_cntr_ai> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/down_counter.vhd" in Library proc_common_v2_00_a.
+Entity <down_counter> compiled.
+Entity <down_counter> (Architecture <simulation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/eval_timer.vhd" in Library proc_common_v2_00_a.
+Entity <eval_timer> compiled.
+Entity <eval_timer> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_steer.vhd" in Library proc_common_v2_00_a.
+Entity <IPIF_Steer> compiled.
+Entity <IPIF_Steer> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_steer128.vhd" in Library proc_common_v2_00_a.
+Entity <ipif_steer128> compiled.
+Entity <ipif_steer128> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_mirror128.vhd" in Library proc_common_v2_00_a.
+Entity <ipif_mirror128> compiled.
+Entity <ipif_mirror128> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ld_arith_reg.vhd" in Library proc_common_v2_00_a.
+Entity <ld_arith_reg> compiled.
+Entity <ld_arith_reg> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ld_arith_reg2.vhd" in Library proc_common_v2_00_a.
+Entity <ld_arith_reg2> compiled.
+Entity <ld_arith_reg2> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/mux_onehot.vhd" in Library proc_common_v2_00_a.
+Entity <mux_onehot> compiled.
+Entity <mux_onehot> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_bits.vhd" in Library proc_common_v2_00_a.
+Entity <or_bits> compiled.
+Entity <or_bits> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_gate.vhd" in Library proc_common_v2_00_a.
+Entity <or_gate> compiled.
+Entity <or_gate> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pf_dpram_select.vhd" in Library proc_common_v2_00_a.
+Entity <pf_dpram_select> compiled.
+Entity <pf_dpram_select> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect.vhd" in Library proc_common_v2_00_a.
+Entity <pselect> compiled.
+Entity <pselect> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_mask.vhd" in Library proc_common_v2_00_a.
+Entity <pselect_mask> compiled.
+Entity <pselect_mask> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl16_fifo.vhd" in Library proc_common_v2_00_a.
+Entity <srl16_fifo> compiled.
+Entity <srl16_fifo> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo.vhd" in Library proc_common_v2_00_a.
+Entity <SRL_FIFO> compiled.
+Entity <SRL_FIFO> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo2.vhd" in Library proc_common_v2_00_a.
+Entity <srl_fifo2> compiled.
+Entity <srl_fifo2> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo3.vhd" in Library proc_common_v2_00_a.
+Entity <srl_fifo3> compiled.
+Entity <srl_fifo3> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_rbu.vhd" in Library proc_common_v2_00_a.
+Entity <srl_fifo_rbu> compiled.
+Entity <srl_fifo_rbu> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/valid_be.vhd" in Library proc_common_v2_00_a.
+Entity <valid_be> compiled.
+Entity <valid_be> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_with_enable_f.vhd" in Library proc_common_v2_00_a.
+Entity <or_with_enable_f> compiled.
+Entity <or_with_enable_f> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/dynshreg_i_f.vhd" in Library proc_common_v2_00_a.
+Entity <dynshreg_i_f> compiled.
+Entity <dynshreg_i_f> (Architecture <behavioral>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/mux_onehot_f.vhd" in Library proc_common_v2_00_a.
+Entity <mux_onehot_f> compiled.
+Entity <mux_onehot_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_f.vhd" in Library proc_common_v2_00_a.
+Entity <srl_fifo_f> compiled.
+Entity <srl_fifo_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/compare_vectors_f.vhd" in Library proc_common_v2_00_a.
+Entity <compare_vectors_f> compiled.
+Entity <compare_vectors_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/counter_f.vhd" in Library proc_common_v2_00_a.
+Entity <counter_f> compiled.
+Entity <counter_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_muxcy_f.vhd" in Library proc_common_v2_00_a.
+Entity <or_muxcy_f> compiled.
+Entity <or_muxcy_f> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/xor_f.vhd" in Library proc_common_v2_00_a.
+Entity <recursive_xor> compiled.
+Entity <recursive_xor> (Architecture <implementation>) compiled.
+Entity <xor_f> compiled.
+Entity <xor_f> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/soft_reset.vhd" in Library proc_common_v2_00_a.
+Entity <soft_reset> compiled.
+Entity <soft_reset> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd" in Library proc_common_v2_00_a.
+Entity <pselect_f> compiled.
+Entity <pselect_f> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_gate128.vhd" in Library proc_common_v2_00_a.
+Entity <or_gate128> compiled.
+Entity <or_gate128> (Architecture <imp>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/ipif_pkg.vhd" in Library proc_common_v2_00_a.
+Package <ipif_pkg> compiled.
+Package body <ipif_pkg> compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plb_address_decoder.vhd" in Library plbv46_slave_single_v1_00_a.
+Entity <plb_address_decoder> compiled.
+Entity <plb_address_decoder> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plb_slave_attachment.vhd" in Library plbv46_slave_single_v1_00_a.
+Entity <plb_slave_attachment> compiled.
+Entity <plb_slave_attachment> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plbv46_slave_single.vhd" in Library plbv46_slave_single_v1_00_a.
+Entity <plbv46_slave_single> compiled.
+Entity <plbv46_slave_single> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/length_decrement.vhd" in Library xps_central_dma_v2_00_b.
+Entity <Length_Decrement> compiled.
+Entity <Length_Decrement> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/address_count.vhd" in Library xps_central_dma_v2_00_b.
+Entity <Address_Count> compiled.
+Entity <Address_Count> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd" in Library xps_central_dma_v2_00_b.
+Entity <master_attachment> compiled.
+Entity <master_attachment> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/slave_attachment.vhd" in Library xps_central_dma_v2_00_b.
+Entity <slave_attachment> compiled.
+Entity <slave_attachment> (Architecture <IMP>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/dre.vhd" in Library xps_central_dma_v2_00_b.
+Entity <dre> compiled.
+Entity <dre> (Architecture <implementation>) compiled.
+Compiling vhdl file "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/xps_central_dma.vhd" in Library xps_central_dma_v2_00_b.
+Entity <xps_central_dma> compiled.
+Entity <xps_central_dma> (Architecture <IMP>) compiled.
+Compiling vhdl file "E:/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/hdl/xps_central_dma_0_wrapper.vhd" in Library work.
+Entity <xps_central_dma_0_wrapper> compiled.
+Entity <xps_central_dma_0_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <xps_central_dma_0_wrapper> in library <work> (architecture <STRUCTURE>).
+
+Analyzing hierarchy for entity <xps_central_dma> in library <xps_central_dma_v2_00_b> (architecture <IMP>) with generics.
+	C_BASEADDR = "10000000001000000000000000000000"
+	C_FAMILY = "virtex5"
+	C_FIFO_DEPTH = 16
+	C_HIGHADDR = "10000000001000001111111111111111"
+	C_MPLB_AWIDTH = 32
+	C_MPLB_DWIDTH = 64
+	C_MPLB_NATIVE_DWIDTH = 32
+	C_RD_BURST_SIZE = 16
+	C_SPLB_AWIDTH = 32
+	C_SPLB_DWIDTH = 64
+	C_SPLB_MID_WIDTH = 2
+	C_SPLB_NATIVE_DWIDTH = 32
+	C_SPLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+	C_SPLB_SUPPORT_BURSTS = 0
+	C_WR_BURST_SIZE = 16
+
+Analyzing hierarchy for entity <master_attachment> in library <xps_central_dma_v2_00_b> (architecture <implementation>) with generics.
+	C_FAMILY = "virtex5"
+	C_FIFO_DEPTH = 16
+	C_PLB_AWIDTH = 32
+	C_RD_BURST_SIZE = 16
+	C_SPLB_NATIVE_DWIDTH = 32
+	C_WR_BURST_SIZE = 16
+
+Analyzing hierarchy for entity <slave_attachment> in library <xps_central_dma_v2_00_b> (architecture <IMP>) with generics.
+	C_BASEADDR = "10000000001000000000000000000000"
+	C_FAMILY = "virtex5"
+	C_HIGHADDR = "10000000001000001111111111111111"
+	C_SPLB_AWIDTH = 32
+	C_SPLB_DWIDTH = 64
+	C_SPLB_MID_WIDTH = 2
+	C_SPLB_NATIVE_DWIDTH = 32
+	C_SPLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+
+Analyzing hierarchy for entity <dre> in library <xps_central_dma_v2_00_b> (architecture <implementation>) with generics.
+	C_FIFO_DEPTH = 16
+	C_MPLB_DWIDTH = 64
+	C_RD_BURST_SIZE = 16
+	C_WR_BURST_SIZE = 16
+
+Analyzing hierarchy for entity <srl_fifo_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_DEPTH = 32
+	C_DWIDTH = 8
+	C_FAMILY = "virtex5"
+
+Analyzing hierarchy for entity <Length_Decrement> in library <xps_central_dma_v2_00_b> (architecture <IMP>) with generics.
+	C_FAMILY = "virtex5"
+
+Analyzing hierarchy for entity <Address_Count> in library <xps_central_dma_v2_00_b> (architecture <IMP>) with generics.
+	C_FAMILY = "virtex5"
+
+Analyzing hierarchy for entity <plbv46_slave_single> in library <plbv46_slave_single_v1_00_a> (architecture <implementation>) with generics.
+	C_ARD_ADDR_RANGE_ARRAY = ("0000000000000000000000000000000010000000001000000000000000000000",
+	                          "0000000000000000000000000000000010000000001000000000000000111111")
+	C_ARD_NUM_CE_ARRAY = (16)
+	C_BUS2CORE_CLK_RATIO = 1
+	C_FAMILY = "virtex5"
+	C_INCLUDE_DPHASE_TIMER = 1
+	C_SIPIF_DWIDTH = 32
+	C_SPLB_AWIDTH = 32
+	C_SPLB_DWIDTH = 64
+	C_SPLB_MID_WIDTH = 2
+	C_SPLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+
+Analyzing hierarchy for entity <srl_fifo_rbu_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_DEPTH = 32
+	C_DWIDTH = 8
+	C_FAMILY = "virtex5"
+
+Analyzing hierarchy for entity <plb_slave_attachment> in library <plbv46_slave_single_v1_00_a> (architecture <implementation>) with generics.
+	C_ARD_ADDR_RANGE_ARRAY = ("0000000000000000000000000000000010000000001000000000000000000000",
+	                          "0000000000000000000000000000000010000000001000000000000000111111")
+	C_ARD_NUM_CE_ARRAY = (16)
+	C_BUS2CORE_CLK_RATIO = 1
+	C_DPHASE_TIMEOUT = 128
+	C_FAMILY = "virtex5"
+	C_INCLUDE_DPHASE_TIMER = 1
+	C_IPIF_ABUS_WIDTH = 32
+	C_IPIF_DBUS_WIDTH = 32
+	C_PLB_MID_WIDTH = 2
+	C_PLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+WARNING:Xst:1748 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 281: VHDL Assertion Statement with non constant condition is ignored.
+
+Analyzing hierarchy for entity <cntr_incr_decr_addn_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_FAMILY = "virtex5"
+	C_SIZE = 6
+
+Analyzing hierarchy for entity <dynshreg_f> in library <proc_common_v2_00_a> (architecture <behavioral>) with generics.
+	C_DEPTH = 32
+	C_DWIDTH = 8
+	C_FAMILY = "virtex5"
+
+Analyzing hierarchy for entity <plb_address_decoder> in library <plbv46_slave_single_v1_00_a> (architecture <IMP>) with generics.
+	C_ARD_ADDR_RANGE_ARRAY = ("0000000000000000000000000000000010000000001000000000000000000000",
+	                          "0000000000000000000000000000000010000000001000000000000000111111")
+	C_ARD_NUM_CE_ARRAY = (16)
+	C_BUS_AWIDTH = 32
+	C_FAMILY = "nofamily"
+	C_SPLB_P2P = 0
+WARNING:Xst:1748 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 281: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 281: VHDL Assertion Statement with non constant condition is ignored.
+
+Analyzing hierarchy for entity <counter_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_FAMILY = "nofamily"
+	C_NUM_BITS = 8
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 26
+	C_AW = 32
+	C_BAR = "10000000001000000000000000000000"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0000"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0001"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0010"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0011"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0100"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0101"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0110"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0111"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1000"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1001"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1010"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1011"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1100"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1101"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1110"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <pselect_f> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1111"
+	C_FAMILY = "nofamily"
+
+Analyzing hierarchy for entity <or_gate128> in library <proc_common_v2_00_a> (architecture <imp>) with generics.
+	C_BUS_WIDTH = 1
+	C_OR_WIDTH = 1
+	C_USE_LUT_OR = false
+
+Analyzing hierarchy for entity <or_muxcy> in library <proc_common_v2_00_a> (architecture <implementation>) with generics.
+	C_NUM_BITS = 1
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <xps_central_dma_0_wrapper> in library <work> (Architecture <STRUCTURE>).
+WARNING:Xst:37 - Detected unknown constraint/property "HDL". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "IMP_NETLIST". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "IP_GROUP". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "IPTYPE". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIM_MODELS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "STYLE". This constraint/property is not supported by the current software release and will be ignored.
+    Set property "MAX_FANOUT = 5000" for signal <SPLB_Clk> in unit <xps_central_dma>.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+    Set property "MAX_FANOUT = 5000" for signal <SPLB_Rst> in unit <xps_central_dma>.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+    Set property "MAX_FANOUT = 5000" for signal <MPLB_Clk> in unit <xps_central_dma>.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+    Set property "MAX_FANOUT = 5000" for signal <MPLB_Rst> in unit <xps_central_dma>.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "HDL". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "IMP_NETLIST". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "IPTYPE". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "IP_GROUP". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIM_MODELS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "STYLE". This constraint/property is not supported by the current software release and will be ignored.
+Entity <xps_central_dma_0_wrapper> analyzed. Unit <xps_central_dma_0_wrapper> generated.
+
+Analyzing generic Entity <xps_central_dma> in library <xps_central_dma_v2_00_b> (Architecture <IMP>).
+	C_BASEADDR = "10000000001000000000000000000000"
+	C_FAMILY = "virtex5"
+	C_FIFO_DEPTH = 16
+	C_HIGHADDR = "10000000001000001111111111111111"
+	C_MPLB_AWIDTH = 32
+	C_MPLB_DWIDTH = 64
+	C_MPLB_NATIVE_DWIDTH = 32
+	C_RD_BURST_SIZE = 16
+	C_SPLB_AWIDTH = 32
+	C_SPLB_DWIDTH = 64
+	C_SPLB_MID_WIDTH = 2
+	C_SPLB_NATIVE_DWIDTH = 32
+	C_SPLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+	C_SPLB_SUPPORT_BURSTS = 0
+	C_WR_BURST_SIZE = 16
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "SIGIS". This constraint/property is not supported by the current software release and will be ignored.
+Entity <xps_central_dma> analyzed. Unit <xps_central_dma> generated.
+
+Analyzing generic Entity <master_attachment> in library <xps_central_dma_v2_00_b> (Architecture <implementation>).
+	C_FAMILY = "virtex5"
+	C_FIFO_DEPTH = 16
+	C_PLB_AWIDTH = 32
+	C_RD_BURST_SIZE = 16
+	C_SPLB_NATIVE_DWIDTH = 32
+	C_WR_BURST_SIZE = 16
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd" line 1259: Unconnected output port 'FIFO_Full' of component 'srl_fifo_f'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd" line 1259: Unconnected output port 'FIFO_Full' of component 'srl_fifo_f'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd" line 1259: Unconnected output port 'FIFO_Full' of component 'srl_fifo_f'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd" line 1259: Unconnected output port 'FIFO_Full' of component 'srl_fifo_f'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd" line 1542: Unconnected output port 'C_Out' of component 'Length_Decrement'.
+Entity <master_attachment> analyzed. Unit <master_attachment> generated.
+
+Analyzing generic Entity <srl_fifo_f> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_DEPTH = 32
+	C_DWIDTH = 8
+	C_FAMILY = "virtex5"
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_f.vhd" line 115: Unconnected output port 'Underflow' of component 'srl_fifo_rbu_f'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_f.vhd" line 115: Unconnected output port 'Overflow' of component 'srl_fifo_rbu_f'.
+Entity <srl_fifo_f> analyzed. Unit <srl_fifo_f> generated.
+
+Analyzing generic Entity <srl_fifo_rbu_f> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_DEPTH = 32
+	C_DWIDTH = 8
+	C_FAMILY = "virtex5"
+Entity <srl_fifo_rbu_f> analyzed. Unit <srl_fifo_rbu_f> generated.
+
+Analyzing generic Entity <cntr_incr_decr_addn_f> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_FAMILY = "virtex5"
+	C_SIZE = 6
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 164: Instantiating black box module <MUXCY_L>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 171: Instantiating black box module <XORCY>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 177: Instantiating black box module <FDS>.
+    Set user-defined property "INIT =  1" for instance <STRUCTURAL_A_GEN.Addr_Counters[5].FDS_I> in unit <cntr_incr_decr_addn_f>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 164: Instantiating black box module <MUXCY_L>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 171: Instantiating black box module <XORCY>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 177: Instantiating black box module <FDS>.
+    Set user-defined property "INIT =  1" for instance <STRUCTURAL_A_GEN.Addr_Counters[4].FDS_I> in unit <cntr_incr_decr_addn_f>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 164: Instantiating black box module <MUXCY_L>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 171: Instantiating black box module <XORCY>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 177: Instantiating black box module <FDS>.
+    Set user-defined property "INIT =  1" for instance <STRUCTURAL_A_GEN.Addr_Counters[3].FDS_I> in unit <cntr_incr_decr_addn_f>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 164: Instantiating black box module <MUXCY_L>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 171: Instantiating black box module <XORCY>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 177: Instantiating black box module <FDS>.
+    Set user-defined property "INIT =  1" for instance <STRUCTURAL_A_GEN.Addr_Counters[2].FDS_I> in unit <cntr_incr_decr_addn_f>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 164: Instantiating black box module <MUXCY_L>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 171: Instantiating black box module <XORCY>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 177: Instantiating black box module <FDS>.
+    Set user-defined property "INIT =  1" for instance <STRUCTURAL_A_GEN.Addr_Counters[1].FDS_I> in unit <cntr_incr_decr_addn_f>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 164: Instantiating black box module <MUXCY_L>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 171: Instantiating black box module <XORCY>.
+WARNING:Xst:2211 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd" line 177: Instantiating black box module <FDS>.
+    Set user-defined property "INIT =  1" for instance <STRUCTURAL_A_GEN.Addr_Counters[0].FDS_I> in unit <cntr_incr_decr_addn_f>.
+Entity <cntr_incr_decr_addn_f> analyzed. Unit <cntr_incr_decr_addn_f> generated.
+
+Analyzing generic Entity <dynshreg_f> in library <proc_common_v2_00_a> (Architecture <behavioral>).
+	C_DEPTH = 32
+	C_DWIDTH = 8
+	C_FAMILY = "virtex5"
+Entity <dynshreg_f> analyzed. Unit <dynshreg_f> generated.
+
+Analyzing generic Entity <Length_Decrement> in library <xps_central_dma_v2_00_b> (Architecture <IMP>).
+	C_FAMILY = "virtex5"
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[31].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[30].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[29].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[28].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[27].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[26].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[25].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[24].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[23].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[22].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[21].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[20].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[19].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[18].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[17].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[16].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[15].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[14].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[13].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[12].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[11].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[10].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[9].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[8].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[7].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[6].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[5].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[4].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[3].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[2].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[1].LOWER_FDRE_I> in unit <Length_Decrement>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[0].LOWER_FDRE_I> in unit <Length_Decrement>.
+Entity <Length_Decrement> analyzed. Unit <Length_Decrement> generated.
+
+Analyzing generic Entity <slave_attachment> in library <xps_central_dma_v2_00_b> (Architecture <IMP>).
+	C_BASEADDR = "10000000001000000000000000000000"
+	C_FAMILY = "virtex5"
+	C_HIGHADDR = "10000000001000001111111111111111"
+	C_SPLB_AWIDTH = 32
+	C_SPLB_DWIDTH = 64
+	C_SPLB_MID_WIDTH = 2
+	C_SPLB_NATIVE_DWIDTH = 32
+	C_SPLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/slave_attachment.vhd" line 435: Unconnected output port 'C_Out' of component 'Length_Decrement'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/slave_attachment.vhd" line 545: Unconnected output port 'Bus2IP_Clk' of component 'plbv46_slave_single'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/slave_attachment.vhd" line 545: Unconnected output port 'Bus2IP_Reset' of component 'plbv46_slave_single'.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/slave_attachment.vhd" line 545: Unconnected output port 'Bus2IP_Addr' of component 'plbv46_slave_single'.
+Entity <slave_attachment> analyzed. Unit <slave_attachment> generated.
+
+Analyzing generic Entity <Address_Count> in library <xps_central_dma_v2_00_b> (Architecture <IMP>).
+	C_FAMILY = "virtex5"
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[31].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[30].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[29].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[28].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[27].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[26].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[25].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[24].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[23].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[22].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[21].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[20].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[19].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[18].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[17].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[16].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[15].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[14].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[13].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[12].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[11].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[10].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[9].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[8].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[7].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[6].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[5].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[4].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[3].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[2].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[1].LOWER_FDRE_I> in unit <Address_Count>.
+    Set user-defined property "INIT =  0" for instance <STRUCTURAL_LGTH_ADDR_GEN.BITS_GEN[0].LOWER_FDRE_I> in unit <Address_Count>.
+Entity <Address_Count> analyzed. Unit <Address_Count> generated.
+
+Analyzing generic Entity <plbv46_slave_single> in library <plbv46_slave_single_v1_00_a> (Architecture <implementation>).
+	C_ARD_ADDR_RANGE_ARRAY = ("0000000000000000000000000000000010000000001000000000000000000000",
+	                          "0000000000000000000000000000000010000000001000000000000000111111")
+	C_ARD_NUM_CE_ARRAY = (16)
+	C_BUS2CORE_CLK_RATIO = 1
+	C_FAMILY = "virtex5"
+	C_INCLUDE_DPHASE_TIMER = 1
+	C_SIPIF_DWIDTH = 32
+	C_SPLB_AWIDTH = 32
+	C_SPLB_DWIDTH = 64
+	C_SPLB_MID_WIDTH = 2
+	C_SPLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+Entity <plbv46_slave_single> analyzed. Unit <plbv46_slave_single> generated.
+
+Analyzing generic Entity <plb_slave_attachment> in library <plbv46_slave_single_v1_00_a> (Architecture <implementation>).
+	C_ARD_ADDR_RANGE_ARRAY = ("0000000000000000000000000000000010000000001000000000000000000000",
+	                          "0000000000000000000000000000000010000000001000000000000000111111")
+	C_ARD_NUM_CE_ARRAY = (16)
+	C_BUS2CORE_CLK_RATIO = 1
+	C_DPHASE_TIMEOUT = 128
+	C_FAMILY = "virtex5"
+	C_INCLUDE_DPHASE_TIMER = 1
+	C_IPIF_ABUS_WIDTH = 32
+	C_IPIF_DBUS_WIDTH = 32
+	C_PLB_MID_WIDTH = 2
+	C_PLB_NUM_MASTERS = 3
+	C_SPLB_P2P = 0
+WARNING:Xst:1748 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 281: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:753 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plb_slave_attachment.vhd" line 1192: Unconnected output port 'Count_Out' of component 'counter_f'.
+Entity <plb_slave_attachment> analyzed. Unit <plb_slave_attachment> generated.
+
+Analyzing generic Entity <plb_address_decoder> in library <plbv46_slave_single_v1_00_a> (Architecture <IMP>).
+	C_ARD_ADDR_RANGE_ARRAY = ("0000000000000000000000000000000010000000001000000000000000000000",
+	                          "0000000000000000000000000000000010000000001000000000000000111111")
+	C_ARD_NUM_CE_ARRAY = (16)
+	C_BUS_AWIDTH = 32
+	C_FAMILY = "nofamily"
+	C_SPLB_P2P = 0
+WARNING:Xst:1748 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 281: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/proc_common_pkg.vhd" line 281: VHDL Assertion Statement with non constant condition is ignored.
+Entity <plb_address_decoder> analyzed. Unit <plb_address_decoder> generated.
+
+Analyzing generic Entity <pselect_f.1> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 26
+	C_AW = 32
+	C_BAR = "10000000001000000000000000000000"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.1> analyzed. Unit <pselect_f.1> generated.
+
+Analyzing generic Entity <pselect_f.2> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0000"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.2> analyzed. Unit <pselect_f.2> generated.
+
+Analyzing generic Entity <pselect_f.3> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0001"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.3> analyzed. Unit <pselect_f.3> generated.
+
+Analyzing generic Entity <pselect_f.4> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0010"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.4> analyzed. Unit <pselect_f.4> generated.
+
+Analyzing generic Entity <pselect_f.5> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0011"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.5> analyzed. Unit <pselect_f.5> generated.
+
+Analyzing generic Entity <pselect_f.6> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0100"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.6> analyzed. Unit <pselect_f.6> generated.
+
+Analyzing generic Entity <pselect_f.7> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0101"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.7> analyzed. Unit <pselect_f.7> generated.
+
+Analyzing generic Entity <pselect_f.8> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0110"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.8> analyzed. Unit <pselect_f.8> generated.
+
+Analyzing generic Entity <pselect_f.9> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "0111"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.9> analyzed. Unit <pselect_f.9> generated.
+
+Analyzing generic Entity <pselect_f.10> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1000"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.10> analyzed. Unit <pselect_f.10> generated.
+
+Analyzing generic Entity <pselect_f.11> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1001"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.11> analyzed. Unit <pselect_f.11> generated.
+
+Analyzing generic Entity <pselect_f.12> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1010"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.12> analyzed. Unit <pselect_f.12> generated.
+
+Analyzing generic Entity <pselect_f.13> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1011"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.13> analyzed. Unit <pselect_f.13> generated.
+
+Analyzing generic Entity <pselect_f.14> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1100"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.14> analyzed. Unit <pselect_f.14> generated.
+
+Analyzing generic Entity <pselect_f.15> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1101"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.15> analyzed. Unit <pselect_f.15> generated.
+
+Analyzing generic Entity <pselect_f.16> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1110"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.16> analyzed. Unit <pselect_f.16> generated.
+
+Analyzing generic Entity <pselect_f.17> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_AB = 4
+	C_AW = 4
+	C_BAR = "1111"
+	C_FAMILY = "nofamily"
+Entity <pselect_f.17> analyzed. Unit <pselect_f.17> generated.
+
+Analyzing generic Entity <or_gate128> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_BUS_WIDTH = 1
+	C_OR_WIDTH = 1
+	C_USE_LUT_OR = false
+Entity <or_gate128> analyzed. Unit <or_gate128> generated.
+
+Analyzing generic Entity <or_muxcy> in library <proc_common_v2_00_a> (Architecture <implementation>).
+	C_NUM_BITS = 1
+Entity <or_muxcy> analyzed. Unit <or_muxcy> generated.
+
+Analyzing generic Entity <counter_f> in library <proc_common_v2_00_a> (Architecture <imp>).
+	C_FAMILY = "nofamily"
+	C_NUM_BITS = 8
+Entity <counter_f> analyzed. Unit <counter_f> generated.
+
+Analyzing generic Entity <dre> in library <xps_central_dma_v2_00_b> (Architecture <implementation>).
+	C_FIFO_DEPTH = 16
+	C_MPLB_DWIDTH = 64
+	C_RD_BURST_SIZE = 16
+	C_WR_BURST_SIZE = 16
+Entity <dre> analyzed. Unit <dre> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <dre>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/dre.vhd".
+WARNING:Xst:647 - Input <PLB_Rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <MPLB_MRdDBus<32:63>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <sm2_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sm2_cs> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sm1_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sm1_cs> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_0> for signal <sm4_cs>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 5                                              |
+    | Inputs             | 2                                              |
+    | Outputs            | 1                                              |
+    | Clock              | MPLB_Clk (rising_edge)                         |
+    | Reset              | PLB_Sw_Rst (positive)                          |
+    | Reset type         | synchronous                                    |
+    | Reset State        | sm4_idle                                       |
+    | Power Up State     | sm4_idle                                       |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_1> for signal <sm3_cs>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 5                                              |
+    | Inputs             | 2                                              |
+    | Outputs            | 1                                              |
+    | Clock              | MPLB_Clk (rising_edge)                         |
+    | Reset              | PLB_Sw_Rst (positive)                          |
+    | Reset type         | synchronous                                    |
+    | Reset State        | sm3_idle                                       |
+    | Power Up State     | sm3_idle                                       |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 4x4-bit ROM for signal <m_be_in_rd_ns$mux0001> created at line 469.
+    Found 4x4-bit ROM for signal <m_be_in_wr_ns$mux0001> created at line 629.
+    Found 4-bit register for signal <m_be_in_rd_cs>.
+    Found 4-bit subtractor for signal <m_be_in_rd_cs$addsub0000> created at line 486.
+    Found 7-bit comparator greatequal for signal <m_be_in_rd_cs$cmp_ge0000> created at line 499.
+    Found 4-bit register for signal <m_be_in_wr_cs>.
+    Found 4-bit subtractor for signal <m_be_in_wr_cs$addsub0000> created at line 646.
+    Found 7-bit comparator greatequal for signal <m_be_in_wr_cs$cmp_ge0000> created at line 659.
+    Found 4-bit register for signal <m_size_in_rd_cs>.
+    Found 4-bit register for signal <m_size_in_wr_cs>.
+    Found 5-bit register for signal <rdbuffer_addr_load_data_cs>.
+    Found 33-bit comparator greatequal for signal <rdbuffer_addr_load_data_cs$cmp_ge0000> created at line 465.
+    Found 7-bit comparator greatequal for signal <rdbuffer_addr_load_data_cs$cmp_ge0001> created at line 481.
+    Found 5-bit register for signal <wrbuffer_addr_load_data_cs>.
+    Found 33-bit comparator greatequal for signal <wrbuffer_addr_load_data_cs$cmp_ge0000> created at line 625.
+    Found 7-bit comparator greatequal for signal <wrbuffer_addr_load_data_cs$cmp_ge0001> created at line 641.
+    Summary:
+	inferred   2 Finite State Machine(s).
+	inferred   2 ROM(s).
+	inferred  26 D-type flip-flop(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred   6 Comparator(s).
+Unit <dre> synthesized.
+
+
+Synthesizing Unit <dynshreg_f>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/dynshreg_f.vhd".
+    Found 8-bit 32-to-1 multiplexer for signal <Dout>.
+    Found 256-bit register for signal <data>.
+INFO:Xst:738 - HDL ADVISOR - 256 flip-flops were inferred for signal <data>. You may be trying to describe a RAM in a way that is incompatible with block and distributed RAM resources available on Xilinx devices, or with a specific template that is not supported. Please review the Xilinx resources documentation and the XST user manual for coding guidelines. Taking advantage of RAM resources will lead to improved device usage and reduced synthesis time.
+    Summary:
+	inferred 256 D-type flip-flop(s).
+	inferred   8 Multiplexer(s).
+Unit <dynshreg_f> synthesized.
+
+
+Synthesizing Unit <counter_f>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/counter_f.vhd".
+    Found 9-bit register for signal <icount_out>.
+    Found 9-bit subtractor for signal <icount_out$sub0000> created at line 248.
+    Summary:
+	inferred   9 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+Unit <counter_f> synthesized.
+
+
+Synthesizing Unit <pselect_f_1>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+WARNING:Xst:647 - Input <A<26:31>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+Unit <pselect_f_1> synthesized.
+
+
+Synthesizing Unit <pselect_f_2>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_2> synthesized.
+
+
+Synthesizing Unit <pselect_f_3>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_3> synthesized.
+
+
+Synthesizing Unit <pselect_f_4>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_4> synthesized.
+
+
+Synthesizing Unit <pselect_f_5>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_5> synthesized.
+
+
+Synthesizing Unit <pselect_f_6>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_6> synthesized.
+
+
+Synthesizing Unit <pselect_f_7>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_7> synthesized.
+
+
+Synthesizing Unit <pselect_f_8>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_8> synthesized.
+
+
+Synthesizing Unit <pselect_f_9>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_9> synthesized.
+
+
+Synthesizing Unit <pselect_f_10>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_10> synthesized.
+
+
+Synthesizing Unit <pselect_f_11>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_11> synthesized.
+
+
+Synthesizing Unit <pselect_f_12>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_12> synthesized.
+
+
+Synthesizing Unit <pselect_f_13>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_13> synthesized.
+
+
+Synthesizing Unit <pselect_f_14>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_14> synthesized.
+
+
+Synthesizing Unit <pselect_f_15>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_15> synthesized.
+
+
+Synthesizing Unit <pselect_f_16>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_16> synthesized.
+
+
+Synthesizing Unit <pselect_f_17>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/pselect_f.vhd".
+Unit <pselect_f_17> synthesized.
+
+
+Synthesizing Unit <or_muxcy>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_muxcy.vhd".
+Unit <or_muxcy> synthesized.
+
+
+Synthesizing Unit <Length_Decrement>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/length_decrement.vhd".
+WARNING:Xst:1780 - Signal <Y_out_i> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Found 1-bit xor2 for signal <y_lut_28$xor0000> created at line 228.
+    Found 1-bit xor2 for signal <y_lut_29$xor0000> created at line 228.
+    Found 1-bit xor2 for signal <y_lut_30$xor0000> created at line 228.
+    Found 1-bit xor2 for signal <y_lut_31$xor0000> created at line 228.
+Unit <Length_Decrement> synthesized.
+
+
+Synthesizing Unit <cntr_incr_decr_addn_f>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/cntr_incr_decr_addn_f.vhd".
+WARNING:Xst:646 - Signal <cry<6>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 6-bit xor2 for signal <hsum_A>.
+Unit <cntr_incr_decr_addn_f> synthesized.
+
+
+Synthesizing Unit <Address_Count>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/address_count.vhd".
+WARNING:Xst:1780 - Signal <y_out_i> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <cout<0>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 1-bit xor2 for signal <y_lut_28$xor0000> created at line 210.
+    Found 1-bit xor2 for signal <y_lut_29$xor0000> created at line 210.
+    Found 1-bit xor2 for signal <y_lut_30$xor0000> created at line 210.
+    Found 1-bit xor2 for signal <y_lut_31$xor0000> created at line 210.
+Unit <Address_Count> synthesized.
+
+
+Synthesizing Unit <or_gate128>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/or_gate128.vhd".
+WARNING:Xst:1780 - Signal <test> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <or_gate128> synthesized.
+
+
+Synthesizing Unit <srl_fifo_rbu_f>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_rbu_f.vhd".
+    Found 1-bit register for signal <FIFO_Full>.
+    Found 1-bit register for signal <overflow_i>.
+    Found 31-bit comparator greatequal for signal <overflow_i$cmp_ge0000> created at line 263.
+    Found 1-bit register for signal <underflow_i>.
+    Summary:
+	inferred   3 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <srl_fifo_rbu_f> synthesized.
+
+
+Synthesizing Unit <plb_address_decoder>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plb_address_decoder.vhd".
+WARNING:Xst:647 - Input <Bus_RNW_Erly> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Address_In_Erly> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Address_Valid_Erly> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <cs_s_h_clr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <cs_ce_clr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <addr_out_s_h<4:5>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <addr_match_clr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 6-bit register for signal <addr_out_s_h>.
+    Found 1-bit register for signal <cs_out_i<0>>.
+    Found 1-bit register for signal <cs_out_s_h<0>>.
+    Found 1-bit register for signal <decode_hit_reg>.
+    Found 16-bit register for signal <rdce_out_i>.
+    Found 1-bit register for signal <rnw_s_h>.
+    Found 16-bit register for signal <wrce_out_i>.
+    Summary:
+	inferred  42 D-type flip-flop(s).
+Unit <plb_address_decoder> synthesized.
+
+
+Synthesizing Unit <srl_fifo_f>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v2_00_a/hdl/vhdl/srl_fifo_f.vhd".
+Unit <srl_fifo_f> synthesized.
+
+
+Synthesizing Unit <plb_slave_attachment>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plb_slave_attachment.vhd".
+WARNING:Xst:647 - Input <PLB_UABus> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <valid_plb_type> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <valid_plb_size> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <start_data_phase> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sl_wrdack_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sl_wrcomp_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sl_wait_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sl_rddack_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sl_rdcomp_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <sl_data_ack> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <set_sl_busy_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <rd_ce_ld_enable> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <clear_sl_rd_busy_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <clear_sl_rd_busy> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <clear_sl_busy_ns> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <clear_rd_ce> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Register <sl_rdcomp_i> equivalent to <rd_clear_sl_busy> has been removed
+    Register <sl_rddack_i> equivalent to <rd_clear_sl_busy> has been removed
+    Register <sl_addrack_i> equivalent to <set_sl_busy> has been removed
+    Register <sl_wrdack_i> equivalent to <sl_wrcomp_i> has been removed
+    Register <wr_clear_sl_busy> equivalent to <sl_wrcomp_i> has been removed
+    Found 1-bit register for signal <addr_cntl_cs<0>>.
+    Found 1-bit register for signal <addr_cycle_flush>.
+    Found 32-bit register for signal <bus2ip_addr_i>.
+    Found 4-bit register for signal <bus2ip_be_i>.
+    Found 1-bit register for signal <bus2ip_rnw_i>.
+    Found 1-bit register for signal <data_timeout>.
+    Found 2-bit register for signal <master_id>.
+    Found 32-bit register for signal <plb_abus_reg>.
+    Found 4-bit register for signal <plb_be_reg>.
+    Found 2-bit register for signal <plb_masterid_reg>.
+    Found 1-bit register for signal <plb_pavalid_reg>.
+    Found 1-bit register for signal <plb_rnw_reg>.
+    Found 4-bit register for signal <plb_size_reg>.
+    Found 3-bit register for signal <plb_type_reg>.
+    Found 32-bit register for signal <plb_wrdbus_reg>.
+    Found 1-bit register for signal <rd_clear_sl_busy>.
+    Found 1-bit register for signal <set_sl_busy>.
+    Found 1-bit register for signal <sl_busy>.
+    Found 3-bit register for signal <sl_mbusy_i>.
+    Found 3-bit register for signal <sl_mrderr_i>.
+    Found 3-bit register for signal <sl_mwrerr_i>.
+    Found 32-bit register for signal <sl_rddbus_i>.
+    Found 1-bit register for signal <sl_rearbitrate_i>.
+    Found 1-bit register for signal <sl_wrcomp_i>.
+    Summary:
+	inferred 167 D-type flip-flop(s).
+Unit <plb_slave_attachment> synthesized.
+
+
+Synthesizing Unit <master_attachment>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/master_attachment.vhd".
+WARNING:Xst:647 - Input <PLB_MIRQ> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_MRdWdAddr> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_MSSize> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <m_wrBurst_d_in> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <m_size_in> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <m_be_in> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <m_abus_in> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_minus_one_23> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_minus_one_22> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_minus_one_21> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_minus_one_20> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <fifo_occy_minus_one<20:23>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_23> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_22> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_21> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_occy_20> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <fifo_full> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <da_reg_i> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <buffer_addr_wr_count_en> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <buffer_addr_rd_count_en> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_2> for signal <read_state_machine_cs>.
+    -----------------------------------------------------------------------
+    | States             | 8                                              |
+    | Transitions        | 26                                             |
+    | Inputs             | 13                                             |
+    | Outputs            | 8                                              |
+    | Clock              | MPLB_Clk (rising_edge)                         |
+    | Reset              | read_state_machine_cs$or0000 (positive)        |
+    | Reset type         | synchronous                                    |
+    | Reset State        | read_idle                                      |
+    | Power Up State     | read_idle                                      |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_3> for signal <write_state_machine_cs>.
+    -----------------------------------------------------------------------
+    | States             | 8                                              |
+    | Transitions        | 33                                             |
+    | Inputs             | 13                                             |
+    | Outputs            | 8                                              |
+    | Clock              | MPLB_Clk (rising_edge)                         |
+    | Reset              | fifo_reset (positive)                          |
+    | Reset type         | synchronous                                    |
+    | Reset State        | write_idle                                     |
+    | Power Up State     | write_idle                                     |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_4> for signal <addr_state_machine_cs>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 9                                              |
+    | Inputs             | 5                                              |
+    | Outputs            | 4                                              |
+    | Clock              | MPLB_Clk (rising_edge)                         |
+    | Reset              | fifo_reset (positive)                          |
+    | Reset type         | synchronous                                    |
+    | Reset State        | addr_idle                                      |
+    | Power Up State     | addr_idle                                      |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <M_rdBurst>.
+    Found 1-bit register for signal <M_request>.
+    Found 4-bit register for signal <M_size>.
+    Found 1-bit register for signal <M_wrBurst>.
+    Found 32-bit register for signal <M_ABus>.
+    Found 4-bit register for signal <Fifo_write>.
+    Found 4-bit register for signal <M_BE_i>.
+    Found 1-bit register for signal <M_RNW>.
+    Found 1-bit register for signal <dma_busy_rd_cs>.
+    Found 1-bit register for signal <dma_busy_wr_cs>.
+    Found 1-bit register for signal <dma_done_rd_cs>.
+    Found 1-bit register for signal <dma_done_wr_cs>.
+    Found 32-bit register for signal <FIFO_Datain_i>.
+    Found 7-bit comparator greatequal for signal <fifo_occy_flag_0$cmp_ge0000> created at line 1301.
+    Found 7-bit comparator greatequal for signal <fifo_occy_flag_1$cmp_ge0000> created at line 1304.
+    Found 7-bit comparator greatequal for signal <fifo_occy_flag_2$cmp_ge0000> created at line 1307.
+    Found 7-bit comparator greatequal for signal <fifo_occy_flag_3$cmp_ge0000> created at line 1309.
+    Found 5-bit adder for signal <fifo_occy_minus_one_10>.
+    Found 5-bit adder for signal <fifo_occy_minus_one_11>.
+    Found 5-bit adder for signal <fifo_occy_minus_one_12>.
+    Found 5-bit adder for signal <fifo_occy_minus_one_13>.
+    Found 1-bit register for signal <fifo_reset>.
+    Found 7-bit adder for signal <fifo_vacancy_0>.
+    Found 7-bit adder for signal <fifo_vacancy_1>.
+    Found 7-bit adder for signal <fifo_vacancy_2>.
+    Found 7-bit adder for signal <fifo_vacancy_3>.
+    Found 7-bit comparator greatequal for signal <fifo_vacancy_flag_0$cmp_ge0000> created at line 1323.
+    Found 7-bit comparator greatequal for signal <fifo_vacancy_flag_1$cmp_ge0000> created at line 1326.
+    Found 7-bit comparator greatequal for signal <fifo_vacancy_flag_2$cmp_ge0000> created at line 1329.
+    Found 7-bit comparator greatequal for signal <fifo_vacancy_flag_3$cmp_ge0000> created at line 1332.
+    Found 4-bit register for signal <Fifo_write_dre_i>.
+    Found 1-bit register for signal <m_wrBurst_d>.
+    Found 32-bit register for signal <m_wrdbus_d>.
+    Found 2-bit register for signal <priority_level>.
+    Found 4-bit register for signal <rd_bytes_i>.
+    Found 32-bit comparator greatequal for signal <rd_bytes_i$cmp_ge0000> created at line 1570.
+    Found 5-bit down counter for signal <rdload>.
+    Found 1-bit register for signal <rdrequest_aack_cs>.
+    Found 1-bit register for signal <read_addr_phase_cs>.
+    Found 6-bit comparator greater for signal <Single_rd_xfer$cmp_gt0000> created at line 1076.
+    Found 6-bit comparator lessequal for signal <Single_wr_xfer$cmp_le0000> created at line 1127.
+    Found 1-bit register for signal <start_read_cs>.
+    Found 1-bit register for signal <start_write_cs>.
+    Found 1-bit register for signal <tempcs>.
+    Found 5-bit subtractor for signal <wrbuffer_addr_load_data_i>.
+    Found 1-bit register for signal <write_addr_phase_cs>.
+    Found 5-bit down counter for signal <wrload>.
+    Found 1-bit register for signal <wrrequest_aack_cs>.
+    Summary:
+	inferred   3 Finite State Machine(s).
+	inferred   2 Counter(s).
+	inferred 135 D-type flip-flop(s).
+	inferred   9 Adder/Subtractor(s).
+	inferred  11 Comparator(s).
+Unit <master_attachment> synthesized.
+
+
+Synthesizing Unit <plbv46_slave_single>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plbv46_slave_single_v1_00_a/hdl/vhdl/plbv46_slave_single.vhd".
+WARNING:Xst:647 - Input <PLB_wrPrim> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_MSize> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_rdBurst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_SAValid> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_wrPendReq> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_wrPendPri> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_rdPendReq> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_rdPendPri> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_busLock> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_wrDBus<32:63>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_reqPri> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_lockErr> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_wrBurst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_TAttribute> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_rdPrim> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <PLB_abort> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+Unit <plbv46_slave_single> synthesized.
+
+
+Synthesizing Unit <slave_attachment>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/slave_attachment.vhd".
+WARNING:Xst:646 - Signal <bus2ip_wrce<5:10>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <bus2ip_wrce<13:15>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <bus2ip_rdce<0>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <bus2ip_rdce<6:10>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <bus2ip_rdce<13:15>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:737 - Found 2-bit latch for signal <sa_reg_li>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 2-bit latch for signal <da_reg_li>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 4-bit register for signal <Fifo_read>.
+    Found 1-bit register for signal <Fifo_empty_r>.
+    Found 1-bit register for signal <cs_A_splb>.
+    Found 1-bit register for signal <cs_B_mplb>.
+    Found 1-bit register for signal <cs_C_mplb>.
+    Found 1-bit register for signal <cs_C_mplb_d1>.
+    Found 1-bit register for signal <cs_D_splb>.
+    Found 1-bit register for signal <cs_E_splb>.
+    Found 1-bit register for signal <cs_E_splb_d1>.
+    Found 1-bit register for signal <da_reg_load_n>.
+    Found 1-bit register for signal <dma_busy_d1>.
+    Found 2-bit register for signal <dma_control_reg<0:1>>.
+    Found 1-bit register for signal <dma_done_d1>.
+    Found 1-bit register for signal <dma_error_d1>.
+    Found 2-bit register for signal <dma_status_reg>.
+    Found 2-bit register for signal <dma_status_reg_hold>.
+    Found 32-bit comparator greatequal for signal <Fifo_read$cmp_ge0000> created at line 752.
+    Found 2-bit register for signal <intr_enable_reg>.
+    Found 2-bit register for signal <intr_status_reg>.
+    Found 1-bit xor2 for signal <intr_status_reg_30$xor0000> created at line 689.
+    Found 1-bit xor2 for signal <intr_status_reg_31$xor0000> created at line 689.
+    Found 32-bit register for signal <ip2bus_data>.
+    Found 1-bit register for signal <ip2bus_error>.
+    Found 1-bit register for signal <ip2bus_rdack>.
+    Found 1-bit register for signal <ip2bus_wrack>.
+    Found 1-bit register for signal <length_reg_load_n_i>.
+    Found 1-bit register for signal <sa_reg_load_n>.
+    Found 4-bit register for signal <wr_bytes_i>.
+    Summary:
+	inferred  67 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <slave_attachment> synthesized.
+
+
+Synthesizing Unit <xps_central_dma>.
+    Related source file is "C:/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/xps_central_dma_v2_00_b/hdl/vhdl/xps_central_dma.vhd".
+WARNING:Xst:1305 - Output <M_UABus> is never assigned. Tied to value 00000000000000000000000000000000.
+Unit <xps_central_dma> synthesized.
+
+
+Synthesizing Unit <xps_central_dma_0_wrapper>.
+    Related source file is "E:/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/hdl/xps_central_dma_0_wrapper.vhd".
+Unit <xps_central_dma_0_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 2
+ 4x4-bit ROM                                           : 2
+# Adders/Subtractors                                   : 12
+ 4-bit subtractor                                      : 2
+ 5-bit adder                                           : 4
+ 5-bit subtractor                                      : 1
+ 7-bit adder                                           : 4
+ 9-bit subtractor                                      : 1
+# Counters                                             : 2
+ 5-bit down counter                                    : 2
+# Registers                                            : 268
+ 1-bit register                                        : 108
+ 2-bit register                                        : 5
+ 3-bit register                                        : 1
+ 32-bit register                                       : 8
+ 4-bit register                                        : 14
+ 5-bit register                                        : 2
+ 6-bit register                                        : 1
+ 8-bit register                                        : 128
+ 9-bit register                                        : 1
+# Latches                                              : 2
+ 2-bit latch                                           : 2
+# Comparators                                          : 22
+ 31-bit comparator greatequal                          : 4
+ 32-bit comparator greatequal                          : 2
+ 33-bit comparator greatequal                          : 2
+ 6-bit comparator greater                              : 1
+ 6-bit comparator lessequal                            : 1
+ 7-bit comparator greatequal                           : 12
+# Multiplexers                                         : 4
+ 8-bit 32-to-1 multiplexer                             : 4
+# Xors                                                 : 42
+ 1-bit xor2                                            : 42
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_4> for best encoding.
+Optimizing FSM <xps_central_dma_0/MASTER_ATTACHMENT_I/addr_state_machine_cs/FSM> on signal <addr_state_machine_cs[1:2]> with gray encoding.
+------------------------------
+ State            | Encoding
+------------------------------
+ addr_idle        | 00
+ request          | 01
+ clear_addr_cycle | 11
+ handle_rearb     | 10
+------------------------------
+Analyzing FSM <FSM_3> for best encoding.
+Optimizing FSM <xps_central_dma_0/MASTER_ATTACHMENT_I/write_state_machine_cs/FSM> on signal <write_state_machine_cs[1:8]> with one-hot encoding.
+--------------------------------
+ State              | Encoding
+--------------------------------
+ write_idle         | 00000001
+ wait_write_trans1  | 00000010
+ wait_write_trans2  | 00000100
+ write_request      | 00001000
+ write_dataphase    | 10000000
+ handle_wrbterm     | 00100000
+ wait_busy_deassert | 01000000
+ dma_wr_tout        | 00010000
+--------------------------------
+Analyzing FSM <FSM_2> for best encoding.
+Optimizing FSM <xps_central_dma_0/MASTER_ATTACHMENT_I/read_state_machine_cs/FSM> on signal <read_state_machine_cs[1:8]> with speed1 encoding.
+----------------------------------
+ State                | Encoding
+----------------------------------
+ read_idle            | 10000000
+ wait_read_trans1     | 01000000
+ wait_read_trans2     | 00100000
+ read_request         | 00010000
+ read_dataphase       | 00000100
+ handle_rdbterm       | 00000010
+ wait_writephase_comp | 00000001
+ dma_transfer_comp    | 00001000
+----------------------------------
+Analyzing FSM <FSM_1> for best encoding.
+Optimizing FSM <xps_central_dma_0/DRE_ATTACHMENT_I/sm3_cs/FSM> on signal <sm3_cs[1:2]> with gray encoding.
+----------------------
+ State    | Encoding
+----------------------
+ sm3_idle | 00
+ sm3_load | 01
+ rd3_over | 11
+----------------------
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <xps_central_dma_0/DRE_ATTACHMENT_I/sm4_cs/FSM> on signal <sm4_cs[1:2]> with gray encoding.
+----------------------
+ State    | Encoding
+----------------------
+ sm4_idle | 00
+ sm4_load | 01
+ wr4_over | 11
+----------------------
+WARNING:Xst:2404 -  FFs/Latches <rd_bytes_i<0:2>> (without init value) have a constant value of 0 in block <master_attachment>.
+WARNING:Xst:2404 -  FFs/Latches <wr_bytes_i<0:2>> (without init value) have a constant value of 0 in block <slave_attachment>.
+Loading device for application Rf_Device from file '5vlx110t.nph' in environment c:\Xilinx\10.1\ISE.
+
+Synthesizing (advanced) Unit <dynshreg_f>.
+	Found 32-bit dynamic shift register for signal <Dout<7>>.
+	Found 32-bit dynamic shift register for signal <Dout<6>>.
+	Found 32-bit dynamic shift register for signal <Dout<5>>.
+	Found 32-bit dynamic shift register for signal <Dout<4>>.
+	Found 32-bit dynamic shift register for signal <Dout<3>>.
+	Found 32-bit dynamic shift register for signal <Dout<2>>.
+	Found 32-bit dynamic shift register for signal <Dout<1>>.
+	Found 32-bit dynamic shift register for signal <Dout<0>>.
+Unit <dynshreg_f> synthesized (advanced).
+WARNING:Xst:2677 - Node <addr_out_s_h_5> of sequential type is unconnected in block <plb_address_decoder>.
+WARNING:Xst:2677 - Node <addr_out_s_h_4> of sequential type is unconnected in block <plb_address_decoder>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 5
+# ROMs                                                 : 2
+ 4x4-bit ROM                                           : 2
+# Adders/Subtractors                                   : 12
+ 4-bit subtractor                                      : 2
+ 5-bit adder                                           : 4
+ 5-bit subtractor                                      : 1
+ 7-bit adder                                           : 4
+ 9-bit subtractor                                      : 1
+# Counters                                             : 2
+ 5-bit down counter                                    : 2
+# Registers                                            : 606
+ Flip-Flops                                            : 606
+# Latches                                              : 2
+ 2-bit latch                                           : 2
+# Shift Registers                                      : 32
+ 32-bit dynamic shift register                         : 32
+# Comparators                                          : 22
+ 31-bit comparator greatequal                          : 4
+ 32-bit comparator greatequal                          : 2
+ 33-bit comparator greatequal                          : 2
+ 6-bit comparator greater                              : 1
+ 6-bit comparator lessequal                            : 1
+ 7-bit comparator greatequal                           : 12
+# Xors                                                 : 42
+ 1-bit xor2                                            : 42
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <m_size_in_rd_cs_3> (without init value) has a constant value of 0 in block <dre>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <m_size_in_rd_cs_1> (without init value) has a constant value of 0 in block <dre>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <m_size_in_wr_cs_3> (without init value) has a constant value of 0 in block <dre>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <m_size_in_wr_cs_1> (without init value) has a constant value of 0 in block <dre>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <m_size_in_rd_cs_2> in Unit <dre> is equivalent to the following FF/Latch, which will be removed : <m_size_in_rd_cs_0> 
+INFO:Xst:2261 - The FF/Latch <m_size_in_wr_cs_2> in Unit <dre> is equivalent to the following FF/Latch, which will be removed : <m_size_in_wr_cs_0> 
+INFO:Xst:2261 - The FF/Latch <addr_cntl_cs_0> in Unit <plb_slave_attachment> is equivalent to the following FF/Latch, which will be removed : <addr_cycle_flush> 
+INFO:Xst:2261 - The FF/Latch <priority_level_1> in Unit <master_attachment> is equivalent to the following FF/Latch, which will be removed : <priority_level_0> 
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[3].DMA_FIFO_F/I_SRL_FIFO_RBU_F/FIFO_Full> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[3].DMA_FIFO_F/I_SRL_FIFO_RBU_F/underflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[3].DMA_FIFO_F/I_SRL_FIFO_RBU_F/overflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[2].DMA_FIFO_F/I_SRL_FIFO_RBU_F/FIFO_Full> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[2].DMA_FIFO_F/I_SRL_FIFO_RBU_F/underflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[2].DMA_FIFO_F/I_SRL_FIFO_RBU_F/overflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[1].DMA_FIFO_F/I_SRL_FIFO_RBU_F/FIFO_Full> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[1].DMA_FIFO_F/I_SRL_FIFO_RBU_F/underflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[1].DMA_FIFO_F/I_SRL_FIFO_RBU_F/overflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[0].DMA_FIFO_F/I_SRL_FIFO_RBU_F/FIFO_Full> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[0].DMA_FIFO_F/I_SRL_FIFO_RBU_F/underflow_i> of sequential type is unconnected in block <master_attachment>.
+WARNING:Xst:2677 - Node <FIFO_GEN_2.DATA_FIFO_GEN[0].DMA_FIFO_F/I_SRL_FIFO_RBU_F/overflow_i> of sequential type is unconnected in block <master_attachment>.
+
+Optimizing unit <xps_central_dma_0_wrapper> ...
+
+Optimizing unit <dre> ...
+
+Optimizing unit <counter_f> ...
+
+Optimizing unit <Length_Decrement> ...
+
+Optimizing unit <cntr_incr_decr_addn_f> ...
+
+Optimizing unit <Address_Count> ...
+
+Optimizing unit <plb_address_decoder> ...
+
+Optimizing unit <plb_slave_attachment> ...
+
+Optimizing unit <master_attachment> ...
+
+Optimizing unit <slave_attachment> ...
+WARNING:Xst:1710 - FF/Latch <xps_central_dma_0/MASTER_ATTACHMENT_I/M_size_1> (without init value) has a constant value of 0 in block <xps_central_dma_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <xps_central_dma_0/MASTER_ATTACHMENT_I/M_size_3> (without init value) has a constant value of 0 in block <xps_central_dma_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/plb_abus_reg_31> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/plb_abus_reg_30> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_31> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_30> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_29> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_28> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_27> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_26> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_25> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_24> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_23> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_22> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_21> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_20> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_19> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_18> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_17> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_16> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_15> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_14> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_13> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_12> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_11> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_10> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_9> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_8> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_7> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_6> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_5> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_4> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_3> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_2> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_1> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/bus2ip_addr_i_0> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_15> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_13> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_14> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_10> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_9> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_15> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_8> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_14> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_13> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_6> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_7> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_10> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_0> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_8> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_7> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_9> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_6> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+WARNING:Xst:2677 - Node <xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/wrce_out_i_5> of sequential type is unconnected in block <xps_central_dma_0_wrapper>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+INFO:Xst:2261 - The FF/Latch <xps_central_dma_0/MASTER_ATTACHMENT_I/M_size_0> in Unit <xps_central_dma_0_wrapper> is equivalent to the following FF/Latch, which will be removed : <xps_central_dma_0/MASTER_ATTACHMENT_I/M_size_2> 
+
+Final Macro Processing ...
+
+Processing Unit <xps_central_dma_0_wrapper> :
+	Found 2-bit shift register for signal <xps_central_dma_0/SLAVE_ATTACHMENT_I/cs_E_splb>.
+	Found 2-bit shift register for signal <xps_central_dma_0/SLAVE_ATTACHMENT_I/cs_C_mplb>.
+Unit <xps_central_dma_0_wrapper> processed.
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 559
+ Flip-Flops                                            : 559
+# Shift Registers                                      : 2
+ 2-bit shift register                                  : 2
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/xps_central_dma_0_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 528
+
+Cell Usage :
+# BELS                             : 1182
+#      GND                         : 1
+#      INV                         : 3
+#      LUT2                        : 35
+#      LUT3                        : 191
+#      LUT4                        : 61
+#      LUT5                        : 134
+#      LUT6                        : 294
+#      MULT_AND                    : 128
+#      MUXCY                       : 24
+#      MUXCY_L                     : 152
+#      MUXF7                       : 6
+#      VCC                         : 1
+#      XORCY                       : 152
+# FlipFlops/Latches                : 565
+#      FD                          : 103
+#      FDE                         : 4
+#      FDR                         : 183
+#      FDRE                        : 220
+#      FDRS                        : 11
+#      FDRSE                       : 1
+#      FDS                         : 37
+#      FDSE                        : 2
+#      LD_1                        : 4
+# Shift Registers                  : 34
+#      SRLC16E                     : 2
+#      SRLC32E                     : 32
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 5vlx110tff1136-1 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             565  out of  69120     0%  
+ Number of Slice LUTs:                  752  out of  69120     1%  
+    Number used as Logic:               718  out of  69120     1%  
+    Number used as Memory:               34  out of  17920     0%  
+       Number used as SRL:               34
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    903
+   Number with an unused Flip Flop:     338  out of    903    37%  
+   Number with an unused LUT:           151  out of    903    16%  
+   Number of fully used LUT-FF pairs:   414  out of    903    45%  
+   Number of unique control sets:        70
+
+IO Utilization: 
+ Number of IOs:                         528
+ Number of bonded IOBs:                   0  out of    640     0%  
+
+Specific Feature Utilization:
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+--------------------------------------------------+-----------------------------------------------------------------------------------------+-------+
+Clock Signal                                      | Clock buffer(FF name)                                                                   | Load  |
+--------------------------------------------------+-----------------------------------------------------------------------------------------+-------+
+MPLB_Clk                                          | NONE(xps_central_dma_0/DRE_ATTACHMENT_I/sm4_cs_FSM_FFd1)                                | 393   |
+SPLB_Clk                                          | NONE(xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_31)| 202   |
+xps_central_dma_0/SLAVE_ATTACHMENT_I/sa_reg_load_n| NONE(xps_central_dma_0/SLAVE_ATTACHMENT_I/sa_reg_li_1)                                  | 2     |
+xps_central_dma_0/SLAVE_ATTACHMENT_I/da_reg_load_n| NONE(xps_central_dma_0/SLAVE_ATTACHMENT_I/da_reg_li_1)                                  | 2     |
+--------------------------------------------------+-----------------------------------------------------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -1
+
+   Minimum period: 4.488ns (Maximum Frequency: 222.816MHz)
+   Minimum input arrival time before clock: 2.714ns
+   Maximum output required time after clock: 1.365ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'MPLB_Clk'
+  Clock period: 4.488ns (frequency: 222.816MHz)
+  Total number of paths / destination ports: 19826 / 1061
+-------------------------------------------------------------------------
+Delay:               4.488ns (Levels of Logic = 5)
+  Source:            xps_central_dma_0/DRE_ATTACHMENT_I/wrbuffer_addr_load_data_cs_0 (FF)
+  Destination:       xps_central_dma_0/MASTER_ATTACHMENT_I/start_write_cs (FF)
+  Source Clock:      MPLB_Clk rising
+  Destination Clock: MPLB_Clk rising
+
+  Data Path: xps_central_dma_0/DRE_ATTACHMENT_I/wrbuffer_addr_load_data_cs_0 to xps_central_dma_0/MASTER_ATTACHMENT_I/start_write_cs
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             3   0.471   0.984  xps_central_dma_0/DRE_ATTACHMENT_I/wrbuffer_addr_load_data_cs_0 (xps_central_dma_0/DRE_ATTACHMENT_I/wrbuffer_addr_load_data_cs_0)
+     LUT5:I0->O            8   0.094   0.518  xps_central_dma_0/MASTER_ATTACHMENT_I/Msub_wrbuffer_addr_load_data_i_xor<4>11 (xps_central_dma_0/MASTER_ATTACHMENT_I/wrbuffer_addr_load_data_i<0>)
+     LUT6:I5->O            1   0.094   1.069  xps_central_dma_0/MASTER_ATTACHMENT_I/fifo_occy_flag20 (xps_central_dma_0/MASTER_ATTACHMENT_I/fifo_occy_flag20)
+     LUT6:I0->O            2   0.094   0.485  xps_central_dma_0/MASTER_ATTACHMENT_I/fifo_occy_flag692_SW0 (N158)
+     LUT6:I5->O            3   0.094   0.491  xps_central_dma_0/MASTER_ATTACHMENT_I/fifo_occy_flag692 (xps_central_dma_0/MASTER_ATTACHMENT_I/fifo_occy_flag)
+     LUT6:I5->O            1   0.094   0.000  xps_central_dma_0/MASTER_ATTACHMENT_I/write_addr_phase_cs_mux0001811 (xps_central_dma_0/MASTER_ATTACHMENT_I/write_addr_phase_cs_mux000181)
+     FDRS:D                   -0.018          xps_central_dma_0/MASTER_ATTACHMENT_I/write_addr_phase_cs
+    ----------------------------------------
+    Total                      4.488ns (0.941ns logic, 3.547ns route)
+                                       (21.0% logic, 79.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SPLB_Clk'
+  Clock period: 3.513ns (frequency: 284.657MHz)
+  Total number of paths / destination ports: 1420 / 237
+-------------------------------------------------------------------------
+Delay:               3.513ns (Levels of Logic = 2)
+  Source:            xps_central_dma_0/SLAVE_ATTACHMENT_I/ip2bus_wrack (FF)
+  Destination:       xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/INCLUDE_DATA_PHASE_WDT.I_DPTO_COUNTER/icount_out_7 (FF)
+  Source Clock:      SPLB_Clk rising
+  Destination Clock: SPLB_Clk rising
+
+  Data Path: xps_central_dma_0/SLAVE_ATTACHMENT_I/ip2bus_wrack to xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/INCLUDE_DATA_PHASE_WDT.I_DPTO_COUNTER/icount_out_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              9   0.471   0.833  xps_central_dma_0/SLAVE_ATTACHMENT_I/ip2bus_wrack (xps_central_dma_0/SLAVE_ATTACHMENT_I/ip2bus_wrack)
+     LUT4:I0->O            8   0.094   1.107  xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/dpto_cntr_ld_en1 (xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/dpto_cntr_ld_en)
+     LUT6:I0->O            2   0.094   0.341  xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/INCLUDE_DATA_PHASE_WDT.I_DPTO_COUNTER/icount_out_sub0000<8>1 (xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/INCLUDE_DATA_PHASE_WDT.I_DPTO_COUNTER/icount_out_sub0000<8>1)
+     FDS:S                     0.573          xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/INCLUDE_DATA_PHASE_WDT.I_DPTO_COUNTER/icount_out_7
+    ----------------------------------------
+    Total                      3.513ns (1.232ns logic, 2.281ns route)
+                                       (35.1% logic, 64.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'MPLB_Clk'
+  Total number of paths / destination ports: 1321 / 539
+-------------------------------------------------------------------------
+Offset:              2.714ns (Levels of Logic = 3)
+  Source:            MPLB_MAddrAck (PAD)
+  Destination:       xps_central_dma_0/MASTER_ATTACHMENT_I/start_read_cs (FF)
+  Destination Clock: MPLB_Clk rising
+
+  Data Path: MPLB_MAddrAck to xps_central_dma_0/MASTER_ATTACHMENT_I/start_read_cs
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT5:I0->O            7   0.094   1.006  xps_central_dma_0/MASTER_ATTACHMENT_I/request_rearb1 (xps_central_dma_0/MASTER_ATTACHMENT_I/request_rearb)
+     LUT5:I0->O            1   0.094   0.789  xps_central_dma_0/MASTER_ATTACHMENT_I/start_read_cs_mux0001_SW1 (N149)
+     LUT6:I2->O            1   0.094   0.000  xps_central_dma_0/MASTER_ATTACHMENT_I/start_read_cs_mux0001 (xps_central_dma_0/MASTER_ATTACHMENT_I/start_read_cs_mux0001)
+     FDR:D                    -0.018          xps_central_dma_0/MASTER_ATTACHMENT_I/start_read_cs
+    ----------------------------------------
+    Total                      2.714ns (0.919ns logic, 1.795ns route)
+                                       (33.9% logic, 66.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'SPLB_Clk'
+  Total number of paths / destination ports: 239 / 231
+-------------------------------------------------------------------------
+Offset:              1.673ns (Levels of Logic = 1)
+  Source:            SPLB_Rst (PAD)
+  Destination:       xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_12 (FF)
+  Destination Clock: SPLB_Clk rising
+
+  Data Path: SPLB_Rst to xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_12
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT5:I0->O            7   0.094   0.369  xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_clr1 (xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_clr)
+     FDRE:R                    0.573          xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/I_DECODER/rdce_out_i_1
+    ----------------------------------------
+    Total                      1.673ns (1.304ns logic, 0.369ns route)
+                                       (77.9% logic, 22.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SPLB_Clk'
+  Total number of paths / destination ports: 79 / 79
+-------------------------------------------------------------------------
+Offset:              0.471ns (Levels of Logic = 0)
+  Source:            xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/sl_rearbitrate_i (FF)
+  Destination:       Sl_rearbitrate (PAD)
+  Source Clock:      SPLB_Clk rising
+
+  Data Path: xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/sl_rearbitrate_i to Sl_rearbitrate
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              0   0.471   0.000  xps_central_dma_0/SLAVE_ATTACHMENT_I/PLBV46_I/I_SLAVE_ATTACHMENT/sl_rearbitrate_i (Sl_rearbitrate)
+    ----------------------------------------
+    Total                      0.471ns (0.471ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'MPLB_Clk'
+  Total number of paths / destination ports: 116 / 113
+-------------------------------------------------------------------------
+Offset:              1.365ns (Levels of Logic = 1)
+  Source:            xps_central_dma_0/SLAVE_ATTACHMENT_I/intr_status_reg_31 (FF)
+  Destination:       IP2INTC_Irpt (PAD)
+  Source Clock:      MPLB_Clk rising
+
+  Data Path: xps_central_dma_0/SLAVE_ATTACHMENT_I/intr_status_reg_31 to IP2INTC_Irpt
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             3   0.471   0.800  xps_central_dma_0/SLAVE_ATTACHMENT_I/intr_status_reg_31 (xps_central_dma_0/SLAVE_ATTACHMENT_I/intr_status_reg_31)
+     LUT4:I0->O            0   0.094   0.000  xps_central_dma_0/SLAVE_ATTACHMENT_I/IP2INTC_Irpt1 (IP2INTC_Irpt)
+    ----------------------------------------
+    Total                      1.365ns (0.565ns logic, 0.800ns route)
+                                       (41.4% logic, 58.6% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 84.00 secs
+Total CPU time to Xst completion: 84.30 secs
+ 
+--> 
+
+Total memory usage is 478988 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  212 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
+

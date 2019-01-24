@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Simple HTML Processing with Regular Expressions (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch06_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:40:43 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch06_01' class='lwp lwp_ch06_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 6. Simple HTML Processing with Regular Expressions</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-6-SECT-1">Automating Data Extraction</a><br />
+<a href="ch06_02.htm">Regular Expression Techniques</a><br />
+<a href="ch06_03.htm">Troubleshooting</a><br />
+<a href="ch06_04.htm">When Regular Expressions Aren't Enough</a><br />
+<a href="ch06_05.htm">Example: Extracting Links from a Bookmark File</a><br />
+<a href="ch06_06.htm">Example: Extracting Links from Arbitrary HTML</a><br />
+<a href="ch06_07.htm">Example: Extracting Temperatures from Weather Underground</a><br /></p></div><p>The preceding chapters have been about getting things from the Web.
+But once you get a file, you have to process it. If you get a GIF,
+you'll use some module or external program that
+reads GIFs and likewise if you get a PNG, an RSS file, an MP3, or
+whatever. However, most of the
+<a name="INDEX-355" class="ipoint"
+></a>interesting processable information on
+the Web is in HTML, so much of the rest of this book will focus on
+getting information out of HTML specifically.
+</p>
+
+<p>In this chapter, we will use a rudimentary approach to processing
+HTML source: Perl regular expressions. This technique is powerful and
+most web sites can be mined in this fashion. We present the
+techniques of using regular expressions to extract data and show you
+how to debug those regular expressions. Examples from Amazon, the
+O'Reilly Network, Netscape bookmark files, and the
+Weather Underground web site demonstrate the techniques.
+</p><div class="sect1"><a name="perllwp-CHP-6-SECT-1"></a>
+<h2 class="sect1">6.1. Automating Data Extraction</h2>
+
+<p>Suppose we want to <a name="INDEX-356" class="ipoint"
+></a><a name="INDEX-357" class="ipoint"
+></a><a name="INDEX-358" class="ipoint"
+></a>extract information from an Amazon
+book page. The first problem is getting the HTML. Browsing Amazon
+shows that the URL for a book page is
+<em class="emphasis">http://www.amazon.com/exec/obidos/ASIN/</em><em class="replaceable"><tt>ISBN</tt></em>,
+where <em class="replaceable"><tt>ISBN</tt></em> is the book's
+unique International Standard Book Number. So to fetch the
+<cite>Perl Cookbook</cite>'s page, for
+example:
+</p>
+
+<pre class="code">#!/usr/bin/perl -w
+use strict;
+use LWP::Simple;
+
+my $html = get("http://www.amazon.com/exec/obidos/ASIN/1565922433")
+  or die "Couldn't fetch the Perl Cookbook's page.";</pre>
+
+<p>The relevant piece of HTML looks like this:</p>
+
+<pre class="code">&lt;br clear="left"&gt;
+&lt;FONT FACE="Arial,Helvetica" size=2&gt;
+&lt;b&gt;Paperback&lt;/b&gt;
+- 794 pages (August 1998)
+&lt;br&gt;&lt;/font&gt;
+&lt;font face="Arial,Helvetica" size=-2&gt;
+O'Reilly &amp;amp; Associates; &lt;/font&gt;
+&lt;font face="Arial,Helvetica" size=-2&gt;
+ISBN: 1565922433
+; Dimensions (in inches): 1.55 x 9.22 x 7.08
+&lt;br&gt;
+&lt;FONT FACE="Arial,Helvetica" size=2&gt;
+&lt;/font&gt;&lt;br&gt;
+&lt;/font&gt;
+&lt;/span&gt;
+&lt;font face=verdana,arial,helvetica size=-1&gt;
+&lt;b&gt;Amazon.com Sales Rank: &lt;/b&gt; 4,070 &lt;/font&gt;&lt;br&gt;
+&lt;font face=verdana,arial,helvetica size=-1&gt;</pre>
+
+<p>The easiest way to extract information here is to use regular
+expressions. For example:
+</p>
+
+<pre class="code">$html =~ m{Amazon\.com Sales Rank: &lt;/b&gt; ([\d,]+) &lt;/font&gt;&lt;br&gt;};
+$sales_rank = $1;
+$sales_rank =~ tr[,][]d;    # 4,070 becomes 4070</pre>
+
+<p>This regular expression describes the information we want (a string
+of digits and commas), as well as the text around the text
+we're after (<tt class="literal">Amazon.com</tt>
+<tt class="literal">Sales</tt> <tt class="literal">Rank</tt>: and
+<tt class="literal">&lt;/font&gt;&lt;br&gt;</tt>). We use curly braces to
+delimit the regular expression to avoid problems with the slash in
+<tt class="literal">&lt;/font&gt;</tt>, and we use parentheses to capture
+the desired information. We save that information to
+<tt class="literal">$sales_rank</tt>, then modify the
+variable's value to clean up the data we extracted.
+</p>
+
+<p>The final program appears in <a href="ch06_01.htm#perllwp-CHP-6-EX-1">Example 6-1</a>.</p>
+
+<a name="perllwp-CHP-6-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 6-1. cookbook-rank </h4>
+<pre class="code">#!/usr/bin/perl -w
+# cookbook-rank - find rank of Perl Cookbook on Amazon
+
+use LWP::Simple;
+
+my $html = get("http://www.amazon.com/exec/obidos/ASIN/1565922433")
+  or die "Couldn't fetch the Perl Cookbook's page.";
+$html =~ m{Amazon\.com Sales Rank: &lt;/b&gt; ([\d,]+) &lt;/font&gt;&lt;br&gt;} || die;
+my $sales_rank = $1;
+$sales_rank =~ tr[,][]d;    # 4,070 becomes 4070
+print "$sales_rank\n";</pre>
+</div>
+
+<p>It's then straightforward to generalize the program
+by allowing the user to provide the ISBN on the command line, as
+shown in <a href="ch06_01.htm#perllwp-CHP-6-EX-2">Example 6-2</a>.
+</p>
+
+<a name="perllwp-CHP-6-EX-2"></a><div class="example">
+<h4 class="objtitle">Example 6-2. amazon-rank </h4>
+<pre class="code">#!/usr/bin/perl -w
+# amazon-rank: fetch Amazon rank given ISBN on cmdline
+
+use LWP::Simple;
+
+my $isbn = shift
+  or die "usage:\n$0 ISBN\n";
+my $html = get("http://www.amazon.com/exec/obidos/ASIN/$isbn");
+$html =~ m{Amazon\.com Sales Rank: &lt;/b&gt; ([\d,]+) &lt;/font&gt;&lt;br&gt;} || die;
+my $sales_rank = $1;
+$sales_rank =~ tr[,][]d;    # 4,070 becomes 4070
+print "$sales_rank\n";</pre>
+</div>
+
+<p>We could take this program in any direction we wanted. For example,
+it would be a simple enhancement to take a list of ISBNs from the
+command line or from STDIN, if none were given on the command line.
+It would be trickier, but more useful, to have the program accept
+book titles instead of just ISBNs. A more elaborate version of this
+basic program is one of O'Reilly's
+actual market research tools.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

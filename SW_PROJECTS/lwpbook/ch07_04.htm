@@ -1,0 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Token Sequences (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch07_04"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:30:19 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch07_04' class='lwp lwp_ch07_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">7.4. Token Sequences</h2>
+
+<p>Some problems cannot
+<a name="INDEX-438" class="ipoint"
+></a>be solved with a single-token
+approach. Often you need to scan for a sequence of tokens. For
+example in <a href="ch04_01.htm">Chapter 4, "URLs"</a>, we extracted the Amazon
+sales rank from HTML like this:
+</p>
+
+<pre class="code">&lt;b&gt;Amazon.com Sales Rank: &lt;/b&gt; 4,070 &lt;/font&gt;&lt;br&gt;</pre>
+
+<p>Here we're looking for the text
+<tt class="literal">Amazon.com</tt> <tt class="literal">Sales</tt>
+<tt class="literal">Rank:</tt> , an end-tag for <tt class="literal">b</tt>, and
+the next token as a text token with the sales rank. To solve this, we
+need to check the next few tokens while being able to put them back
+if they're not what we expect.
+</p>
+
+<p>To put tokens back into the stream, use
+<a name="INDEX-439" class="ipoint"
+></a><a name="INDEX-440" class="ipoint"
+></a>the <tt class="literal">unget_token(&#160;)</tt>
+method:
+</p>
+
+<pre class="code">$stream-&gt;unget_token(@next);</pre>
+
+<p>The tokens stored in <tt class="literal">@next</tt> will be returned to the
+stream. For example, to solve our Amazon problem:
+</p>
+
+<pre class="code">while (my $token = $stream-&gt;get_token( )) {
+  if ($token-&gt;[0] eq 'T' and
+    $token-&gt;[1] eq 'Amazon.com Sales Rank: ') {
+    my @next;
+    push @next, $stream-&gt;get_token( );
+    my $found = 0;
+    if ($next[0][0] eq 'E' and $next[0][1] eq 'b') {
+      push @next, $stream-&gt;get_token( );
+      if ($next[1][0] eq 'T') {
+        $sales_rank = $next[1][1];
+        $found = 1;
+      }
+    }
+    $stream-&gt;unget_token(@next) unless $found;
+  }
+}</pre>
+
+<p>If it's the text we're looking for,
+we cautiously explore the next tokens. If the next one is a
+<tt class="literal">&lt;/b&gt;</tt> end-tag, check the next token to ensure
+that it's text. If it is, then
+that's the sales rank. If any of the tests fail, put
+the tokens back on the stream and go back to processing.
+</p>
+
+<a name="perllwp-CHP-7-SECT-4.1"></a><div class="sect2">
+<h3 class="sect2">7.4.1. Example: BBC Headlines</h3>
+
+<p>Suppose, for example, that <a name="INDEX-441" class="ipoint"
+></a><a name="INDEX-442" class="ipoint"
+></a>your morning ritual is to have the
+help come and wake you at about 11 a.m. as they bring two serving
+trays to your bed. On one tray there's a croissant,
+some <em class="emphasis">pain au chocolat</em>, and of course some
+<em class="emphasis">caf&#xE9; au lait</em>, and on the other tray,
+your laptop with a browser window already open on each story from BBC
+News's front page
+(<a href="http://news.bbc.co.uk">http://news.bbc.co.uk</a>). However, the help have
+been getting mixed up lately and opening the stories on <em class="emphasis">The
+Guardian</em>'s web site, and
+that's a bit awkward, since clearly <em class="emphasis">The
+Guardian</em> is an after-lunch paper. You'd
+say something about it, but one doesn't want to make
+a scene, so you just decide to write a program that the help can run
+on the laptop to find all the BBC story URLs.
+</p>
+
+<p>So you look at the source of
+<a href="http://news.bbc.co.uk">http://news.bbc.co.uk</a> and discover that each
+headline link is wrapped in one of two kinds of code. There are lots
+of headlines in code such as these:
+</p>
+
+<pre class="code">&lt;B CLASS="h3"&gt;&lt;A href="/hi/english/business/newsid_1576000/1576290.stm"&gt;Bank
+of England mulls rate cut&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;
+  
+&lt;B CLASS="h3"&gt;&lt;A href="/hi/english/uk_politics/newsid_1576000/1576541.stm"&gt;Euro
+battle revived by Blair speech&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;</pre>
+
+<p>and also some headlines in code like this:</p>
+
+<pre class="code">&lt;A href="/hi/english/business/newsid_1576000/1576636.stm"&gt;
+  &lt;B class="h2"&gt; Swissair shares wiped out&lt;/B&gt;&lt;BR&gt;
+&lt;/A&gt;
+
+&lt;A href="/hi/english/world/middle_east/newsid_1576000/1576113.stm"&gt;
+  &lt;B class="h1"&gt;Mid-East blow to US anti-terror drive&lt;/B&gt;&lt;BR&gt;
+&lt;/A&gt;</pre>
+
+<p>(Note that the <tt class="literal">a</tt> start-tag's
+class value can be <tt class="literal">h1</tt> or <tt class="literal">h2</tt>.)
+</p>
+
+<p>Studying this, you realize that this is <a name="INDEX-443" class="ipoint"
+></a><a name="INDEX-444" class="ipoint"
+></a>how you find the story URLs:
+</p>
+
+<ul><li>
+<p>Every time there's a <tt class="literal">B</tt> start-tag
+with class value of <tt class="literal">h3</tt>, and then an
+<tt class="literal">A</tt> start-tag with an <tt class="literal">href</tt> value,
+save that <tt class="literal">href</tt>.
+</p>
+</li><li>
+<p>Every time there's an <tt class="literal">A</tt> start-tag
+with an <tt class="literal">href</tt> value, a text token consisting of
+just whitespace, and then a <tt class="literal">B</tt> start-tag with a
+class value of <tt class="literal">h1</tt> or <tt class="literal">h2</tt>, save
+the first token's <tt class="literal">href</tt> value.
+</p>
+</li></ul>
+</div>
+<a name="perllwp-CHP-7-SECT-4.2"></a><div class="sect2">
+<h3 class="sect2">7.4.2. Translating the Problem into Code</h3>
+
+<p>We can take some shortcuts when translating this into
+<tt class="literal">$stream-&gt;unget_token($token)</tt> code. The
+following HTML is typical:
+</p>
+
+<pre class="code">&lt;B CLASS="h3"&gt;Top Stories&lt;/B&gt;&lt;BR&gt;
+...
+&lt;B CLASS="h3"&gt;&lt;A href="/hi/english/business/newsid_1576000/1576290.stm"&gt;Bank
+of England mulls rate cut&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;</pre>
+
+<p>When we see the first <tt class="literal">B-h3</tt> start-tag token, we
+think it might be the start of a <tt class="literal">B-h3-A-href</tt>
+pattern. So we get another token and see if it's an
+<tt class="literal">A-href</tt> token. It's not
+(it's the text token <tt class="literal">Top</tt>
+<tt class="literal">Stories</tt>), so we put it back into the stream
+(useful in case some other pattern we're looking for
+involves that being the first token), and we keep looping. Later, we
+see another <tt class="literal">B-h3</tt>, we get another token, and we
+inspect it to see if it's an
+<tt class="literal">A-href</tt> token. This time it is, so we process its
+<tt class="literal">href</tt> value and resume looping.
+There's no reason for us to put that
+<tt class="literal">a-href</tt> back, so the next iteration of the loop
+will resume with the next token being <tt class="literal">Bank</tt>
+<tt class="literal">of</tt> <tt class="literal">England</tt>
+<tt class="literal">mulls</tt> <tt class="literal">rate</tt>
+<tt class="literal">cut</tt>.
+</p>
+
+<pre class="code">sub scan_bbc_stream {
+  my($stream, $docbase) = @_;
+
+ Token:
+  while(my $token = $stream-&gt;get_token) {
+
+    if ($token-&gt;[0] eq 'S'  and  $token-&gt;[1] eq 'b'  and  
+       ($token-&gt;[2]{'class'} || '') eq 'h3') {
+      # The href we want is in the NEXT token... probably.
+      # Like: &lt;B CLASS="h3"&gt;&lt;A href="magic_url_here"&gt;
+
+      my(@next) = ($stream-&gt;get_token);
+
+      if ($next[0] and $next[0][0] eq 'S'  and  $next[0][1] eq 'a'  and
+          defined $next[0][2]{'href'} ) {
+         # We found &lt;a href="..."&gt;!  This rule matches!
+         print URI-&gt;new_abs($next[0][2]{'href'}, $docbase), "\n";
+         next Token;
+      }
+      # We get here only if we've given up on this rule:
+      $stream-&gt;unget_token(@next);
+    }
+
+    # fall thru to subsequent rules here...
+
+  }
+  return;
+}</pre>
+
+<p>The general form of the rule above is this: if the current token
+looks promising, pull off a token and see if that looks promising
+too. If, at any point, we see an unexpected token or hit the end of
+the stream, we restore what we've pulled off (held
+in the temporary array <tt class="literal">@next</tt>), and continue to try
+other rules. But if all the expectations in this rule are met, we
+make it to the part that processes this bunch of tokens (here
+it's just a single line, which prints the URL), and
+then call <tt class="literal">next</tt> <tt class="literal">Token</tt> to start
+another iteration of this loop <em class="emphasis">without</em> restoring
+the tokens that have matched this pattern. (If you are disturbed by
+this use of a named block and <tt class="literal">last</tt> ing and
+<tt class="literal">next</tt> ing around, consider that this could be
+written as a giant <tt class="literal">if</tt>/<tt class="literal">else</tt>
+statement at the risk of potentially greater damage to
+what's left of your sanity.)
+</p>
+
+<p>Each such rule, then, can pull from the stream however many tokens it
+needs to either match or reject the pattern it's
+after. Either it matches and starts another iteration of this loop,
+or it restores the stream to exactly the way it was before this rule
+started pulling from it. This business of a temporary
+<tt class="literal">@next</tt> list may seem like overkill when we only
+have to look one token ahead, only ever looking at
+<tt class="literal">$next[0]</tt>. However, the <tt class="literal">if</tt> block
+for the next pattern (which requires looking two tokens ahead) shows
+how the same framework can be accommodating:
+</p>
+
+<pre class="code"># Add this right after the first if-block ends.
+if($token-&gt;[0] eq 'S'  and  $token-&gt;[1] eq 'a'  and
+   defined $token-&gt;[2]{'href'} ) {
+  # Like: &lt;A href="magic_url_here"&gt; &lt;B class="h2"&gt;
+
+  my(@next) = ($stream-&gt;get_token);
+  if (<tt class="userinput"><b>$next[0]</b></tt> and $next[0][0] eq 'T' and $next[0][1] =~ m/^\s+/s ) {
+    # We found whitespace.
+    <tt class="userinput"><b>push @next,</b></tt> $stream-&gt;get_token;
+    if (<tt class="userinput"><b>$next[1]</b></tt> and $next[1][0] eq 'S'  and  $next[1][1] eq 'b'  and
+       ($next[1][2]{'class'} || '') =~ m/^h[12]$/s ) {
+      # We found &lt;b class="h2"&gt;!  This rule matches!
+      print URI-&gt;new_abs( $token-&gt;[2]{'href'}, $docbase ), "\n";
+      next Token;
+    }
+  }
+  # We get here only if we've given up on this rule:
+  $stream-&gt;unget_token(@next);
+}</pre>
+
+</div>
+<a name="perllwp-CHP-7-SECT-4.3"></a><div class="sect2">
+<h3 class="sect2">7.4.3. Bundling into a Program</h3>
+
+<p>With all that wrapped up in a pure function <tt class="literal">scan_bbc_stream(
+)</tt>, we <a name="INDEX-445" class="ipoint"
+></a><a name="INDEX-446" class="ipoint"
+></a>can test it by first saving the contents of
+<em class="emphasis">http://news.bbc.co.uk</em> locally as
+<em class="emphasis">bbc.html</em> (which we probably already did to
+scrutinize its source code and figure out what HTML patterns surround
+headlines), and then calling this:
+</p>
+
+<pre class="code">use strict;
+use HTML::TokeParser;
+use URI;
+
+scan_bbc_stream(
+  HTML::TokeParser-&gt;new('bbc.html') || die($!),
+  'http://news.bbc.co.uk/' # base URL
+);</pre>
+
+<p>When run, this merrily scans the local copy and say:</p>
+
+<pre class="code">http://news.bbc.co.uk/hi/english/world/middle_east/newsid_1576000/1576113.stm
+http://news.bbc.co.uk/hi/english/world/south_asia/newsid_1576000/1576186.stm
+http://news.bbc.co.uk/hi/english/uk_politics/newsid_1576000/1576051.stm
+http://news.bbc.co.uk/hi/english/uk/newsid_1576000/1576379.stm
+http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576636.stm
+http://news.bbc.co.uk/sport/hi/english/in_depth/2001/england_in_zimbabwe/newsid_
+1574000/1574824.stm
+http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576546.stm
+http://news.bbc.co.uk/hi/english/uk/newsid_1576000/1576313.stm
+http://news.bbc.co.uk/hi/english/uk_politics/newsid_1576000/1576541.stm
+http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576290.stm
+http://news.bbc.co.uk/hi/english/entertainment/music/newsid_1576000/1576599.stm
+http://news.bbc.co.uk/hi/english/sci/tech/newsid_1574000/1574048.stm
+http://news.bbc.co.uk/hi/english/health/newsid_1576000/1576776.stm
+http://news.bbc.co.uk/hi/english/in_depth/uk_politics/2001/conferences_2001/labour/
+newsid_1576000/1576086.stm</pre>
+
+<p>At least that's what the program said once I got
+<tt class="literal">scan_bbc_stream(&#160;)</tt> in its final working state
+shown above. As I was writing it and testing bits of it, I could run
+and re-run the program, scanning the same local file. Then once
+it's working on the local file (or files, depending
+on how many test cases you have), you can write the routine that gets
+what's at a URL, makes a stream pointing to its
+content, and runs a given scanner routine (such as
+<tt class="literal">scan_bbc_stream(&#160;)</tt>) on it:
+</p>
+
+<pre class="code">my $browser;
+BEGIN {
+  use LWP::UserAgent;
+  $browser = LWP::UserAgent-&gt;new;
+  # and any other $browser initialization code here
+}
+
+sub url_scan {
+  my($scanner, $url) = @_;
+  die "What scanner function?" unless $scanner and ref($scanner) eq 'CODE';
+  die "What URL?" unless $url;
+  my $resp = $browser-&gt;get( $url );
+  die "Error getting $url: ", $resp-&gt;status_line
+    unless $resp-&gt;is_success;
+  die "It's not HTML, it's ", $resp-&gt;content_type
+    unless $resp-&gt;content_type eq 'text/html';
+
+  my $stream = HTML::TokeParser-&gt;new( $resp-&gt;content_ref )
+    || die "Couldn't make a stream from $url\'s content!?";
+  # new( ) on a string wants a reference, and so that's what
+  #  we give it!  HTTP::Response objects just happen to
+  #  offer a method that returns a reference to the content.
+  $scanner-&gt;($stream, $resp-&gt;base);
+}</pre>
+
+<p>If you thought the contents of <tt class="literal">$resp</tt> could be very
+large, you could save the contents to a temporary file, and start the
+stream off with
+<tt class="literal">HTML::TokeParser-&gt;new($tempfile)</tt>. With the
+above <tt class="literal">url_scan(&#160;)</tt>, to
+<a name="INDEX-447" class="ipoint"
+></a><a name="INDEX-448" class="ipoint"
+></a>retrieve the BBC main page and scan it, you
+need only replace our test statement that scans the input stream,
+with this:
+</p>
+
+<pre class="code">url_scan(\&amp;scan_bbc_stream, 'http://news.bbc.co.uk/');</pre>
+
+<p>And then the program outputs the URLs from the live BBC main page (or
+will die with an error message if it can't get it).
+To actually complete the task of getting the printed URLs to each
+open a new browser instance, well, this depends on your browser and
+OS, but for my MS Windows laptop and Netscape, this <a name="INDEX-449" class="ipoint"
+></a><a name="INDEX-450" class="ipoint"
+></a>Perl program will
+do it:
+</p>
+
+<pre class="code">my $ns = "c:\\program files\\netscape\\communicator\\program\\netscape.exe";
+die "$ns doesn't exist" unless -e $ns;
+die "$ns isn't executable" unless -x $ns;
+while (&lt;&gt;) { chomp; m/\S/ and <tt class="userinput"><b>system($ns, $_)</b></tt> and die $!; }</pre>
+
+<p>This is then called as:</p>
+
+<pre class="code">C:\perlstuff&gt; perl bbc_urls.pl | perl urls2ns.pl</pre>
+
+<p>Under Unix, the correct <tt class="literal">system(&#160;)</tt> command is:</p>
+
+<pre class="code">system("netscape '$url' &amp;")</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

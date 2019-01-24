@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Common MIME Types (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appc_01"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:32:01 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appc_01' class='lwp lwp_appc_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Appendix C. Common MIME Types</h1>
+<p>Every HTTP response that's more than just headers
+must specify a MIME type via the <tt class="literal">Content-Type</tt>
+header (accessible as <tt class="literal">$response-&gt;content_type(
+)</tt>). Here is a list of the usual MIME type for each of the
+most common file types on the Internet. The items are sorted
+alphabetically by the usual extensions.
+</p>
+
+<p>Regrettably, this list is neither complete nor authoritative, as
+there are more file types in use than those given
+"official" MIME types. For more
+information, see <em class="emphasis">HTTP: The Definitive Guide</em>
+(O'Reilly). Also consider the <em class="emphasis">mime.types</em> file that comes with Apache and/or
+your browser's "Helper
+Applications" configuration menus. For the list of
+official MIME types, see <a href="http://www.isi.edu/in-notes/iana/assignments/media-types/">http://www.isi.edu/in-notes/iana/assignments/media-types/</a>.
+</p>
+
+<a name="appc-2-fm2xml"></a><table border="1" cellpadding="3">
+
+
+
+<tr>
+<th>
+<p>Extension</p>
+</th>
+<th>
+<p>MIME type</p>
+</th>
+</tr>
+
+
+<tr>
+<td>
+<p><em class="filename"> .au</em></p>
+</td>
+<td><code class="code">audio/basic</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .avi</em></p>
+</td>
+<td><code class="code">video/msvideo, video/avi, video/x-msvideo</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .bmp</em></p>
+</td>
+<td><code class="code">image/bmp</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .bz2</em></p>
+</td>
+<td><code class="code">application/x-bzip2</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .css</em></p>
+</td>
+<td><code class="code">text/css</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .dtd</em></p>
+</td>
+<td><code class="code">application/xml-dtd</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .doc</em></p>
+</td>
+<td><code class="code">application/msword</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .exe</em></p>
+</td>
+<td><code class="code">application/octet-stream</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .gif</em></p>
+</td>
+<td><code class="code">image/gif</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .gz</em></p>
+</td>
+<td><code class="code">application/x-gzip</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .hqx</em></p>
+</td>
+<td><code class="code">application/mac-binhex40</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .html</em></p>
+</td>
+<td><code class="code">text/html</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .jar</em></p>
+</td>
+<td><code class="code">application/java-archive</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .jpg</em></p>
+</td>
+<td><code class="code">image/jpeg</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .js</em></p>
+</td>
+<td><code class="code">application/x-javascript</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .midi</em></p>
+</td>
+<td><code class="code">audio/x-midi</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .mp3</em></p>
+</td>
+<td><code class="code">audio/mpeg</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .mpeg</em></p>
+</td>
+<td><code class="code">video/mpeg</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .ogg</em></p>
+</td>
+<td><code class="code">audio/vorbis, application/ogg</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .pdf</em></p>
+</td>
+<td><code class="code">application/pdf</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .pl</em></p>
+</td>
+<td><code class="code">application/x-perl</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .png</em></p>
+</td>
+<td><code class="code">image/png</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .ppt</em></p>
+</td>
+<td><code class="code">application/vnd.ms-powerpoint</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .ps</em></p>
+</td>
+<td><code class="code">application/postscript</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .qt</em></p>
+</td>
+<td><code class="code">video/quicktime</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .ra</em></p>
+</td>
+<td><code class="code">audio/x-pn-realaudio, audio/vnd.rn-realaudio</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .ram</em></p>
+</td>
+<td><code class="code">audio/x-pn-realaudio, audio/vnd.rn-realaudio</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .rdf</em></p>
+</td>
+<td><code class="code">application/rdf, application/rdf+xml</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .rtf</em></p>
+</td>
+<td><code class="code">application/rtf</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .sgml</em></p>
+</td>
+<td><code class="code">text/sgml</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .sit</em></p>
+</td>
+<td><code class="code">application/x-stuffit</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .svg</em></p>
+</td>
+<td><code class="code">image/svg+xml</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .swf</em></p>
+</td>
+<td><code class="code">application/x-shockwave-flash</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .tar.gz</em></p>
+</td>
+<td><code class="code">application/x-tar</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .tgz</em></p>
+</td>
+<td><code class="code">application/x-tar</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .tiff</em></p>
+</td>
+<td><code class="code">image/tiff</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .tsv</em></p>
+</td>
+<td><code class="code">text/tab-separated-values</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .txt</em></p>
+</td>
+<td><code class="code">text/plain</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .wav</em></p>
+</td>
+<td><code class="code">audio/wav, audio/x-wav</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .xls</em></p>
+</td>
+<td><code class="code">application/vnd.ms-excel</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .xml</em></p>
+</td>
+<td><code class="code">application/xml</code></td>
+</tr>
+<tr>
+<td>
+<p><em class="filename"> .zip</em></p>
+</td>
+<td><code class="code">application/zip, application/x-compressed-zip</code></td>
+</tr>
+
+</table><p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

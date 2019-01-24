@@ -1,0 +1,4 @@
+verilog work "hfifo.v"
+verilog work "mem.v"
+verilog work "flist.v"
+verilog work "stimulus.v"

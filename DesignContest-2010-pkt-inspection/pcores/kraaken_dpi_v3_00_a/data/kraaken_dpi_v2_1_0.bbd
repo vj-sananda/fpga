@@ -1,0 +1,10 @@
+##############################################################################
+## Filename:          E:\work\FPGA_PROJECTS\ML509\ml509_dpi\pcores/canscid_dpi_v1_00_a/data/canscid_dpi_v2_1_0.bbd
+## Description:       Black Box Definition
+## Date:              Sun Mar 28 14:19:37 2010 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+Files
+################################################################################
+cam_v6_1.ngc,srlfifo39.ngc
+

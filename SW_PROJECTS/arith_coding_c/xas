@@ -1,0 +1,80 @@
+shift" into the new context.  For example, if the
+ * last context was "ABC", and the symbol 'D' had just been processed,
+ * this routine would want to update the context pointers to that
+ * contexts[1]=="D", contexts[2]=="CD" and contexts[3]=="BCD".  The
+ * potential problem is that some of these tables may not exist.
+ * The way this is handled is by the shift_to_next_context routine.
+ * It is passed a pointer to the "ABC" context, along with the symbol
+ * 'D', and its job is to return a pointer to "BCD".  Once we have
+ * "BCD", we can follow the lesser context pointers in order to get
+ * the pointers to "CD" and "C".  The hard work was done in
+ * shift_to_context().
+ */
+void add_character_to_model( int c )
+{
+    int i;
+    if ( max_order < 0 || c < 0 )
+       return;
+    contexts[ max_order ] =
+       shift_to_next_context( contexts[ max_order ],
+                              (unsigned char) c, max_order );
+    for ( i = max_order-1 ; i > 0 ; i-- )
+        contexts[ i ] = contexts[ i+1 ]->lesser_context;
+}
+
+/*
+ * This routine is called when adding a new character to the model. From
+ * the previous example, if the current context was "ABC", and the new
+ * symbol was 'D', this routine would get called with a pointer to
+ * context table "ABC", and symbol 'D', with order max_order.  What this
+ * routine needs to do then is to find the context table "BCD".  This
+ * should be an easy job, and it is if the table already exists.  All
+ * we have to in that case is follow the back pointer from "ABC" to "BC".
+ * We then search the link table of "BC" until we find the linke to "D".
+ * That link points to "BCD", and that value is then returned to the
+ * caller.  The problem crops up when "BC" doesn't have a pointer to
+ * "BCD".  This generally means that the "BCD" context has not appeared
+ * yet.  When this happens, it means a new table has to be created and
+ * added to the "BC" table.  That can be done with a single call to
+ * the allocate_new_table routine.  The only problem is that the
+ * allocate_new_table routine wants to know what the lesser context for
+ * the new table is going to be.  In other words, when I create "BCD",
+ * I need to know where "CD" is located.  In order to find "CD", I
+ * have to recursively call shift_to_next_context, passing it a pointer
+ * to context "C" and they symbol 'D'.  It then returns a pointer to
+ * "CD", which I use to create the "BCD" table.  The recursion is guaranteed
+ * to end if it ever gets to order -1, because the null table is
+ * guaranteed to have a for every symbol to the order 0 table.  This is
+ * the most complicated part of the modeling program, but it is
+ * necessary for performance reasons.
+ */
+CONTEXT *shift_to_next_context( CONTEXT *table, unsigned char c, int order)
+{
+    int i;
+    CONTEXT *new_lesser;
+/*
+ * First, try to find the new context by backing up to the lesser
+ * context and searching its link table.  If I find the link, we take
+ * a quick and easy exit, returning the link.  Note that their is a
+ * special Kludge for context order 0.  We know for a fact that
+ * the lesser context pointer at order 0 points to the null table,
+ * order -1, and we know that the -1 table only has a single link
+ * pointer, which points back to the order 0 table.
+ */
+    table = table->lesser_context;
+    if ( order == 0 )
+        return( table->links[ 0 ].next );
+    for ( i = 0 ; i <= table->max_index ; i++ )
+        if ( table->stats[ i ].symbol == c )
+            if ( table->links[ i ].next != NULL )
+                return( table->links[ i ].next );
+            else
+                break;
+/*
+ * If I get here, it means the new context did not exist.  I have to
+ * create the new context, add a link to it here, and add the backwards
+ * link to *his* previous context.  Creating the table and adding it to
+ * this table is pretty easy, but adding the back pointer isn't.  Since
+ * creating the new back pointer isn't easy, I duck my responsibility
+ * and recurse to myself in order to pick it up.
+ */

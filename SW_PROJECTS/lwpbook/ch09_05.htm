@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: Fresh Air (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch09_05"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 02:24:06 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch09_05' class='lwp lwp_ch09_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">9.5. Example: Fresh Air</h2>
+
+<p>Another HTML::TokeParser <a name="INDEX-561" class="ipoint"
+></a><a name="INDEX-562" class="ipoint"
+></a>problem (in <a href="ch08_01.htm">Chapter 8, "Tokenizing Walkthrough"</a>) was extracting relevant links from the
+program descriptions from the Fresh Air web site. There were aspects
+of the task that we will not review here (such as how to request a
+month's worth of weekday listings at a time), but we
+will instead focus on the heart of the program, which is how to take
+HTML source from a local file, feed it to HTML::TreeBuilder, and pull
+the interesting links out of the resulting tree.
+</p>
+
+<p>If we save the HTML source of a program description page as
+<em class="filename">fresh1.html</em> and sift through its source, we get
+a 12-KB file. Only about one 1 KB of that is real content, like this:
+</p>
+
+<pre class="code">...
+<tt class="userinput"><b>&lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.ram"&gt;</b></tt>
+  &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#FFCC00" SIZE="2"&gt;
+    Listen to &lt;B&gt;Monday - July 2, 2001&lt;/B&gt;
+  &lt;/FONT&gt;
+<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+ 
+...
+ 
+   <tt class="userinput"><b>&lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.01.ram"&gt;</b></tt>Listen to
+   &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="3"&gt;
+   &lt;B&gt; Editor and writer Walter Kirn                            &lt;/B&gt;
+   &lt;/FONT&gt;<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+                             
+&lt;BR&gt;
+&lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="2"&gt;
+&lt;BLOCKQUOTE&gt;Editor and writer <tt class="userinput"><b>&lt;A</b></tt>
+<tt class="userinput"><b>HREF="http://freshair.npr.org/guestInfoFA.cfm?name=walterkirn"&gt;</b></tt>Walter
+Kirn<tt class="userinput"><b>&lt;/A&gt;</b></tt>'s new novel &lt;I&gt;Up in the Air&lt;/I&gt; (Doubleday) is about 
+...
+&lt;/BLOCKQUOTE&gt;&lt;/FONT&gt;
+&lt;BR&gt;
+ 
+  <tt class="userinput"><b>&lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.02.ram"&gt;</b></tt>Listen to
+  &lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="3"&gt;
+  &lt;B&gt; Casting director and actress Joanna Merlin             &lt;/B&gt;
+  &lt;/FONT&gt;<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+ 
+&lt;BR&gt;
+&lt;FONT FACE="Verdana, Charcoal, Sans Serif" COLOR="#ffffff" SIZE="2"&gt;
+&lt;BLOCKQUOTE&gt;Casting director and actress <tt class="userinput"><b>&lt;A</b></tt>
+<tt class="userinput"><b>HREF="http://freshair.npr.org/guestInfoFA.cfm?name=joannamerlin"&gt;</b></tt>Joanna
+Merlin<tt class="userinput"><b>&lt;/A&gt;</b></tt> has written a new guide for actors, &lt;I&gt;Auditioning: An
+...
+&lt;/BLOCKQUOTE&gt;&lt;/FONT&gt;
+&lt;BR&gt;
+...</pre>
+
+<p>The rest of the file is mostly taken up by some JavaScript, some
+search box forms, and code for a button bar, which contains image
+links like this:
+</p>
+
+<pre class="code">...
+<tt class="userinput"><b>&lt;A HREF="dayFA.cfm?todayDate=archive"&gt;&lt;</b></tt>IMG SRC="images/nav_archived_on.gif" 
+ALT="Archived Shows" WIDTH="124" HEIGHT="36" BORDER="0" HSPACE="0" VSPACE="0"&gt;<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+<tt class="userinput"><b>&lt;A HREF="commFA.cfm"&gt;</b></tt>&lt;IMG SRC="images/nav_commentators_off.gif" ALT="Commentators" 
+WIDTH="124" HEIGHT="36" BORDER="0" HSPACE="0" VSPACE="0"&gt;<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+<tt class="userinput"><b>&lt;A HREF="aboutFA.cfm"&gt;</b></tt>&lt;IMG SRC="images/nav_about_off.gif" ALT="About Fresh Air" 
+WIDTH="124" HEIGHT="36" BORDER="0" HSPACE="0" VSPACE="0"&gt;<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+<tt class="userinput"><b>&lt;A HREF="stationsFA.cfm"&gt;</b></tt>&lt;IMG SRC="images/nav_stations_off.gif" ALT="Find a Station" 
+WIDTH="124" HEIGHT="36" BORDER="0" HSPACE="0" VSPACE="0"&gt;<tt class="userinput"><b>&lt;/A&gt;</b></tt>
+...</pre>
+
+<p>Then, after the real program description text, there is code that
+links to the description pages for the previous and next shows:
+</p>
+
+<pre class="code">...
+&lt;TD WIDTH="50%" ALIGN="left" BGCOLOR="#4F4F85"&gt;
+  &lt;FONT FACE="Verdana, Charcoal, Sans Serif" SIZE="2" COLOR="#FFCC00"&gt;
+    &amp;#160;&amp;#160;&amp;#171;&amp;#160;
+  &lt;/FONT&gt;
+  <tt class="userinput"><b>&lt;A HREF="dayFA.cfm?todayDate=06%2F29%2F2001"&gt;</b></tt>
+    &lt;FONT FACE="Verdana, Charcoal, Sans Serif" SIZE="2" COLOR="#FFCC00"&gt;
+      Previous show
+    &lt;/FONT&gt;
+ <tt class="userinput"><b>&lt;/A&gt;</b></tt>
+&lt;/TD&gt;
+&lt;TD WIDTH="50%" ALIGN="right" BGCOLOR="#4F4F85"&gt;
+  <tt class="userinput"><b>&lt;A HREF="dayFA.cfm?todayDate=07%2F03%2F2001"&gt;</b></tt>
+    &lt;FONT FACE="Verdana, Charcoal, Sans Serif" SIZE="2" COLOR="#FFCC00"&gt;
+      Next show
+    &lt;/FONT&gt;
+  <tt class="userinput"><b>&lt;/A&gt;</b></tt>
+  &lt;FONT FACE="Verdana, Charcoal, Sans Serif" SIZE="2" COLOR="#FFCC00"&gt;
+   &amp;#160;&amp;#187;&amp;#160;&amp;#160;
+  &lt;/FONT&gt;
+&lt;/TD&gt;
+...</pre>
+
+<p>The trick is in capturing the URLs and link text from each program
+link in the main text, while ignoring the button bar links and the
+"Previous Show" and
+"Next Show" links. Two criteria
+distinguish the links we want from the links we
+don't: First, each link that we want (i.e., each
+<tt class="literal">a</tt> element with an <tt class="literal">href</tt>
+attribute) has a <tt class="literal">font</tt> element as a child; and
+secondly, the text content of the <tt class="literal">a</tt> element starts
+with "Listen to" (which we
+incidentally want to leave out when we print the link text). This is
+directly implementable with calls to HTML::Element methods:
+</p>
+
+<a name="INDEX-563" class="ipoint"
+></a><a name="INDEX-564" class="ipoint"
+></a><pre class="code">use HTML::TreeBuilder;
+my $tree = HTML::TreeBuilder-&gt;new;
+$tree-&gt;parse_file( 'fresh1.html' ) || die $!;
+my $base_url = 'http://www.freshair.com/whatever';
+  # for resolving relative URLs
+
+foreach my $a ( $tree-&gt;find_by_tag_name('a') ) {
+
+  my $href = $a-&gt;attr('href') || next;
+    # Make sure it has an href attribute
+
+  next unless grep ref($_) &amp;&amp; $_-&gt;tag eq 'font', $a-&gt;content_list;
+    # Make sure (at least) one of its children is a font element
+  
+  my $text_content = $a-&gt;as_text;
+  next unless $text_content =~ s/^\s*Listen to\s+//s;
+    # Make sure its text content starts with that (and remove it)
+
+  # It's good!  Print it:
+  use URI;
+  print "$text_content\n  ", URI-&gt;new_abs($href, $base_url), "\n";
+}
+
+$tree-&gt;delete;  # Delete tree from memory</pre>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

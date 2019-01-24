@@ -1,0 +1,273 @@
+Release 7.1.01i - xst H.42
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "isocm_bram_wrapper_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/isocm_bram_wrapper/isocm_bram_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : isocm_bram_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+RTL Output                         : YES
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation/isocm_bram_wrapper}
+
+=========================================================================
+
+WARNING:Xst:29 - Optimization Effort not specified
+The following parameters have been added:
+Optimization Effort                : 1
+
+=========================================================================
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" in Library isocm_bram_elaborate_v1_00_a.
+Entity <isocm_bram_elaborate> compiled.
+Entity <isocm_bram_elaborate> (Architecture <STRUCTURE>) compiled.
+Compiling vhdl file "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/isocm_bram_wrapper.vhd" in Library work.
+Entity <isocm_bram_wrapper> compiled.
+Entity <isocm_bram_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <isocm_bram_wrapper> (Architecture <STRUCTURE>).
+    Set user-defined property "KEEP_HIERARCHY =  yes" for unit <isocm_bram_wrapper>.
+Instantiating component <isocm_bram_elaborate> from Library <isocm_bram_elaborate_v1_00_a>.
+Entity <isocm_bram_wrapper> analyzed. Unit <isocm_bram_wrapper> generated.
+
+Analyzing generic Entity <isocm_bram_elaborate> (Architecture <structure>).
+	C_MEMSIZE = 4096
+	C_PORT_DWIDTH = 64
+	C_PORT_AWIDTH = 32
+	C_NUM_WE = 2
+	C_FAMILY = "virtex2p"
+WARNING:Xst:753 - "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" line 89: Unconnected output port 'DOPA' of component 'RAMB16_S36_S36'.
+WARNING:Xst:753 - "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" line 89: Unconnected output port 'DOPB' of component 'RAMB16_S36_S36'.
+WARNING:Xst:766 - "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" line 89: Generating a Black Box for component <RAMB16_S36_S36>.
+WARNING:Xst:753 - "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" line 115: Unconnected output port 'DOPA' of component 'RAMB16_S36_S36'.
+WARNING:Xst:753 - "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" line 115: Unconnected output port 'DOPB' of component 'RAMB16_S36_S36'.
+WARNING:Xst:766 - "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd" line 115: Generating a Black Box for component <RAMB16_S36_S36>.
+Entity <isocm_bram_elaborate> analyzed. Unit <isocm_bram_elaborate> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <isocm_bram_elaborate>.
+    Related source file is "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/hdl/elaborate/isocm_bram_elaborate_v1_00_a/hdl/vhdl/isocm_bram_elaborate.vhd".
+WARNING:Xst:647 - Input <BRAM_Addr_A<0:19>> is never used.
+WARNING:Xst:647 - Input <BRAM_Addr_A<29:31>> is never used.
+WARNING:Xst:647 - Input <BRAM_Addr_B<0:19>> is never used.
+WARNING:Xst:647 - Input <BRAM_Addr_B<29:31>> is never used.
+Unit <isocm_bram_elaborate> synthesized.
+
+
+Synthesizing Unit <isocm_bram_wrapper>.
+    Related source file is "F:/fpga/proj/DesignContest08_vjs_64bit_blk4/synthesis/../hdl/isocm_bram_wrapper.vhd".
+Unit <isocm_bram_wrapper> synthesized.
+
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:/Xilinx.
+
+Optimizing unit <isocm_bram_wrapper> ...
+
+Optimizing unit <isocm_bram_elaborate> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : ../implementation/isocm_bram_wrapper/isocm_bram_wrapper.ngr
+Top Level Output File Name         : ../implementation/isocm_bram_wrapper/isocm_bram_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 330
+
+Cell Usage :
+# BELS                             : 1
+#      GND                         : 1
+# RAMS                             : 2
+#      RAMB16_S36_S36              : 2
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of bonded IOBs:                330  out of    556    59%  
+ Number of BRAMs:                        2  out of    136     1%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+BRAM_Clk_A                         | NONE                   | 2     |
+BRAM_Clk_B                         | NONE                   | 2     |
+-----------------------------------+------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: 0.219ns
+   Maximum output required time after clock: 1.401ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'BRAM_Clk_A'
+  Total number of paths / destination ports: 78 / 78
+-------------------------------------------------------------------------
+Offset:              0.219ns (Levels of Logic = 1)
+  Source:            BRAM_Addr_A<20> (PAD)
+  Destination:       isocm_bram/ramb16_s36_s36_1 (RAM)
+  Destination Clock: BRAM_Clk_A rising
+
+  Data Path: BRAM_Addr_A<20> to isocm_bram/ramb16_s36_s36_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     begin scope: 'isocm_bram'
+     RAMB16_S36_S36:ADDRA8        0.219          ramb16_s36_s36_1
+    ----------------------------------------
+    Total                      0.219ns (0.219ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'BRAM_Clk_B'
+  Total number of paths / destination ports: 78 / 78
+-------------------------------------------------------------------------
+Offset:              0.219ns (Levels of Logic = 1)
+  Source:            BRAM_Addr_B<20> (PAD)
+  Destination:       isocm_bram/ramb16_s36_s36_1 (RAM)
+  Destination Clock: BRAM_Clk_B rising
+
+  Data Path: BRAM_Addr_B<20> to isocm_bram/ramb16_s36_s36_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     begin scope: 'isocm_bram'
+     RAMB16_S36_S36:ADDRB8        0.219          ramb16_s36_s36_1
+    ----------------------------------------
+    Total                      0.219ns (0.219ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'BRAM_Clk_B'
+  Total number of paths / destination ports: 64 / 64
+-------------------------------------------------------------------------
+Offset:              1.401ns (Levels of Logic = 1)
+  Source:            isocm_bram/ramb16_s36_s36_0 (RAM)
+  Destination:       BRAM_Din_B<0> (PAD)
+  Source Clock:      BRAM_Clk_B rising
+
+  Data Path: isocm_bram/ramb16_s36_s36_0 to BRAM_Din_B<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB16_S36_S36:CLKB->DOB31    0   1.401   0.000  ramb16_s36_s36_0 (BRAM_Din_B<0>)
+     end scope: 'isocm_bram'
+    ----------------------------------------
+    Total                      1.401ns (1.401ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'BRAM_Clk_A'
+  Total number of paths / destination ports: 64 / 64
+-------------------------------------------------------------------------
+Offset:              1.401ns (Levels of Logic = 1)
+  Source:            isocm_bram/ramb16_s36_s36_0 (RAM)
+  Destination:       BRAM_Din_A<0> (PAD)
+  Source Clock:      BRAM_Clk_A rising
+
+  Data Path: isocm_bram/ramb16_s36_s36_0 to BRAM_Din_A<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB16_S36_S36:CLKA->DOA31    0   1.401   0.000  ramb16_s36_s36_0 (BRAM_Din_A<0>)
+     end scope: 'isocm_bram'
+    ----------------------------------------
+    Total                      1.401ns (1.401ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+CPU : 7.57 / 7.74 s | Elapsed : 8.00 / 8.00 s
+ 
+--> 
+
+Total memory usage is 158392 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   12 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

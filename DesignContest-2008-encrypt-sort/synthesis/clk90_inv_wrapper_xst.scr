@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top clk90_inv_wrapper
+-ifmt MIXED
+-ifn clk90_inv_wrapper_xst.prj
+-ofn ../implementation/clk90_inv_wrapper/clk90_inv_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/clk90_inv_wrapper}

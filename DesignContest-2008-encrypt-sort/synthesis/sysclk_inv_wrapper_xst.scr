@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top sysclk_inv_wrapper
+-ifmt MIXED
+-ifn sysclk_inv_wrapper_xst.prj
+-ofn ../implementation/sysclk_inv_wrapper/sysclk_inv_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/sysclk_inv_wrapper}

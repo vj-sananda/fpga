@@ -1,0 +1,481 @@
+Release 7.1.02i - xst H.40
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "synth.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "synth"
+Output Format                      : NGC
+Target Device                      : xc2vp30-7-ff896
+
+---- Source Options
+Top Module Name                    : huffman_encode
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Equivalent register Removal        : YES
+Slice Packing                      : YES
+Pack IO Registers into IOBs        : auto
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : NO
+Global Optimization                : AllClockNets
+RTL Output                         : Yes
+Write Timing Constraints           : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+lso                                : synth.lso
+Read Cores                         : YES
+cross_clock_analysis               : NO
+verilog2001                        : YES
+safe_implementation                : No
+Optimize Instantiated Primitives   : NO
+tristate2logic                     : Yes
+use_clock_enable                   : Yes
+use_sync_set                       : Yes
+use_sync_reset                     : Yes
+enable_auto_floorplanning          : No
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "./huffman_encode.v"
+Module <huffman_encode> compiled
+No errors in compilation
+Analysis of file <"synth.prj"> succeeded.
+ 
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <huffman_encode>.
+	c_width = 4
+	vlc_width = 5
+	vlcz_width = 5
+	p_width = 32
+	p_width_msb = 31
+	EOM = <u>11111
+	EOM_LENGTH = 4
+	Calling function <huffman_code_swizzled>.
+	Calling function <huffman_code_length>.
+	Calling function <shift_mult_operand>.
+Module <huffman_encode> is correct for synthesis.
+ 
+    Set property "resynthesize = true" for unit <huffman_encode>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <huffman_encode>.
+    Related source file is "./huffman_encode.v".
+WARNING:Xst:1872 - Variable <i> is used but never assigned.
+INFO:Xst:2117 - HDL ADVISOR - Mux Selector <fsm_cs> of Case statement line 140 was re-encoded using one-hot encoding. The case statement will be optimized (default statement optimization), but this optimization may lead to design initialization problems. To ensure the design works safely, you can:
+   	- add an 'init' attribute on signal <fsm_cs> (optimization is then done without any risk)
+   	- use the attribute 'signal_encoding user' to avoid onehot optimization
+   	- use the attribute 'safe_implementation yes' to force XST to perform a safe (but less efficient) optimization
+    Found finite state machine <FSM_0> for signal <fsm_cs>.
+    -----------------------------------------------------------------------
+    | States             | 8                                              |
+    | Transitions        | 20                                             |
+    | Inputs             | 11                                             |
+    | Outputs            | 8                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 000                                            |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32x5-bit multiplier for signal <$n0000> created at line 162.
+    Found 32-bit shifter logical left for signal <$n0017> created at line 256.
+    Found 5-bit subtractor for signal <$n0018> created at line 153.
+    Found 6-bit adder for signal <$n0019>.
+    Found 6-bit subtractor for signal <$n0020> created at line 179.
+    Found 7-bit comparator greatequal for signal <$n0023> created at line 174.
+    Found 5-bit register for signal <cdata_rd>.
+    Found 64-bit register for signal <cdata_shift_rd>.
+    Found 1-bit register for signal <eom_detected_rc>.
+    Found 5-bit 9-to-1 multiplexer for signal <huffman_code_swizzled/1/huffman_code_swizzled>.
+    Found 5-bit register for signal <ldata_rd>.
+    Found 32-bit register for signal <odata_rd>.
+    Found 64-bit register for signal <pdata_rd>.
+    Found 6-bit register for signal <plsb_bit_rc>.
+    Found 1-bit register for signal <pop_rc>.
+    Found 1-bit 4-to-1 multiplexer for signal <pop_wc>.
+    Found 1-bit register for signal <push_eom_pending_rc>.
+    Found 1-bit register for signal <push_pending_rc>.
+    Found 1-bit register for signal <push_rc>.
+    Found 32-bit register for signal <shift_mult_result_rd>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred 213 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   1 Multiplier(s).
+	inferred   1 Comparator(s).
+	inferred   6 Multiplexer(s).
+	inferred   1 Combinational logic shifter(s).
+Unit <huffman_encode> synthesized.
+
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <FSM_0> on signal <fsm_cs[1:8]> with speed1 encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 10000000
+ 001   | 01000000
+ 010   | 00100000
+ 011   | 00010000
+ 100   | 00001000
+ 101   | 00000010
+ 110   | 00000100
+ 111   | 00000001
+-------------------
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# FSMs                             : 1
+# Multipliers                      : 1
+ 32x5-bit multiplier               : 1
+# Adders/Subtractors               : 3
+ 5-bit subtractor                  : 1
+ 6-bit adder                       : 1
+ 6-bit subtractor                  : 1
+# Registers                        : 20
+ 1-bit register                    : 13
+ 32-bit register                   : 2
+ 5-bit register                    : 2
+ 6-bit register                    : 1
+ 64-bit register                   : 2
+# Comparators                      : 1
+ 7-bit comparator greatequal       : 1
+# Multiplexers                     : 2
+ 1-bit 4-to-1 multiplexer          : 1
+ 5-bit 9-to-1 multiplexer          : 1
+# Logic shifters                   : 1
+ 32-bit shifter logical left       : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch  <cdata_shift_rd_62> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_61> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_60> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_59> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_58> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_57> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_56> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_55> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_54> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_53> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_52> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_51> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_50> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_49> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_48> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_47> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_46> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_45> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_44> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_43> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_42> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_41> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_40> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_39> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_38> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_37> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <cdata_shift_rd_63> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1710 - FF/Latch  <pdata_rd_51> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_52> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_53> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_54> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_55> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_56> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_57> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_58> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_59> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_60> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_61> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_62> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_63> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_37> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_38> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_39> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_40> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_41> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_42> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_43> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_44> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_45> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_46> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_47> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_48> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_49> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <pdata_rd_50> (without init value) has a constant value of 0 in block <huffman_encode>.
+Register <fsm_cs_FFd2> equivalent to <pop_rc> has been removed
+
+Optimizing unit <huffman_encode> ...
+WARNING:Xst:1710 - FF/Latch  <ldata_rd_4> (without init value) has a constant value of 0 in block <huffman_encode>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <ldata_rd_3> (without init value) has a constant value of 0 in block <huffman_encode>.
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:/Xilinx.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block huffman_encode, actual ratio is 1.
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : synth.ngr
+Top Level Output File Name         : synth
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 42
+
+Macro Statistics :
+# Registers                        : 12
+#      1-bit register              : 5
+#      32-bit register             : 2
+#      5-bit register              : 2
+#      6-bit register              : 1
+#      64-bit register             : 2
+# Multiplexers                     : 2
+#      1-bit 4-to-1 multiplexer    : 1
+#      5-bit 9-to-1 multiplexer    : 1
+# Logic shifters                   : 1
+#      32-bit shifter logical left : 1
+# Adders/Subtractors               : 1
+#      6-bit adder                 : 1
+# Multipliers                      : 1
+#      32x5-bit multiplier         : 1
+# Comparators                      : 1
+#      7-bit comparator greatequal : 1
+
+Cell Usage :
+# BELS                             : 361
+#      GND                         : 1
+#      INV                         : 1
+#      LUT1                        : 3
+#      LUT1_L                      : 14
+#      LUT2                        : 17
+#      LUT2_L                      : 5
+#      LUT3                        : 34
+#      LUT3_L                      : 19
+#      LUT4                        : 175
+#      LUT4_L                      : 1
+#      MUXCY                       : 24
+#      MUXF5                       : 41
+#      VCC                         : 1
+#      XORCY                       : 25
+# FlipFlops/Latches                : 164
+#      FDC                         : 86
+#      FDE                         : 77
+#      FDP                         : 1
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 41
+#      IBUF                        : 7
+#      OBUF                        : 34
+# MULTs                            : 2
+#      MULT18X18                   : 2
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                     147  out of  13696     1%  
+ Number of Slice Flip Flops:           164  out of  27392     0%  
+ Number of 4 input LUTs:               268  out of  27392     0%  
+ Number of bonded IOBs:                 42  out of    556     7%  
+ Number of MULT18X18s:                   2  out of    136     1%  
+ Number of GCLKs:                        1  out of     16     6%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 164   |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 6.694ns (Maximum Frequency: 149.385MHz)
+   Minimum input arrival time before clock: 3.385ns
+   Maximum output required time after clock: 3.659ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 6.694ns (frequency: 149.385MHz)
+  Total number of paths / destination ports: 7534 / 164
+-------------------------------------------------------------------------
+Delay:               6.694ns (Levels of Logic = 19)
+  Source:            cdata_rd_4 (FF)
+  Destination:       cdata_shift_rd_36 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: cdata_rd_4 to cdata_shift_rd_36
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              4   0.370   0.413  cdata_rd_4 (cdata_rd_4)
+     MULT18X18:B4->P21     1   2.783   0.467  Mmult__n0000_inst_mult_0 (Mmult__n0000_N22)
+     LUT2_L:I0->LO         1   0.275   0.000  Mmult__n0000_inst_lut2_41 (Mmult__n0000_inst_lut2_4)
+     MUXCY:S->O            1   0.334   0.000  Mmult__n0000_inst_cy_4 (Mmult__n0000_inst_cy_4)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_5 (Mmult__n0000_inst_cy_5)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_6 (Mmult__n0000_inst_cy_6)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_7 (Mmult__n0000_inst_cy_7)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_8 (Mmult__n0000_inst_cy_8)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_9 (Mmult__n0000_inst_cy_9)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_10 (Mmult__n0000_inst_cy_10)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_11 (Mmult__n0000_inst_cy_11)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_12 (Mmult__n0000_inst_cy_12)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_13 (Mmult__n0000_inst_cy_13)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_14 (Mmult__n0000_inst_cy_14)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_15 (Mmult__n0000_inst_cy_15)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_16 (Mmult__n0000_inst_cy_16)
+     MUXCY:CI->O           1   0.036   0.000  Mmult__n0000_inst_cy_17 (Mmult__n0000_inst_cy_17)
+     MUXCY:CI->O           0   0.036   0.000  Mmult__n0000_inst_cy_18 (Mmult__n0000_inst_cy_18)
+     XORCY:CI->O           1   0.708   0.349  Mmult__n0000_inst_sum_19 (_n0057<36>)
+     LUT3_L:I2->LO         1   0.275   0.000  cdata_shift_wd<36>1 (cdata_shift_wd<36>)
+     FDE:D                     0.208          cdata_shift_rd_36
+    ----------------------------------------
+    Total                      6.694ns (5.464ns logic, 1.230ns route)
+                                       (81.6% logic, 18.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 119 / 93
+-------------------------------------------------------------------------
+Offset:              3.385ns (Levels of Logic = 4)
+  Source:            not_full (PAD)
+  Destination:       fsm_cs_FFd1 (FF)
+  Destination Clock: clk rising
+
+  Data Path: not_full to fsm_cs_FFd1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            12   0.878   0.657  not_full_IBUF (not_full_IBUF)
+     LUT4:I0->O            1   0.275   0.350  fsm_cs_FFd1-In21 (CHOICE55)
+     LUT4:I2->O            1   0.275   0.468  fsm_cs_FFd1-In22 (CHOICE56)
+     LUT4:I0->O            1   0.275   0.000  fsm_cs_FFd1-In33 (fsm_cs_FFd1-In)
+     FDP:D                     0.208          fsm_cs_FFd1
+    ----------------------------------------
+    Total                      3.385ns (1.911ns logic, 1.474ns route)
+                                       (56.5% logic, 43.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 34 / 34
+-------------------------------------------------------------------------
+Offset:              3.659ns (Levels of Logic = 1)
+  Source:            pop_rc (FF)
+  Destination:       pop (PAD)
+  Source Clock:      clk rising
+
+  Data Path: pop_rc to pop
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             50   0.370   0.697  pop_rc (pop_rc)
+     OBUF:I->O                 2.592          pop_OBUF (pop)
+    ----------------------------------------
+    Total                      3.659ns (2.962ns logic, 0.697ns route)
+                                       (81.0% logic, 19.0% route)
+
+=========================================================================
+CPU : 11.93 / 12.16 s | Elapsed : 12.00 / 12.00 s
+ 
+--> 
+
+Total memory usage is 156332 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   58 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

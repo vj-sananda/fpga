@@ -1,0 +1,282 @@
+# ##############################################################################
+# Created by Base System Builder Wizard for Xilinx EDK 7.1.2 Build EDK_H.12.5.1
+# Sat Apr 30 00:54:53 2005
+# Target Board:  Xilinx XUP Virtex-II Pro Development System Rev C
+# Family:	 virtex2p
+# Device:	 xc2vp30
+# Package:	 ff896
+# Speed Grade:	 -7
+# Processor: PPC 405
+# Processor clock frequency: 300.000000 MHz
+# Bus clock frequency: 100.000000 MHz
+# Debug interface: FPGA JTAG
+# Data Cache: 16 KB
+# Instruction Cache: 16 KB
+# On Chip Memory :   4 KB
+# Total Off Chip Memory : 512 MB
+# - DDR_SDRAM_64Mx64 Dual Rank = 256 MB
+# - DDR_512MB_64Mx64_rank2_row13_col10_cl2_5 = 256 MB
+# ##############################################################################
+
+
+ PARAMETER VERSION = 2.1.0
+
+
+ PORT fpga_0_RS232_Uart_1_RX_pin = fpga_0_RS232_Uart_1_RX, DIR = INPUT
+ PORT fpga_0_RS232_Uart_1_TX_pin = fpga_0_RS232_Uart_1_TX, DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Clk_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Clk, VEC = [0:2], DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Clkn_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Clkn, VEC = [0:2], DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Addr_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Addr, VEC = [0:12], DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_BankAddr_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_BankAddr, VEC = [0:1], DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CASn_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CASn, DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_RASn_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_RASn, DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_WEn_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_WEn, DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DM_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DM, VEC = [0:7], DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS, VEC = [0:7], DIR = INOUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQ_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQ, VEC = [0:63], DIR = INOUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CKE_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CKE, VEC = [0:1], DIR = OUTPUT
+ PORT fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CSn_pin = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CSn, VEC = [0:1], DIR = OUTPUT
+ PORT fpga_0_DDR_CLK_FB = ddr_feedback_s, DIR = INPUT
+ PORT fpga_0_DDR_CLK_FB_OUT = ddr_clk_feedback_out_s, DIR = OUTPUT
+ PORT sys_clk_pin = dcm_clk_s, DIR = INPUT, SIGIS = DCMCLK
+ PORT sys_rst_pin = sys_rst_s, DIR = INPUT
+
+
+BEGIN ppc405
+ PARAMETER INSTANCE = ppc405_0
+ PARAMETER HW_VER = 2.00.c
+ BUS_INTERFACE JTAGPPC = jtagppc_0_0
+ BUS_INTERFACE ISOCM = iocm
+ BUS_INTERFACE IPLB = plb
+ BUS_INTERFACE DPLB = plb
+ PORT PLBCLK = sys_clk_s
+ PORT C405RSTCHIPRESETREQ = C405RSTCHIPRESETREQ
+ PORT C405RSTCORERESETREQ = C405RSTCORERESETREQ
+ PORT C405RSTSYSRESETREQ = C405RSTSYSRESETREQ
+ PORT RSTC405RESETCHIP = RSTC405RESETCHIP
+ PORT RSTC405RESETCORE = RSTC405RESETCORE
+ PORT RSTC405RESETSYS = RSTC405RESETSYS
+ PORT BRAMISOCMCLK = sys_clk_s
+ PORT CPMC405CLOCK = proc_clk_s
+END
+
+BEGIN ppc405
+ PARAMETER INSTANCE = ppc405_1
+ PARAMETER HW_VER = 2.00.c
+ BUS_INTERFACE JTAGPPC = jtagppc_0_1
+END
+
+BEGIN jtagppc_cntlr
+ PARAMETER INSTANCE = jtagppc_0
+ PARAMETER HW_VER = 2.00.a
+ BUS_INTERFACE JTAGPPC0 = jtagppc_0_0
+ BUS_INTERFACE JTAGPPC1 = jtagppc_0_1
+END
+
+BEGIN proc_sys_reset
+ PARAMETER INSTANCE = reset_block
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_EXT_RESET_HIGH = 0
+ PORT Ext_Reset_In = sys_rst_s
+ PORT Slowest_sync_clk = sys_clk_s
+ PORT Chip_Reset_Req = C405RSTCHIPRESETREQ
+ PORT Core_Reset_Req = C405RSTCORERESETREQ
+ PORT System_Reset_Req = C405RSTSYSRESETREQ
+ PORT Rstc405resetchip = RSTC405RESETCHIP
+ PORT Rstc405resetcore = RSTC405RESETCORE
+ PORT Rstc405resetsys = RSTC405RESETSYS
+ PORT Bus_Struct_Reset = sys_bus_reset
+ PORT Dcm_locked = dcm_1_lock
+END
+
+BEGIN isocm_v10
+ PARAMETER INSTANCE = iocm
+ PARAMETER HW_VER = 2.00.a
+ PARAMETER C_ISCNTLVALUE = 0x85
+ PORT ISOCM_Clk = sys_clk_s
+ PORT sys_rst = sys_bus_reset
+END
+
+BEGIN isbram_if_cntlr
+ PARAMETER INSTANCE = iocm_cntlr
+ PARAMETER HW_VER = 3.00.a
+ PARAMETER C_BASEADDR = 0xfffff000
+ PARAMETER C_HIGHADDR = 0xffffffff
+ BUS_INTERFACE ISOCM = iocm
+ BUS_INTERFACE DCR_WRITE_PORT = isocm_porta
+ BUS_INTERFACE INSTRN_READ_PORT = isocm_portb
+END
+
+BEGIN bram_block
+ PARAMETER INSTANCE = isocm_bram
+ PARAMETER HW_VER = 1.00.a
+ BUS_INTERFACE PORTA = isocm_porta
+ BUS_INTERFACE PORTB = isocm_portb
+END
+
+BEGIN plb_v34
+ PARAMETER INSTANCE = plb
+ PARAMETER HW_VER = 1.02.a
+ PARAMETER C_DCR_INTFCE = 0
+ PARAMETER C_EXT_RESET_HIGH = 1
+ PORT SYS_Rst = sys_bus_reset
+ PORT PLB_Clk = sys_clk_s
+END
+
+BEGIN opb_v20
+ PARAMETER INSTANCE = opb
+ PARAMETER HW_VER = 1.10.c
+ PARAMETER C_EXT_RESET_HIGH = 1
+ PORT SYS_Rst = sys_bus_reset
+ PORT OPB_Clk = sys_clk_s
+END
+
+BEGIN plb2opb_bridge
+ PARAMETER INSTANCE = plb2opb
+ PARAMETER HW_VER = 1.01.a
+ PARAMETER C_DCR_INTFCE = 0
+ PARAMETER C_RNG0_BASEADDR = 0x40600000
+ PARAMETER C_RNG0_HIGHADDR = 0x4060ffff
+ PARAMETER C_NUM_ADDR_RNG = 1
+ BUS_INTERFACE SPLB = plb
+ BUS_INTERFACE MOPB = opb
+ PORT PLB_Clk = sys_clk_s
+ PORT OPB_Clk = sys_clk_s
+END
+
+BEGIN opb_uartlite
+ PARAMETER INSTANCE = RS232_Uart_1
+ PARAMETER HW_VER = 1.00.b
+ PARAMETER C_BAUDRATE = 9600
+ PARAMETER C_DATA_BITS = 8
+ PARAMETER C_ODD_PARITY = 0
+ PARAMETER C_USE_PARITY = 0
+ PARAMETER C_CLK_FREQ = 100000000
+ PARAMETER C_BASEADDR = 0x40600000
+ PARAMETER C_HIGHADDR = 0x4060ffff
+ BUS_INTERFACE SOPB = opb
+ PORT OPB_Clk = sys_clk_s
+ PORT RX = fpga_0_RS232_Uart_1_RX
+ PORT TX = fpga_0_RS232_Uart_1_TX
+END
+
+BEGIN plb_ddr
+ PARAMETER INSTANCE = DDR_512MB_64Mx64_rank2_row13_col10_cl2_5
+ PARAMETER HW_VER = 1.11.a
+ PARAMETER C_PLB_CLK_PERIOD_PS = 10000
+ PARAMETER C_NUM_BANKS_MEM = 2
+ PARAMETER C_NUM_CLK_PAIRS = 4
+ PARAMETER C_INCLUDE_BURST_CACHELN_SUPPORT = 1
+ PARAMETER C_REG_DIMM = 0
+ PARAMETER C_DDR_TMRD = 20000
+ PARAMETER C_DDR_TWR = 20000
+ PARAMETER C_DDR_TRAS = 60000
+ PARAMETER C_DDR_TRC = 90000
+ PARAMETER C_DDR_TRFC = 100000
+ PARAMETER C_DDR_TRCD = 30000
+ PARAMETER C_DDR_TRRD = 20000
+ PARAMETER C_DDR_TRP = 30000
+ PARAMETER C_DDR_TREFC = 70300000
+ PARAMETER C_DDR_AWIDTH = 13
+ PARAMETER C_DDR_COL_AWIDTH = 10
+ PARAMETER C_DDR_BANK_AWIDTH = 2
+ PARAMETER C_DDR_DWIDTH = 64
+ PARAMETER C_MEM0_BASEADDR = 0x00000000
+ PARAMETER C_MEM0_HIGHADDR = 0x0fffffff
+ PARAMETER C_MEM1_BASEADDR = 0x10000000
+ PARAMETER C_MEM1_HIGHADDR = 0x1fffffff
+ BUS_INTERFACE SPLB = plb
+ PORT PLB_Clk = sys_clk_s
+ PORT DDR_Addr = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Addr
+ PORT DDR_BankAddr = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_BankAddr
+ PORT DDR_CASn = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CASn
+ PORT DDR_CKE = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CKE
+ PORT DDR_CSn = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_CSn
+ PORT DDR_RASn = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_RASn
+ PORT DDR_WEn = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_WEn
+ PORT DDR_DM = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DM
+ PORT DDR_DQS = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQS
+ PORT DDR_DQ = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_DQ
+ PORT DDR_Clk = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Clk & ddr_clk_feedback_out_s
+ PORT DDR_Clkn = fpga_0_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5_DDR_Clkn & 0b0
+ PORT Clk90_in = clk_90_s
+ PORT Clk90_in_n = clk_90_n_s
+ PORT PLB_Clk_n = sys_clk_n_s
+ PORT DDR_Clk90_in = ddr_clk_90_s
+ PORT DDR_Clk90_in_n = ddr_clk_90_n_s
+END
+
+BEGIN util_vector_logic
+ PARAMETER INSTANCE = sysclk_inv
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_SIZE = 1
+ PARAMETER C_OPERATION = not
+ PORT Op1 = sys_clk_s
+ PORT Res = sys_clk_n_s
+END
+
+BEGIN util_vector_logic
+ PARAMETER INSTANCE = clk90_inv
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_SIZE = 1
+ PARAMETER C_OPERATION = not
+ PORT Op1 = clk_90_s
+ PORT Res = clk_90_n_s
+END
+
+BEGIN util_vector_logic
+ PARAMETER INSTANCE = ddr_clk90_inv
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_SIZE = 1
+ PARAMETER C_OPERATION = not
+ PORT Op1 = ddr_clk_90_s
+ PORT Res = ddr_clk_90_n_s
+END
+
+BEGIN dcm_module
+ PARAMETER INSTANCE = dcm_0
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_CLK0_BUF = TRUE
+ PARAMETER C_CLK90_BUF = TRUE
+ PARAMETER C_CLKFX_BUF = TRUE
+ PARAMETER C_CLKFX_DIVIDE = 1
+ PARAMETER C_CLKFX_MULTIPLY = 3
+ PARAMETER C_CLKIN_PERIOD = 10.000000
+ PARAMETER C_CLK_FEEDBACK = 1X
+ PARAMETER C_EXT_RESET_HIGH = 1
+ PORT CLKIN = dcm_clk_s
+ PORT CLK0 = sys_clk_s
+ PORT CLK90 = clk_90_s
+ PORT CLKFX = proc_clk_s
+ PORT CLKFB = sys_clk_s
+ PORT RST = net_gnd
+ PORT LOCKED = dcm_0_lock
+END
+
+BEGIN dcm_module
+ PARAMETER INSTANCE = dcm_1
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_CLK0_BUF = TRUE
+ PARAMETER C_CLK90_BUF = TRUE
+ PARAMETER C_CLKIN_PERIOD = 10.000000
+ PARAMETER C_CLK_FEEDBACK = 1X
+ PARAMETER C_PHASE_SHIFT = 60
+ PARAMETER C_CLKOUT_PHASE_SHIFT = FIXED
+ PARAMETER C_EXT_RESET_HIGH = 0
+ PORT CLKIN = ddr_feedback_s
+ PORT CLK90 = ddr_clk_90_s
+ PORT CLK0 = dcm_1_FB
+ PORT CLKFB = dcm_1_FB
+ PORT RST = dcm_0_lock
+ PORT LOCKED = dcm_1_lock
+END
+
+BEGIN accel_sort_plb
+ PARAMETER INSTANCE = accel_sort_plb_0
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_BASEADDR = 0xcc800000
+ PARAMETER C_HIGHADDR = 0xcc80ffff
+ BUS_INTERFACE SPLB = plb
+ PORT PLB_Clk = sys_clk_s
+END
+

@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Rewrite for Features (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_06"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 21:00:22 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_06' class='lwp lwp_ch08_06' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">8.6. Rewrite for Features</h2>
+
+<p>My core approach in these cases is to pick some set of assumptions
+and stick with it, but also to assume that they will fail. So I write
+the code so that when it does fail, the point of failure will be easy
+to isolate. I do this is <a name="INDEX-480" class="ipoint"
+></a><a name="INDEX-481" class="ipoint"
+></a>with <em class="firstterm">debug levels</em>,
+also called <em class="firstterm">trace levels</em>. Consider this
+expanded version of our code:
+</p>
+
+<pre class="code">use strict;
+use constant DEBUG =&gt; 0;
+
+use HTML::TokeParser;
+parse_fresh_stream(
+  HTML::TokeParser-&gt;new('fresh1.html') || die($!),
+  'http://freshair.npr.org/dayFA.cfm?todayDate=07%2F02%2F2001'
+);
+
+sub parse_fresh_stream {
+  use URI;
+  my($stream, $base_url) = @_;
+  DEBUG and print "About to parse stream with base $base_url\n";
+
+  while(my $a_tag = $stream-&gt;get_tag('a')) {
+    DEBUG &gt; 1 and printf "Considering {%s}\n", $a_tag-&gt;[3];
+    my $url = URI-&gt;new_abs( ($a_tag-&gt;[1]{'href'} || next), $base_url);
+    unless($url-&gt;scheme eq 'http') {
+      DEBUG &gt; 1 and print "Scheme is no good in $url\n";
+      next;
+    }
+    unless($url-&gt;host =~ m/www\.npr\.org/) {
+      DEBUG &gt; 1 and print "Host is no good in $url\n";
+      next;
+    }
+    unless($url-&gt;path =~ m{/ramfiles/.*\.ram$}) {
+      DEBUG &gt; 1 and print "Path is no good in $url\n";
+      next;
+    }
+    DEBUG &gt; 1 and print "IT'S GOOD!\n";
+    my $text = $stream-&gt;get_trimmed_text('/a') || "??";
+    printf "%s\n  %s\n", $text, $url;
+  }
+  DEBUG and print "End of stream\n";
+  return;
+}</pre>
+
+<p>Among the notable changes here, I'm making a URI
+object for each URL I'm scrutinizing, and to make a
+new absolute URI object out of each potentially relative URL, I have
+to pass the base URL as a parameter to
+<a name="INDEX-482" class="ipoint"
+></a><a name="INDEX-483" class="ipoint"
+></a>the <tt class="literal">parse_fresh_stream(&#160;)</tt>
+function. Once I do that, I get to isolate parts of URLs the proper
+way, using URI methods such as <tt class="literal">host(&#160;)</tt> and
+<tt class="literal">path(&#160;)</tt>, instead of by applying regexp matches to
+the bare URL.
+</p>
+
+<a name="perllwp-CHP-8-SECT-6.1"></a><div class="sect2">
+<h3 class="sect2">8.6.1. Debuggability</h3>
+
+<p>The greatest change is the <a name="INDEX-484" class="ipoint"
+></a>introduction of all the lines with
+"DEBUG" in them. Because the DEBUG
+constant is declared with value 0, all the tests of whether DEBUG is
+nonzero are obviously always false, and so all these lines are never
+run; in fact, the Perl compiler removes them from the parse tree of
+this program, so they're discarded the moment
+they're parsed. (Incidentally,
+there's nothing magic about the name
+"DEBUG"; you can call it
+"TRACE" or
+"Talkytalky" or
+"_mumbles" or whatever you want.
+However, using all caps is a matter of convention.) So, with a DEBUG
+value of 0, when you run this program, it simply prints this:
+</p>
+
+<pre class="code">Listen to Current Show
+  http://www.npr.org/ramfiles/fa/20011011.fa.ram
+Listen to Monday - July 2, 2001
+  http://www.npr.org/ramfiles/fa/20010702.fa.ram
+Listen to Editor and writer Walter Kirn
+  http://www.npr.org/ramfiles/fa/20010702.fa.01.ram
+Listen to Casting director and actress Joanna Merlin
+  http://www.npr.org/ramfiles/fa/20010702.fa.02.ram</pre>
+
+<p>(That first link is superfluous, but we'll deal with
+that in a bit; otherwise, it all works okay.) So these DEBUG lines do
+nothing. And when we deploy the above program with some code that
+harvests the pages instead of working from the local test page, the
+DEBUG lines will continue to do nothing. But suppose that, months
+later, the program just stops working. That is, it runs, but prints
+nothing, and we don't know why. Did NPR change the
+Fresh Air site so much that the old program
+listings' URLs are no longer serve any content? Or
+has some part of the format changed? If we just change
+<tt class="literal">DEBUG</tt> <tt class="literal">=&gt;</tt>
+<tt class="literal">0</tt> to <tt class="literal">DEBUG</tt>
+<tt class="literal">=&gt;</tt> <tt class="literal">1</tt> and rerun the program,
+we can see that <tt class="literal">parse_fresh_stream(&#160;)</tt> is
+definitely being called on a stream from an HTML page, because we see
+the messages from the print statements in that routine:
+</p>
+
+<pre class="code">About to parse stream with base
+http://freshair.npr.org/dayFA.cfm?todayDate=07%2F02%2F2001
+End of stream</pre>
+
+<p>Change the DEBUG level to 2, and we get more detailed output:</p>
+
+<pre class="code">About to parse stream with base
+http://freshair.npr.org/dayFA.cfm?todayDate=07%2F02%2F2001
+Considering {&lt;A HREF="index.cfm"&gt;}
+Host is no good in http://freshair.npr.org/index.cfm
+Considering {&lt;A HREF="http://www.npr.org/ramfiles/fa/20011011.fa.prok"&gt;}
+Path is no good in http://www.npr.org/ramfiles/fa/20011011.fa.prok
+Considering {&lt;A HREF="dayFA.cfm?todayDate=current"&gt;}
+[...]
+Considering {&lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.prok"&gt;}
+Path is no good in http://www.npr.org/ramfiles/fa/20010702.fa.prok
+Considering {&lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.01.prok"&gt;}
+Path is no good in http://www.npr.org/ramfiles/fa/20010702.fa.01.prok
+Considering {&lt;A HREF="http://freshair.npr.org/guestInfoFA.cfm?name=walterkirn"&gt;}
+Host is no good in http://freshair.npr.org/guestInfoFA.cfm?name=walterkirn
+Considering {&lt;A HREF="http://www.npr.org/ramfiles/fa/20010702.fa.02.prok"&gt;}
+Path is no good in http://www.npr.org/ramfiles/fa/20010702.fa.02.prok
+Considering {&lt;A HREF="http://freshair.npr.org/guestInfoFA.cfm?name=joannamerlin"&gt;}
+Host is no good in http://freshair.npr.org/guestInfoFA.cfm?name=joannamerlin
+Considering {&lt;A HREF="dayFA.cfm?todayDate=06%2F29%2F2001"&gt;}
+Host is no good in http://freshair.npr.org/dayFA.cfm?todayDate=06%2F29%2F2001
+Considering {&lt;A HREF="dayFA.cfm?todayDate=07%2F03%2F2001"&gt;}
+Host is no good in http://freshair.npr.org/dayFA.cfm?todayDate=07%2F03%2F2001
+End of stream</pre>
+
+<p>Our <tt class="literal">parse_fresh_stream(&#160;)</tt> routine is still
+correctly rejecting <em class="filename">index.cfm</em> and the like, for
+having a "no good" host (i.e., not
+<em class="emphasis">www.npr.org</em>). And we can see that
+it's happening on those
+"ramfiles" links, and
+it's not rejecting their host, because they are on
+<em class="emphasis">www.npr.org</em>. But it rejects their paths. When we
+look back at the code that triggers rejection based on the path, it
+kicks in only when the path fails to match
+<tt class="literal">m{/ramfiles/.*\.ram$}</tt>. Why don't
+our ramfiles paths match that regexp anymore? Ah ha, because they
+don't end in <em class="emphasis">.ram</em> anymore; they
+end in <em class="emphasis">.prok</em>, some new audio format that NPR has
+switched to! This is evident at the end of the lines beginning
+"Path is no good." Change our
+regexp to accept <em class="emphasis">.prok</em>, rerun the program, and
+go about our business. Similarly, if the audio files moved to a
+different server, we'd be alerted to their host
+being "no good" now, and we could
+adjust the regexp that checks that.
+</p>
+
+<p>We had to make some fragile assumptions to tell interesting links
+apart from uninteresting ones, but having all these DEBUG statements
+means that when the assumptions no longer hold, we can quickly
+isolate the problem.
+</p>
+
+</div>
+<a name="perllwp-CHP-8-SECT-6.2"></a><div class="sect2">
+<h3 class="sect2">8.6.2. Images and Applets</h3>
+
+<p>Speaking of assumptions, what about <a name="INDEX-485" class="ipoint"
+></a><a name="INDEX-486" class="ipoint"
+></a><a name="INDEX-487" class="ipoint"
+></a><a name="INDEX-488" class="ipoint"
+></a>the fact that (back to our
+pre-<em class="emphasis">.prok</em> local test file and setting DEBUG back
+to 0) we get an extra link at the start of the output here?
+</p>
+
+<pre class="code">Listen to Current Show
+  http://www.npr.org/ramfiles/fa/20011011.fa.ram
+Listen to Monday - July 2, 2001
+  http://www.npr.org/ramfiles/fa/20010702.fa.ram
+Listen to Editor and writer Walter Kirn
+  http://www.npr.org/ramfiles/fa/20010702.fa.01.ram
+Listen to Casting director and actress Joanna Merlin
+  http://www.npr.org/ramfiles/fa/20010702.fa.02.ram</pre>
+
+<p>If we go to our browser and use the "Find in
+Page" function to see where "Listen
+to Current Show" appears in the rendered page,
+we'll probably find no match. So
+where's it coming from? Try the same search on the
+source, and you'll see:
+</p>
+
+<pre class="code">&lt;A HREF="http://www.npr.org/ramfiles/fa/20011011.fa.ram"&gt;
+  &lt;IMG SRC="images/listen.gif" ALT="Listen to Current Show"
+    WIDTH="124" HEIGHT="47" BORDER="0" HSPACE="0" VSPACE="0"&gt;
+&lt;/A&gt;</pre>
+
+<p>Recall that <tt class="literal">get_text(&#160;)</tt> and
+<tt class="literal">get_text_trimmed(&#160;)</tt> give special
+<a name="INDEX-489" class="ipoint"
+></a><a name="INDEX-490" class="ipoint"
+></a><a name="INDEX-491" class="ipoint"
+></a><a name="INDEX-492" class="ipoint"
+></a>treatment to <tt class="literal">img</tt> and
+<tt class="literal">applet</tt> elements; they treat them as virtual text
+tags with contents from their <tt class="literal">alt</tt> values (or in
+the absence of any <tt class="literal">alt</tt> value, the strings
+<tt class="literal">[IMG]</tt> or <tt class="literal">[APPLET]</tt>). That might
+be a useful feature normally, but it's bothersome
+now. So we turn it off by adding this line just before our
+<tt class="literal">while</tt> loop starts reading from the stream:
+</p>
+
+<pre class="code">$stream-&gt;{'textify'} = {};</pre>
+
+<p>We know that's the line to use partly because I
+mentioned it as an aside much earlier, and partly because
+it's in the HTML::TokeParser manpage (where you can
+also read about how to do things with the <tt class="literal">textify</tt>
+feature other than just turn it off). With that change made, our
+program prints this:
+</p>
+
+<pre class="code">??
+  http://www.npr.org/ramfiles/fa/20011011.fa.ram
+Listen to Monday - July 2, 2001
+  http://www.npr.org/ramfiles/fa/20010702.fa.ram
+Listen to Editor and writer Walter Kirn
+  http://www.npr.org/ramfiles/fa/20010702.fa.01.ram
+Listen to Casting director and actress Joanna Merlin
+  http://www.npr.org/ramfiles/fa/20010702.fa.02.ram</pre>
+
+<p>That <tt class="literal">??</tt> is there because when the first link had
+no link text (and we're no longer counting
+<tt class="literal">alt</tt> text), it caused <tt class="literal">get_trimmed_text(
+)</tt> to return an empty string. That is a false value in Perl,
+so it causes the fallthrough to <tt class="literal">??</tt> here:
+</p>
+
+<pre class="code">my $text = $stream-&gt;get_trimmed_text('/a') <tt class="userinput"><b>|| "??"</b></tt>;</pre>
+
+<p>If we want to explicitly skip things with no link text, we change
+that to:
+</p>
+
+<pre class="code">my $text = $stream-&gt;get_trimmed_text('/a');
+unless(length $text) {
+  DEBUG &gt; 1 and print "Skipping link with no link-text\n";
+  next;
+}</pre>
+
+<p>That makes the program give this output, as <a name="INDEX-493" class="ipoint"
+></a><a name="INDEX-494" class="ipoint"
+></a><a name="INDEX-495" class="ipoint"
+></a><a name="INDEX-496" class="ipoint"
+></a>we wanted it:
+</p>
+
+<pre class="code">Listen to Monday - July 2, 2001
+  http://www.npr.org/ramfiles/fa/20010702.fa.ram
+Listen to Editor and writer Walter Kirn
+  http://www.npr.org/ramfiles/fa/20010702.fa.01.ram
+Listen to Casting director and actress Joanna Merlin
+  http://www.npr.org/ramfiles/fa/20010702.fa.02.ram</pre>
+
+</div>
+<a name="perllwp-CHP-8-SECT-6.3"></a><div class="sect2">
+<h3 class="sect2">8.6.3. Link Text</h3>
+
+<p>Now that everything else is working, remember that we
+didn't want all this "Listen
+to" stuff starting every single link. Moreover,
+remember that the presence of a "Listen
+to" at the start of the link text was one of our
+prospective criteria for whether it's an interesting
+link. We didn't implement that, but we can implement
+it now:
+</p>
+
+<pre class="code">unless($text =~ s/^Listen to //) {
+  DEBUG &gt; 1 and print "Odd, \"$text\" doesn't start with \"Listen to\"...\n";
+  next;
+}
+<b class="emphasis-bold">Monday - July 2, 2001</b>
+  <b class="emphasis-bold">http://www.npr.org/ramfiles/fa/20010702.fa.ram</b>
+<b class="emphasis-bold">Editor and writer Walter Kirn</b>
+  <b class="emphasis-bold">http://www.npr.org/ramfiles/fa/20010702.fa.01.ram</b>
+<b class="emphasis-bold">Casting director and actress Joanna Merlin</b>
+  <b class="emphasis-bold">http://www.npr.org/ramfiles/fa/20010702.fa.02.ram</b></pre>
+
+<p>In other words, unless the link next starts with a
+"Listen to" that we can strip off,
+this link is rejected. And incidentally, you might notice that with
+all these little changes we've made, our program now
+works perfectly!
+</p>
+
+</div>
+<a name="perllwp-CHP-8-SECT-6.4"></a><div class="sect2">
+<h3 class="sect2">8.6.4. Live Data</h3>
+
+<p>All it needs to actually pull
+<a name="INDEX-497" class="ipoint"
+></a>data from the Fresh Air web site, is to
+comment out the code that calls the local test file and substitute
+some simple code to get the data for a block of days.
+Here's is the whole program source, with those
+changes and additions:
+</p>
+
+<pre class="code">use strict;
+use constant DEBUG =&gt; 0;
+use HTML::TokeParser;
+
+#parse_fresh_stream(
+#  HTML::TokeParser-&gt;new('fresh1.html') || die($!),
+#  'http://freshair.npr.org/dayFA.cfm?todayDate=07%2F02%2F2001'
+#);
+
+scan_last_month( );
+
+sub scan_last_month {
+  use LWP::UserAgent;
+  my $browser = LWP::UserAgent-&gt;new( );
+  foreach my $date_mdy (weekdays_last_month( )) {
+    my $url = sprintf(
+     'http://freshair.npr.org/dayFA.cfm?todayDate=%02d%%2f%02d%%2f%04d',
+     @$date_mdy
+    );
+    DEBUG and print "Getting @$date_mdy URL $url\n";
+    sleep 3; # Don't hammer the NPR server!
+    my $response = $browser-&gt;get($url);
+    unless($response-&gt;is_success) {
+      print "Error getting $url: ", $response-&gt;status_line, "\n";
+      next;
+    }
+    my $stream = HTML::TokeParser-&gt;new($response-&gt;content_ref)
+     || die "What, couldn't make a stream?!";
+    parse_fresh_stream($stream, $response-&gt;base);
+  }
+}
+
+sub weekdays_last_month { # Boring date handling. Feel free to skip.
+  my($now) = time;
+  my $this_month = (gmtime $now)[4];
+  my(@out, $last_month, $that_month);
+
+  do { # Get to end of last month.
+    $now -= (24 * 60 * 60); # go back a day
+    $that_month = (gmtime $now)[4];
+  } while($that_month == $this_month);
+  $last_month = $that_month;
+
+  do { # Go backwards thru last month
+    my(@then) = (gmtime $now);
+    unshift @out, [$then[4] + 1 , $then[3], $then[5] + 1900] # m,d,yyyy
+      unless $then[6] == 0 or $then[6] == 6;
+    $now -= (24 * 60 * 60); # go back one day
+    $that_month = (gmtime $now)[4];
+  } while($that_month == $last_month);
+  return @out;
+}
+
+# Unchanged since you last saw it:
+sub parse_fresh_stream {
+  use URI;
+  my($stream, $base_url) = @_;
+  DEBUG and print "About to parse stream with base $base_url\n";
+
+  while(my $a_tag = $stream-&gt;get_tag('a')) {
+    DEBUG &gt; 1 and printf "Considering {%s}\n", $a_tag-&gt;[3];
+    my $url = URI-&gt;new_abs( ($a_tag-&gt;[1]{'href'} || next), $base_url);
+    unless($url-&gt;scheme eq 'http') {
+      DEBUG &gt; 1 and print "Scheme is no good in $url\n";
+      next;
+    }
+    unless($url-&gt;host =~ m/www\.npr\.org/) {
+      DEBUG &gt; 1 and print "Host is no good in $url\n";
+      next;
+    }
+    unless($url-&gt;path =~ m{/ramfiles/.*\.ram$}) {
+      DEBUG &gt; 1 and print "Path is no good in $url\n";
+      next;
+    }
+    DEBUG &gt; 1 and print "IT'S GOOD!\n";
+    my $text = $stream-&gt;get_trimmed_text('/a') || "??";
+    printf "%s\n  %s\n", $text, $url;
+  }
+  DEBUG and print "End of stream\n";
+  return;
+}</pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

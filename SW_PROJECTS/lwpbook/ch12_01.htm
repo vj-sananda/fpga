@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Spiders (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch12_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:16:19 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch12_01' class='lwp lwp_ch12_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 12. Spiders</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-12-SECT-1">Types of Web-Querying Programs</a><br />
+<a href="ch12_02.htm">A User Agent for Robots</a><br />
+<a href="ch12_03.htm">Example: A Link-Checking Spider</a><br />
+<a href="ch12_04.htm">Ideas for Further Expansion</a><br /></p></div><p>So far we have focused on the mechanics of getting and parsing data
+off the Web, just a page here and a page there, without much
+attention to the ramifications. In this section, we consider issues
+that arise from writing programs that send more than a few requests
+to given web sites. Then we move on to how to write recursive web
+user agents, or <em class="firstterm">spiders</em>. With these
+<a name="INDEX-653" class="ipoint"
+></a>skills,
+you'll be able to write programs that automatically
+navigate web sites, from simple link checkers to powerful
+bulk-download tools.
+</p>
+
+<div class="sect1"><a name="perllwp-CHP-12-SECT-1"></a>
+<h2 class="sect1">12.1. Types of Web-Querying Programs</h2>
+
+<p>Let's say your boss comes to you and says
+"I need you to write a spider."
+What does he mean by "spider"? Is
+he talking about the simple one-page screen scrapers we wrote in
+earlier chapters? Or does he want to extract many pages from a single
+server? Or maybe he wants you to write a new Google, which attempts
+to find and download every page on the Web. Roughly speaking, there
+are four kinds of programs that make requests to web servers:
+</p>
+
+<dl>
+<dt><i>Type One Requester</i></dt>
+<dd>
+This program requests a <a name="INDEX-654" class="ipoint"
+></a><a name="INDEX-655" class="ipoint"
+></a>couple items from a server, knowing
+ahead of time the URL of each. An example of this is our program in
+<a href="ch07_01.htm">Chapter 7, "HTML Processing with Tokens"</a> that requested just the front page of
+the BBC News web site.
+
+</dd>
+
+
+<dt><i>Type Two Requester</i></dt>
+<dd>
+This program requests a <a name="INDEX-656" class="ipoint"
+></a><a name="INDEX-657" class="ipoint"
+></a>few items from a server, then
+requests the pages to which those link (or possibly just a subset of
+those). An example of this is the program we alluded to in <a href="ch11_01.htm">Chapter 11, "Cookies, Authentication,and Advanced Requests"</a> that would download the front page of the
+<em class="emphasis">New York Times</em> web site, then downloaded every
+story URL that appeared there.
+
+</dd>
+
+
+<dt><i>Type Three Requester</i></dt>
+<dd>
+This single-site spider
+<a name="INDEX-658" class="ipoint"
+></a><a name="INDEX-659" class="ipoint"
+></a>requests what's at a
+given URL, finds links on that page that are on the same host, and
+requests <em class="emphasis">those</em>. Then, for each of those, it
+finds links to things on the same host, and so on, until potentially
+it visits every URL on the host.
+
+</dd>
+
+
+<dt><i>Type Four Requester</i></dt>
+<dd>
+This host-spanning spider <a name="INDEX-660" class="ipoint"
+></a><a name="INDEX-661" class="ipoint"
+></a>requests what's at
+a given URL, finds links on that page that are anywhere on the Web,
+and requests those. Then, for each of those, it finds links to things
+anywhere on the Web (or at least things that are accessed via HTTP)
+and so on, until it visits every URL on the Web, in theory.
+
+</dd>
+
+</dl>
+
+<p>From each of the above types to the next, there is an added bit of
+logic that radically changes the scope and nature of the program.
+</p>
+
+<p>A Type One <a name="INDEX-662" class="ipoint"
+></a><a name="INDEX-663" class="ipoint"
+></a>Requester makes only a few requests.
+This is not normally a noticeable imposition on the remote server,
+unless one of these requests is for a document
+that's very large or that has to be dynamically
+generated with great difficulty.
+</p>
+
+<p>A Type Two Requester places <a name="INDEX-664" class="ipoint"
+></a><a name="INDEX-665" class="ipoint"
+></a>rather more burden on the remote
+server, simply because it generates many more requests. For example,
+our <em class="emphasis">New York Times</em> story downloader in <a href="ch11_01.htm">Chapter 11, "Cookies, Authentication,and Advanced Requests"</a> downloads not one or two pages, but several
+dozen. Because we don't want this to burden the
+<em class="emphasis">Times</em>'s servers, we
+considerately called <tt class="literal">sleep(2)</tt> after every request.
+</p>
+
+<p>In fact, that probably makes our program much kinder to the remote
+server than a typical browser would be. Typically, browsers create
+several simultaneous connections when downloading all the various
+images, stylesheets, and applets they need to render a given web
+page. However, a typical session with a graphical browser
+doesn't involve downloading so many
+<em class="emphasis">different</em> pages.
+</p>
+
+<p>Note that with this sort of program, the scope of the program is
+clearly finite; it processes only the presumably small number of
+links that appear on a few pages. So there is no real chance of the
+program surprising you by requesting vastly more pages than
+you'd expect. For example, if you run your program
+that downloads links off the <em class="emphasis">New York
+Times</em>'s front page, it downloads just
+those and that's it. If you run it, and the total
+count of downloaded pages is 45, you can assume that when you run it
+tomorrow, it will be about that many: maybe 30, 60, maybe even 70,
+but not 700 or 70,000. Moreover, when you see that the average length
+of each story downloaded is 30 KB, you can assume that
+it's unlikely for any future story to be 100 KB, and
+extremely unlikely for any to be 10 MB.
+</p>
+
+<p>But a Type Three Requester is the <a name="INDEX-666" class="ipoint"
+></a><a name="INDEX-667" class="ipoint"
+></a>first kind that could potentially go
+seriously awry. Previously, we could make safe assumptions about the
+nature of the pages whose links we were downloading. But when a
+program (or, specifically, a spider, as we can freely call these
+sorts of recursive programs) could request <em class="emphasis">anything and
+everything</em> on the server, it will be visiting pages we
+know nothing about, and about which we can't make
+any assumptions. For example, suppose we request the main page of our
+local paper's web site, and suppose that it links to
+a local events calendar for this month. If the events calendar is
+dynamically generated from a database, this month's
+page probably has a link to next month's page, and
+next month's to the month after, and so on forever,
+probably regardless of whether each "next
+month" has any events to it. So if you wrote a
+spider that wouldn't stop until it had requested
+every object on the server, for this server, it would never stop,
+because the number of pages on the server is infinite. In webmaster
+jargon, these are referred to as "infinite URL
+spaces."
+</p>
+
+<p>A Type Four Requester has <a name="INDEX-668" class="ipoint"
+></a><a name="INDEX-669" class="ipoint"
+></a>all the problems of Type Threes,
+except that instead of running the risk of annoying just the
+webmaster of the local paper, it can annoy any number of webmasters
+all over the world. Just one of the many things that can go wrong
+with these kinds of host-spanning spiders is if it sees a link to
+Yahoo!. It will follow that link, and then start recursing through
+all of Yahoo!, and visiting every site to which Yahoo! links. Because
+these sorts of spiders demand typically immense resources and are not
+"general purpose" by any means, we
+will not be discussing them.
+</p>
+
+<p>If you are interested in this type of spider, you should read this
+chapter to understand the basic ideas of single-site spiders, then
+read Totty et al's <em class="emphasis">HTTP: The Definitive
+Guide</em> (O'Reilly), which goes into great
+detail on the special problems that await large-scale spiders.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

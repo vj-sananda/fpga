@@ -1,0 +1,31 @@
+V2 24
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_top.vhd 2005/03/16.02:10:50 H.42
+EN rdpfifo_v1_01_b/RDPFIFO_TOP 1122082427 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_top.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PH PROC_COMMON_V2_00_A/PF_DPRAM_SELECT -1 \
+      PH PROC_COMMON_V2_00_A/SRL16_FIFO -1
+AR rdpfifo_v1_01_b/RDPFIFO_TOP/IMPLEMENTATION 1122082428 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_top.vhd \
+      EN rdpfifo_v1_01_b/RDPFIFO_TOP 1122082427 CP IPIF_CONTROL_RD CP INTEGER \
+      CP BOOLEAN        CP IN             CP OUT            CP RDPFIFO_DP_CNTL \
+      CP PF_DPRAM_SELECT CP SRL16_FIFO
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_dp_cntl.vhd 2005/03/16.02:10:50 H.42
+EN rdpfifo_v1_01_b/RDPFIFO_DP_CNTL 1122082397 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_dp_cntl.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PB ieee/STD_LOGIC_UNSIGNED 1106404634 PH PROC_COMMON_V2_00_A/PF_COUNTER_TOP -1 \
+      PH PROC_COMMON_V2_00_A/PF_OCC_COUNTER_TOP -1 \
+      PH PROC_COMMON_V2_00_A/PF_ADDER -1
+AR rdpfifo_v1_01_b/RDPFIFO_DP_CNTL/IMPLEMENTATION 1122082398 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/rdpfifo_dp_cntl.vhd \
+      EN rdpfifo_v1_01_b/RDPFIFO_DP_CNTL 1122082397 CP STD_LOGIC \
+      CP TRANSITION_STATE_TYPE CP STD_LOGIC_VECTOR CP PF_OCC_COUNTER_TOP \
+      CP PF_COUNTER_TOP CP BOOLEAN        CP PF_ADDER
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/ipif_control_rd.vhd 2005/03/16.02:10:49 H.42
+EN rdpfifo_v1_01_b/IPIF_CONTROL_RD 1122082395 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/ipif_control_rd.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630
+AR rdpfifo_v1_01_b/IPIF_CONTROL_RD/IMPLEMENTATION 1122082396 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/rdpfifo_v1_01_b/hdl/vhdl/ipif_control_rd.vhd \
+      EN rdpfifo_v1_01_b/IPIF_CONTROL_RD 1122082395 CP STD_LOGIC_VECTOR CP INTEGER

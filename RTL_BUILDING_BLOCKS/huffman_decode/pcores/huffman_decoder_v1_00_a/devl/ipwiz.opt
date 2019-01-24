@@ -1,0 +1,12 @@
+-batch 
+-create huffman_decoder 
+-ver 1.00.a 
+-dir F:\fpga\proj\huffman_decode 
+-lang verilog 
+-bus opb s 
+-rfifo 4 32 512 
+-wfifo 4 32 512 
+-regn 2 32 
+-xps 
+-ise 
+-driver 

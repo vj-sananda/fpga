@@ -1,0 +1,111 @@
+    new_lesser = shift_to_next_context( table, c, order-1 );
+/*
+ * Now that I have the back pointer for this table, I can make a call
+ * to a utility to allocate the new table.
+ */
+    table = allocate_next_order_table( table, c, new_lesser );
+    return( table );
+}
+
+/*
+ * Rescaling the table needs to be done for one of three reasons.
+ * First, if the maximum count for the table has exceeded 16383, it
+ * means that arithmetic coding using 16 and 32 bit registers might
+ * no longer work.  Secondly, if an individual symbol count has
+ * reached 255, it will no longer fit in a byte.  Third, if the
+ * current model isn't compressing well, the compressor program may
+ * want to rescale all tables in order to give more weight to newer
+ * statistics.  All this routine does is divide each count by 2.
+ * If any counts drop to 0, the counters can be removed from the
+ * stats table, but only if this is a leaf context.  Otherwise, we
+ * might cut a link to a higher order table.
+ */
+void rescale_table( CONTEXT *table )
+{
+    int i;
+
+    if ( table->max_index == -1 )
+        return;
+    for ( i = 0 ; i <= table->max_index ; i++ )
+        table->stats[ i ].counts /= 2;
+    if ( table->stats[ table->max_index ].counts == 0 &&
+         table->links == NULL )
+    {
+        while ( table->stats[ table->max_index ].counts == 0 &&
+                table->max_index >= 0 )
+            table->max_index--;
+        if ( table->max_index == -1 )
+        {
+            handle_free( (char __handle *) table->stats );
+            table->stats = NULL;
+        }
+        else
+        {
+            table->stats = (STATS __handle *)
+                handle_realloc( (char __handle *) table->stats,
+                                 sizeof( STATS ) * ( table->max_index + 1 ) );
+            if ( table->stats == NULL )
+                error_exit( "Error #11: reallocating stats space!" );
+        }
+    }
+}
+
+/*
+ * This routine has the job of creating a cumulative totals table for
+ * a given context.  The cumulative low and high for symbol c are going to
+ * be stored in totals[c+2] and totals[c+1].  Locations 0 and 1 are
+ * reserved for the special ESCAPE symbol.  The ESCAPE symbol
+ * count is calculated dynamically, and changes based on what the
+ * current context looks like.  Note also that this routine ignores
+ * any counts for symbols that have already showed up in the scoreboard,
+ * and it adds all new symbols found here to the scoreboard.  This
+ * allows us to exclude counts of symbols that have already appeared in
+ * higher order contexts, improving compression quite a bit.
+ */
+void totalize_table( CONTEXT *table )
+{
+    int i;
+    unsigned char max;
+
+    for ( ; ; )
+    {
+        max = 0;
+        i = table->max_index + 2;
+        totals[ i ] = 0;
+        for ( ; i > 1 ; i-- )
+        {
+            totals[ i-1 ] = totals[ i ];
+            if ( table->stats[ i-2 ].counts )
+                if ( ( current_order == -2 ) ||
+                     scoreboard[ table->stats[ i-2 ].symbol ] == 0 )
+                     totals[ i-1 ] += table->stats[ i-2 ].counts;
+            if ( table->stats[ i-2 ].counts > max )
+                max = table->stats[ i-2 ].counts;
+        }
+/*
+ * Here is where the escape calculation needs to take place.
+ */
+        if ( max == 0 )
+            totals[ 0 ] = 1;
+        else
+        {
+            totals[ 0 ] = (short int) ( 256 - table->max_index );
+            totals[ 0 ] *= table->max_index;
+            totals[ 0 ] /= 256;
+            totals[ 0 ] /= max;
+            totals[ 0 ]++;
+            totals[ 0 ] += totals[ 1 ];
+        }
+        if ( totals[ 0 ] < MAXIMUM_SCALE )
+            break;
+        rescale_table( table );
+    }
+    for ( i = 0 ; i < table->max_index ; i++ )
+	if (table->stats[i].counts != 0)
+            scoreboard[ table->stats[ i ].symbol ] = 1;
+}
+
+/*
+ * This routine is called when the entire model is to be flushed.
+ * This is done in an attempt to improve the compression ratio by
+ * giving greater weight to upcoming statistics.  Th

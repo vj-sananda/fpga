@@ -1,0 +1,22 @@
+microblaze_0
+CANSCID_DPI_SOURCES = /cygdrive/e/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/canscid_dpi/src/main.c /cygdrive/e/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/canscid_dpi/src/my_timer.c /cygdrive/e/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/drivers/kraaken_dpi_v3_00_a/src/kraaken_dpi.c /cygdrive/e/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/canscid_dpi/src/dma_intr_handler.c 
+CANSCID_DPI_HEADERS = /cygdrive/e//work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/canscid_dpi/src/my_timer.h /cygdrive/e//work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/drivers/kraaken_dpi_v3_00_a/src/kraaken_dpi.h /cygdrive/e//work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/canscid_dpi/src/dma_intr_handler.h 
+CANSCID_DPI_CC = mb-gcc
+CANSCID_DPI_CC_SIZE = mb-size
+CANSCID_DPI_CC_OPT = -O2
+CANSCID_DPI_CFLAGS = 
+CANSCID_DPI_CC_SEARCH = # -B
+CANSCID_DPI_LIBPATH = -L./microblaze_0/lib/ # -L
+CANSCID_DPI_INCLUDES = -I./microblaze_0/include/  -Icanscid_dpi/src/ -Idrivers/kraaken_dpi_v3_00_a/src/ # -I
+CANSCID_DPI_LFLAGS = # -l
+CANSCID_DPI_LINKER_SCRIPT = /cygdrive/e/work/FPGA_PROJECTS/ML509/xupv5_kraaken_v1/canscid_dpi/canscid_dpi_linker_script.ld
+CANSCID_DPI_CC_DEBUG_FLAG =  -g 
+CANSCID_DPI_CC_PROFILE_FLAG = # -pg
+CANSCID_DPI_CC_GLOBPTR_FLAG= # -mxl-gp-opt
+CANSCID_DPI_MODE = executable
+CANSCID_DPI_LIBG_OPT = -$(CANSCID_DPI_MODE) microblaze_0
+CANSCID_DPI_CC_INFERRED_FLAGS= -mno-xl-soft-mul -mxl-pattern-compare -mcpu=v7.10.d 
+CANSCID_DPI_CC_START_ADDR_FLAG=  #  # -Wl,-defsym -Wl,_TEXT_START_ADDR=
+CANSCID_DPI_CC_STACK_SIZE_FLAG=  #  # -Wl,-defsym -Wl,_STACK_SIZE=
+CANSCID_DPI_CC_HEAP_SIZE_FLAG=  #  # -Wl,-defsym -Wl,_HEAP_SIZE=
+                  $(CANSCID_DPI_CC_INFERRED_FLAGS)  \

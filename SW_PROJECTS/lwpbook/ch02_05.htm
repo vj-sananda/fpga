@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: AltaVista (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_05"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 02:38:29 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_05' class='lwp lwp_ch02_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">2.5. Example: AltaVista</h2>
+
+<p>Every so often, two people, somewhere, somehow, <a name="INDEX-87" class="ipoint"
+></a><a name="INDEX-88" class="ipoint"
+></a>will come to argue over a point of
+English spelling&#x2014;one of them will hold up a dictionary
+recommending one spelling, and the other will hold up a dictionary
+recommending something else. In olden times, such conflicts were
+tidily settled with a fight to the death, but in these days of
+overspecialization, it is common for one of the spelling combatants
+to say "Let's ask a linguist.
+He'll know I'm right and
+you're wrong!" And so I am
+contacted, and my supposedly expert opinion is requested. And if I
+happen to be answering mail that month, my response is often
+something like:
+</p>
+
+<blockquote>
+<p>Dear Mr. Hing:</p>
+
+<p>I have read with intense interest your letter detailing your struggle
+with the question of whether your favorite savory spice should be
+spelled in English as "asafoetida"
+or whether you should heed your secretary's
+admonishment that all the kids today are spelling it
+"asafetida."
+</p>
+
+<p>I could note various factors potentially involved here; notably, the
+fact that in many cases, British/Commonwealth spelling retains many
+"ae"/"oe"
+digraphs whereas U.S./Canadian spelling strongly prefers an
+"e"
+("foetus"/"fetus,"
+etc.). But I will instead be (merely) democratic about this and note
+that if you use AltaVista (<a href="http://altavista.com">http://altavista.com</a>, a well-known search
+engine) to run a search on
+"asaf<em class="emphasis">e</em>tida,"
+it will say that across all the pages that AltaVista has indexed,
+there are "about 4,170" matched;
+whereas for
+"asaf<em class="emphasis">oe</em>tida"
+there are many more, "about 8,720."
+</p>
+
+<p>So you, with the "oe", are
+apparently in the majority.
+</p>
+</blockquote>
+
+<p>To automate the task of producing such reports, I've
+written a small program called <em class="emphasis">alta_count</em>, which
+queries AltaVista for each term given and reports the count of
+documents matched:
+</p>
+
+<pre class="code">% alta_count asafetida asafoetida
+<tt class="userinput"><b>asafetida: 4,170 matches</b></tt>
+<tt class="userinput"><b>asafoetida: 8,720 matches</b></tt></pre>
+
+<p>At time of this writing, going to <a href="http://altavista.com">http://altavista.com</a>, putting a word or
+phrase in the search box, and hitting the Submit button yields a
+result page with a URL that looks like this:
+</p>
+
+<pre class="code">http://www.altavista.com/sites/search/web?q=%22asafetida%22&amp;kl=XX</pre>
+
+<p>Now, you could construct these URLs for any phrase with something
+like:
+</p>
+
+<pre class="code">$url = 'http://www.altavista.com/sites/search/web?q=%22'
+       . $phrase
+       . '%22&amp;kl=XX'  ;</pre>
+
+<p>But that doesn't take into account the need to
+encode characters such as spaces in URLs. If I want to run a search
+on the frequency of "boy toy" (as
+compared to the alternate spelling
+"boytoy"), the space in that phrase
+needs to be encoded as <tt class="literal">%20</tt>, and if I want to run a
+search on the frequency of
+"r&#xE9;sum&#xE9;,"
+each "&#xE9;" needs to be
+encoded as <tt class="literal">%E9</tt>.
+</p>
+
+<p>The correct way to generate the query strings is to use the
+URI::Escape module:
+</p>
+
+<pre class="code">use URI::Escape;    # That gives us the uri_escape function
+$url = 'http://www.altavista.com/sites/search/web?q=%22'
+       . uri_escape($phrase)
+       . '%22&amp;kl=XX'  ;</pre>
+
+<p>Now we just have to request that URL and skim the returned content
+for AltaVista's standard phrase "We
+found <em class="emphasis">[number]</em> results."
+(That's assuming the response comes with an okay
+status code, as we should get unless AltaVista is somehow down or
+inaccessible.)
+</p>
+
+<p><a href="ch02_05.htm#perllwp-CHP-2-EX-6">Example 2-6</a> is the complete
+<em class="emphasis">alta_count</em> program.
+</p>
+
+<a name="perllwp-CHP-2-EX-6"></a><div class="example">
+<h4 class="objtitle">Example 2-6. The alta_count program </h4>
+<pre class="code">#!/usr/bin/perl -w
+use strict;
+use URI::Escape;
+foreach my $word (@ARGV) {
+  next unless length $word; # sanity-checking
+  my $url = 'http://www.altavista.com/sites/search/web?q=%22'
+    . uri_escape($word) . '%22&amp;kl=XX';
+  my ($content, $status, $is_success) = do_GET($url);
+  if (!$is_success) {
+    print "Sorry, failed: $status\n";
+  } elsif ($content =~ m/&gt;We found ([0-9,]+) results?/) { # like "1,952"
+    print "$word: $1 matches\n";
+  } else {
+    print "$word: Page not processable, at $url\n";
+  }
+  sleep 2; # Be nice to AltaVista's servers!!!
+}
+
+# And then my favorite do_GET routine:
+use LWP; # loads lots of necessary classes.
+my $browser;
+sub do_GET {
+  $browser = LWP::UserAgent-&gt;new unless $browser;
+  my $resp = $browser-&gt;get(@_);
+  return ($resp-&gt;content, $resp-&gt;status_line, $resp-&gt;is_success, $resp)
+    if wantarray;
+  return unless $resp-&gt;is_success;
+  return $resp-&gt;content;
+}</pre>
+</div>
+
+<p>With that, I can run:</p>
+
+<pre class="code">% alta_count boytoy 'boy toy'
+<b class="emphasis-bold">boytoy: 6,290 matches</b>
+<b class="emphasis-bold">boy toy: 26,100 matches</b></pre>
+
+<p>knowing that when it searches for the frequency of
+"boy toy," it is duly URL-encoding
+the space character.
+</p>
+
+<p>This approach to HTTP GET query parameters, <a name="INDEX-89" class="ipoint"
+></a><a name="INDEX-90" class="ipoint"
+></a>where we insert one or two values into an
+otherwise precooked URL, works fine for most cases. For a more
+general approach (where we produce the part after the ? completely
+<a name="INDEX-91" class="ipoint"
+></a><a name="INDEX-92" class="ipoint"
+></a>from
+scratch in the URL), see <a href="ch05_01.htm">Chapter 5, "Forms"</a>.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

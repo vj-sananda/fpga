@@ -1,0 +1,16 @@
+-batch 
+-create example_fifo_loopback_vhdl 
+-ver 1.00.a 
+-dir "E:\work\FPGA_PROJECTS\ML509\ml509_dpi" 
+-lang vhdl 
+-bus plbv46 s 
+-burst s 32 
+-rfifo 1 128 
+-wfifo 1 128 
+-isc 1 
+-intrn 1 1 
+-reg 20 
+-wrbuf 16 
+-xps 
+-ise 
+-driver 

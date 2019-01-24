@@ -1,0 +1,100 @@
+V2 61
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr_reg.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/BRST_ADDR_CNTR_REG 1122082415 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr_reg.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PH OPB_IPIF_V3_01_A/OPB_FLEX_ADDR_CNTR -1 PH unisim/VCOMPONENTS 1122082370
+AR opb_ipif_v3_01_a/BRST_ADDR_CNTR_REG/IMPLEMENTATION 1122082416 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr_reg.vhd \
+      EN opb_ipif_v3_01_a/BRST_ADDR_CNTR_REG 1122082415 CP STD_LOGIC_VECTOR \
+      CP FDRE           CP OPB_IPIF_V3_01_A/OPB_FLEX_ADDR_CNTR
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_ipif.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/OPB_IPIF 1122082435 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_ipif.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PH ieee/NUMERIC_STD 1106404639 \
+      PH OPB_IPIF_V3_01_A/OPB_BAM -1 PB proc_common_v2_00_a/IPIF_PKG 1122082400 \
+      PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384
+AR opb_ipif_v3_01_a/OPB_IPIF/IMP 1122082436 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_ipif.vhd \
+      EN opb_ipif_v3_01_a/OPB_IPIF 1122082435 CP OPB_IPIF_V3_01_A/OPB_BAM
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/BRST_ADDR_CNTR 1122082413 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628
+AR opb_ipif_v3_01_a/BRST_ADDR_CNTR/IMPLEMENTATION 1122082414 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/brst_addr_cntr.vhd \
+      EN opb_ipif_v3_01_a/BRST_ADDR_CNTR 1122082413 \
+      PH PROC_COMMON_V2_00_A/DIRECT_PATH_CNTR_AI -1 PH unisim/VCOMPONENTS 1122082370 \
+      CP PROC_COMMON_V2_00_A/DIRECT_PATH_CNTR_AI \
+      PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/srl_fifo3.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/SRL_FIFO3 1122082401 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/srl_fifo3.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PH unisim/VCOMPONENTS 1122082370
+AR opb_ipif_v3_01_a/SRL_FIFO3/IMP 1122082402 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/srl_fifo3.vhd \
+      EN opb_ipif_v3_01_a/SRL_FIFO3 1122082401 CP FDR CP MUXCY_L CP XORCY      CP FDRE \
+      CP SRL16E
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_flex_addr_cntr.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/OPB_FLEX_ADDR_CNTR 1122082405 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_flex_addr_cntr.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PH ieee/NUMERIC_STD 1106404639 \
+      PH unisim/VCOMPONENTS 1122082370
+AR opb_ipif_v3_01_a/OPB_FLEX_ADDR_CNTR/IMPLEMENTATION 1122082406 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_flex_addr_cntr.vhd \
+      EN opb_ipif_v3_01_a/OPB_FLEX_ADDR_CNTR 1122082405 CP LUT4 CP MUXCY CP XORCY \
+      CP FDRE
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_be_gen.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/OPB_BE_GEN 1122082411 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_be_gen.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384
+AR opb_ipif_v3_01_a/OPB_BE_GEN/IMPLEMENTATION 1122082412 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_be_gen.vhd \
+      EN opb_ipif_v3_01_a/OPB_BE_GEN 1122082411 PH unisim/VCOMPONENTS 1122082370 \
+      CP FDRE           CP MUXCY
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/write_buffer.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/WRITE_BUFFER 1122082417 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/write_buffer.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630 \
+      PB ieee/STD_LOGIC_UNSIGNED 1106404634 PB ieee/STD_LOGIC_MISC 1106404638 \
+      PH PROC_COMMON_V2_00_A/COUNTER -1 PH unisim/VCOMPONENTS 1122082370 \
+      PH OPB_IPIF_V3_01_A/SRL_FIFO3 -1 \
+      PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384
+AR opb_ipif_v3_01_a/WRITE_BUFFER/IMPLEMENTATION 1122082418 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/write_buffer.vhd \
+      EN opb_ipif_v3_01_a/WRITE_BUFFER 1122082417 CP OPB_IPIF_V3_01_A/SRL_FIFO3 \
+      CP PROC_COMMON_V2_00_A/COUNTER CP STD_LOGIC_VECTOR
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/reset_mir.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/RESET_MIR 1122082423 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/reset_mir.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PB ieee/STD_LOGIC_ARITH 1106404630
+AR opb_ipif_v3_01_a/RESET_MIR/IMPLEMENTATION 1122082424 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/reset_mir.vhd \
+      EN opb_ipif_v3_01_a/RESET_MIR 1122082423 CP STD_LOGIC_VECTOR
+FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd 2005/03/16.02:09:44 H.42
+EN opb_ipif_v3_01_a/OPB_BAM 1122082433 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PH ieee/NUMERIC_STD 1106404639 \
+      PB proc_common_v2_00_a/IPIF_PKG 1122082400 \
+      PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384
+AR opb_ipif_v3_01_a/OPB_BAM/IMPLEMENTATION 1122082434 \
+      FL $XILINX/hw/XilinxProcessorIPLib/pcores/opb_ipif_v3_01_a/hdl/vhdl/opb_bam.vhd \
+      EN opb_ipif_v3_01_a/OPB_BAM 1122082433 PH unisim/VCOMPONENTS 1122082370 \
+      PH PROC_COMMON_V2_00_A/PSELECT -1 PH PROC_COMMON_V2_00_A/OR_MUXCY -1 \
+      PH PROC_COMMON_V2_00_A/IPIF_STEER -1 PH ieee/NUMERIC_STD 1106404639 \
+      PB ieee/STD_LOGIC_MISC 1106404638 PH OPB_IPIF_V3_01_A/RESET_MIR -1 \
+      PH OPB_IPIF_V3_01_A/BRST_ADDR_CNTR -1 \
+      PH OPB_IPIF_V3_01_A/BRST_ADDR_CNTR_REG -1 \
+      PH OPB_IPIF_V3_01_A/OPB_BE_GEN -1 \
+      PH INTERRUPT_CONTROL_V1_00_A/INTERRUPT_CONTROL -1 \
+      PH WRPFIFO_V1_01_B/WRPFIFO_TOP -1 PH RDPFIFO_V1_01_B/RDPFIFO_TOP -1 \
+      CP PROC_COMMON_V2_00_A/PSELECT CP STD_LOGIC CP OPB_IPIF_V3_01_A/OPB_BE_GEN \
+      CP OPB_IPIF_V3_01_A/BRST_ADDR_CNTR CP OPB_IPIF_V3_01_A/BRST_ADDR_CNTR_REG \
+      CP OPB_IPIF_V3_01_A/WRITE_BUFFER CP INTEGER CP STD_LOGIC_VECTOR \
+      CP PROC_COMMON_V2_00_A/OR_MUXCY CP PROC_COMMON_V2_00_A/IPIF_STEER \
+      CP OPB_IPIF_V3_01_A/RESET_MIR CP NATURAL \
+      CP INTERRUPT_CONTROL_V1_00_A/INTERRUPT_CONTROL CP FDRE \
+      CP RDPFIFO_V1_01_B/RDPFIFO_TOP CP WRPFIFO_V1_01_B/WRPFIFO_TOP \
+      PB proc_common_v2_00_a/IPIF_PKG 1122082400 PB proc_common_v2_00_a/FAMILY 1122082432 \
+      PB proc_common_v2_00_a/PROC_COMMON_PKG 1122082384

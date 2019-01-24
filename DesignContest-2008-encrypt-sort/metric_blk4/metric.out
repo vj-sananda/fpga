@@ -1,0 +1,37 @@
+Blocksize 4, Level3 optimized, no debug symbols
+03/05/08
+EDK 7.1i
+
+Sorting starts
+Case (rand, pwr=  6) : Elapsed       251,  correct
+Case ( rot, pwr=  6) : Elapsed       249,  correct
+Case (rand, pwr= 10) : Elapsed      6501,  correct
+Case ( rot, pwr= 10) : Elapsed      6478,  correct
+Case (rand, pwr= 14) : Elapsed    132530,  correct
+Case ( rot, pwr= 14) : Elapsed    131031,  correct
+Case (rand, pwr= 18) : Elapsed   2565078,  correct
+Case ( rot, pwr= 18) : Elapsed   2526753,  correct
+Relative Geometric Mean: 29.501170
+Sorting completed
+Sorting starts
+Case (rand, pwr=  6) : Elapsed       251,  correct
+Case ( rot, pwr=  6) : Elapsed       248,  correct
+Case (rand, pwr= 10) : Elapsed      6499,  correct
+Case ( rot, pwr= 10) : Elapsed      6478,  correct
+Case (rand, pwr= 14) : Elapsed    132530,  correct
+Case ( rot, pwr= 14) : Elapsed    131031,  correct
+Case (rand, pwr= 18) : Elapsed   2565078,  correct
+Case ( rot, pwr= 18) : Elapsed   2526753,  correct
+Relative Geometric Mean: 29.517149
+Sorting completed
+Sorting starts
+Case (rand, pwr=  6) : Elapsed       251,  correct
+Case ( rot, pwr=  6) : Elapsed       249,  correct
+Case (rand, pwr= 10) : Elapsed      6499,  correct
+Case ( rot, pwr= 10) : Elapsed      6477,  correct
+Case (rand, pwr= 14) : Elapsed    132530,  correct
+Case ( rot, pwr= 14) : Elapsed    131031,  correct
+Case (rand, pwr= 18) : Elapsed   2565078,  correct
+Case ( rot, pwr= 18) : Elapsed   2526753,  correct
+Relative Geometric Mean: 29.502874
+Sorting completed

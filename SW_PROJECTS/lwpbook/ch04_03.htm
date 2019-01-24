@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Converting Absolute URLs to Relative (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch04_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch04_03' class='lwp lwp_ch04_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">4.3. Converting Absolute URLs to Relative</h2>
+
+<p>A relative URL path assumes <a name="INDEX-260" class="ipoint"
+></a><a name="INDEX-261" class="ipoint"
+></a><a name="INDEX-262" class="ipoint"
+></a><a name="INDEX-263" class="ipoint"
+></a>you're in a
+directory and the path elements are relative to that directory. For
+example, if you're in <em class="emphasis">/staff/</em>,
+these are the same:
+</p>
+
+<pre class="code">roster/search.cgi
+/staff/roster/search.cgi</pre>
+
+<p>If you're in <em class="emphasis">/students/</em>, this
+is the path to <em class="emphasis">/staff/roster/search.cgi</em>:
+</p>
+
+<pre class="code">../staff/roster/search.cgi</pre>
+
+<p>The URI class includes <a name="INDEX-264" class="ipoint"
+></a><a name="INDEX-265" class="ipoint"
+></a>a method <tt class="literal">rel(&#160;)</tt>, which
+creates a relative URL out of an absolute goal URI object. The newly
+created relative URL is how you could get to that original URL,
+starting from the absolute base URL.
+</p>
+
+<pre class="code">$relative = $absolute_goal-&gt;rel(<em class="replaceable"><tt>absolute_base</tt></em>);</pre>
+
+<p>The <em class="replaceable"><tt>absolute_base</tt></em> is the URL path in
+<a name="INDEX-266" class="ipoint"
+></a>which
+you're assumed to be; it can be a string, or a real
+URI object. But <tt class="literal">$absolute_goal</tt> must be a URI
+object. The <tt class="literal">rel(&#160;)</tt> method returns a URI object.
+</p>
+
+<p>For example:</p>
+
+<pre class="code">use URI;
+my $base = URI-&gt;new('http://phee.phye.phoe.fm/thingamajig/zing.xml');
+my $goal = URI-&gt;new('http://phee.phye.phoe.fm/hi_there.jpg');
+print $goal-&gt;rel($base), "\n";
+<b class="emphasis-bold">../hi_there.jpg</b></pre>
+
+<p>If you start with normal strings, simplify this to
+<tt class="literal">URI-&gt;new($abs_goal)-&gt;rel($base)</tt>, as shown
+here:
+</p>
+
+<pre class="code">use URI;
+my $base = 'http://phee.phye.phoe.fm/thingamajig/zing.xml';
+my $goal = 'http://phee.phye.phoe.fm/hi_there.jpg';
+print URI-&gt;new($goal)-&gt;rel($base), "\n";
+<b class="emphasis-bold">../hi_there.jpg</b></pre>
+
+<p>Incidentally, the trailing slash in a base URL can be very important.
+Consider:
+</p>
+
+<pre class="code">use URI;
+my $base = 'http://phee.phye.phoe.fm/englishmen/blood';
+my $goal = 'http://phee.phye.phoe.fm/englishmen/tony.jpg';
+print URI-&gt;new($goal)-&gt;rel($base), "\n";
+<b class="emphasis-bold">tony.jpg</b></pre>
+
+<p>But add a slash to the base URL and see the change:</p>
+
+<pre class="code">use URI;
+my $base = 'http://phee.phye.phoe.fm/englishmen/blood/';
+my $goal = 'http://phee.phye.phoe.fm/englishmen/tony.jpg';
+print URI-&gt;new($goal)-&gt;rel($base), "\n";
+<b class="emphasis-bold">../tony.jpg</b></pre>
+
+<p>That's because in the first case,
+"blood" is not considered a
+directory, whereas in the second case, it is. You may be accustomed
+to treating <em class="emphasis">/blood</em> and
+<em class="emphasis">/blood/</em> as the same, when
+<em class="emphasis">blood</em> is a directory. Web servers maintain your
+illusion by invisibly redirecting requests for
+<em class="emphasis">/blood</em> to <em class="emphasis">/blood/</em>, but you
+can't ever tell when this is actually going to
+happen just by looking at a URL.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

@@ -1,0 +1,758 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>User Agents (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch03_04"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:55:45 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch03_04' class='lwp lwp_ch03_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">3.4. User Agents</h2>
+
+<p>The first and simplest use <a name="INDEX-112" class="ipoint"
+></a><a name="INDEX-113" class="ipoint"
+></a><a name="INDEX-114" class="ipoint"
+></a>of LWP's two
+basic classes is LWP::UserAgent, which manages HTTP connections and
+performs requests for you. The <tt class="literal">new(&#160;)</tt> constructor
+makes a user agent object:
+</p>
+
+<pre class="code">$browser = LWP::UserAgent-&gt;new(<em class="replaceable"><tt>%options</tt></em>);</pre>
+
+<p>The <em class="replaceable"><tt>options</tt></em> and their default values are
+<a name="INDEX-115" class="ipoint"
+></a><a name="INDEX-116" class="ipoint"
+></a>summarized in <a href="ch03_04.htm#perllwp-CHP-3-TABLE-1">Table 3-1</a>. The options are attributes whose values can
+be fetched or altered by the method calls described in the next
+section.
+</p>
+
+<a name="perllwp-CHP-3-TABLE-1"></a><h4 class="objtitle">Table 3-1. Constructor options and default values for LWP::UserAgent </h4><table border="1" cellpadding="3">
+
+
+
+<tr>
+<th>
+<p>Key</p>
+</th>
+<th>
+<p>Default</p>
+</th>
+</tr>
+
+
+<tr>
+<td><code class="code">agent</code></td>
+<td><code class="code">"libwww-perl/<em class="replaceable"><tt>#.###</tt></em>"</code></td>
+</tr>
+<tr>
+<td><code class="code">conn_cache</code></td>
+<td><code class="code">undef</code></td>
+</tr>
+<tr>
+<td><code class="code">cookie_jar</code></td>
+<td><code class="code">undef</code></td>
+</tr>
+<tr>
+<td><code class="code">from</code></td>
+<td><code class="code">undef</code></td>
+</tr>
+<tr>
+<td><code class="code">max_size</code></td>
+<td><code class="code">undef</code></td>
+</tr>
+<tr>
+<td><code class="code">parse_head</code></td>
+<td><code class="code">1</code></td>
+</tr>
+<tr>
+<td><code class="code">protocols_allowed</code></td>
+<td><code class="code">undef</code></td>
+</tr>
+<tr>
+<td><code class="code">protocols_forbidden</code></td>
+<td><code class="code">undef</code></td>
+</tr>
+<tr>
+<td><code class="code">requests_redirectable</code></td>
+<td><code class="code">['GET', 'HEAD']</code></td>
+</tr>
+<tr>
+<td><code class="code">timeout</code></td>
+<td><code class="code">180</code></td>
+</tr>
+
+</table><p>
+
+<p>If you have a user agent object and want a copy of it (for example,
+you want to run the same requests <a name="INDEX-117" class="ipoint"
+></a><a name="INDEX-118" class="ipoint"
+></a>over two connections, one persistent with
+KeepAlive and one without) use the <tt class="literal">clone(&#160;)</tt>
+method:
+</p>
+
+<pre class="code">$copy = $browser-&gt;clone( );</pre>
+
+<p>This object represents a browser and has attributes you can get and
+set by calling methods on the object. Attributes modify future
+connections (e.g., proxying, timeouts, and whether the HTTP
+connection can be persistent) or the requests sent over the
+connection (e.g., authentication and cookies, or HTTP headers).
+</p>
+
+<a name="perllwp-CHP-3-SECT-4.1"></a><div class="sect2">
+<h3 class="sect2">3.4.1. Connection Parameters</h3>
+
+<p>The <tt class="literal">timeout(&#160;)</tt> attribute represents
+<a name="INDEX-119" class="ipoint"
+></a><a name="INDEX-120" class="ipoint"
+></a><a name="INDEX-121" class="ipoint"
+></a><a name="INDEX-122" class="ipoint"
+></a>how long LWP will wait for a server to
+respond to a request:
+</p>
+
+<pre class="code">$oldval = $browser-&gt;timeout([<em class="replaceable"><tt>newval</tt></em>]);</pre>
+
+<p>That is, if you want to set the value, you'd do it
+like so:
+</p>
+
+<pre class="code">$browser-&gt;timeout(<em class="replaceable"><tt>newval</tt></em>);</pre>
+
+<p>And if you wanted to read the value, you'd do it
+like this:
+</p>
+
+<pre class="code">$value = $browser-&gt;timeout( );</pre>
+
+<p>And you could even set the value and get back the old value at the
+same time:
+</p>
+
+<pre class="code">$previously = $browser-&gt;timeout(<em class="replaceable"><tt>newval</tt></em>);</pre>
+
+<p>The default value of the <tt class="literal">timeout</tt> attribute is 180
+seconds. If you're spidering, you might want to
+change this to a lower number to prevent your spider from wasting a
+lot of time on unreachable sites:
+</p>
+
+<pre class="code">$oldval = $browser-&gt;timeout( );
+$browser-&gt;timeout(10);
+print "Changed timeout from $oldval to 10\n";
+<b class="emphasis-bold">Changed timeout from 180 to 10</b></pre>
+
+<p>The <tt class="literal">max_size(&#160;)</tt> method limits the
+<a name="INDEX-123" class="ipoint"
+></a><a name="INDEX-124" class="ipoint"
+></a>number of bytes of an HTTP response that the
+user agent will read:
+</p>
+
+<pre class="code">$size = $browser-&gt;max_size([<em class="replaceable"><tt>bytes</tt></em>])</pre>
+
+<p>The default value of the <tt class="literal">max_size(&#160;)</tt> attribute is
+<tt class="literal">undef</tt>, signifying no limit. If the maximum size is
+exceeded, the response will have a <tt class="literal">Client-Aborted</tt>
+header. Here's how to test for that:
+</p>
+
+<pre class="code">$response = $browser-&gt;request($req);
+if ($response-&gt;header("Client-Aborted")) {
+  warn "Response exceeded maximum size."
+}</pre>
+
+<p>To have your browser object support HTTP
+<tt class="literal">Keep-Alive</tt>, call the <tt class="literal">conn_cache(
+)</tt> method to <a name="INDEX-125" class="ipoint"
+></a><a name="INDEX-126" class="ipoint"
+></a><a name="INDEX-127" class="ipoint"
+></a><a name="INDEX-128" class="ipoint"
+></a><a name="INDEX-129" class="ipoint"
+></a><a name="INDEX-130" class="ipoint"
+></a>a
+<em class="firstterm">connection cache object</em>, of class
+LWP::ConnCache. This is done like so:
+</p>
+
+<pre class="code">use LWP::ConnCache;
+$cache = $browser-&gt;conn_cache(LWP::ConnCache-&gt;new( ));</pre>
+
+<p>The newly created connection cache object will cache only one
+connection at a time. To have it cache more, you access its
+<tt class="literal">total_capacity</tt> attribute. Here's
+how to increase that cache to 10 connections:
+</p>
+
+<pre class="code">$browser-&gt;conn_cache-&gt;total_capacity(10);</pre>
+
+<p>To cache all connections (no limits):</p>
+
+<pre class="code">$browser-&gt;conn_cache-&gt;total_capacity(undef);</pre>
+
+</div>
+<a name="perllwp-CHP-3-SECT-4.2"></a><div class="sect2">
+<h3 class="sect2">3.4.2. Request Parameters</h3>
+
+<p>The <tt class="literal">agent(&#160;)</tt> attribute gets and sets
+<a name="INDEX-131" class="ipoint"
+></a><a name="INDEX-132" class="ipoint"
+></a><a name="INDEX-133" class="ipoint"
+></a>the string that LWP sends for the
+<tt class="literal">User-Agent</tt> header:
+</p>
+
+<pre class="code">$oldval = $browser-&gt;agent([<em class="replaceable"><tt>agent_string</tt></em>]);</pre>
+
+<p>Some web sites use this string to identify the browser. To pretend to
+be Netscape to get past web servers that check to see whether
+you're using a "supported
+browser," do this:
+</p>
+
+<pre class="code">print "My user agent name is ", $browser-&gt;agent( ), ".\n";
+$browser-&gt;agent("Mozilla/4.76 [en] (Windows NT 5.0; U)");
+print "And now I'm calling myself ", $browser-&gt;agent( ), "!\n";
+<b class="emphasis-bold">My user agent name is libwww-perl/5.60</b>.
+<b class="emphasis-bold">And now I'm calling myself Mozilla/4.76 [en] (Windows NT 5.0; U)!</b></pre>
+
+<p>The <tt class="literal">from(&#160;)</tt> attribute <a name="INDEX-134" class="ipoint"
+></a>controls the <tt class="literal">From</tt>
+header, which contains the email address of the user making the
+request:
+</p>
+
+<pre class="code">$old_address = $browser-&gt;from([<em class="replaceable"><tt>email_address</tt></em>]);</pre>
+
+<p>The default value is <tt class="literal">undef</tt>, which indicates no
+<tt class="literal">From</tt> header should be sent.
+</p>
+
+<p>The user agent object can manage the sending and receiving of cookies
+for you. Control this with the <tt class="literal">cookie_jar(&#160;)</tt>
+method:
+</p>
+
+<pre class="code">$old_cj_obj = $browser-&gt;cookie_jar([<em class="replaceable"><tt>cj_obj</tt></em>])</pre>
+
+<p>This reads or sets the HTTP::Cookies object that's
+used for holding all this browser's cookies. By
+default, there is no cookie jar, in which case the user agent ignores
+cookies.
+</p>
+
+<p>To create a temporary cookie jar, which will keep cookies only for
+the duration of the user agent object:
+</p>
+
+<pre class="code">$browser-&gt;cookie_jar(HTTP::Cookies-&gt;new);</pre>
+
+<p>To use a file as a persistent store for cookies:</p>
+
+<pre class="code">my $some_file = '/home/mojojojo/cookies.lwp';
+$browser-&gt;cookie_jar(HTTP::Cookies-&gt;new(
+  'file' =&gt; $some_file, 'autosave' =&gt; 1
+));</pre>
+
+<p>Cookies are discussed in more detail in <a href="ch11_01.htm">Chapter 11, "Cookies, Authentication,and Advanced Requests"</a>.</p>
+
+</div>
+<a name="perllwp-CHP-3-SECT-4.3"></a><div class="sect2">
+<h3 class="sect2">3.4.3. Protocols</h3>
+
+<p>LWP allows you to control <a name="INDEX-135" class="ipoint"
+></a><a name="INDEX-136" class="ipoint"
+></a>the
+protocols with which a user agent can fetch documents. You can choose
+to allow only a certain set of protocols, or allow all but a few. You
+can also test a protocol to see whether it's
+supported by LWP and by this particular browser object.
+</p>
+
+<p>The <tt class="literal">protocols_allowed(&#160;)</tt>
+<a name="INDEX-137" class="ipoint"
+></a><a name="INDEX-138" class="ipoint"
+></a><a name="INDEX-139" class="ipoint"
+></a><a name="INDEX-140" class="ipoint"
+></a>and <tt class="literal">protocols_forbidden(
+)</tt> methods explicitly permit or forbid certain protocols
+(e.g., FTP or HTTP) from being used by this user agent:
+</p>
+
+<pre class="code">$aref_maybe = $browser-&gt;protocols_allowed([<em class="replaceable"><tt>\@protocols</tt></em>]);
+$aref_maybe = $browser-&gt;protocols_forbidden([<em class="replaceable"><tt>\@protocols</tt></em>]);</pre>
+
+<p>Call the methods with no
+<a name="INDEX-141" class="ipoint"
+></a>arguments to get an array reference
+containing the allowed or forbidden protocols, or
+<tt class="literal">undef</tt> if the attribute isn't set.
+By default, neither is set, which means that this browser supports
+all the protocols that your installation of LWP supports.
+</p>
+
+<p>For example, if you're processing a list of URLs and
+don't want to parse them to weed out the FTP URLs,
+you could write this:
+</p>
+
+<pre class="code">$browser-&gt;protocols_forbidden(["ftp"]);</pre>
+
+<p>Then you can blindly execute requests, and any <tt class="literal">ftp</tt>
+URLs will fail automatically. That is, if you request an
+<tt class="literal">ftp</tt> URL, the browser object returns an error
+response without performing any actual request.
+</p>
+
+<p>Instead of forbidden protocols, you can specify which to allow by
+using the <tt class="literal">protocols_allowed</tt> method. For example,
+to set this browser object to support only <tt class="literal">http</tt>
+and <tt class="literal">gopher</tt> URLs, you could write this:
+</p>
+
+<pre class="code">$browser-&gt;protocols_allowed(["http", "gopher"]);</pre>
+
+<p>To check if LWP and this particular browser support a particular URL
+protocol, use the <tt class="literal">is_protocol_supported(&#160;)</tt> method.
+ If this <tt class="literal">$browser object</tt> has a <tt
+class="literal">protocols_allowed</tt> list (and most don't), then <tt
+class="literal">is_protocol_supported</tt> returns true only for
+protocols that are in that list, and which LWP supports.  But if the
+<tt class="literal">$browser</tt> object is normal in not having a <tt
+class="literal">protocols_allowed</tt> list, then <tt
+class="literal">is_protocol_supported</tt> returns true for any
+protocol that LWP supports and which isn't in <tt
+class="literal">protocols_forbidden</tt>.
+ You call it like this:
+</p>
+
+<pre class="code">$boolean = $browser-&gt;is_protocol_supported(<em class="replaceable"><tt>scheme</tt></em>);</pre>
+
+<p>For example:</p>
+
+<pre class="code">unless ($browser-&gt;is_protocol_supported("https")) {
+  warn "Cannot process https:// URLs.\n";
+}</pre>
+
+</div>
+<a name="perllwp-CHP-3-SECT-4.4"></a><div class="sect2">
+<h3 class="sect2">3.4.4. Redirection</h3>
+
+<p>A server can reply to a <a name="INDEX-142" class="ipoint"
+></a><a name="INDEX-143" class="ipoint"
+></a>request with a response that redirects
+the user agent to a new location. A user agent can automatically
+follow redirections for you. By default, LWP::UserAgent objects
+follow GET and HEAD method redirections.
+</p>
+
+<p>The <tt class="literal">requests_redirectable(&#160;)</tt> attribute controls
+<a name="INDEX-144" class="ipoint"
+></a>the list of methods for which the user
+agent will automatically follow redirections:
+</p>
+
+<pre class="code">$aref = $browser-&gt;requests_redirectable([<em class="replaceable"><tt>\@methods</tt></em>]);</pre>
+
+<p>To disable the automatic following of redirections, pass in a
+reference to an empty array:
+</p>
+
+<pre class="code">$browser-&gt;requests_redirectable([]);</pre>
+
+<p>To add POST to the list of redirectable methods:</p>
+
+<pre class="code">push @{$browser-&gt;requests_redirectable}, 'POST';</pre>
+
+<p>You can test a request to see whether the method in that request is
+one for which the user agent will follow redirections:
+</p>
+
+<pre class="code">$boolean = $browser-&gt;redirect_ok(<em class="replaceable"><tt>request</tt></em>);</pre>
+
+<p>The <tt class="literal">redirect_ok(&#160;)</tt> method returns
+<a name="INDEX-145" class="ipoint"
+></a><a name="INDEX-146" class="ipoint"
+></a>true if redirections are permitted for the
+method in the request.
+</p>
+
+</div>
+<a name="perllwp-CHP-3-SECT-4.5"></a><div class="sect2">
+<h3 class="sect2">3.4.5. Authentication</h3>
+
+<p>The user agent can manage <a name="INDEX-147" class="ipoint"
+></a><a name="INDEX-148" class="ipoint"
+></a>authentication information for a series
+of requests to the same site. The <tt class="literal">credentials(&#160;)</tt>
+method <a name="INDEX-149" class="ipoint"
+></a><a name="INDEX-150" class="ipoint"
+></a>sets a username and password for a
+particular realm on a site:
+</p>
+
+<pre class="code">$browser-&gt;credentials(<em class="replaceable"><tt>host_port</em>, <em class="replaceable">realm</em>, <em class="replaceable">uname</em>, <em class="replaceable">pass</tt></em>);</pre>
+
+<p>A <em class="firstterm">realm</em> is a string that's
+used to identify the locked-off area on the given server and port. In
+interactive browsers, the realm is the string that's
+displayed as part of the pop-up window that appears. For example, if
+the pop-up window says "Enter username for
+Unicode-MailList-Archives at www.unicode.org," then
+the realm string is <tt class="literal">Unicode-MailList-Archives</tt>, and
+the <em class="replaceable"><tt>host_port</tt></em> value is
+<tt class="literal">www.unicode.org:80</tt>. (The browser
+doesn't typically show the <tt class="literal">:80</tt>
+part for HTTP, nor the <tt class="literal">:443</tt> part for HTTPS, as
+those are the default port numbers.)
+</p>
+
+<p>The username, password, and realm can be sent for every request whose
+hostname and port match the one given in
+<em class="replaceable"><tt>host_port</tt></em>, and that require authorization.
+For example:
+</p>
+
+<pre class="code">$browser-&gt;credentials("intranet.example.int:80", "Finances",
+                      "fred", "3l1t3");</pre>
+
+<p>From that point on, any requests this browser makes to port 80 that
+require authentication with a realm name of
+"Finances," will be tried with a
+username "fred" and a password
+"3l1t3."
+</p>
+
+<p>For more information on authentication, see <a href="ch11_01.htm">Chapter 11, "Cookies, Authentication,and Advanced Requests"</a>. 
+</p>
+
+</div>
+<a name="perllwp-CHP-3-SECT-4.6"></a><div class="sect2">
+<h3 class="sect2">3.4.6. Proxies</h3>
+
+<p>One potentially important function of the <a name="INDEX-151" class="ipoint"
+></a><a name="INDEX-152" class="ipoint"
+></a>user agent object is
+<a name="INDEX-153" class="ipoint"
+></a><a name="INDEX-154" class="ipoint"
+></a>managing proxies. The <tt class="literal">env_proxy(
+)</tt> method configures the proxy settings:
+</p>
+
+<pre class="code">$browser-&gt;env_proxy( );</pre>
+
+<p>This method inspects proxy settings from environment variables such
+as <tt class="literal">http_proxy</tt>, <tt class="literal">gopher_proxy</tt>,
+and <tt class="literal">no_proxy</tt>. If you don't use a
+proxy, those environment variables aren't set, and
+the call to <tt class="literal">env_proxy(&#160;)</tt> has no effect.
+</p>
+
+<p>To set proxying from within your <a name="INDEX-155" class="ipoint"
+></a><a name="INDEX-156" class="ipoint"
+></a>program, use the <tt class="literal">proxy(&#160;)</tt>
+and <tt class="literal">no_proxy(&#160;)</tt> methods. The <tt class="literal">proxy(
+)</tt> method sets or retrieves the proxy for a particular
+scheme:
+</p>
+
+<pre class="code">$browser-&gt;proxy(<em class="replaceable"><tt>scheme</em>, <em class="replaceable">proxy</tt></em>);
+$browser-&gt;proxy(<em class="replaceable"><tt>\@schemes</em>, <em class="replaceable">proxy</tt></em>);
+$proxy = $browser-&gt;proxy(<em class="replaceable"><tt>scheme</tt></em>);</pre>
+
+<p>The first two forms set the proxy for one or more schemes. The third
+form returns the proxy for a particular scheme. For example:
+</p>
+
+<pre class="code">$p = $browser-&gt;proxy("ftp");
+$browser-&gt;proxy("ftp", "http://firewall:8001/");
+print "Changed proxy from $p to our firewall.\n";</pre>
+
+<p>The <tt class="literal">no_proxy(&#160;)</tt> method lets you disable proxying
+for particular domains:
+</p>
+
+<pre class="code">$browser-&gt;no_proxy([ <em class="replaceable"><tt>domain</tt></em>, ... ]);</pre>
+
+<p>Pass a list of domains to <tt class="literal">no_proxy(&#160;)</tt> to add them
+to the list of domains that are not proxied (e.g., those within your
+corporate firewall). For example:
+</p>
+
+<pre class="code">$browser-&gt;no_proxy("c64.example.int", "localhost", "server");</pre>
+
+<p>Call <tt class="literal">no_proxy(&#160;)</tt> with no arguments to clear the
+list of unproxied domains:
+</p>
+
+<pre class="code">$browser-&gt;no_proxy( );  # no exceptions to proxying</pre>
+
+</div>
+<a name="perllwp-CHP-3-SECT-4.7"></a><div class="sect2">
+<h3 class="sect2">3.4.7. Request Methods</h3>
+
+<p>There are three <a name="INDEX-157" class="ipoint"
+></a><a name="INDEX-158" class="ipoint"
+></a><a name="INDEX-159" class="ipoint"
+></a>basic request methods:
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(<em class="replaceable"><tt>url</tt></em>);
+$resp = $browser-&gt;head(<em class="replaceable"><tt>url</tt></em>);
+$resp = $browser-&gt;post(<em class="replaceable"><tt>url,</em> <em class="replaceable">\@form_data</tt></em>);</pre>
+
+<p>If you're specifying extra header lines to be sent
+with the request, do it like this:
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(<em class="replaceable"><tt>url,</em> <em class="replaceable">Header1 =&gt; Value1, Header2 =&gt; Value2, ...</tt></em>);
+$resp = $browser-&gt;head(<em class="replaceable"><tt>url,</em> <em class="replaceable">Header1 =&gt; Value1, Header2 =&gt; Value2, ...</tt></em>);
+$resp = $browser-&gt;post(<em class="replaceable"><tt>url, \@form_data,</tt></em>
+<em class="replaceable"><tt>                       Header1 =&gt; Value1, Header2 =&gt; Value2, ...</tt></em>);</pre>
+
+<p>For example:</p>
+
+<pre class="code">$resp = $browser-&gt;get("http://www.nato.int",
+  'Accept-Language' =&gt; 'en-US',
+  'Accept-Charset' =&gt; 'iso-8859-1,*,utf-8',
+  'Accept-Encoding' =&gt; 'gzip',
+  'Accept' =&gt;
+   "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*",
+);</pre>
+
+<a name="perllwp-CHP-3-SECT-4.7.1"></a><div class="sect3">
+<h3 class="sect3">3.4.7.1. Saving response content to a file</h3>
+
+<p>With normal requests, the body of the response is stored in the
+response object's <tt class="literal">$response-&gt;content(
+)</tt> attribute by default. That's fine when
+the response body is a moderately small piece of data such as a
+20-kilobyte HTML file. But a 6-megabyte MP3 file should probably be
+saved to disk without saving it in memory first.
+</p>
+
+<p>The request methods support this by providing sort of fake header
+lines that don't turn into real headers in the
+request but act as options for LWP's handling of the
+request. Each option/header starts with a
+":" character, a character that no
+real HTTP header name could contain. The simplest option is
+<tt class="literal">':content_file'</tt> <tt class="literal">=&gt;</tt>
+<em class="replaceable"><tt>filename</tt></em>.
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(<em class="replaceable"><tt>url, </em>':content_file' =&gt; <em class="replaceable">filename, ...</tt></em>);
+$resp = $browser-&gt;head(<em class="replaceable"><tt>url,</em> ':content_file' =&gt; <em class="replaceable">filename, ...</tt></em>);
+$resp = $browser-&gt;post(<em class="replaceable"><tt>url,</em> <em class="replaceable">\@form_data,</tt></em>
+<em class="replaceable"><tt>  </em>':content_file' =&gt; <em class="replaceable">filename</em>,<em class="replaceable"> ...</tt></em>);</pre>
+
+<p>With this option, the content of the response is saved to the given
+filename, overwriting whatever might be in that file already. (In
+theory, no response to a HEAD request should ever have content, so it
+seems odd to specify where content should be saved. However, in
+practice, some strange servers and many CGIs on otherwise normal
+servers do respond to HEAD requests as if they were GET requests.)
+</p>
+
+<p>A typical example:</p>
+
+<pre class="code">my $out = 'weather_satellite.jpg';
+my $resp = $browser-&gt;<tt class="userinput"><b>get(</b></tt>'http://weathersys.int/',
+  ':content_file' =&gt; $out,
+);
+die "Couldn't get the weather picture: ", $resp-&gt;status_line
+ unless $resp-&gt;is_success;</pre>
+
+<p>This feature is also useful for cases in which you were planning on
+saving the content to that file anyway. Also see the <tt class="literal">mirror(
+)</tt> method described below, which does something similar to
+<tt class="literal">$browser-&gt;get($url, ':content_file' =&gt;</tt>
+<em class="replaceable"><tt>filename</tt></em><tt class="literal">, ...)</tt>.
+</p>
+
+</div>
+
+<a name="perllwp-CHP-3-SECT-4.7.2"></a><div class="sect3">
+<h3 class="sect3">3.4.7.2. Sending response content to a callback</h3>
+
+<p>If you instead provide an option/header pair consisting of
+<tt class="literal">':content_cb'</tt> and a subroutine reference, LWP
+won't save the content in memory or to a file but
+will instead call the subroutine every so often, as new data comes in
+over the connection to the remote server. This is the syntax for
+specifying such a callback routine:
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(<em class="replaceable"><tt>url, </em>':content_cb' =&gt; <em class="replaceable">\&amp;mysub,</em> <em class="replaceable">...</tt></em>);
+$resp = $browser-&gt;head(<em class="replaceable"><tt>url, </em>':content_cb' =&gt; <em class="replaceable">\&amp;mysub, ...</tt></em>);
+$resp = $browser-&gt;post(<em class="replaceable"><tt>url, \@form_data,</tt></em>
+<em class="replaceable"><tt>  </em>':content_cb' =&gt; <em class="replaceable">\&amp;mysub, ...</tt></em>);</pre>
+
+<p>Whatever subroutine you define will get chunks of the newly received
+data passed in as the first parameter, and the second parameter will
+be the new HTTP::Response object that will eventually get returned
+from the current
+<tt class="literal">get</tt>/<tt class="literal">head</tt>/<tt class="literal">post</tt>
+call. So you should probably start every callback routine like this:
+</p>
+
+<pre class="code">sub <em class="replaceable"><tt>callbackname</tt></em> {
+ my($data, $response) = @_;
+ ...</pre>
+
+<p>Here, for example, is a routine that hex-dumps whatever data is
+received as a response to this request:
+</p>
+
+<pre class="code">my $resp = $browser-&gt;get('http://www.perl.com',
+ <b class="emphasis-bold">':content_cb' =&gt; \&amp;hexy</b>,
+);
+<b class="emphasis-bold">sub hexy {</b>
+  <b class="emphasis-bold">my($data, $resp) = @_;</b>
+  print length($data), " bytes:\n";
+  print '  ', unpack('H*', substr($data,0,16,'')), "\n"
+   while length $data;
+  return;
+}</pre>
+
+<p>In fact, you can pass an anonymous routine as the callback. The above
+could just as well be expressed like this:
+</p>
+
+<pre class="code">my $resp = $browser-&gt;get('http://www.perl.com',
+  <b class="emphasis-bold">':content_cb' =&gt; sub {</b>
+    my($data, $resp) = @_;
+    print length($data), " bytes:\n";
+    print '  ', unpack('H*', substr($data,0,16,'')), "\n"
+     while length $data;
+    return;
+<tt class="userinput"><b>  }</b></tt>
+);</pre>
+
+<p>The size of the <tt class="literal">$data</tt> string is unpredictable. If
+it matters to you how big each is, you can specify another option,
+<tt class="literal">:read_size_hint</tt> <tt class="literal">=&gt;</tt>
+<em class="replaceable"><tt>byte_count</tt></em>, which LWP will take as a hint
+for how many bytes you want the typical <tt class="literal">$data</tt>
+string to be:
+</p>
+
+<pre class="code">$resp = $browser-&gt;get(<em class="replaceable"><tt>url,</tt></em>
+<em class="replaceable"><tt>  </em>':content_cb' =&gt; <em class="replaceable">\&amp;mysub,</tt></em>
+<em class="replaceable"><tt>  </em>':read_size_hint' =&gt; <em class="replaceable">byte_count,</tt></em>
+  <em class="replaceable"><tt>...,</tt></em>
+);
+$resp = $browser-&gt;head(<em class="replaceable"><tt>url,</tt></em>
+<em class="replaceable"><tt>  </em>':content_cb' =&gt; <em class="replaceable">\&amp;mysub,</tt></em>
+<em class="replaceable"><tt>  </em>':read_size_hint' =&gt; <em class="replaceable">byte_count,</tt></em>
+  <em class="replaceable"><tt>...,</tt></em>
+);
+$resp = $browser-&gt;post(<em class="replaceable"><tt>url, \@form_data,</tt></em>
+<em class="replaceable"><tt>  </em>':content_cb' =&gt; <em class="replaceable">\&amp;mysub,</tt></em>
+<em class="replaceable"><tt>  </em>':read_size_hint' =&gt; <em class="replaceable">byte_count,</tt></em>
+  <em class="replaceable"><tt>...,</tt></em>
+);</pre>
+
+<p>We can modify our hex-dumper routine to be called like this:</p>
+
+<pre class="code">my $resp = $browser-&gt;get('http://www.perl.com',
+<b class="emphasis-bold">':content_cb' =&gt; \&amp;hexy</b>,
+<b class="emphasis-bold">':read_size_hint' =&gt; 1024</b>,
+);</pre>
+
+<p>However, there is no guarantee that's how big the
+<tt class="literal">$data</tt> string will actually be. It is merely a
+hint, which LWP may disregard.
+</p>
+
+</div>
+
+<a name="perllwp-CHP-3-SECT-4.7.3"></a><div class="sect3">
+<h3 class="sect3">3.4.7.3. Mirroring a URL to a file</h3>
+
+<p>The <tt class="literal">mirror(&#160;)</tt> method GETs a URL and stores the
+result to a file:
+</p>
+
+<pre class="code">$response = $browser-&gt;mirror(<em class="replaceable"><tt>url_to_get</em>, <em class="replaceable">filename</tt></em>)</pre>
+
+<p>But it has the added feature that it uses an HTTP
+<tt class="literal">If-Modified-Since</tt> header line on the request it
+performs, to avoid transferring the remote file unless it has changed
+since the local file (<em class="replaceable"><tt>filename</tt></em>) was last
+changed. The <tt class="literal">mirror(&#160;)</tt> method returns a new
+HTTP::Response object but without a <tt class="literal">content</tt>
+attribute (any interesting content will have been written to the
+local file). You should at least check
+<tt class="literal">$response-&gt;is_error(&#160;)</tt>:
+</p>
+
+<pre class="code">$response = $browser-&gt;mirror("http://www.cpan.org/",
+                             "cpan_home.html");
+if( $response-&gt;is_error( ) ){
+  die "Couldn't access the CPAN home page: " .
+    $response-&gt;status_line;
+}</pre>
+
+</div>
+</div>
+<a name="perllwp-CHP-3-SECT-4.8"></a><div class="sect2">
+<h3 class="sect2">3.4.8. Advanced Methods</h3>
+
+<p>The HTML <a name="INDEX-160" class="ipoint"
+></a><a name="INDEX-161" class="ipoint"
+></a>specification permits
+<tt class="literal">meta</tt> tags in the <tt class="literal">head</tt> of a
+document, some of which are alternatives to HTTP headers. By default,
+if the Response object is an HTML object, its <tt class="literal">head</tt>
+section is parsed, and some of the content of the
+<tt class="literal">head</tt> tags is copied into the HTTP::Response
+object's headers. For example, consider an HTML
+document that starts like this:
+</p>
+
+<pre class="code">&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Kiki's Pie Page&lt;/title&gt;
+ &lt;base href="http://cakecity.int/"&gt;
+ &lt;meta name="Notes" content="I like pie!"&gt;
+ &lt;meta http-equiv="Description" content="PIE RECIPES FROM KIKI"&gt;
+&lt;/head&gt;</pre>
+
+<p>If you request that document and call <tt class="literal">print</tt>
+<tt class="literal">$response-&gt;headers_as_string</tt> on it,
+you'll see this:
+</p>
+
+<pre class="code">Date: Fri, 05 Apr 2002 11:19:51 GMT
+Accept-Ranges: bytes
+Server: Apache/1.3.23
+<b class="emphasis-bold">Content-Base: http://cakecity.int/</b>
+Content-Length: 204
+Content-Type: text/html
+Last-Modified: Fri, 05 Apr 2002 11:19:38 GMT
+Client-Date: Fri, 05 Apr 2002 11:19:51 GMT
+<b class="emphasis-bold">Description: PIE RECIPES FROM KIKI</b>
+<b class="emphasis-bold">Title: Kiki's Pie Page</b>
+<b class="emphasis-bold">X-Meta-Notes: I like pie!</b></pre>
+
+<p>You can access those headers individually with
+<tt class="literal">$response-&gt;header('Content-Base')</tt>,
+<tt class="literal">$response-&gt;header('Description')</tt>,
+<tt class="literal">$response-&gt;header('Title')</tt>, and
+<tt class="literal">$response-&gt;header('X-Meta-Notes')</tt>,
+respectively, as we shall see in the next section.
+</p>
+
+<p>The documentation for the HTML::HeadParser module, which LWP uses to
+implement this feature, explains the exact details.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

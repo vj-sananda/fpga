@@ -1,0 +1,20 @@
+ppc405_0
+MERGE_SORT_SOURCES = merge_sort/aes_core.c merge_sort/main.c merge_sort/msort.c merge_sort/recordio.c 
+MERGE_SORT_HEADERS = merge_sort64/aes_core.h merge_sort64/recordio.h merge_sort64/msort.h merge_sort64/sortrecord_hw_plb.h merge_sort64/timer.h 
+MERGE_SORT_CC = powerpc-eabi-gcc
+MERGE_SORT_CC_SIZE = powerpc-eabi-size
+MERGE_SORT_CC_OPT = -O2
+MERGE_SORT_CFLAGS = 
+MERGE_SORT_CC_SEARCH = # -B
+MERGE_SORT_LIBPATH = -L./ppc405_0/lib/ # -L
+MERGE_SORT_INCLUDES = -I./ppc405_0/include/  -Imerge_sort64/ # -I
+MERGE_SORT_LFLAGS = # -l
+MERGE_SORT_CC_PREPROC_FLAG = # -Wp,
+MERGE_SORT_CC_ASM_FLAG = # -Wa,
+MERGE_SORT_CC_LINKER_FLAG = # -Wl,
+MERGE_SORT_LINKER_SCRIPT = merge_sort_linker_script
+MERGE_SORT_CC_DEBUG_FLAG =  -g 
+MERGE_SORT_CC_GLOBPTR_FLAG= # -msdata=eabi
+MERGE_SORT_CC_START_ADDR_FLAG=  # -Wl,-defsym -Wl,_START_ADDR=
+MERGE_SORT_CC_STACK_SIZE_FLAG=  # -Wl,-defsym -Wl,_STACK_SIZE=
+MERGE_SORT_CC_HEAP_SIZE_FLAG=  # -Wl,-defsym -Wl,_HEAP_SIZE=

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Alternatives (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_07"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_07' class='lwp lwp_ch08_07' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">8.7. Alternatives</h2>
+
+<p>Now, with the sort of 20/20 hindsight that is always in abundance in
+such cases, we can see that there were other ways it could have been
+done. For example, instead of using the various tricks to keep the
+first image-ALT link from printing, we could simply have kept a count
+of the good links seen so far in the current stream and ignored the
+first one. Our actual solution is more proper in this case, but
+sometimes counting items is the best or only way to get a problem
+solved.
+</p>
+
+<p>More importantly, we could have done without all the code that tests
+the link URL and used one regexp to implement our last criterion,
+i.e., that the link text begin with "Listen
+to". But, as with our earlier consideration of how
+much of the URL to check, it comes down to the question: do you want
+something that's more careful (i.e., enforcing more
+assumptions on the input data, and so more prone to reject
+appropriate links in the future) or more forgiving (i.e., enforcing
+fewer assumptions, but more likely to match inappropriate links in
+the future)?
+</p>
+
+<p>The answer depends on how concise you want the code to be, how much
+time you want to spend thinking up assumptions, and, most
+importantly, what happens if it breaks. If I've
+crontabbed this program to harvest Fresh Air listings every month and
+mail me the results, if it breaks, I'll get some
+sort of anomalous output mailed to me (whether with too few links, or
+too many) and it's no big deal because, working or
+not, it's just so I can listen to interesting radio
+programs. But your data extraction program may instead serve many
+people who will be greatly inconvenienced if it stops working
+properly. You have to decide on a case-by-case basis whether your
+program should be more likely to clam up and miss interesting data in
+new formats, <a name="INDEX-498" class="ipoint"
+></a>or pass <a name="INDEX-499" class="ipoint"
+></a>through new kinds of data despite the
+risk that they might be irrelevant or just <a name="INDEX-500" class="ipoint"
+></a><a name="INDEX-501" class="ipoint"
+></a>plain wrong.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

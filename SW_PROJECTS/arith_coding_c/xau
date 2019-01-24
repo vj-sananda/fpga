@@ -1,0 +1,34 @@
+is routine
+ * starts at the given table, and recursively calls itself to
+ * rescale every table in its list of links.  The table itself
+ * is then rescaled.
+ */
+void recursive_flush( CONTEXT *table )
+{
+    int i;
+
+    if ( table->links != NULL )
+        for ( i = 0 ; i <= table->max_index ; i++ )
+            if ( table->links[ i ].next != NULL )
+                recursive_flush( table->links[ i ].next );
+    rescale_table( table );
+}
+
+/*
+ * This routine is called to flush the whole table, which it does
+ * by calling the recursive flush routine starting at the order 0
+ * table.
+ */
+void flush_model()
+{
+    recursive_flush( contexts[ 0 ] );
+}
+
+void error_exit( char *message)
+{
+    putc( '\n', stdout );
+    puts( message );
+    exit( -1 );
+}
+
+

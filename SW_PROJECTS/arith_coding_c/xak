@@ -1,0 +1,126 @@
+ion ratio.
+ * It prints out the number of input bytes, the number of output bytes,
+ * and the bits per byte compression ratio.   This is done both as a
+ * pacifier and as a seat-of-the-pants diagnostice.  A better version
+ * of this routine would also print the local compression ratio.
+ */
+void print_compression()
+{
+    long total_input_bytes;
+    long total_output_bytes;
+
+    total_input_bytes  =  ftell( text_file );
+    total_output_bytes = bit_ftell_output( compressed_file );
+    if ( total_output_bytes == 0 )
+        total_output_bytes = 1;
+
+    fprintf( stderr,"%ld/%ld, %2.3f\r",
+	     total_input_bytes,
+	     total_output_bytes,
+             8.0 * total_output_bytes / total_input_bytes );
+}
+
+/*
+ * This routine is called once every 256 input symbols.  Its job is to
+ * check to see if the compression ratio hits or exceeds 90%.  If the
+ * output size is 90% of the input size, it means not much compression
+ * is taking place, so we probably ought to flush the statistics in the
+ * model to allow for more current statistics to have greater impactic.
+ * This heuristic approach does seem to have some effect.
+ */
+int check_compression()
+{
+    static long local_input_marker = 0L;
+    static long local_output_marker = 0L;
+    long total_input_bytes;
+    long total_output_bytes;
+    int local_ratio;
+
+    print_compression();
+    total_input_bytes  =  ftell( text_file ) - local_input_marker;
+    total_output_bytes = bit_ftell_output( compressed_file );
+    total_output_bytes -= local_output_marker;
+    if ( total_output_bytes == 0 )
+        total_output_bytes = 1;
+    local_ratio = (int)( ( total_output_bytes * 100 ) / total_input_bytes );
+
+    local_input_marker = ftell( text_file );
+    local_output_marker = bit_ftell_output( compressed_file );
+
+    if ( local_ratio > 90 && flushing_enabled )
+    {
+        fprintf( stderr, "Flushing... \r" );
+        return( 1 );
+    }
+    return( 0 );
+}
+
+
+/*
+ * Listing 7 -- expand-1.c
+ *
+ * This listing is the driver program for the decompression routine
+ * using the order 0 fixed context model.  It follows the model
+ * shown in BILL.C for a decompression program, by reading in
+ * high, low, range values from the arithmetic coder, converting
+ * them to integer symbols using the model code.  Finally, the
+ * character is removed from the input code, and the model is updated.
+ * When an EOF is detected, the program exits.
+ *
+ * To build this program:
+ *
+ * Turbo C:     tcc -w expand-1.c model-1.c bitio.c coder.c
+ * QuickC:      qcl /W3 expand-1.c model-1.c bitio.c coder.c
+ * Zortech:     ztc expand-1.c model-1.c bitio.c coder.c
+ * *NIX:        cc -o expand-1 expand-1.c model-1.c bitio.c coder.c
+ *
+ * Command line options:
+ *
+ *  -f text_file_name  [defaults to test.inp]
+ *  -c compressed_file_name [defaults to test.cmp]
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "coder.h"
+#include "model.h"
+#include "bitio.h"
+
+/*
+ * Local function prototypes.
+ */
+void initialize_options( int argc, char **argv );
+void print_compression(void);
+
+/*
+ * The two file names are used by several routines in this module.
+ */
+FILE *text_file;
+FILE *compressed_file;
+
+/*
+ * The main procedure here is a simple straight-line piece of code.
+ * first, the files, model, bit-oriented I/O, and the arithmetic
+ * decoder are all initialized.  Then, the program sits in a loop
+ * reading in symbol ranges, converting them, writing them out to
+ * the text file, and updating the model.  When this is all done,
+ * a little clean up activity takes place, and the program exits.
+ */
+void main( int argc, char *argv[] )
+{
+    SYMBOL s;
+    int c;
+    long int counter = 0;
+    int count;
+
+    initialize_options( --argc, ++argv );
+    initialize_model();
+    initialize_input_bitstream();
+    initialize_arithmetic_decoder( compressed_file );
+    for ( ; ; )
+    {
+	get_symbol_scale( &s );
+	count = get_current_count( &s );
+	c = convert_symbol_to_int( count, &s );
+	remove_symbol_from_stream( compressed_file, &s );
+	if ( c == EO

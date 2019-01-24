@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Adding Extra Request Header Lines (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch11_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:57:17 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch11_02' class='lwp lwp_ch11_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">11.2. Adding Extra Request Header Lines</h2>
+
+<p>Here's some simplistic
+<a name="INDEX-629" class="ipoint"
+></a><a name="INDEX-630" class="ipoint"
+></a><a name="INDEX-631" class="ipoint"
+></a><a name="INDEX-632" class="ipoint"
+></a>debugging advice: if your browser sees
+one thing at a given URL, but your LWP program sees another, first
+try just turning on cookie support, with an empty cookie jar. If that
+fails, have it read in your browser's cookie
+file.<a class='footnotylink' href="#FOOTNOTE-4">[4]</a> And if
+<em class="emphasis">that</em> fails, it's time to start
+wondering what means the remote site is using for distinguishing your
+LWP program's requests from your
+browser's requests.
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-4"></a>[4]
+Currently there is support for only Netscape
+cookie files. But check CPAN; someone might write support for other
+browsers' cookie files.</p> </blockquote>
+
+<p>Every kind of browser sends different HTTP headers besides the very
+minimal headers that LWP::UserAgent typically sends. For example,
+whereas an LWP::UserAgent browser by default sends this header line:
+</p>
+
+<pre class="code">User-Agent: libwww-perl/5.5394</pre>
+
+<p>Netscape 4.76 sends a header line like this:</p>
+
+<pre class="code">User-Agent: Mozilla/4.76 [en] (Win98; U)</pre>
+
+<p>And also sends these header fields that an LWP::UserAgent browser
+doesn't send normally at all:
+</p>
+
+<pre class="code">Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*
+Accept-Charset: iso-8859-1,*,utf-8
+Accept-Encoding: gzip
+Accept-Language: en-US</pre>
+
+<p>(That's assuming you've set your
+language preferences to U.S. English). That's on top
+of any <tt class="literal">Connection:</tt> <tt class="literal">keep-alive</tt>
+headers that may be sent, if the browser or any intervening firewall
+supports that feature (<tt class="literal">keep-alive</tt>) of HTTP.
+</p>
+
+<p>Opera 5.12 is not much different:</p>
+
+<pre class="code">User-Agent: Opera/5.12 (Windows 98; U)  [en]
+Accept: text/html, image/png, image/jpeg, image/gif, image/x-xbitmap, */*
+Accept-Language: en
+Accept-Encoding: deflate, gzip, x-gzip, identity, *;q=0</pre>
+
+<p>But a recent version of Netscape gets rather more verbose:</p>
+
+<pre class="code">User-Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US;
+   rv:0.9.4) Gecko/20011126 Netscape6/6.2.1
+Accept: text/xml, application/xml, application/xhtml+xml, text/html;q=0.9,
+   image/png, image/jpeg, image/gif;q=0.2, text/plain;q=0.8,
+   text/css, */*;q=0.1
+Accept-Charset: ISO-8859-1, utf-8;q=0.66, *;q=0.66
+Accept-Encoding: gzip, deflate, compress;q=0.9
+Accept-Language: en-us</pre>
+
+<p>Internet Explorer 5.12, in true Microsoft fashion, emits a few
+nonstandard headers:
+</p>
+
+<pre class="code">Accept: */*
+Accept-Language: en
+Extension: Security/Remote-Passphrase
+UA-CPU: PPC
+UA-OS: MacOS
+User-Agent: Mozilla/4.0 (compatible; MSIE 5.12; Mac_PowerPC)</pre>
+
+<p>Lynx can be verbose in reporting what MIME types my
+system's <em class="filename">/etc/mailcap</em> tells it
+that it can handle:
+</p>
+
+<pre class="code">Accept: text/html, text/plain, audio/mod, image/*, video/*, video/mpeg,
+  application/pgp, application/pgp, application/pdf, message/partial,
+  message/external-body, application/postscript, x-be2,
+  application/andrew-inset, text/richtext, text/enriched
+Accept: x-sun-attachment, audio-file, postscript-file, default,
+  mail-file, sun-deskset-message, application/x-metamail-patch,
+  text/sgml, */*;q=0.01
+Accept-Encoding: gzip, compress
+Accept-Language: en, es
+User-Agent: Lynx/2.8.3dev.18 libwww-FM/2.14</pre>
+
+<p>This information can come in handy when trying to make your LWP
+program seem as much like a well-known interactive browser as
+possible
+</p>
+
+<a name="perllwp-CHP-11-SECT-2.1"></a><div class="sect2">
+<h3 class="sect2">11.2.1. Pretending to Be Netscape</h3>
+
+<p>For example, suppose <a name="INDEX-633" class="ipoint"
+></a><a name="INDEX-634" class="ipoint"
+></a><a name="INDEX-635" class="ipoint"
+></a>you're looking at
+<a href="http://www.expreszo.nl/home.php">http://www.expreszo.nl/home.php</a>
+and you see that it has interesting headlines. You'd
+like to write a headline detector for this site to go with the other
+headline detectors we've been producing throughout
+the book. You look at the source in Netscape and see that each
+headline link looks like this:
+</p>
+
+<pre class="code">&lt;A class=pink href="headlines.php?id=749"&gt;<em class="replaceable"><tt>...text...</tt></em>&lt;/A&gt;</pre>
+
+<p>So you write something quite simple to capture those links:</p>
+
+<pre class="code">use strict;
+use warnings;
+use LWP;
+my $browser = LWP::UserAgent-&gt;new;
+ 
+my $url = 'http://www.expreszo.nl/home.php';
+my $response = $browser-&gt;get($url);
+die "Can't get $url: ", $response-&gt;status_line
+ unless $response-&gt;is_success;
+$_ = $response-&gt;content;
+my %seen;
+while( m{href="(headlines.php[^"]+)"&gt;(.*?)&lt;/A&gt;}sg ) {
+  my $this = URI-&gt;new_abs($1,$response-&gt;base);
+  print "$this\n  $2\n" unless $seen{$this}++;
+}
+print "NO HEADLINES?!  Source:\n", $response-&gt;content unless keys %seen;</pre>
+
+<p>And you run it, and it quite stubbornly says:</p>
+
+<pre class="code">NO HEADLINES?!  Source:
+&lt;html&gt;&lt;body&gt;
+...
+Je hebt minimaal Microsoft Internet Explorer versie 4 of hoger, of
+Netscape Navigator versie 4 of hoger nodig om deze site te bekijken.
+...
+&lt;/body&gt;&lt;/html&gt;</pre>
+
+<p>That is, "you need MSIE 4 or higher, or Netscape 4
+or higher, to view this site." It seems to be
+checking the <tt class="literal">User-Agent</tt> string of whatever browser
+visits the site and throwing a fit unless it's MSIE
+or Netscape! This is easily simulated, by adding this line right
+after <tt class="literal">$browser</tt> is created:
+</p>
+
+<pre class="code">$browser-&gt;agent('Mozilla/4.76 [en] (Win98; U)');</pre>
+
+<p>With that one small change, the server sends the same page you saw in
+Netscape, and the headline extractor happily sees the headlines, and
+everything works:
+</p>
+
+<pre><tt class="literal">http://www.expreszo.nl/headlines.php?id=752
+  Meer syfilis en HIV bij homo's
+http://www.expreszo.nl/headlines.php?id=751
+  Imam hangt geldboete van <!-- img src="figs/euro.gif" alt="E" / -->&euro; 1200 boven het hoofd
+http://www.expreszo.nl/headlines.php?id=740
+  SGP wil homohuwelijk terugdraaien
+http://www.expreszo.nl/headlines.php?id=750
+  Gays en moslims worden vaak gediscrimineerd
+http://www.expreszo.nl/headlines.php?id=749
+  Elton's gaydar rinkelt bij bruidegom Minnelli
+http://www.expreszo.nl/headlines.php?id=746
+  Lekkertje Drew Barrymore liever met een vrouw?</tt></pre>
+
+<p>This approach works fine when the web site is looking only at the
+<tt class="literal">User-Agent</tt> line, as you can most easily control it
+with <tt class="literal">$browser-&gt;agent(...)</tt>. If you were dealing
+with some other site that insisted on seeing even more Netscape-like
+headers, that could be done, too:
+</p>
+
+<pre class="code">my @netscape_like_headers = (
+  'User-Agent' =&gt; 'Mozilla/4.76 [en] (Win98; U)',
+  'Accept-Language' =&gt; 'en-US',
+  'Accept-Charset' =&gt; 'iso-8859-1,*,utf-8',
+  'Accept-Encoding' =&gt; 'gzip',
+  'Accept' =&gt;
+   "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*",
+);
+my $response = $browser-&gt;get($url, @netscape_like_headers);</pre>
+
+</div>
+<a name="perllwp-CHP-11-SECT-2.2"></a><div class="sect2">
+<h3 class="sect2">11.2.2. Referer</h3>
+
+<p>For some sites, that's not enough: they want to see
+that <a name="INDEX-636" class="ipoint"
+></a><a name="INDEX-637" class="ipoint"
+></a>your <tt class="literal">Referer</tt> header
+value is something they consider appropriate. A
+<tt class="literal">Referer</tt> header line signals the URL of a page that
+either linked to the item you're requesting (as with
+<tt class="literal">&lt;a</tt> <tt class="literal">href="url"&gt;</tt>) or
+inlines that image item (as with <tt class="literal">&lt;img
+src="url"&gt;</tt>).
+</p>
+
+<p>For example, I am a big fan of the comic strip <em class="emphasis">Dennis The
+Menace</em>. I find it to be the truest realization of deep
+satire, and I admire how its quality has kept up over the past 50
+years, quite undeterred by the retirement and eventual death of its
+<em class="emphasis">auteur</em>, the comic genius Hank Ketcham. And
+nothing brightens my day more than laughing over the
+day's <em class="emphasis">Dennis The Menace</em> strip
+and hardcopying a really good one now and then, so I can pin it up on
+my office door to amuse my colleagues and to encourage them to visit
+the DTM web site. However, the server for the
+strip's image files doesn't want it
+to be inlined on pages that aren't authorized to do
+so, so they check the <tt class="literal">Referer</tt> line. Unfortunately,
+they have forgotten to allow for when there is no
+<tt class="literal">Referer</tt> line at all, such as happens when I try to
+hardcopy the day's image file using my browser. But
+LWP comes to the rescue:
+</p>
+
+<pre class="code">my $response = $browser-&gt;get(
+  # The URL of the image:
+  'http://pst.rbma.com/content/Dennis_The_Menace',
+
+  'Referer' =&gt;   # The URL where I see the strip:
+
+  'http://www.sfgate.com/cgi-bin/article.cgi?file=/comics/Dennis_The_Menace.dtl',
+);
+open(OUT, "&gt;today_dennis.gif") || die $!;
+binmode(OUT);
+print OUT $response-&gt;content;
+close(OUT);</pre>
+
+<p>By giving a <tt class="literal">Referer</tt> value that passes the image
+server's test for a good URL, I get to make a local
+copy of the image, which I can then print out and put on my office
+door.
+</p>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

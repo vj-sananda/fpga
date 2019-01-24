@@ -1,0 +1,22 @@
+Release 7.1.02i ngdbuild H.40
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+
+Command Line: ngdbuild -intstyle ise -dd f:\fpga\proj\llist_fifo_big/_ngo -nt
+timestamp -uc llist_fifo.ucf -p xc2vp30-ff896-7 stimulus.ngc stimulus.ngd 
+
+Reading NGO file 'F:/fpga/proj/llist_fifo_big/stimulus.ngc' ...
+
+Applying constraints in "llist_fifo.ucf" to the design...
+
+Checking timing specifications ...
+Checking expanded design ...
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   0
+
+Total memory usage is 67752 kilobytes
+
+Writing NGD file "stimulus.ngd" ...
+
+Writing NGDBUILD log file "stimulus.bld"...

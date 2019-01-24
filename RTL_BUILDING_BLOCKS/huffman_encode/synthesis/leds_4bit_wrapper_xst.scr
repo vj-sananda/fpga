@@ -1,0 +1,11 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top leds_4bit_wrapper
+-ifmt MIXED
+-ifn leds_4bit_wrapper_xst.prj
+-ofn ../implementation/leds_4bit_wrapper/leds_4bit_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/leds_4bit_wrapper}

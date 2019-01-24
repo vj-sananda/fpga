@@ -1,0 +1,11 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a\devl\synthesis\huffman_decoder_xst.prj
+-top huffman_decoder
+-p virtex2p
+-ofn F:\fpga\proj\huffman_decode\pcores\huffman_decoder_v1_00_a\devl\synthesis\huffman_decoder_xst.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /

@@ -1,0 +1,44 @@
+##############################################################################
+## Filename:          E:/work/FPGA_PROJECTS/ML509/ml509_dpi/pcores/example_fifo_loopback_vhdl_v1_00_a/data/example_fifo_loopback_vhdl_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Tue Mar 30 10:52:23 2010 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v2_00_a proc_common_pkg vhdl
+lib proc_common_v2_00_a ipif_pkg vhdl
+lib proc_common_v2_00_a or_muxcy vhdl
+lib proc_common_v2_00_a or_gate128 vhdl
+lib proc_common_v2_00_a family_support vhdl
+lib proc_common_v2_00_a pselect_f vhdl
+lib proc_common_v2_00_a counter_f vhdl
+lib plbv46_slave_burst_v1_00_a flex_addr_cntr vhdl
+lib plbv46_slave_burst_v1_00_a addr_reg_cntr_brst_flex vhdl
+lib plbv46_slave_burst_v1_00_a plb_address_decoder vhdl
+lib plbv46_slave_burst_v1_00_a burst_support vhdl
+lib plbv46_slave_burst_v1_00_a wr_buffer vhdl
+lib plbv46_slave_burst_v1_00_a be_reset_gen vhdl
+lib plbv46_slave_burst_v1_00_a plb_slave_attachment vhdl
+lib plbv46_slave_burst_v1_00_a data_mirror_128 vhdl
+lib plbv46_slave_burst_v1_00_a plbv46_slave_burst vhdl
+lib interrupt_control_v2_00_a interrupt_control vhdl
+lib proc_common_v2_00_a inferred_lut4 vhdl
+lib proc_common_v2_00_a pf_counter_bit vhdl
+lib proc_common_v2_00_a pf_counter vhdl
+lib proc_common_v2_00_a pf_counter_top vhdl
+lib proc_common_v2_00_a pf_occ_counter vhdl
+lib proc_common_v2_00_a pf_occ_counter_top vhdl
+lib proc_common_v2_00_a pf_adder_bit vhdl
+lib proc_common_v2_00_a pf_adder vhdl
+lib proc_common_v2_00_a pf_dpram_select vhdl
+lib proc_common_v2_00_a srl16_fifo vhdl
+lib rdpfifo_v4_00_a rdpfifo_dp_cntl vhdl
+lib rdpfifo_v4_00_a ipif_control_rd vhdl
+lib rdpfifo_v4_00_a rdpfifo_top vhdl
+lib dre_v2_00_a dsp48_mux vhdl
+lib dre_v2_00_a tx_dre_top vhdl
+lib wrpfifo_v4_00_a pf_dly1_mux vhdl
+lib wrpfifo_v4_00_a wrpfifo_dp_cntl vhdl
+lib wrpfifo_v4_00_a ipif_control_wr_dre vhdl
+lib wrpfifo_v4_00_a wrpfifo_top vhdl
+lib example_fifo_loopback_vhdl_v1_00_a user_logic vhdl
+lib example_fifo_loopback_vhdl_v1_00_a example_fifo_loopback_vhdl vhdl

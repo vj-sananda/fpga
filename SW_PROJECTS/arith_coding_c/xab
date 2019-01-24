@@ -1,0 +1,126 @@
+ break;
+        remove_symbol_from_stream( compressed_file, &s );
+        putc( c, stdout );
+    }
+    putc( '\n', stdout );
+}
+
+/*
+ * This routine is called to convert a character read in from
+ * the text input stream to a low, high, range SYMBOL.  This is
+ * part of the modeling function.  In this case, all that needs
+ * to be done is to find the character in the probabilities table
+ * and then retrieve the low and high values for that symbol.
+ */
+void convert_int_to_symbol( char c, SYMBOL *s )
+{
+    int i;
+
+    i=0;
+    for ( ; ; )
+    {
+        if ( c == probabilities[ i ].c )
+        {
+            s->low_count = probabilities[ i ].low;
+            s->high_count = probabilities[ i ].high;
+            s->scale = 11;
+            return;
+        }
+        if ( probabilities[i].c == '\0' )
+            error_exit( "Trying to encode a char not in the table" );
+        i++;
+    }
+}
+
+/*
+ * This modeling function is called to convert a SYMBOL value
+ * consisting of a low, high, and range value into a text character
+ * that can be sent to a file.  It does this by finding the symbol
+ * in the probability table that straddles the current range.
+ */
+char convert_symbol_to_int( unsigned int count, SYMBOL *s )
+{
+    int i;
+
+    i = 0;
+    for ( ; ; )
+    {
+        if ( count >= probabilities[ i ].low &&
+             count < probabilities[ i ].high )
+        {
+            s->low_count = probabilities[ i ].low;
+            s->high_count = probabilities[ i ].high;
+            s->scale = 11;
+            return( probabilities[ i ].c );
+        }
+        if ( probabilities[ i ].c == '\0' )
+            error_exit( "Failure to decode character" );
+        i++;
+    }
+}
+
+/*
+ * A generic error routine.
+ */
+void error_exit( char *message )
+{
+    puts( message );
+    exit( -1 );
+}
+
+/*
+ * Listing 4 -- bitio.c
+ *
+ * This routine contains a set of bit oriented i/o routines
+ * used for arithmetic data compression.  The important fact to
+ * know about these is that the first bit is stored in the msb of
+ * the first byte of the output, like you might expect.
+ *
+ * Both input and output maintain a local buffer so that they only
+ * have to do block reads and writes.  This is done in spite of the
+ * fact that C standard I/O does the same thing.  If these
+ * routines are ever ported to assembly language the buffering
+ * will come in handy.
+ *
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include "coder.h"
+#include "bitio.h"
+
+#define BUFFER_SIZE 256
+static char buffer[ BUFFER_SIZE + 2 ]; /* This is the i/o buffer    */
+static char *current_byte;             /* Pointer to current byte   */
+
+static int output_mask;                /* During output, this byte  */
+                                       /* contains the mask that is */
+                                       /* applied to the output byte*/
+                                       /* if the output bit is a 1  */
+
+static int input_bytes_left;           /* During input, these three */
+static int input_bits_left;            /* variables keep track of my*/
+static int past_eof;                   /* input state.  The past_eof*/
+                                       /* byte comes about because  */
+                                       /* of the fact that there is */
+                                       /* a possibility the decoder */
+                                       /* can legitimately ask for  */
+                                       /* more bits even after the  */
+                                       /* entire file has been      */
+                                       /* sucked dry.               */
+
+
+/*
+ * This routine is called once to initialze the output bitstream.
+ * All it has to do is set up the current_byte pointer, clear out
+ * all the bits in my current output byte, and set the output mask
+ * so it will set the proper bit next time a bit is output.
+ */
+void initialize_output_bitstream()
+{
+    current_byte = buffer;
+    *current_byte = 0;
+    output_mask = 0x80;
+}
+
+/*
+ * The output bit rou

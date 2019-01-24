@@ -1,0 +1,456 @@
+Release 9.1.03i - xst J.33
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "synth.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "synth"
+Output Format                      : NGC
+Target Device                      : xc2vp30-7-ff896
+
+---- Source Options
+Top Module Name                    : app_pack
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Equivalent register Removal        : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Convert Tristates To Logic         : Yes
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : auto
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Library Search Order               : synth.lso
+Keep Hierarchy                     : NO
+Global Optimization                : AllClockNets
+RTL Output                         : Yes
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Verilog 2001                       : YES
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "./app_pack.v" in library work
+Compiling verilog include file "pkt.defn.vh"
+Compiling verilog include file "parameter.vh"
+Module <app_pack> compiled
+No errors in compilation
+Analysis of file <"synth.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <app_pack> in library <work> with parameters.
+	msb_states = "00000000000000000000000000000010"
+	s0 = "00000000000000000000000000000000"
+	s1 = "00000000000000000000000000000001"
+	s2 = "00000000000000000000000000000010"
+	w_din = "00000000000000000000000000100000"
+	w_f0 = "00000000000000000000000000000101"
+	w_f1 = "00000000000000000000000000000110"
+	w_f2 = "00000000000000000000000000100000"
+	w_f3 = "00000000000000000000000000011110"
+	w_f4 = "00000000000000000000000000010111"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <app_pack>.
+	msb_states = 32'sb00000000000000000000000000000010
+	s0 = 32'sb00000000000000000000000000000000
+	s1 = 32'sb00000000000000000000000000000001
+	s2 = 32'sb00000000000000000000000000000010
+	w_din = 32'sb00000000000000000000000000100000
+	w_f0 = 32'sb00000000000000000000000000000101
+	w_f1 = 32'sb00000000000000000000000000000110
+	w_f2 = 32'sb00000000000000000000000000100000
+	w_f3 = 32'sb00000000000000000000000000011110
+	w_f4 = 32'sb00000000000000000000000000010111
+Module <app_pack> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <app_pack>.
+    Related source file is "./app_pack.v".
+WARNING:Xst:646 - Signal <f3_v_wc> is assigned but never used.
+WARNING:Xst:646 - Signal <f4_v_wc> is assigned but never used.
+WARNING:Xst:646 - Signal <f0_v_wc> is assigned but never used.
+WARNING:Xst:646 - Signal <f1_v_wc> is assigned but never used.
+WARNING:Xst:646 - Signal <f2_v_wc> is assigned but never used.
+WARNING:Xst:646 - Signal <dout_v_wc> is assigned but never used.
+    Found finite state machine <FSM_0> for signal <curr_state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 5                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | rst (positive)                                 |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 000                                            |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32-bit register for signal <dout_rd>.
+    Found 5-bit register for signal <f0_rd>.
+    Found 1-bit register for signal <f0_v_rx_rc>.
+    Found 6-bit register for signal <f1_rd>.
+    Found 1-bit register for signal <f1_v_rx_rc>.
+    Found 32-bit register for signal <f2_rd>.
+    Found 1-bit register for signal <f2_v_rx_rc>.
+    Found 30-bit register for signal <f3_rd>.
+    Found 32-bit register for signal <f4_dout_rd>.
+    Found 1-bit register for signal <f4_dout_v_rc>.
+    Found 23-bit register for signal <f4_rd>.
+    Found 32-bit register for signal <tmp_rd>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred 196 D-type flip-flop(s).
+Unit <app_pack> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 7
+ 1-bit register                                        : 4
+ 32-bit register                                       : 3
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <curr_state> on signal <curr_state[1:2]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 00
+ 001   | 01
+ 010   | 10
+-------------------
+Loading device for application Rf_Device from file '2vp30.nph' in environment C:\Xilinx91i.
+WARNING:Xst:2677 - Node <tmp_rd_11> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_12> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_13> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_14> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_15> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_16> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_17> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_18> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_19> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_20> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_21> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_22> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_23> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_24> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_25> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_26> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_27> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_28> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_29> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_30> of sequential type is unconnected in block <app_pack>.
+WARNING:Xst:2677 - Node <tmp_rd_31> of sequential type is unconnected in block <app_pack>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# Registers                                            : 81
+ Flip-Flops                                            : 81
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <app_pack> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block app_pack, actual ratio is 0.
+FlipFlop curr_state_FFd1 has been replicated 2 time(s)
+FlipFlop curr_state_FFd2 has been replicated 2 time(s)
+FlipFlop f4_dout_v_rc has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 86
+ Flip-Flops                                            : 86
+
+=========================================================================
+
+=========================================================================
+*                          Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : synth.ngr
+Top Level Output File Name         : synth
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 136
+
+Cell Usage :
+# BELS                             : 229
+#      INV                         : 1
+#      LUT2                        : 24
+#      LUT3                        : 44
+#      LUT3_D                      : 2
+#      LUT3_L                      : 33
+#      LUT4                        : 91
+#      LUT4_D                      : 4
+#      LUT4_L                      : 9
+#      MUXF5                       : 21
+# FlipFlops/Latches                : 86
+#      FDE                         : 35
+#      FDR                         : 39
+#      FDRS                        : 12
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 135
+#      IBUF                        : 102
+#      OBUF                        : 33
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                     109  out of  13696     0%  
+ Number of Slice Flip Flops:            86  out of  27392     0%  
+ Number of 4 input LUTs:               208  out of  27392     0%  
+ Number of IOs:                        136
+ Number of bonded IOBs:                136  out of    556    24%  
+ Number of GCLKs:                        1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk                                | BUFGP                  | 86    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 2.694ns (Maximum Frequency: 371.154MHz)
+   Minimum input arrival time before clock: 3.608ns
+   Maximum output required time after clock: 5.457ns
+   Maximum combinational path delay: 6.371ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 2.694ns (frequency: 371.154MHz)
+  Total number of paths / destination ports: 542 / 98
+-------------------------------------------------------------------------
+Delay:               2.694ns (Levels of Logic = 3)
+  Source:            f4_dout_v_rc_1 (FF)
+  Destination:       dout_rd_6 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: f4_dout_v_rc_1 to dout_rd_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              1   0.370   0.429  f4_dout_v_rc_1 (f4_dout_v_rc_1)
+     LUT4_D:I1->O          2   0.275   0.396  dout_mux0000111 (N5)
+     LUT4_D:I2->O          5   0.275   0.466  dout_mux002111 (N21)
+     LUT4:I3->O            2   0.275   0.000  dout_mux002532 (dout_6_OBUF)
+     FDR:D                     0.208          dout_rd_6
+    ----------------------------------------
+    Total                      2.694ns (1.403ns logic, 1.291ns route)
+                                       (52.1% logic, 47.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 408 / 184
+-------------------------------------------------------------------------
+Offset:              3.608ns (Levels of Logic = 4)
+  Source:            f3_v (PAD)
+  Destination:       dout_rd_6 (FF)
+  Destination Clock: clk rising
+
+  Data Path: f3_v to dout_rd_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            52   0.878   0.836  f3_v_IBUF (f3_v_IBUF)
+     LUT4_D:I0->O          2   0.275   0.396  dout_mux0000111 (N5)
+     LUT4_D:I2->O          5   0.275   0.466  dout_mux002111 (N21)
+     LUT4:I3->O            2   0.275   0.000  dout_mux002532 (dout_6_OBUF)
+     FDR:D                     0.208          dout_rd_6
+    ----------------------------------------
+    Total                      3.608ns (1.911ns logic, 1.697ns route)
+                                       (53.0% logic, 47.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 371 / 33
+-------------------------------------------------------------------------
+Offset:              5.457ns (Levels of Logic = 4)
+  Source:            f4_dout_v_rc_1 (FF)
+  Destination:       dout<10> (PAD)
+  Source Clock:      clk rising
+
+  Data Path: f4_dout_v_rc_1 to dout<10>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              1   0.370   0.430  f4_dout_v_rc_1 (f4_dout_v_rc_1)
+     LUT4_D:I1->O          2   0.275   0.396  dout_mux0000111 (N5)
+     LUT4_D:I2->O          5   0.275   0.466  dout_mux002111 (N21)
+     LUT4:I3->O            2   0.275   0.378  dout_mux002532 (dout_6_OBUF)
+     OBUF:I->O                 2.592          dout_6_OBUF (dout<6>)
+    ----------------------------------------
+    Total                      5.457ns (3.787ns logic, 1.670ns route)
+                                       (69.4% logic, 30.6% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 185 / 33
+-------------------------------------------------------------------------
+Delay:               6.371ns (Levels of Logic = 5)
+  Source:            f3_v (PAD)
+  Destination:       dout<10> (PAD)
+
+  Data Path: f3_v to dout<10>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            52   0.878   0.836  f3_v_IBUF (f3_v_IBUF)
+     LUT4_D:I0->O          2   0.275   0.396  dout_mux0000111 (N5)
+     LUT4_D:I2->O          5   0.275   0.466  dout_mux002111 (N21)
+     LUT4:I3->O            2   0.275   0.378  dout_mux002532 (dout_6_OBUF)
+     OBUF:I->O                 2.592          dout_6_OBUF (dout<6>)
+    ----------------------------------------
+    Total                      6.371ns (4.295ns logic, 2.076ns route)
+                                       (67.4% logic, 32.6% route)
+
+=========================================================================
+CPU : 14.08 / 14.17 s | Elapsed : 14.00 / 14.00 s
+ 
+--> 
+
+Total memory usage is 195352 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   27 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

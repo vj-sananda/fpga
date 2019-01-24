@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>File Uploads (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch05_07"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:51:27 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch05_07' class='lwp lwp_ch05_07' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">5.7. File Uploads</h2>
+
+<p>So far we've discussed <a name="INDEX-348" class="ipoint"
+></a><a name="INDEX-349" class="ipoint"
+></a><a name="INDEX-350" class="ipoint"
+></a><a name="INDEX-351" class="ipoint"
+></a><a name="INDEX-352" class="ipoint"
+></a>users entering text data that they
+type (or paste) into forms. But there's another way
+to submit data: with a <tt class="literal">type=file</tt> form element,
+which allows users to select a file on their local systems to upload
+when the form is submitted.
+</p>
+
+<p>Currently, three things have to happen for a user to upload a file
+via a form. First, the program that will be processing the form has
+to be expecting a file to be uploaded (you can't
+just alter the HTML for any form and stick a
+<tt class="literal">type=file</tt> field into it). Second, the form has to
+have an <tt class="literal">&lt;input
+type=</tt><tt class="userinput"><b>file</b></tt>
+<tt class="literal">name=</tt><em class="replaceable"><tt>whatever</tt></em><tt class="literal">&gt;</tt>
+element. And third, the <tt class="literal">form</tt> element has to have
+its attributes set like so:
+</p>
+
+<pre class="code">&lt;form <tt class="userinput"><b>method=post enctype="multipart/form-data"</b></tt> action="<em class="replaceable"><tt>url</tt></em>"&gt;</pre>
+
+<p>This is necessary because file-upload fields can't
+be conveyed by the normal form-data encoding system, but instead have
+to use the <tt class="literal">"multipart/form-data"</tt> encoding system
+(which, incidentally, can be conveyed only across POST requests, not
+across GET requests).
+</p>
+
+<p>Suppose, for example, that you were automating interaction with an
+HTML form that looked like this:
+</p>
+
+<pre class="code">&lt;form enctype="multipart/form-data" method=post
+  action="http://pastel.int/feedback.pl"&gt;
+Subject:               &lt;input <tt class="userinput"><b>name="subject"</b></tt> type="text"&gt;
+&lt;br&gt;File to process -- &lt;input <tt class="userinput"><b>name="saywhat" type="file"</b></tt>&gt;
+&lt;br&gt;Your Name --       &lt;input <tt class="userinput"><b>name="user"</b></tt>    type="text"&gt;
+&lt;input type="submit" value="Send!"&gt;&lt;/form&gt;</pre>
+
+<p>Modeling the first and third fields is as we've seen
+before -- a simple matter of
+<tt class="literal">$browser-&gt;post($url,</tt>
+<tt class="literal">['subject'=&gt;...,</tt>
+<tt class="literal">'user'=&gt;...])</tt>. But the file-upload part
+involves some doing. First off, you have to add a header line of
+<tt class="literal">'Content_Type'</tt> <tt class="literal">=&gt;
+'form-data'</tt> to mean that yes, you really mean this to be a
+<tt class="literal">"multipart/form-data"</tt> POSTing. And secondly, where
+you would have a string in
+<tt class="literal">'saywhat'=&gt;</tt><em class="replaceable"><tt>text</tt></em>, you
+instead have an array reference where the first array item is the
+path to the file you want to upload. So it ends up looking like this:
+</p>
+
+<pre class="code">my $response = $browser-&gt;post(
+  'http://pastel.int/feedback.pl',
+  [ 'subject' =&gt; 'Demand for pie.',
+<tt class="userinput"><b>    'saywhat' =&gt; ["./today/earth_pies1.dml"],</b></tt>
+    'user'    =&gt; 'Adm. Kang',
+  ],
+  <b class="emphasis-bold">'Content_Type' =&gt; 'form-data'</b>,
+  <em class="replaceable"><tt>...any other header lines...</tt></em>
+);</pre>
+
+<p>Assume that <em class="filename">./today/earth_pies1.dml</em> looks like
+this:
+</p>
+
+<pre class="code">&lt;?xml version="1.0" encoding='iso-8859-1' standalone="yes"?&gt;
+&lt;Demand xml:lang="i-klingon"&gt;
+  DaH chabmeyraj tunob!
+&lt;/Demand&gt;</pre>
+
+<p>The request that the above program actually sends will look like this:</p>
+
+<pre class="code">--xYzZY
+Content-Disposition: form-data; name="<tt class="userinput"><b>subject</b></tt>"
+ 
+<b class="emphasis-bold">Demand for pie</b>.
+--xYzZY
+Content-Disposition: form-data; name="<tt class="userinput"><b>saywhat</b></tt>"; filename="<tt class="userinput"><b>earth_pies1.dml</b></tt>"
+Content-Length: 131
+Content-Type: <tt class="userinput"><b>text/plain</b></tt>
+ 
+&lt;?xml version="1.0" encoding='iso-8859-1' standalone="yes"?&gt;
+&lt;Demand xml:lang="i-klingon"&gt;
+  DaH chabmeyraj tunob!
+&lt;/Demand&gt;
+ 
+--xYzZY
+Content-Disposition: form-data; name="<tt class="userinput"><b>user</b></tt>"
+ 
+<b class="emphasis-bold">Adm. Kang</b>
+--xYzZY--</pre>
+
+<p>Note that each form-field is like a little HTTP message of its own,
+with its own set of headers and its own body. For the
+"normal" fields (the first and
+third fields), the header basically expresses that this is ordinary
+data for a particular field name, and the body expresses the form
+data. But for the <tt class="literal">type=file</tt> field, we get the
+file's content as the body. Take a look at the
+header again:
+</p>
+
+<pre class="code">Content-Disposition: form-data; name="<tt class="userinput"><b>saywhat</b></tt>"; filename="<tt class="userinput"><b>earth_pies1.dml</b></tt>"
+Content-Length: 131
+Content-Type: <tt class="userinput"><b>text/plain</b></tt></pre>
+
+<p>The <tt class="literal">name="saywhat"</tt> expresses what the
+<tt class="literal">name="..."</tt> attribute was on the
+<tt class="literal">&lt;input</tt> <tt class="literal">type=file</tt>
+<tt class="literal">...&gt;</tt> element to which this corresponds, which
+we coded into our program in the <tt class="literal">saywhat=&gt;[...]</tt>
+line. But note that LWP also tells the remote host the basename of
+the file we're uploading by default (i.e., the
+filename minus directory names) as well as its best guess at the MIME
+type for that file. Because LWP (specifically, the LWP::MediaTypes
+module) has never heard of the <em class="filename"
+><abbr title="Demand Markup Languge.  I made it up!">.dml</abbr></em> extension,
+it falls back on <tt class="literal">text/plain</tt>. (If this file had
+clearly been a binary file, LWP would call it
+<tt class="literal">application/octet-stream</tt>, the MIME type for
+general binary files.) In case you want to change the name that LWP
+presents to the remote server, you can provide that name as a second
+item in the arrayref:
+</p>
+
+<pre class="code"><em class="replaceable"><tt>fieldname</em> =&gt; [<em class="replaceable">local_filespec</em> =&gt; <em class="replaceable">as_what_name</tt></em>],</pre>
+
+<p>So if you change the <tt class="literal">saywhat</tt> line in the above
+program to this:
+</p>
+
+<pre class="code">'saywhat' =&gt; ["./today/earth_pies1.dml" =&gt; "allyourpie.xml"],</pre>
+
+<p>Then the resulting headers on its part of the POST request would look
+like this:
+</p>
+
+<pre class="code">Content-Disposition: form-data; name="<tt class="userinput"><b>saywhat</b></tt>"; filename="<tt class="userinput"><b>allyourpie.xml</b></tt>"
+Content-Length: 131
+Content-Type: <tt class="userinput"><b>text/plain</b></tt></pre>
+
+<p>Although most applications that take file uploads across the Web pay
+no attention to the MIME types (because so many browsers get them
+wrong), if you want to specify a MIME type for a particular file
+upload, you could <a name="INDEX-353" class="ipoint"
+></a>do so with a third item in the array
+reference:
+</p>
+
+<pre class="code"><em class="replaceable"><tt>fieldname</em> =&gt; [<em class="replaceable">local_filespec</em> =&gt; <em class="replaceable">as_what_name</em> =&gt; <em class="replaceable">MIME_type</tt></em>],</pre>
+
+<p>Like so:</p>
+
+<pre class="code">'saywhat' =&gt; ["./today/earth_pies1.dml" =&gt; "allyourpie.xml"
+               =&gt; "application/angry-ultimatum"],</pre>
+
+<p>Then the resulting headers on its part of the POST request would look
+like this:
+</p>
+
+<pre class="code">Content-Disposition: form-data; name="<tt class="userinput"><b>saywhat</b></tt>"; filename="<tt class="userinput"><b>allyourpie.xml</b></tt>"
+Content-Length: 131
+Content-Type: <tt class="userinput"><b>application/angry-ultimatum</b></tt></pre>
+
+<p>All these file-upload options work just as well for binary files
+(such as JPEGs) as for text files. Note, however, that when LWP
+constructs and sends the request, it currently has to read into
+memory all files you're sending in this request. If
+you're sending a 20-megabyte MP3 file, this might be
+a problem! You can tell LWP not to read the files into memory by
+setting
+<tt class="literal">$HTTP::Request::Common::DYNAMIC_FILE_UPLOAD</tt>
+<tt class="literal">=</tt> <tt class="literal">1</tt> (it bears explaining that
+HTTP::Request::Common is the library that LWP uses for creating these
+file-upload requests), but unfortunately, at the time of this
+writing, many servers and CGIs do not understand the resulting HTTP
+POST request.
+</p>
+
+<p>One especially neat trick is that you don't even
+need to have a file to upload to send a "file
+upload" request. To send content from a string in
+memory instead of from a file on disk, use this syntax:
+</p>
+
+<pre class="code"><em class="replaceable"><tt>fieldname</tt></em> =&gt; [
+    undef,   # yes, undef!
+    <em class="replaceable"><tt>as_what_name</tt></em>, 
+    'Content_Type' =&gt; <em class="replaceable"><tt>MIME_type</tt></em>,
+    'Content' =&gt; <em class="replaceable"><tt>data_to_send</tt></em>
+],</pre>
+
+<p>For example, we could change our <tt class="literal">saywhat</tt> line in
+the above program to read:
+</p>
+
+<pre class="code">'saywhat' =&gt; [
+    undef,
+    'allyourpie.xml', 
+    'Content_Type' =&gt; 'application/angry-ultimatum',
+    'Content' =&gt; "All your pies are belong to me!\nGNAR!"
+],</pre>
+
+<p>The resulting request will contain this chunk of data for the
+<tt class="literal">saywhat</tt> field:
+</p>
+
+<pre class="code">Content-Disposition: form-data; name="<tt class="userinput"><b>saywhat</b></tt>"; filename="<tt class="userinput"><b>allyourpie.xml</b></tt>"
+Content-Type: <tt class="userinput"><b>application/angry-ultimatum</b></tt>
+ 
+<b class="emphasis-bold">All your pies are belong to me!</b>
+<b class="emphasis-bold">GNAR!</b></pre>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

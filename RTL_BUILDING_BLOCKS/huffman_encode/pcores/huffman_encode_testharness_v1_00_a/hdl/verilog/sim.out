@@ -1,0 +1,4 @@
+VCD info: dumpfile dump.vcd opened for output.
+$readmemh(encoded.dat): Not enough words in the read file for requested range.
+idata[          0] = 0x00000001
+idata[          1] = 0x00000001

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>History of LWP (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch01_02"; var lwp_lastmod=
+  'Time-stamp: "2007-11-12 19:57:38 AST"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch01_02' class='lwp lwp_ch01_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">1.2. History of LWP</h2>
+
+<p>The following history
+<a name="INDEX-16" class="ipoint"
+></a>of LWP was written by Gisle Aas, one of the
+creators of LWP and its current maintainer.
+</p>
+
+<p>&laquo;</p>
+<blockquote>
+<p>The libwww-perl project was <a name="INDEX-17" class="ipoint"
+></a>started at the very first WWW conference
+held in Geneva in 1994. At the conference, Martijn Koster met Roy
+Fielding who was presenting the work he
+<a name="INDEX-18" class="ipoint"
+></a><a name="INDEX-19" class="ipoint"
+></a>had
+done on MOMspider. MOMspider was a Perl program that traversed the
+Web looking for broken links and built an index of the documents and
+links discovered. Martijn suggested turning the reusable components
+of this program into a library. The result was the libwww-perl
+library for Perl 4 that Roy maintained.
+</p>
+
+<p>Later the same year, Larry Wall made the first
+"stable" release of Perl 5
+available. It was obvious that the module system and object-oriented
+features that the new version of Perl provided make
+Roy's library even better. At one point, both
+Martijn and myself had made our own separate modifications of
+libwww-perl. We joined forces, merged our designs, and made several
+alpha releases. Unfortunately, Martijn ended up in disagreement with
+his employer about the intellectual property rights of work done
+outside hours. To safeguard the code's continued
+availability to the Perl community, he asked me to take over
+maintenance of it.
+</p>
+
+<p>The LWP:: module <a name="INDEX-20" class="ipoint"
+></a>namespace was introduced by Martijn in
+one of the early alpha releases. This name choice was lively
+discussed on the libwww mailing list. It was soon pointed out that
+this name could be confused with what certain implementations of
+threads called themselves, but no better name alternatives emerged.
+In the last message on this matter, Martijn concluded,
+"OK, so we all agree LWP stinks
+:-)." The name stuck and has established itself.
+</p>
+
+<p>If you search for "LWP" on Google
+today, you <a name="INDEX-21" class="ipoint"
+></a>have to go to 30th position before you
+find a link about threads.
+</p>
+
+<p>In May 1996, we made the first non-beta release of libwww-perl for
+Perl 5. It was called release 5.00 because it was for Perl 5. This
+made some room for Roy to maintain libwww-perl for Perl 4, called
+libwww-perl-0.40. Martijn continued to contribute but was
+unfortunately "rolled over by the Java
+train."
+</p>
+
+<p>In 1997-98, I tried to redesign LWP around the concept of an event
+loop under the name LWPng. This allowed many nice things: multiple
+requests could be handled in parallel and on the same connection,
+requests could be pipelined to improve round-trip time, and HTTP/1.1
+was actually supported. But the tuits to finish it up never came, so
+this branch must by now be regarded as dead. I still hope some brave
+soul shows up and decides to bring it back to life.
+</p>
+
+<p>1998 was also the year that the HTML:: modules were unbundled from
+the core LWP distribution and the year after Sean M. Burke showed up
+and took over maintenance of the HTML-Tree distribution, actually
+making it handle all the real-world HTML that you will find. I had
+kind of given up on dealing with all the strange HTML that the web
+ecology had let develop. Sean had enough dedication to make sense of
+it.
+</p>
+
+<p>Today LWP is in strict maintenance mode with a much slower release
+cycle. The code base seems to be quite solid and capable of doing
+what most people expect it to.
+</p>
+
+</blockquote>
+<p>&raquo;</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

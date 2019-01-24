@@ -1,0 +1,8 @@
+# Output products list for <icon_pro>
+icon_pro.ncf
+icon_pro.ngc
+icon_pro.vhd
+icon_pro.vho
+icon_pro.xco
+icon_pro_flist.txt
+icon_pro_xmdf.tcl

@@ -1,0 +1,418 @@
+Release 10.1.03 - xst K.39 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> PMSPEC -- Overriding Xilinx file <C:/Xilinx/10.1/EDK/virtex2p/data/virtex2p.acd> with local file <c:/Xilinx/10.1/ISE/virtex2p/data/virtex2p.acd>
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "system_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/system.ngc"
+
+---- Source Options
+Top Module Name                    : system
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 10000
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" in Library work.
+Entity <system> compiled.
+Entity <system> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <system> in library <work> (architecture <STRUCTURE>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <system> in library <work> (Architecture <STRUCTURE>).
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1701: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1709: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1717: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1725: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1733: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1741: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1749: Instantiating black box module <IOBUF>.
+WARNING:Xst:2211 - "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd" line 1757: Instantiating black box module <IOBUF>.
+Entity <system> analyzed. Unit <system> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <system>.
+    Related source file is "E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/hdl/system.vhd".
+Unit <system> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Reading core <../implementation/ppc405_0_wrapper.ngc>.
+Reading core <../implementation/ppc405_1_wrapper.ngc>.
+Reading core <../implementation/jtagppc_0_wrapper.ngc>.
+Reading core <../implementation/reset_block_wrapper.ngc>.
+Reading core <../implementation/plb_wrapper.ngc>.
+Reading core <../implementation/opb_wrapper.ngc>.
+Reading core <../implementation/plb2opb_wrapper.ngc>.
+Reading core <../implementation/rs232_uart_1_wrapper.ngc>.
+Reading core <../implementation/leds_4bit_wrapper.ngc>.
+Reading core <../implementation/dipsws_4bit_wrapper.ngc>.
+Reading core <../implementation/plb_bram_if_cntlr_1_wrapper.ngc>.
+Reading core <../implementation/plb_bram_if_cntlr_1_bram_wrapper.ngc>.
+Reading core <../implementation/dcm_0_wrapper.ngc>.
+Reading core <../implementation/huffman_encode_testharness_0_wrapper.ngc>.
+Loading core <ppc405_0_wrapper> for timing and area information for instance <ppc405_0>.
+Loading core <ppc405_1_wrapper> for timing and area information for instance <ppc405_1>.
+Loading core <jtagppc_0_wrapper> for timing and area information for instance <jtagppc_0>.
+Loading core <reset_block_wrapper> for timing and area information for instance <reset_block>.
+Loading core <plb_wrapper> for timing and area information for instance <plb>.
+Loading core <opb_wrapper> for timing and area information for instance <opb>.
+Loading core <plb2opb_wrapper> for timing and area information for instance <plb2opb>.
+Loading core <rs232_uart_1_wrapper> for timing and area information for instance <RS232_Uart_1>.
+Loading core <leds_4bit_wrapper> for timing and area information for instance <LEDs_4Bit>.
+Loading core <dipsws_4bit_wrapper> for timing and area information for instance <DIPSWs_4Bit>.
+Loading core <plb_bram_if_cntlr_1_wrapper> for timing and area information for instance <plb_bram_if_cntlr_1>.
+Loading core <plb_bram_if_cntlr_1_bram_wrapper> for timing and area information for instance <plb_bram_if_cntlr_1_bram>.
+Loading core <dcm_0_wrapper> for timing and area information for instance <dcm_0>.
+Loading core <huffman_encode_testharness_0_wrapper> for timing and area information for instance <huffman_encode_testharness_0>.
+Loading device for application Rf_Device from file '2vp30.nph' in environment c:\Xilinx\10.1\ISE;C:\Xilinx\10.1\EDK.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <system> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+INFO:Xst:2260 - The FF/Latch <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1> in Unit <plb> is equivalent to the following 2 FFs/Latches : <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1_1> <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1_2> 
+INFO:Xst:2260 - The FF/Latch <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0> in Unit <plb> is equivalent to the following 2 FFs/Latches : <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0_1> <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0_2> 
+INFO:Xst:2260 - The FF/Latch <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1> in Unit <plb> is equivalent to the following 2 FFs/Latches : <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1_1> <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1_2> 
+INFO:Xst:2260 - The FF/Latch <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0> in Unit <plb> is equivalent to the following 2 FFs/Latches : <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0_1> <plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0_2> 
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/system.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 12
+
+Cell Usage :
+# BELS                             : 6079
+#      GND                         : 17
+#      INV                         : 79
+#      LUT1                        : 52
+#      LUT1_L                      : 1
+#      LUT2                        : 491
+#      LUT2_D                      : 9
+#      LUT2_L                      : 120
+#      LUT3                        : 1899
+#      LUT3_D                      : 9
+#      LUT3_L                      : 228
+#      LUT4                        : 1521
+#      LUT4_D                      : 35
+#      LUT4_L                      : 535
+#      MULT_AND                    : 9
+#      MUXCY                       : 251
+#      MUXCY_L                     : 252
+#      MUXF5                       : 201
+#      MUXF6                       : 3
+#      VCC                         : 17
+#      XORCY                       : 350
+# FlipFlops/Latches                : 1947
+#      FD                          : 151
+#      FD_1                        : 5
+#      FDC                         : 41
+#      FDCE                        : 51
+#      FDCPE                       : 4
+#      FDE                         : 471
+#      FDP                         : 13
+#      FDPE                        : 9
+#      FDR                         : 455
+#      FDRE                        : 648
+#      FDRS                        : 46
+#      FDRSE                       : 20
+#      FDS                         : 14
+#      FDSE                        : 11
+#      LD_1                        : 8
+# RAMS                             : 176
+#      RAM16X1D                    : 110
+#      RAMB16_S1_S1                : 64
+#      RAMB16_S36_S36              : 2
+# Shift Registers                  : 66
+#      SRL16                       : 47
+#      SRL16E                      : 19
+# Clock Buffers                    : 1
+#      BUFG                        : 1
+# IO Buffers                       : 12
+#      IBUF                        : 2
+#      IBUFG                       : 1
+#      IOBUF                       : 8
+#      OBUF                        : 1
+# DCMs                             : 1
+#      DCM                         : 1
+# Others                           : 5
+#      JTAGPPC                     : 1
+#      PPC405                      : 2
+#      ROM128X1                    : 2
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                     3241  out of  13696    23%  
+ Number of Slice Flip Flops:           1947  out of  27392     7%  
+ Number of 4 input LUTs:               5281  out of  27392    19%  
+    Number used as logic:              4979
+    Number used as Shift registers:      66
+    Number used as RAMs:                220
+    Number used as ROMs:                 16
+ Number of IOs:                          12
+ Number of bonded IOBs:                  12  out of    556     2%  
+ Number of BRAMs:                        66  out of    136    48%  
+ Number of GCLKs:                         1  out of     16     6%  
+ Number of PPC405s:                       2  out of      2   100%  
+ Number of DCMs:                          1  out of      8    12%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+---------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)           | Load  |
+-----------------------------------+---------------------------------+-------+
+sys_clk_pin                        | dcm_0/Using_Virtex.DCM_INST:CLK0| 2123  |
+-----------------------------------+---------------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+Control Signal                                                                                                                                                                                                                                                                                        | Buffer(FF name)                                                                                                                                                  | Load  |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+opb/OPB_Rst(opb/opb/POR_FF_I:Q)                                                                                                                                                                                                                                                                       | NONE(RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/uart_CS_3)                                                                                                    | 99    |
+huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/Fifo_Reset(huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/Fifo_Reset:Q)| NONE(huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/INCLUDE_WRFIFO_GEN.I_WRPFIFO_TOP/USE_BLOCK_RAM.I_DP_CONTROLLER/int_full_dly2)| 6     |
+N0(XST_GND:G)                                                                                                                                                                                                                                                                                         | NONE(dcm_0/RST_shift1)                                                                                                                                           | 4     |
+plb2opb/BGO_dcrDBus<31>(plb2opb/XST_GND:G)                                                                                                                                                                                                                                                            | NONE(plb2opb/plb2opb/I_PLB_abort_Reg)                                                                                                                            | 4     |
+huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/INCLUDE_RDFIFO_GEN.I_RDFIFO/I_IPIF_INTERFACE_BLOCK/Fifo_rst(huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/INCLUDE_RDFIFO_GEN.I_RDFIFO/I_IPIF_INTERFACE_BLOCK/Fifo_rst:Q)              | NONE(huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/INCLUDE_RDFIFO_GEN.I_RDFIFO/USE_BLOCK_RAM.I_DP_CONTROLLER/int_full_dly2)     | 3     |
+RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/reset_RX_FIFO(RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/reset_RX_FIFO:Q)                                                                                                                                                                            | NONE(RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/data_Exists_I)                                                                   | 1     |
+RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/reset_TX_FIFO(RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/reset_TX_FIFO:Q)                                                                                                                                                                            | NONE(RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/data_Exists_I)                                                                   | 1     |
+plb2opb/plb2opb/OPBside_reset_Read_inprog_negedge_regd(plb2opb/plb2opb/I_OPBside_reset_Read_inprog_negedge_regd:O)                                                                                                                                                                                    | NONE(plb2opb/plb2opb/I_Read_inprog_negedge_Reg)                                                                                                                  | 1     |
+plb2opb/plb2opb/PLB_abort_regd_clear(plb2opb/plb2opb/I_PLB_abort_regd_clear:O)                                                                                                                                                                                                                        | NONE(plb2opb/plb2opb/I_PLB_abort_Reg)                                                                                                                            | 1     |
+plb2opb/plb2opb/PLBside_reset_OPB_retry_onRd(plb2opb/plb2opb/I_B_side_Reg_CLR:O)                                                                                                                                                                                                                      | NONE(plb2opb/plb2opb/I_A_side_Reg)                                                                                                                               | 1     |
+plb2opb/plb2opb/PLBside_reset_OPB_timeout_onRd(plb2opb/plb2opb/I_OPB_timeout_side_Reg_CLR:O)                                                                                                                                                                                                          | NONE(plb2opb/plb2opb/I_OPB_timeout_Reg)                                                                                                                          | 1     |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 8.368ns (Maximum Frequency: 119.505MHz)
+   Minimum input arrival time before clock: 5.382ns
+   Maximum output required time after clock: 3.293ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'sys_clk_pin'
+  Clock period: 8.368ns (frequency: 119.505MHz)
+  Total number of paths / destination ports: 201495 / 5320
+-------------------------------------------------------------------------
+Delay:               8.368ns (Levels of Logic = 11)
+  Source:            huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/opb_select_s0 (FF)
+  Destination:       huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/GEN_RDREQ_WREQ.WRREQ_GEN_FOR_REST.WRREQ_HOLD_FF (FF)
+  Source Clock:      sys_clk_pin rising
+  Destination Clock: sys_clk_pin rising
+
+  Data Path: huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/opb_select_s0 to huffman_encode_testharness_0/huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/GEN_RDREQ_WREQ.WRREQ_GEN_FOR_REST.WRREQ_HOLD_FF
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              7   0.370   0.483  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/opb_select_s0 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/opb_select_s0)
+     LUT4:I2->O            1   0.275   0.370  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_s0_0_and0000_SW0_SW0_SW0 (N139)
+     LUT4:I3->O            5   0.275   0.428  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_s0_0_and0000 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/Bus2IP_CS<0>)
+     MUXCY:CI->O           2   0.416   0.476  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/PER_AR_GEN[0].PER_CE_GEN[0].MULTIPLE_CES_THIS_CS_GEN.CE_I/XST_WA.GEN_DECODE[0].MUXCY_I (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/Bus2IP_CE<0>)
+     LUT2:I1->O           33   0.275   0.809  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_rdce_s0_0_and00001 (huffman_encode_testharness_0/iBus2IP_RdCE<0>)
+     begin scope: 'huffman_encode_testharness_0/USER_LOGIC_I'
+     LUT4:I0->O            1   0.275   0.349  bus2ip_wrce_RNI8G44[0] (ip2bus_ack)
+     end scope: 'huffman_encode_testharness_0/USER_LOGIC_I'
+     LUT4:I2->O            1   0.275   0.349  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/ipic_xferack12 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/ipic_xferack12)
+     LUT4_L:I2->LO         1   0.275   0.118  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/ipic_xferack67 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/ipic_xferack67)
+     LUT4:I2->O            2   0.275   0.396  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/ipic_xferack152 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/ipic_xferack)
+     LUT4:I2->O            3   0.275   0.415  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1)
+     LUT4:I2->O            2   0.275   0.378  huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/rdreq_hold_rst1 (huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/rdreq_hold_rst)
+     FDRE:R                    0.536          huffman_encode_testharness_0/OPB_IPIF_I/OPB_BAM_I/GEN_RDREQ_WREQ.RDREQ_HOLD_FF
+    ----------------------------------------
+    Total                      8.368ns (3.797ns logic, 4.571ns route)
+                                       (45.4% logic, 54.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'sys_clk_pin'
+  Total number of paths / destination ports: 805 / 160
+-------------------------------------------------------------------------
+Offset:              5.382ns (Levels of Logic = 15)
+  Source:            huffman_encode_testharness_0/huffman_encode_testharness_0/USER_LOGIC_I/div_i/dut/dut/ex_div/MuxSel0_1:O (PAD)
+  Destination:       huffman_encode_testharness_0/huffman_encode_testharness_0/USER_LOGIC_I/div_i/dut/dut/ex_div/etl1__XH__67_0/q[67] (FF)
+  Destination Clock: sys_clk_pin rising
+
+  Data Path: huffman_encode_testharness_0/huffman_encode_testharness_0/USER_LOGIC_I/div_i/dut/dut/ex_div/MuxSel0_1:O to huffman_encode_testharness_0/huffman_encode_testharness_0/USER_LOGIC_I/div_i/dut/dut/ex_div/etl1__XH__67_0/q[67]
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    ROM128X1:O            89   0.000   0.000  MuxSel0_1 (MuxSel0_1)
+     begin scope: 'mux2e__DivOpA__68_0'
+     LUT3:I1->O            1   0.275   0.468  un91_dout_i[61] (N_25_i)
+     LUT3:I0->O            2   0.275   0.476  un91_dout_i_RNIMV43[61] (Si_60)
+     end scope: 'mux2e__DivOpA__68_0'
+     begin scope: 'etl1__CH__61_0'
+     LUT3:I1->O            1   0.275   0.349  q_RNIBA77[59] (Carry_61)
+     end scope: 'etl1__CH__61_0'
+     begin scope: 'etl1__XH__67_0'
+     LUT4:I2->O            2   0.275   0.000  q_RNIIK8I[61] (N_6467)
+     end scope: 'etl1__XH__67_0'
+     MUXCY_L:S->LO         1   0.334   0.000  XH_in_1_cry_0_0 (XH_in_1_cry_0)
+     MUXCY_L:CI->LO        1   0.036   0.000  XH_in_1_cry_1_0 (XH_in_1_cry_1)
+     MUXCY_L:CI->LO        1   0.036   0.000  XH_in_1_cry_2_0 (XH_in_1_cry_2)
+     MUXCY_L:CI->LO        1   0.036   0.000  XH_in_1_cry_3_0 (XH_in_1_cry_3)
+     MUXCY_L:CI->LO        0   0.036   0.000  XH_in_1_cry_4_0 (XH_in_1_cry_4)
+     XORCY:CI->O           1   0.708   0.468  XH_in_1_s_5 (N_3318)
+     begin scope: 'etl1__XH__67_0'
+     LUT4_L:I0->LO         1   0.275   0.000  q_32[67] (q_32[67])
+     FDE:D                     0.208          q[67]
+    ----------------------------------------
+    Total                      5.382ns (3.621ns logic, 1.761ns route)
+                                       (67.3% logic, 32.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'sys_clk_pin'
+  Total number of paths / destination ports: 23 / 19
+-------------------------------------------------------------------------
+Offset:              3.293ns (Levels of Logic = 2)
+  Source:            RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/TX (FF)
+  Destination:       fpga_0_RS232_Uart_1_TX_pin (PAD)
+  Source Clock:      sys_clk_pin rising
+
+  Data Path: RS232_Uart_1/RS232_Uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/TX to fpga_0_RS232_Uart_1_TX_pin
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              1   0.370   0.332  RS232_Uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/TX (TX)
+     end scope: 'RS232_Uart_1'
+     OBUF:I->O                 2.592          fpga_0_RS232_Uart_1_TX_pin_OBUF (fpga_0_RS232_Uart_1_TX_pin)
+    ----------------------------------------
+    Total                      3.293ns (2.962ns logic, 0.332ns route)
+                                       (89.9% logic, 10.1% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 48.00 secs
+Total CPU time to Xst completion: 48.22 secs
+ 
+--> 
+
+Total memory usage is 257944 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    8 (   0 filtered)
+Number of infos    :    4 (   0 filtered)
+

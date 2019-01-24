@@ -1,0 +1,2900 @@
+//! **************************************************************************
+// Written by: Map H.40 on Sun Apr 24 15:05:36 2005
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "fpga_0_LEDs_4Bit_GPIO_IO_pin<0>" LOCATE = SITE "AC4" LEVEL 1;
+COMP "fpga_0_LEDs_4Bit_GPIO_IO_pin<1>" LOCATE = SITE "AC3" LEVEL 1;
+COMP "fpga_0_LEDs_4Bit_GPIO_IO_pin<2>" LOCATE = SITE "AA6" LEVEL 1;
+COMP "fpga_0_LEDs_4Bit_GPIO_IO_pin<3>" LOCATE = SITE "AA5" LEVEL 1;
+COMP "sys_clk_pin" LOCATE = SITE "AJ15" LEVEL 1;
+COMP "fpga_0_DIPSWs_4Bit_GPIO_IO_pin<0>" LOCATE = SITE "AC11" LEVEL 1;
+COMP "fpga_0_DIPSWs_4Bit_GPIO_IO_pin<1>" LOCATE = SITE "AD11" LEVEL 1;
+COMP "fpga_0_DIPSWs_4Bit_GPIO_IO_pin<2>" LOCATE = SITE "AF8" LEVEL 1;
+COMP "fpga_0_DIPSWs_4Bit_GPIO_IO_pin<3>" LOCATE = SITE "AF9" LEVEL 1;
+COMP "sys_rst_pin" LOCATE = SITE "AH5" LEVEL 1;
+COMP "fpga_0_RS232_Uart_1_RX_pin" LOCATE = SITE "AJ8" LEVEL 1;
+COMP "fpga_0_RS232_Uart_1_TX_pin" LOCATE = SITE "AE7" LEVEL 1;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_63.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_63.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_62.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_62.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_61.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_61.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_60.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_60.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_59.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_59.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_58.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_58.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_57.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_57.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_56.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_56.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_55.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_55.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_54.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_54.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_53.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_53.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_52.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_52.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_0.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_0.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_1.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_1.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_2.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_2.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_3.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_3.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_4.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_4.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_5.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_5.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_6.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_6.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_7.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_7.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_8.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_8.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_9.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_9.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_10.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_10.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_11.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_11.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_12.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_12.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_13.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_13.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_14.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_14.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_15.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_15.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_16.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_16.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_17.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_17.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_18.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_18.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_19.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_19.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_20.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_20.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_21.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_21.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_22.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_22.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_23.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_23.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_24.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_24.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_25.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_25.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_26.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_26.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_27.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_27.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_28.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_28.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_29.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_29.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_30.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_30.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_31.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_31.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_32.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_32.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_33.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_33.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_34.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_34.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_35.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_35.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_36.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_36.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_37.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_37.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_38.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_38.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_39.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_39.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_40.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_40.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_41.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_41.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_42.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_42.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_43.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_43.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_44.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_44.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_45.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_45.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_46.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_46.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_47.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_47.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_48.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_48.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_49.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_49.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_50.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_50.A"
+        PINNAME CLKA;
+PIN
+        plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_51.A_pins<53>
+        = BEL
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_51.A"
+        PINNAME CLKA;
+PIN
+        huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CORE/I_DPB16_512x321.A_pins<53>
+        = BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CORE/I_DPB16_512x321.A"
+        PINNAME CLKA;
+PIN
+        huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CORE/I_DPB16_512x321.B_pins<53>
+        = BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CORE/I_DPB16_512x321.B"
+        PINNAME CLKB;
+PIN
+        huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CORE/I_DPB16_512x321.A_pins<53>
+        = BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CORE/I_DPB16_512x321.A"
+        PINNAME CLKA;
+PIN
+        huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CORE/I_DPB16_512x321.B_pins<53>
+        = BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CORE/I_DPB16_512x321.B"
+        PINNAME CLKB;
+PIN ppc405_0/ppc405_0/PPC405_i_pins<172> = BEL "ppc405_0/ppc405_0/PPC405_i"
+        PINNAME CPMC405CLOCK;
+PIN ppc405_0/ppc405_0/PPC405_i_pins<421> = BEL "ppc405_0/ppc405_0/PPC405_i"
+        PINNAME PLBCLK;
+TIMEGRP dcm_0_dcm_0_CLK0_BUF = PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_63.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_62.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_61.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_60.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_59.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_58.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_57.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_56.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_55.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_54.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_53.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_52.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_0.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_1.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_2.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_3.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_4.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_5.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_6.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_7.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_8.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_9.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_10.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_11.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_12.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_13.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_14.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_15.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_16.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_17.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_18.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_19.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_20.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_21.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_22.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_23.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_24.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_25.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_26.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_27.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_28.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_29.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_30.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_31.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_32.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_33.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_34.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_35.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_36.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_37.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_38.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_39.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_40.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_41.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_42.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_43.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_44.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_45.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_46.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_47.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_48.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_49.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_50.A_pins<53>"
+        PIN
+        "plb_bram_if_cntlr_1_bram/plb_bram_if_cntlr_1_bram/ramb16_s1_s1_51.A_pins<53>"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_1_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_0_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_6"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_8"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_read_ack"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/rd_access_error"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_wrce1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_rdreq"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_empty"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/sw_reset_error"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_deadlock"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/I_COUNTER_BIT_LSB/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/I_COUNTER_BIT_LSB/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/I_COUNTER_BIT_LSB/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_NORMAL_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/I_COUNTER_BIT_LSB/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_MARK_OCCUPANCY/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_MARKREG_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_READ_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I7/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/I_WRITE_ADDR_CNTR/I_UP_DWN_COUNTER/Counter_Bit_I8/FDRE_I"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/Fifo_rst"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/fifo_errack_inhibit"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/burst_rd_xfer"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_read_ack"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_6"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_8"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_read_req"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/wr_access_error"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/rd_access_error"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_wrce1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/sw_reset_error"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/Fifo_Reset"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_deadlock"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_rdce2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/fifo_errack_inhibit"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_almostfull"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_full"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/wr_access_error"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_rdce2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_almostempty"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_IPIF_INTERFACE_BLOCK/reg_vacancy_9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/trans_state_FFd3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/trans_state_FFd2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/trans_state_FFd1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/ld_occ_norm_into_mark"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/enable_rd_addr_decr"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/ld_addr_mark_into_write"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/enable_mark_addr_inc"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/int_empty_dly1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/hold_ack"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/enable_wr_addr_inc"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/int_full_dly1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CONTROLLER/int_full_dly2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_occupancy_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/I_DELAY_MUX/FDRE_I0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/trans_state_FFd7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/trans_state_FFd4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/trans_state_FFd2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/enable_mark_addr_decr"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/trans_state_FFd9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/int_rdack"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/back_to_back_rd"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/int_empty_dly1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/hold_ack"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/enable_wr_addr_inc"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/valid_read"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/bkup_recover"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/enable_rd_addr_decr"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/rdack_dly1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/int_full_dly1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CONTROLLER/int_full_dly2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/fsm_cs_FFd3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/fsm_cs_FFd2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/fsm_cs_FFd1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_25"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_26"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_27"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_28"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_29"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_8"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_30"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_31"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_32"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_33"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_34"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_24"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/shift_len_rc_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/idx_rc_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/code_rc_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/code_detect_rc"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_35"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/push_rc"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pop_rc"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_22"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_21"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_20"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_19"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_18"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_17"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_16"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_15"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_14"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_13"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_12"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_11"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_10"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/shift_len_rc_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/idx_rc_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/shift_len_rc_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/code_rc_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/code_rc_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/code_rc_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/bits_left_rc_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_6"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/huffman_decode_i/pdata_rd_23"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_27"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_28"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_29"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_30"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_31"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_6"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_8"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_10"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_11"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_12"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_13"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_14"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_15"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_16"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_17"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_18"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_19"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_20"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_21"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_23"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_10"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_11"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_12"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_6"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_8"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_10"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_11"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_13"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_14"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_15"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_16"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_17"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_18"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_14"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_19"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_20"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_15"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_21"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_13"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_8"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_6"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_5"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_4"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_21"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_20"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_26"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_7"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_25"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_23"
+        PIN
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CORE/I_DPB16_512x321.A_pins<53>"
+        PIN
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_DP_CORE/I_DPB16_512x321.B_pins<53>"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_22"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_12"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_24"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_19"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_22"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_9"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_18"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_17"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_16"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/RDREQ_HOLD_FF"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/WRREQ_HOLD_FF"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1_d1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1_d2"
+        PIN
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CORE/I_DPB16_512x321.A_pins<53>"
+        PIN
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_WRPFIFO_TOP/I_DP_CORE/I_DPB16_512x321.B_pins<53>"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/postedwrack_s2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/last_pw_xferack_d1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_3"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_4"
+        BEL "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_0" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_0" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_31" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_30" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_29" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_28" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_27" BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0"
+        BEL "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_26" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_25" BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_select_s0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_0"
+        BEL "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_24" BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/I_RDFIFO/I_IPIF_INTERFACE_BLOCK/reg_read_req"
+        BEL "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_23" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_22" BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/last_xferack_d1_s0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/last_xferack_d1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/fifo_wr_cntl_cs_FFd1"
+        BEL "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/result_rd_3" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/result_rd_2" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/result_rd_1" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/result_rd_0" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_30" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_29" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_28" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_27" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_26" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_25" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_24" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_23" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_22" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_21" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_20" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_19" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_18" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_17" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_16" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_15" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_14" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_13" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_12" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_11" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_10" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_9" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_8" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_7" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_6" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_5" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_4" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_3" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_2" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_1" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_0" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_10" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_11" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_12" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_13" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_14" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_15" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_16" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_17" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_18" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_19" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_20" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_21" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_22" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_23" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_24" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_25" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_26" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_27" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_28" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_29" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_30" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_31" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_21" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_20" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_19" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_18" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_17" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_16" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_15" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_14" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_13" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_12" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_11" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_10" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_9" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_8" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/ldata_rd_31" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/rdy_rc" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/IP2RFIFO_WrReq" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/IP2WFIFO_RdReq" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_7" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_6" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_5" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_4" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_3" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_2" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg1_1" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_9" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_8" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_7" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_6" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_5" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_4" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_3" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_2" BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/slv_reg0_1" BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_0"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_errack_s2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_31"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_30"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_29"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_28"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_27"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_26"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_25"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_24"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_23"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/fifo_wr_cntl_cs_FFd2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/fifo_cntl_cs_FFd1"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/USER_LOGIC_I/fifo_cntl_cs_FFd2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_22"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_2"
+        BEL
+        "huffman_decoder_0/huffman_decoder_0/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE4"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE5"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE6"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N16"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N15"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N14"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N13"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N12"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N11"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N10"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N9"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N8"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE_N7"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE0to30"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE0to31"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE0to32"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE0to33"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE4to74"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE4to75"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE4to76"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRSE_BE4to77"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_BRAM_CONTROLLER/IP2Bus_RdAck_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER/I_CS_S_H_REG0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER/I_BKEND_CS_REG0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DECODER/I_ADDR_MATCH_REG"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_SIZE_S_H_REG3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_SIZE_S_H_REG2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_SNGL_S_H_REG"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_CACHLN_S_H_REG"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd10"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd7"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd6"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd5"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/bus2ip_rdreq_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/addr_cycle_flush"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/bus2ip_wrreq_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd13"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I5/FDRE_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/addr_cntl_state_FFd1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/addr_cntl_state_FFd2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cycle_count_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cycle_count_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cycle_count_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cycle_count_3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_18"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_19"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_20"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_21"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_22"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_23"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_24"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_25"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_26"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_27"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_28"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_29"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_30"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_31"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_32"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_33"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_34"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_35"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_36"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_37"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_38"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_39"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_40"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_41"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_42"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_43"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_44"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_45"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_46"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_47"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_48"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_49"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_50"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_51"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_52"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_53"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_54"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_55"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_56"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_57"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_58"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_59"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_60"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_61"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_62"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_63"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_4"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_5"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_6"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_7"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_8"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_9"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_10"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_11"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_12"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_13"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_14"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_15"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_16"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_17"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_18"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_19"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_20"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_21"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_22"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_23"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_24"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_25"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_26"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_27"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_28"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_29"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_30"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_31"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_32"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_33"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_34"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_35"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_36"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_37"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_38"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_39"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_40"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_41"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_42"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_43"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_44"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_45"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_46"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_47"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_48"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_49"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_50"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_51"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_52"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_53"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_54"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_55"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_56"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_57"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_58"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_59"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_60"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_61"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_62"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_63"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_4"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_5"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_6"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_7"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_8"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_9"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_10"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_11"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_12"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_13"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_14"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_15"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_16"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_17"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_18"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_19"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_20"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_21"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_22"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_23"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_24"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_25"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_26"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_27"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_28"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_29"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_30"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_31"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_size_reg_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_size_reg_3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdwdaddr_i_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdwdaddr_i_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_4"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_5"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_6"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_7"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd12"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd8"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_15"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd9"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_8"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_7"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_ADDRESS_COUNTER/I_FLEX_ADDR_CNTR/I_FDRE0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abort_reg"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I6/FDRE_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_pavalid_reg"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/clear_sl_busy"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I0/FDRE_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_9"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddbus_i_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_merr_i_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_10"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_merr_i_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_11"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_12"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_4"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_5"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_6"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/Bus2IP_masterID_i_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_3"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rddack_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/set_sl_busy"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I3/FDRE_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sig_inhib_Addr_cntr_ld"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/data_cntl_state_FFd11"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_rdcomp_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I4/FDRE_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_wrdack_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_abus_reg_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_mbusy_i_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_14"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_masterid_reg_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_mbusy_i_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_16"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_rnw_reg"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/CARRY_OUT_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_busy"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_be_reg_0"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I2/FDRE_I"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/sl_wrcomp_i"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_2"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_13"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_17"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/plb_wrdbus_reg_1"
+        BEL
+        "plb_bram_if_cntlr_1/plb_bram_if_cntlr_1/I_PLB_IPIF/I_SLAVE_ATTACHMENT/I_DPTO_COUNTER/Counter_Bit_I1/FDRE_I"
+        BEL "reset_block/reset_block/EXT_LPF/exr_lpf_3" BEL
+        "reset_block/reset_block/EXT_LPF/exr_d1" BEL
+        "reset_block/reset_block/EXT_LPF/exr_lpf_2" BEL
+        "reset_block/reset_block/EXT_LPF/lpf_exr" BEL
+        "reset_block/reset_block/CORE_RESET/q_int_2" BEL
+        "reset_block/reset_block/CORE_RESET/q_int_1" BEL
+        "reset_block/reset_block/CORE_RESET/q_int_0" BEL
+        "reset_block/reset_block/CORE_RESET/q_int_3" BEL
+        "reset_block/reset_block/EXT_LPF/exr_lpf_0" BEL
+        "reset_block/reset_block/SEQ/SEQ_COUNTER/q_int_2" BEL
+        "reset_block/reset_block/SEQ/SEQ_COUNTER/q_int_1" BEL
+        "reset_block/reset_block/SEQ/SEQ_COUNTER/q_int_0" BEL
+        "reset_block/reset_block/SEQ/SEQ_COUNTER/q_int_5" BEL
+        "reset_block/reset_block/SEQ/SEQ_COUNTER/q_int_4" BEL
+        "reset_block/reset_block/SEQ/sys_dec_0" BEL
+        "reset_block/reset_block/SEQ/SEQ_COUNTER/q_int_3" BEL
+        "reset_block/reset_block/SEQ/pr_dec_0" BEL
+        "reset_block/reset_block/SEQ/chip_dec_1" BEL
+        "reset_block/reset_block/SEQ/chip_dec_2" BEL
+        "reset_block/reset_block/SEQ/pr_dec_1" BEL
+        "reset_block/reset_block/SEQ/bsr_dec_0" BEL
+        "reset_block/reset_block/SEQ/system_Reset_Req_d2" BEL
+        "reset_block/reset_block/SEQ/chip_dec_0" BEL
+        "reset_block/reset_block/SEQ/pr_dec_2" BEL
+        "reset_block/reset_block/SEQ/sys_dec_2" BEL
+        "reset_block/reset_block/SEQ/system_Reset_Req_d3" BEL
+        "reset_block/reset_block/SEQ/Chip" BEL
+        "reset_block/reset_block/SEQ/sys_dec_1" BEL
+        "reset_block/reset_block/SEQ/chip_Reset_Req_d1" BEL
+        "reset_block/reset_block/SEQ/system_Reset_Req_d1" BEL
+        "reset_block/reset_block/SEQ/bsr" BEL
+        "reset_block/reset_block/SEQ/seq_clr" BEL
+        "reset_block/reset_block/SEQ/ris_edge" BEL
+        "reset_block/reset_block/SEQ/sys_edge" BEL
+        "reset_block/reset_block/SEQ/Sys" BEL "reset_block/reset_block/SEQ/pr"
+        BEL "reset_block/reset_block/SEQ/chip_Reset_Req_d2" BEL
+        "reset_block/reset_block/SEQ/bsr_dec_2" BEL
+        "reset_block/reset_block/SEQ/chip_Reset_Req_d3" BEL
+        "reset_block/reset_block/SEQ/seq_cnt_en" BEL
+        "reset_block/reset_block/Rstc405resetcore" BEL
+        "reset_block/reset_block/Rstc405resetchip" BEL
+        "reset_block/reset_block/Bus_Struct_Reset_0" BEL
+        "reset_block/reset_block/EXT_LPF/exr_lpf_1" BEL
+        "reset_block/reset_block/Core_Reset_Req_d1" BEL
+        "reset_block/reset_block/Core_Reset_Req_d3" BEL
+        "reset_block/reset_block/core_cnt_en" BEL
+        "reset_block/reset_block/Core_Reset_Req_d2" BEL
+        "reset_block/reset_block/core_req_edge" BEL
+        "reset_block/reset_block/EXT_LPF/lpf_int" BEL
+        "reset_block/reset_block/Rstc405resetsys" BEL
+        "reset_block/reset_block/EXT_LPF/POR_SRL_I/SRL16E" PIN
+        "ppc405_0/ppc405_0/PPC405_i_pins<172>" PIN
+        "ppc405_0/ppc405_0/PPC405_i_pins<421>" PIN
+        "ppc405_0/ppc405_0/PPC405_i_pins<172>" PIN
+        "ppc405_0/ppc405_0/PPC405_i_pins<421>" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_13" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_12" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_11" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_10" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_9" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_8" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_be_s0_3" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1_d2" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_7" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_6" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_5" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_4" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_rnw_s1" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_3" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_2" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_1" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_27" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_26" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/last_pw_xferack_d1" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_25" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/last_pw_xferack_d2" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_24" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s2" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_23" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_0" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_0" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_22" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_21" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_20" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_19" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_18" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_17" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_16" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_15" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_14" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_31" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_30" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_29" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/opb_select_s0" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_0"
+        BEL "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_28" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_s1_0" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_be_s1_3" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/cycle_active" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/postedwrack_s2" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1_d1" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/last_xferack_d1_s0" BEL
+        "dipsws_4bit/dipsws_4bit/OPB_IPIF_I/OPB_BAM_I/last_xferack_d1" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/gpio_xferAck_Reg" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/READ_REG_FF_I3" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/iGPIO_xferAck" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/gpio_Data_In_2" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/gpio_Data_In_1" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/READ_REG_FF_I0" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/gpio_Data_In_0" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/gpio_Data_In_3" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/READ_REG_FF_I1" BEL
+        "dipsws_4bit/dipsws_4bit/gpio_core_1/READ_REG_FF_I2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_27" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_17" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_29" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_data_s1_28" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_data_s1_29" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_data_s1_30" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_data_s1_31" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_16" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_15" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_14" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_13" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_12" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_11" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_10" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_9" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_8" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_7" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_6" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_5" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_4" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_3" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_1" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_18" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_19" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_be_s1_3" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_addr_s1_29" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_20" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_21" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_22" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_23" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_24" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_28" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_29" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_30" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_dbus_s0_31" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_25" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_31" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_be_s0_3" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1_d2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_30" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_29" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_dbus_s2_28" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_26" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_rnw_s1" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/last_pw_xferack_d1" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/last_pw_xferack_d2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_abus_s0_0" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/new_pw_s0_d1_0" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_rnw_s0" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_OE_3" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_OE_2" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/READ_REG_FF_I3" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_OE_1" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/READ_REG_FF_I2" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/READ_REG_FF_I1" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/READ_REG_FF_I0" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_xferAck_Reg" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/iGPIO_xferAck" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_Data_Out_3" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/opb_select_s0" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_OE_0" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_hit_s0_d1_0" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_Data_Out_0" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_Data_Out_1" BEL
+        "leds_4bit/leds_4bit/gpio_core_1/gpio_Data_Out_2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/bus2ip_cs_s1_0" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/cycle_active" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/postedwrack_s2" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/sln_xferack_s1_d1" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/last_xferack_d1_s0" BEL
+        "leds_4bit/leds_4bit/OPB_IPIF_I/OPB_BAM_I/last_xferack_d1" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I3"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I4"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I5"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I6"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I7"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/data_Exists_I"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/rx_2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/running_0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I7"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I8"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/rx_1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Mid_Start_Bit_SRL16"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/FDRE_I3"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/start_Edge_Detected_0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/stop_Bit_Position"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I4"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Delay_16"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I5"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/First_Bit_I1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I6"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/Others_I3"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/FIFO_Write"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/previous_RX"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_6"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_5"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_4"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_3"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_8"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_9"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/EN_16x_Baud"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Baud_Rate_I/Count_7"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/FDRE_I3"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I3"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I4"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I5"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I6"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/SRL16E_I7"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/data_Exists_I"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/FDRE_I0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/FDRE_I1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/SRL_FIFO_I/FDRE_I2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_sel_0"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/tx_Start"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_sel_2"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/TX"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/tx_DataBits"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/mux_sel_1"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/FDRE_I"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/fifo_Read"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/serial_Data"
+        BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_RX_I/SRL_FIFO_I/SRL16E_I0"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE7"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE6"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE5"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE4"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE3"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE2"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE1"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_rdBus_FDRE0"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/Frame_Error_DFF"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OverRun_Error_DFF"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/uart_CS_1_DFF" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/enable_interrupts" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/reset_TX_FIFO" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/OPB_UARTLITE_TX_I/DIV16_SRL16E"
+        BEL "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/opb_RNW_1" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/xfer_Ack" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/uart_CS_2" BEL
+        "rs232_uart_1/rs232_uart_1/OPB_UARTLITE_Core_I/reset_RX_FIFO" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_cnt_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_cnt_2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_cnt_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_cnt_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_7" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_9" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_6" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_8" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_59" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdComp_i" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_58" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_63" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_57" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_62" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_56" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_61" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_55" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_60" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_49" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_54" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_48" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_53" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_MBusy_i_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_47" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_52" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_46" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_51" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_45" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_50" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_39" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_44" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_38" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_43" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_37" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_42" BEL
+        "plb2opb/plb2opb/PLB_IF_I/start_flag_hold" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_36" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_41" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_35" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_40" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_len_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_29" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_34" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_28" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_33" BEL
+        "plb2opb/plb2opb/PLB_IF_I/access_valid" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_27" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_32" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_26" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_31" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_25" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_30" BEL
+        "plb2opb/plb2opb/PLB_IF_I/wr_busy" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_19" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_24" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_18" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_23" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_17" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_22" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_16" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_21" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_15" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_20" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_last" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_14" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_13" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_12" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_11" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_10" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_4" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_5" BEL
+        "plb2opb/plb2opb/PLB_IF_I/access_valid_rearb" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdWdAddr_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdWdAddr_2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/PLB_wrBurst_d1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdWdAddr_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_4" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_5" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_wrDAck_i" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_6" BEL
+        "plb2opb/plb2opb/PLB_IF_I/addrAck_d1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/addrAck_d2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_7" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_8" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDBus_9" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_xfer_strobe_wr_d1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/xfer_is_32" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_RNW" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_26" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_8" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_7" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_6" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_5" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_4" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_14" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_13" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_12" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_11" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_10" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_32" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_33" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_52" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_51" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_48" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_46" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_43" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_40" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_28" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_27" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_34" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_35" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_25" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_22" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_23" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_24" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_23" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_21" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_22" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_20" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_19" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_12" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_11" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_10" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_29" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_29" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_18" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_13" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_14" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_21" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_20" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_28" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_17" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_15" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_27" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_16" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_9" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_MBusy_i_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_15" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_31" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_len_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_len_2" BEL
+        "plb2opb/plb2opb/PLB_IF_I/brst_len_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_63" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_62" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_61" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_60" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_59" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_58" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_57" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_56" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_53" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_30" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_54" BEL
+        "plb2opb/plb2opb/PLB_IF_I/busy" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_55" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_47" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_45" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_44" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_42" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_41" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_39" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_38" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_36" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_26" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_37" BEL
+        "plb2opb/plb2opb/PLB_IF_I/msize_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_49" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_50" BEL
+        "plb2opb/plb2opb/PLB_IF_I/rd_busy" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_wrDBus_d1_25" BEL
+        "plb2opb/plb2opb/PLB_IF_I/err_detect" BEL
+        "plb2opb/plb2opb/PLB_IF_I/master_id_decode_i_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/master_id_decode_i_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/plb_xfer_strobe_wr" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_wrComp_i" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/BGO_rdDAck_i" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_BE_3" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_BE_7" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_24" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_19" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_18" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_17" BEL
+        "plb2opb/plb2opb/PLB_IF_I/opb_ABus_reg_16" BEL
+        "plb2opb/plb2opb/XFER_IF_I/wr_addr_1" BEL
+        "plb2opb/plb2opb/XFER_IF_I/wr_addr_2" BEL
+        "plb2opb/plb2opb/XFER_IF_I/wr_addr_3" BEL
+        "plb2opb/plb2opb/XFER_IF_I/wr_addr_0" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I71" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I68" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I67" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I61" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I60" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I59" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I58" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I57" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I56" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I55" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I54" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I53" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I52" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I51" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I50" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I49" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I48" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I47" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I46" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I45" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I44" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I43" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I42" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I41" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I40" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I39" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I38" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I37" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I36" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I35" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I34" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I33" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I32" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I31" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I30" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I29" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I28" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I27" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I26" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I25" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I24" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I23" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I22" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I21" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I20" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I19" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I18" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I17" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I16" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I15" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I14" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I13" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I12" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I11" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I10" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I9" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I8" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I7" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I6" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I5" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I4" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I3" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I2" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I1" BEL
+        "plb2opb/plb2opb/XFER_IF_I/RAM_FF_I0" BEL
+        "plb2opb/plb2opb/XFER_IF_I/OPB_xfer_start_ack_d2" BEL
+        "plb2opb/plb2opb/XFER_IF_I/OPB_xfer_start_ack_d3" BEL
+        "plb2opb/plb2opb/XFER_IF_I/PLB_xfer_start_flag_d1" BEL
+        "plb2opb/plb2opb/XFER_IF_I/PLB_xfer_start_flag_d2" BEL
+        "plb2opb/plb2opb/XFER_IF_I/PLB_xfer_start_flag_d3" BEL
+        "plb2opb/plb2opb/XFER_IF_I/wr_addr_rst_d1" BEL
+        "plb2opb/plb2opb/XFER_IF_I/wr_addr_rst" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/waddr_0" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/waddr_rclk_synced_0" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/waddr_1" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/raddr_0" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/raddr_1" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/waddr_rclk_synced_1" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_1" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_2" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_3" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_4" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_5" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_6" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_7" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_8" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_9" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_10" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_11" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_12" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_13" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_14" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_15" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_16" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_17" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_18" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_19" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_20" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_21" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_22" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_23" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_24" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_25" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_26" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_27" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_28" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_29" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_30" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_31" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_33" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_34" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_35" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_36" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_37" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_data_0" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/PLB_rcv_strobe" BEL
+        "plb2opb/plb2opb/OPB_IF_I/xfer_rd_addr_1" BEL
+        "plb2opb/plb2opb/OPB_IF_I/xfer_rd_addr_2" BEL
+        "plb2opb/plb2opb/OPB_IF_I/xfer_rd_addr_3" BEL
+        "plb2opb/plb2opb/OPB_IF_I/xfer_rd_addr_0" BEL
+        "plb2opb/plb2opb/PLB_IF_I/rcv_last_write_status" BEL
+        "plb2opb/plb2opb/OPB_IF_I/BGO_select_fdrse" BEL
+        "plb2opb/plb2opb/OPB_IF_I/OPB_XFER_PEND_FDRSE_I" BEL
+        "plb2opb/plb2opb/OPB_IF_I/rst_d1" BEL
+        "plb2opb/plb2opb/OPB_IF_I/rst_d2" BEL
+        "plb2opb/plb2opb/OPB_IF_I/opb_xfer_start_flag_d1" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_2" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_3" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_4" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_5" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_6" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_7" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_8" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_9" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_10" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_11" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_12" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_13" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_14" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_15" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_16" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_17" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_18" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_19" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_20" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_21" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_22" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_23" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_24" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_25" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_26" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_27" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_28" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_29" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_30" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_31" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_32" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_33" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_34" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_35" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_36" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_37" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_38" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_39" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_40" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_41" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_42" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_43" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_44" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_45" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_46" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_47" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_48" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_49" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_50" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_51" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_52" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_53" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_54" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_55" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_56" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_57" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_58" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_59" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_60" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_61" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_62" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_63" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_1" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_2" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_3" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_4" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_5" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_6" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_7" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_8" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_9" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_10" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_11" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_12" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_13" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_14" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_15" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_16" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_17" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_18" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_19" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_20" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_21" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_22" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_23" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_24" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_25" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_26" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_27" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_28" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_29" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_30" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_31" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_32" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_33" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_34" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_35" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_36" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_37" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_38" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_39" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_40" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_41" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_42" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_43" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_44" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_45" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_46" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_47" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_48" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_49" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_50" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_51" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_52" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_53" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_54" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_55" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_56" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_57" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_58" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_59" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_60" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_61" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_62" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_63" BEL
+        "plb2opb/plb2opb/BGO_MBusy_int_1dly_1" BEL
+        "plb2opb/plb2opb/BGO_MErr_int_2dly_1" BEL
+        "plb2opb/plb2opb/BGO_MErr_int_1dly_1" BEL
+        "plb2opb/plb2opb/BGO_MBusy_int_2dly_1" BEL
+        "plb2opb/plb2opb/BGO_rdWdAddr_2dly_1" BEL
+        "plb2opb/plb2opb/BGO_rdWdAddr_2dly_2" BEL
+        "plb2opb/plb2opb/BGO_rdWdAddr_2dly_3" BEL
+        "plb2opb/plb2opb/BGO_MErr_int_2dly_0" BEL
+        "plb2opb/plb2opb/BGO_rdDAck_int_1dly" BEL
+        "plb2opb/plb2opb/Read_inprog" BEL
+        "plb2opb/plb2opb/BGO_MBusy_int_1dly_0" BEL
+        "plb2opb/plb2opb/I_BGO_select_regd" BEL
+        "plb2opb/plb2opb/I_PLB_abort_onRd_OPBside_1dly" BEL
+        "plb2opb/plb2opb/I_PLB_abort_onRd_synch2" BEL
+        "plb2opb/plb2opb/I_PLB_abort_onRd_synch1" BEL
+        "plb2opb/plb2opb/I_PLB_abort_Reg" BEL
+        "plb2opb/plb2opb/I_B_Strobe_out_1dly" BEL
+        "plb2opb/plb2opb/I_OPB_retry_onRd_synch2" BEL
+        "plb2opb/plb2opb/I_OPB_retry_onRd_synch1" BEL
+        "plb2opb/plb2opb/I_A_side_Reg" BEL
+        "plb2opb/plb2opb/I_Read_inprog_negedge_OPBside_1dly" BEL
+        "plb2opb/plb2opb/I_Read_inprog_negedge_regd_OPBside_synch2" BEL
+        "plb2opb/plb2opb/I_Read_inprog_negedge_regd_OPBside_synch1" BEL
+        "plb2opb/plb2opb/I_Read_inprog_negedge_Reg" BEL
+        "plb2opb/plb2opb/I_Read_inprog_regd" BEL
+        "plb2opb/plb2opb/I_Block_OPB_retry_onRd" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_2dly_0" BEL
+        "plb2opb/plb2opb/BGO_MErr_int_1dly_0" BEL
+        "plb2opb/plb2opb/BGO_rdComp_int_2dly" BEL
+        "plb2opb/plb2opb/Block_output_on_PLBabort_regd" BEL
+        "plb2opb/plb2opb/BGO_MBusy_int_2dly_0" BEL
+        "plb2opb/plb2opb/Block_output_on_PLBabort_OPBside" BEL
+        "plb2opb/plb2opb/Wait_on_Rd_2dly" BEL
+        "plb2opb/plb2opb/BGO_rdComp_int_1dly" BEL
+        "plb2opb/plb2opb/BGO_rdDAck_int_2dly" BEL
+        "plb2opb/plb2opb/BGO_rdWdAddr_1dly_1" BEL
+        "plb2opb/plb2opb/BGO_rdWdAddr_1dly_2" BEL
+        "plb2opb/plb2opb/Hold_Busy_til_Rearb_onOPBRetry" BEL
+        "plb2opb/plb2opb/BGO_rdDBus_int_1dly_0" BEL
+        "plb2opb/plb2opb/Wait_on_Rd" BEL "plb2opb/plb2opb/BGO_rdWdAddr_1dly_3"
+        BEL "plb2opb/plb2opb/BGO_rdDBus_int_2dly_1" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I23/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I22/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I21/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I20/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I19/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I18/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I17/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I16/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I15/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I14/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I13/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I12/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I11/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I10/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I9/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I8/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I7/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I6/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I5/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I4/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I3/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I2/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I1/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I0/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I28/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I29/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I27/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I24/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I25/SRL16E" BEL
+        "plb2opb/plb2opb/PLB_IF_I/OPB_ABUS_SRL_I/SRL_I26/SRL16E" BEL
+        "opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/timeout_cnt_1"
+        BEL
+        "opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/timeout_cnt_2"
+        BEL
+        "opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/timeout_cnt_3"
+        BEL
+        "opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/timeout_cnt_0"
+        BEL
+        "opb/opb/OPB_ARBITER_I/OPB_ARBITER_CORE_I/WATCHDOG_TIMER_I/OPB_timeout"
+        BEL "opb/opb/POR_FF_I" BEL "opb/opb/POR_SRL_I/SRL16E" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1_1"
+        BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0_1"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecRdMasterReg_i_1"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbDisMReqReg_1" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecWrMasterReg_i_1" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbPriWrMasterReg_1" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbPriRdMasterReg_i_1" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbPriRdMasterRegReg_1"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecRdInProgReg_i"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecWrInProgReg_i"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecRdMasterReg_i_0"
+        BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbPriRdMasterRegReg_0"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbDisMReqReg_0" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbSecWrMasterReg_i_0" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbWrDBusBusyReg_i" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbRdDBusBusyReg_i" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/ArbPriWrMasterReg_0" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBREGISTERS/arbPriRdMasterReg_i_0" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_DACK_CNTR_I/cnt_1" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_DACK_CNTR_I/cnt_0" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_TIMEOUT_CNTR_I/cnt_2" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_TIMEOUT_CNTR_I/cnt_3" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_TIMEOUT_CNTR_I/cnt_1" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_TIMEOUT_CNTR_I/cnt_0" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_DACK_CNTR_I/cnt_2" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtDAckReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtLine16AccReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtSingleAccReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtLine8AccReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtLine4AccReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtCompReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/PLB_RNWReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/PLB_RNWRegReg" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/wdtTimeOutReg_i" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/Cnt_on_plb2opb_rearb_2"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd2"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd6"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd7"
+        BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/Cnt_on_plb2opb_rearb_0"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd1"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd4"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd8"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd3"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/SAValid" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/Cnt_on_plb2opb_rearb_1"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/PAValid" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/Cnt_on_plb2opb_rearb_en"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_ARBCONTROL_SM/arbctrl_sm_cs_FFd5"
+        BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_0"
+        BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/I_PRIORITY_ENCODER/I_ARBADDRSEL/arbAddrSelReg_i_1"
+        BEL "plb/plb/I_PLB_ARBITER_LOGIC/I_WDT/WDT_DACK_CNTR_I/cnt_3" BEL
+        "plb/plb/I_PLB_ARBITER_LOGIC/arbreset_i" BEL "plb/plb/POR_FF1_I" BEL
+        "plb/plb/POR_FF2_I" BEL "plb/plb/POR_SRL_I/SRL16E" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I71/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I71/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I68/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I68/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I67/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I67/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I61/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I61/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I60/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I60/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I59/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I59/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I58/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I58/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I57/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I57/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I56/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I56/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I55/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I55/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I54/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I54/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I53/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I53/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I52/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I52/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I51/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I51/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I50/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I50/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I49/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I49/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I48/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I48/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I47/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I47/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I46/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I46/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I45/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I45/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I44/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I44/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I43/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I43/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I42/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I42/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I41/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I41/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I40/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I40/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I39/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I39/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I38/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I38/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I37/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I37/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I36/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I36/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I35/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I35/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I34/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I34/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I33/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I33/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I32/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I32/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I31/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I31/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I30/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I30/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I29/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I29/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I28/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I28/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I27/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I27/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I26/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I26/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I25/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I25/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I24/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I24/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I23/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I23/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I22/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I22/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I21/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I21/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I20/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I20/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I19/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I19/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I18/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I18/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I17/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I17/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I16/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I16/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I15/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I15/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I14/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I14/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I13/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I13/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I12/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I12/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I11/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I11/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I10/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I10/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I9/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I9/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I8/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I8/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I7/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I7/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I6/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I6/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I5/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I5/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I4/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I4/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I3/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I3/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I2/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I2/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I1/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I1/DP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I0/SP" BEL
+        "plb2opb/plb2opb/XFER_IF_I/DPRAM_I0/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I0/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I0/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I1/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I1/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I10/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I10/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I11/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I11/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I12/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I12/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I13/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I13/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I14/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I14/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I15/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I15/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I16/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I16/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I17/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I17/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I18/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I18/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I19/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I19/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I2/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I2/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I20/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I20/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I21/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I21/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I22/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I22/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I23/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I23/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I24/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I24/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I25/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I25/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I26/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I26/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I27/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I27/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I28/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I28/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I29/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I29/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I3/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I3/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I30/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I30/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I31/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I31/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I33/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I33/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I34/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I34/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I35/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I35/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I36/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I36/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I37/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I37/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I4/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I4/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I5/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I5/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I6/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I6/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I7/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I7/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I8/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I8/SP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I9/DP" BEL
+        "plb2opb/plb2opb/RCV_DATA_IF_I/ASYNC_FIFO_I/RAM_I9/SP";
+PIN dcm_0/dcm_0/DCM_INST_pins<20> = BEL "dcm_0/dcm_0/DCM_INST" PINNAME CLKIN;
+TIMEGRP sys_clk_pin = PIN "dcm_0/dcm_0/DCM_INST_pins<20>";
+TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 10 ns HIGH 50%;
+TS_dcm_0_dcm_0_CLK0_BUF = PERIOD TIMEGRP "dcm_0_dcm_0_CLK0_BUF" TS_sys_clk_pin
+        HIGH 50%;
+PIN sys_rst_pin_pins<0> = BEL "sys_rst_pin" PINNAME PAD;
+PIN "sys_rst_pin_pins<0>" TIG;
+SCHEMATIC END;

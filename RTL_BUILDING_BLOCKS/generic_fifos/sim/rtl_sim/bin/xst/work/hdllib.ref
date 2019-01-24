@@ -1,0 +1,4 @@
+MO generic_fifo_sc_a NULL ./../../../rtl/verilog/generic_fifo_sc_a.v vlg55/generic__fifo__sc__a.bin 1210187723
+MO generic_fifo_sc_b NULL ./../../../rtl/verilog/generic_fifo_sc_b.v vlg56/generic__fifo__sc__b.bin 1210187352
+MO generic_dpram NULL ./../../../../generic_memories/rtl/verilog/generic_dpram.v vlg34/generic__dpram.bin 1210187723
+MO generic_fifo_dc NULL ./../../../rtl/verilog/generic_fifo_dc.v vlg36/generic__fifo__dc.bin 1210187545

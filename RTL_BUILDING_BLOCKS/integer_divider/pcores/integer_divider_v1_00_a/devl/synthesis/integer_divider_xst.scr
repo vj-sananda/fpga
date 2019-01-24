@@ -1,0 +1,12 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn "E:\work\FPGA_PROJECTS\BLOCKS\integer_divider\pcores\integer_divider_v1_00_a\devl\synthesis\integer_divider_xst.prj"
+-top integer_divider
+-p virtex5
+-ofn "E:\work\FPGA_PROJECTS\BLOCKS\integer_divider\pcores\integer_divider_v1_00_a\devl\synthesis\integer_divider_xst.ngc"
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-work_lib integer_divider_v1_00_a

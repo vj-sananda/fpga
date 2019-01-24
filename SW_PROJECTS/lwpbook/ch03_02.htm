@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Programming with LWP Classes (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch03_02"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch03_02' class='lwp lwp_ch03_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">3.2. Programming with LWP Classes</h2>
+
+<p>The first step in writing a program that uses the LWP classes is to
+create and initialize the browser object, which can be used
+throughout the rest of the program. You need a browser object to
+perform HTTP requests, and although you could use several browser
+objects per program, I've never run into a reason to
+use more than one.
+</p>
+
+<p>The browser object can use a proxy (a server that fetches web pages
+for you, such as a firewall, or a web cache such as Squid).
+It's
+<a name="INDEX-105" class="ipoint"
+></a>good form to check the environment for
+proxy settings by calling <tt class="literal">env_proxy()</tt>:
+</p>
+
+<pre class="code">use LWP::UserAgent;
+my $browser = LWP::UserAgent-&gt;new( );
+$browser-&gt;env_proxy( ); # if we're behind a firewall</pre>
+
+<p>That's all the initialization that most user agents
+will ever need. Once you've done that, you usually
+won't do anything with it for the rest of the
+program, aside from calling its <tt class="literal">get(&#160;)</tt>,
+<tt class="literal">head(&#160;)</tt>, or <tt class="literal">post(&#160;)</tt> methods, to
+get what's at a URL, or to perform HTTP HEAD or POST
+requests on it. For example:
+</p>
+
+<pre class="code">$url = 'http://www.guardian.co.uk/';
+my $response = $browser-&gt;get($url);</pre>
+
+<p>Then you call methods on the response to check the status, extract
+the content, and so on. For example, this code checks to make sure we
+successfully fetched an HTML document that isn't
+worryingly short, then prints a message depending on whether the
+words "Madonna" or
+"Arkansas" appear in the content:
+</p>
+
+<pre class="code">die "Hmm, error \"", $response-&gt;status_line( ),
+  "\" when getting $url"  unless $response-&gt;is_success( );
+my $content_type = $response-&gt;content_type( );
+die "Hm, unexpected content type $content_type from $url"
+   unless $content_type eq 'text/html';
+my $content = $response-&gt;content( );
+die "Odd, the content from $url is awfully short!"
+   if length($content) &lt; 3000;
+if($content =~ m/Madonna|Arkansas/i) {
+   print "&lt;!-- The news today is IMPORTANT --&gt;\n",
+         $content;
+} else {
+   print "$url has no news of ANY CONCEIVABLE IMPORTANCE!\n";
+}</pre>
+
+<p>As you see, the response object <a name="INDEX-106" class="ipoint"
+></a>contains all the data from the web
+server's response (or an error message about how
+that server wasn't reachable!), and we use method
+calls to get at the data. There are accessors for the different parts
+of the response (e.g., the status line) and convenience functions to
+tell us whether the response was successful (<tt class="literal">is_success(
+)</tt>).
+</p>
+
+<p>And that's a working and complete LWP program!</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

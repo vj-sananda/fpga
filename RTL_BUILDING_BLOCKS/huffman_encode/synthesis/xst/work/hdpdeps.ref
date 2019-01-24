@@ -1,0 +1,12 @@
+V2 10
+FL F:/fpga/proj/huffman_encode/synthesis/../hdl/huffman_encode_testharness_0_wrapper.vhd 2005/04/10.01:33:16 H.42
+EN work/HUFFMAN_ENCODE_TESTHARNESS_0_WRAPPER 1122082451 \
+      FL F:/fpga/proj/huffman_encode/synthesis/../hdl/huffman_encode_testharness_0_wrapper.vhd \
+      PB ieee/STD_LOGIC_1164 1106404628 PH unisim/VCOMPONENTS 1122082370 \
+      LB PROC_COMMON_V2_00_A LB INTERRUPT_CONTROL_V1_00_A LB WRPFIFO_V1_01_B \
+      LB RDPFIFO_V1_01_B LB OPB_IPIF_V3_01_A \
+      LB HUFFMAN_ENCODE_TESTHARNESS_V1_00_A
+AR work/HUFFMAN_ENCODE_TESTHARNESS_0_WRAPPER/STRUCTURE 1122082452 \
+      FL F:/fpga/proj/huffman_encode/synthesis/../hdl/huffman_encode_testharness_0_wrapper.vhd \
+      EN work/HUFFMAN_ENCODE_TESTHARNESS_0_WRAPPER 1122082451 \
+      CP HUFFMAN_ENCODE_TESTHARNESS

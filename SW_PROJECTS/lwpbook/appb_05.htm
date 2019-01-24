@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>500s: Server Errors (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appb_05"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appb_05' class='lwp lwp_appb_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">B.5. 500s: Server Errors</h2>
+
+<p>If an LWP request gets any of these 500-series codes,
+<tt class="literal">$response-&gt;is_error</tt> will be true, as it will be
+for any of the 400-series codes. For all other status codes,
+<tt class="literal">$response-&gt;is_error</tt> will be false.
+</p>
+
+<p>Note that at the time of this writing, the "500
+Internal Server Error" code is also used by LWP to
+signal some error conditions where the remote server
+can't even be contacted, such as when
+there's a DNS failure or a TCP/IP connection error.
+</p>
+
+<pre class="code">500 Internal Server Error
+501 Not Implemented
+502 Bad Gateway
+503 Service Unavailable
+504 Gateway Timeout
+505 HTTP Version Not Supported</pre>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

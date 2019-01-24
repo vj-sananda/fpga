@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Web Basics (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-01 22:36:05 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_01' class='lwp lwp_ch02_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 2. Web Basics</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-2-SECT-1">URLs</a><br />
+<a href="ch02_02.htm">An HTTP Transaction</a><br />
+<a href="ch02_03.htm">LWP::Simple</a><br />
+<a href="ch02_04.htm">Fetching Documents Without LWP::Simple</a><br />
+<a href="ch02_05.htm">Example: AltaVista</a><br />
+<a href="ch02_06.htm">HTTP POST</a><br />
+<a href="ch02_07.htm">Example: Babelfish</a><br /></p></div><p>Three things made the Web possible: HTML for encoding
+<a name="INDEX-50" class="ipoint"
+></a>documents, HTTP for
+<a name="INDEX-51" class="ipoint"
+></a>transferring them, and URLs for
+<a name="INDEX-52" class="ipoint"
+></a>identifying them. To fetch and extract
+information from web pages, you must know all three&#x2014;you
+construct a URL for the page you wish to fetch, make an HTTP request
+for it and decode the HTTP response, then parse the HTML to extract
+information. This chapter covers the construction of URLs and the
+concepts behind HTTP. HTML parsing is tricky and gets its own
+chapters later, as does the module that lets you manipulate URLs.
+</p>
+
+<p>You'll also learn how to automate the most basic web
+tasks with the LWP::Simple module. As its name suggests, this module
+has a very simple interface. You'll learn the
+limitations of that interface and see how to use other LWP modules to
+fetch web pages without the limitations of LWP::Simple.
+</p>
+
+<div class="sect1"><a name="perllwp-CHP-2-SECT-1"></a>
+<h2 class="sect1">2.1. URLs</h2>
+
+<p>A Uniform Resource Locator (URL) is the <a name="INDEX-53" class="ipoint"
+></a>address of something
+on the Web. For example:
+</p>
+
+<blockquote class="simplelist"
+>http://www.oreilly.com/news/bikeweek_day1.html</blockquote>
+
+<p>URLs have a structure, given in RFC 2396. That RFC runs to 40 pages,
+largely because of the wide variety of things for which you can
+construct URLs. Because we are interested only
+<a name="INDEX-54" class="ipoint"
+></a><a name="INDEX-55" class="ipoint"
+></a>in HTTP and FTP
+URLs, the components of a URL, with the delimiters that separate
+them, are:
+</p>
+
+<pre class="code"><em class="replaceable"><tt>scheme</tt></em><tt>://<em class="replaceable">username</em>@<em class="replaceable">server</em>:<em class="replaceable">port</em>/<em class="replaceable">path</em>?<em class="replaceable">query</em></tt></pre>
+
+<p>In the case of our example URL, the scheme is
+<em class="emphasis">http</em>, the server is
+<em class="emphasis">www.oreilly.com</em>, and the path is
+<em class="emphasis">/news/bikeweek_day1.html</em>.
+</p>
+
+<p>This is an FTP URL:</p>
+
+<blockquote class="simplelist"
+>ftp://ftp.is.co.za/rfc/rfc1808.txt</blockquote>
+
+<p>The scheme is <em class="emphasis">ftp</em>, the host is
+<em class="emphasis">ftp.is.co.za</em>, and the path is
+<em class="emphasis">/rfc/rfc1808.txt</em>. The scheme and the hostname
+are not case sensitive, but the rest is. That is, 
+ftp://ftp.is.co.za/rfc/rfc1808.txt and
+fTp://ftp.Is.cO.ZA/rfc/rfc1808.txt are the
+same, but 
+ftp://ftp.is.co.za/rfc/rfc1808.txt and
+ftp://ftp.is.co.za/rfc/RFC1808.txt are not,
+unless that server happens to forgive case differences in requests.
+</p>
+
+<p>We're ignoring the URLs that don't
+designate things that a web client can retrieve. For example,
+<em class="emphasis">telnet://melvyl.ucop.edu/</em> designates a host with
+which you can start a Telnet session, and
+<em class="emphasis">mailto:mojo@jojo.int</em> designates an email address
+to which you can send.
+</p>
+
+<p>The only characters <a name="INDEX-56" class="ipoint"
+></a>allowed in the path portions of a URL
+are the US-ASCII characters A through Z, a through z, and 0-9 (but
+excluding extended ASCII characters such as &#xFC; and Unicode
+characters such as
+<!--img src="figs/U03A9.gif" alt="&#x03a9;" --> &#x03a9;
+or
+<!--img src="figs/U2286.gif" alt="Figure 2.1" --> &#x2286;),
+and these
+permitted punctuation characters:
+</p>
+
+<pre class="code">-     _     .     !     ~     *     '     ,
+:     @     &amp;     +     $     (     )     /</pre>
+
+<p>For a query component, the same rule holds, except that the only
+punctuation characters allowed are these:
+</p>
+
+<pre class="code">-     _     .     !     ~     *     '     (     )</pre>
+
+<p>Any other characters <a name="INDEX-57" class="ipoint"
+></a>must be <em class="firstterm">URL
+encoded</em>, i.e., expressed as a percent sign followed by
+the two hexadecimal digits for that character. So if you wanted to
+use a space in a URL, it would have to be expressed as
+<tt class="literal">%20</tt>, because space is character 32 in ASCII, and
+the number 32 expressed in hexadecimal is 20.
+</p>
+
+<p>Incidentally, sometimes you might also see some of these characters
+in a URL:
+</p>
+
+<pre class="code">{     }    |    \    ^    [    ]    `</pre>
+
+<p>But the document that defines URLs, RFC 2396, refers to the use of
+these as unreliable and "unwise."
+When in doubt, encode it!
+</p>
+
+<p>The query portion of a URL assigns values to parameters:</p>
+
+<pre class="code">name=Hiram%20Veeblefeetzer&amp;age=35&amp;country=Madagascar</pre>
+
+<p>There are three parameters in that query string: name, with the value
+<tt class="literal">"Hiram Veeblefeetzer"</tt> (the space has been
+encoded); age, with the value 35; and country, with the value
+<tt class="literal">"Madagascar"</tt>.
+</p>
+
+<p>The URI::Escape <a name="INDEX-58" class="ipoint"
+></a>module <a name="INDEX-59" class="ipoint"
+></a><a name="INDEX-60" class="ipoint"
+></a>provides the <tt class="literal">uri_escape(
+)</tt> function to help you build URLs:
+</p>
+
+<pre class="code">use URI::Escape;
+<em class="replaceable"><tt>encoded_string</tt></em><tt> = uri_escape(<em class="replaceable">raw_string</em></tt>);</pre>
+
+<p>For example, to build the name, age, and country query string:</p>
+
+<pre class="code">$n = uri_escape("Hiram Veeblefeetzer");
+$a = uri_escape(35);
+$c = uri_escape("Madagascar");
+$query = "name=$n&amp;age=$a&amp;country=$c";
+print $query;
+<b class="emphasis-bold">name=Hiram%20Veeblefeetzer&amp;age=35&amp;country=Madagascar</b></pre>
+
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

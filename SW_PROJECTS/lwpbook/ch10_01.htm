@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Modifying HTML with Trees (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch10_01"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:24:13 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch10_01' class='lwp lwp_ch10_01' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h1 class="chapter">Chapter 10. Modifying HTML with Trees</h1>
+<div class="htmltoc"><h4 class="tochead">Contents:</h4>
+  <p> <a href="#perllwp-CHP-10-SECT-1">Changing Attributes</a><br />
+<a href="ch10_02.htm">Deleting Images</a><br />
+<a href="ch10_03.htm">Detaching and Reattaching</a><br />
+<a href="ch10_04.htm">Attaching in Another Tree</a><br />
+<a href="ch10_05.htm">Creating New Elements</a><br /></p></div><p>In <a href="ch09_01.htm">Chapter 9, "HTML Processing with Trees"</a>, we saw how to extract information
+from HTML trees. But that's not the only thing you
+can use trees for. HTML::TreeBuilder trees can be altered and can
+even be written back out as HTML, using <a name="INDEX-565" class="ipoint"
+></a><a name="INDEX-566" class="ipoint"
+></a>the <tt class="literal">as_HTML(&#160;)</tt> method.
+There are four ways in which a tree can be altered: you can alter a
+node's attributes; you can delete a node; you can
+detach a node and reattach it elsewhere; and you can add a new node.
+We'll treat each of these in turn.
+</p><div class="sect1"><a name="perllwp-CHP-10-SECT-1"></a>
+<h2 class="sect1">10.1. Changing Attributes</h2>
+
+<p>Suppose that in your <a name="INDEX-567" class="ipoint"
+></a><a name="INDEX-568" class="ipoint"
+></a>new role as fixer of large sets of
+HTML documents, you are given a bunch of documents that have headings
+like this:
+</p>
+
+<pre class="code">&lt;h3 align=center&gt;Free Monkey&lt;/h3&gt;
+&lt;h3 color=red&gt;Inquire Within&lt;/h3&gt;</pre>
+
+<p>that need to be changed like this:</p>
+
+<pre class="code">&lt;h2 class=scream&gt;Free Monkey&lt;/h2&gt;
+&lt;h4 class=mutter&gt;Inquire Within&lt;/h4&gt;</pre>
+
+<p>Before you start phrasing this in terms of HTML::Element methods, you
+should consider whether this can be done with a search-and-replace
+operation in an editor. In this case, it cannot, because
+you're not just changing every <tt class="literal">&lt;h3
+align=center&gt;</tt> to <tt class="literal">&lt;h2</tt>
+<tt class="literal">class=scream&gt;</tt> and every
+<tt class="literal">&lt;h4</tt> <tt class="literal">color=red&gt;</tt> to
+<tt class="literal">&lt;h3</tt> <tt class="literal">class=mutter&gt;</tt> (which
+are apparently simple search-and-replace operations), you also have
+to change <tt class="literal">&lt;/h3&gt;</tt> to
+<tt class="literal">&lt;/h2&gt;</tt> or to <tt class="literal">&lt;/h4&gt;</tt>,
+depending on what you did to the element that it closes. That sort of
+context dependency puts this well outside the realm of simple
+search-and-replace operations. One could try to implement this with
+HTML::TokeParser, reading every token and printing it back out, after
+having possibly altered it. In such a program, every time we see an
+<tt class="literal">&lt;h3...&gt;</tt> and maybe alter it,
+we'd have to set a flag indicating what the next
+<tt class="literal">&lt;/h3&gt;</tt> should be changed to.
+</p>
+
+<p>So far, you've seen the method
+<tt class="literal">$element-&gt;attr(</tt><em class="replaceable"><tt>attrname</tt></em><tt class="literal">)</tt>
+to get the value of an attribute (returning <tt class="literal">undef</tt>
+if there is no such attribute). To alter attribute values, you need
+only two additional syntaxes:
+<tt class="literal">$element-&gt;attr(</tt><em class="replaceable"><tt>attrname</tt></em><tt class="literal">,</tt>
+<em class="replaceable"><tt>newval</tt></em><tt class="literal">)</tt> sets a value
+(regardless of whether that attribute had a previous value), and
+<tt class="literal">$element-&gt;attr(</tt><em class="replaceable"><tt>attrname</tt></em><tt class="literal">,</tt>
+<tt class="literal">undef)</tt> deletes an attribute. That works even for
+changing the <tt class="literal">_tag</tt> attribute (for which the
+<tt class="literal">$element-&gt;tag</tt> method is a shortcut).
+</p>
+
+<p>That said, it's just a matter of knowing
+<a name="INDEX-569" class="ipoint"
+></a><a name="INDEX-570" class="ipoint"
+></a>what nodes to change and then
+changing them, as in <a href="ch10_01.htm#perllwp-CHP-10-EX-1">Example 10-1</a>.
+</p>
+
+<a name="perllwp-CHP-10-EX-1"></a><div class="example">
+<h4 class="objtitle">Example 10-1. Modifying attributes </h4>
+<pre class="code">use strict;
+use HTML::TreeBuilder;
+my $root = HTML::TreeBuilder-&gt;new;
+$root-&gt;parse_file('rewriters1/in1.html') || die $!;
+ 
+print "Before:\n";
+$root-&gt;dump;
+ 
+my @h3_center = $root-&gt;look_down('_tag', 'h3', 'align', 'center');
+my @h3_red    = $root-&gt;look_down('_tag', 'h3', 'color', 'red');
+foreach my $h3c (@h3_center) {
+<tt class="userinput"><b>  $h3c-&gt;attr('_tag', 'h2');</b></tt>
+<tt class="userinput"><b>  $h3c-&gt;attr('class', 'scream');</b></tt>
+<tt class="userinput"><b>  $h3c-&gt;attr('align', undef);</b></tt>
+}
+ 
+foreach my $h3r (@h3_red) {
+<tt class="userinput"><b>  $h3r-&gt;attr('_tag', 'h4');</b></tt>
+<tt class="userinput"><b>  $h3r-&gt;attr('class', 'mutter');</b></tt>
+<tt class="userinput"><b>  $h3r-&gt;attr('color', undef);</b></tt>
+}
+ 
+print "\n\nAfter:\n";
+$root-&gt;dump;</pre>
+</div>
+
+<p>Suppose that the input file consists of this:</p>
+
+<pre class="code">&lt;html&gt;&lt;body&gt;
+  
+&lt;h3 align=center&gt;Free Monkey&lt;/h3&gt;
+&lt;h3 color=red&gt;Inquire Within&lt;/h3&gt;
+&lt;p&gt;It's a monkey!  &lt;em&gt;And it's free!&lt;/em&gt;&lt;/html&gt;</pre>
+
+<p>When we run the program, we can see the tree dump before and after
+the modifications happen:
+</p>
+
+<pre class="code">Before:
+&lt;html&gt; @0
+  &lt;head&gt; @0.0 (IMPLICIT)
+  &lt;body&gt; @0.1
+    <tt class="userinput"><b>&lt;h3 align="center"&gt;</b></tt> @0.1.0
+      "Free Monkey"
+    <tt class="userinput"><b>&lt;h3 color="red"&gt;</b></tt> @0.1.1
+      "Inquire Within"
+    &lt;p&gt; @0.1.2
+      "It's a monkey! "
+      &lt;em&gt; @0.1.2.1
+        "And it's free!"
+ 
+After:
+&lt;html&gt; @0
+  &lt;head&gt; @0.0 (IMPLICIT)
+  &lt;body&gt; @0.1
+    <tt class="userinput"><b>&lt;h2 class="scream"&gt;</b></tt> @0.1.0
+      "Free Monkey"
+    <tt class="userinput"><b>&lt;h4 class="mutter"&gt;</b></tt> @0.1.1
+      "Inquire Within"
+    &lt;p&gt; @0.1.2
+      "It's a monkey! "
+      &lt;em&gt; @0.1.2.1
+        "And it's free!"</pre>
+
+<p>The changes applied correctly, so we can go ahead and add this code
+to the end of the program, to dump the tree to disk:
+</p>
+
+<pre class="code">open(OUT, "&gt;rewriters1/out1.html") || die "Can't write: $!";
+print OUT $root-&gt;as_HTML;
+close(OUT);
+$root-&gt;delete; # done with it, so delete it</pre>
+
+<a name="perllwp-CHP-10-SECT-1.1"></a><div class="sect2">
+<h3 class="sect2">10.1.1. Whitespace</h3>
+
+<p>Examining the output file shows
+<a name="INDEX-571" class="ipoint"
+></a><a name="INDEX-572" class="ipoint"
+></a>it
+to be one single line, consisting of this (wrapped so it will fit on
+the page):
+</p>
+
+<pre class="code">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h2 class="scream"&gt;Free Monkey&lt;/h2&gt;&lt;h4
+class="mutter"&gt;Inquire Within&lt;/h4&gt;&lt;p&gt;It's a monkey! &lt;em&gt;And it's
+free!&lt;/em&gt;&lt;/body&gt;&lt;/html&gt;</pre>
+
+<p>Where did all the nice whitespace from the original go, such as the
+newline after each <tt class="literal">&lt;/h3&gt;</tt>?
+</p>
+
+<p>Whitespace in HTML (except in <tt class="literal">pre</tt> elements and a
+few others) isn't contrastive. That is, any amount
+of whitespace is as good as just one space. So whenever
+HTML::TreeBuilder sees whitespace tokens as it is parsing the HTML
+source, it compacts each group into a single space. Furthermore,
+whitespace between some kinds of tags (such as between
+<tt class="literal">&lt;/h3&gt;</tt> and <tt class="literal">&lt;h3&gt;</tt>, or
+between <tt class="literal">&lt;/h3&gt;</tt> and
+<tt class="literal">&lt;p&gt;</tt>) isn't meaningful at
+all, so when HTML::TreeBuilder sees such whitespace, it just discards
+it.
+</p>
+
+<p>This whitespace mangling is the default behavior of an
+HTML::TreeBuilder tree and can be changed by two options that you set
+before parsing from a file:
+</p>
+
+<pre class="code">my $root = HTML::TreeBuilder-&gt;new;
+
+$root-&gt;ignore_ignorable_whitespace(0);
+  # Don't try to delete whitespace between block-level elements.
+
+$root-&gt;no_space_compacting(1);
+  # Don't smash every whitespace sequences into a single space.</pre>
+
+<p>With those lines added to our program, the parse tree output file
+ends up with the appropriate whitespace.
+</p>
+
+<pre class="code">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;
+  
+&lt;h2 class="scream"&gt;Free Monkey&lt;/h2&gt;
+&lt;h4 class="mutter"&gt;Inquire Within&lt;/h4&gt;
+  
+&lt;p&gt;It's a monkey!  &lt;em&gt;And it's free!&lt;/em&gt;&lt;/body&gt;
+  
+&lt;/html&gt;</pre>
+
+<p>An alternative is to have the <tt class="literal">as_HTML(&#160;)</tt> method
+try to indent the HTML as it prints it. This is achieved by calling
+<tt class="literal">as_HTML</tt> like so:
+</p>
+
+<pre class="code">print OUT $root-&gt;as_HTML(undef, "  ");</pre>
+
+<p>This feature is still somewhat experimental, and its implementation
+might change, but at time of this writing, this makes the output
+file's code look like this:
+</p>
+
+<pre class="code">&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2 class="scream"&gt;Free Monkey&lt;/h2&gt;
+    &lt;h4 class="mutter"&gt;Inquire Within&lt;/h4&gt;
+    &lt;p&gt;It's a monkey! &lt;em&gt;And it's free!&lt;/em&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+</div>
+<a name="perllwp-CHP-10-SECT-1.2"></a><div class="sect2">
+<h3 class="sect2">10.1.2. Other HTML Options</h3>
+
+<p>Besides this indenting option, there are further options to
+<tt class="literal">as_HTML(&#160;)</tt>, as described in <a href="ch09_01.htm">Chapter 9, "HTML Processing with Trees"</a>. One option controls whether omissible
+end-tags (such as <tt class="literal">&lt;/p&gt;</tt> and
+<tt class="literal">&lt;/li&gt;</tt>) are printed.
+</p>
+
+<p>Another controls what characters are escaped using
+<tt class="literal">&amp;foo;</tt> sequences. Notably, by default, this
+encodes all characters over ASCII 126, so for example,
+<tt class="literal">as_HTML</tt> will print an
+<tt class="literal">&#xE9;</tt> in the parse tree as
+<tt class="literal">&amp;eacute;</tt> (whether it came from a literal
+<tt class="literal">&#xE9;</tt> or from an
+<tt class="literal">&amp;eacute;</tt>). This is always safe, but in cases
+where you're dealing with text with a lot of Latin-1
+or Unicode characters, having every one of those characters encoded
+as a
+<tt class="literal">&amp;</tt><em class="replaceable"><tt>foo</tt></em><tt class="literal">;</tt>
+sequence might be bothersome to any people looking at the HTML markup
+output.
+</p>
+
+<p>In that case, your call to <tt class="literal">as_HTML</tt> can consist of
+<tt class="literal">$root-&gt;as_HTML('&lt;&gt;&amp;')</tt>, in which case
+only the minimum of characters (<tt class="literal">&lt;</tt>,
+<tt class="literal">&gt;</tt>, and <tt class="literal">&amp;</tt>) will be
+escaped. There's no point in using these options (or
+in preserving whitespace with
+<tt class="literal">ignore_ignorable_whitespace</tt> and
+<tt class="literal">no_space_compacting</tt>) if you're
+reasonably sure nobody will ever be looking at the resulting HTML.
+But for cases where people might need to look at the HTML, these
+options will make the code more inviting than <a name="INDEX-573" class="ipoint"
+></a><a name="INDEX-574" class="ipoint"
+></a>just one huge block
+of HTML.
+</p>
+
+</div>
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

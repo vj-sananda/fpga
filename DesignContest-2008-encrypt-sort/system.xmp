@@ -1,0 +1,134 @@
+#Please do not modify this file by hand
+XmpVersion: 7.1
+IntStyle: default
+MHS File: system.mhs
+MSS File: system.mss
+NPL File: projnav/system.ise
+Architecture: virtex2p
+Device: xc2vp30
+Package: ff896
+SpeedGrade: -7
+UseProjNav: 0
+AddToNPL: 0
+PNImportBitFile: 
+PNImportBmmFile: 
+UserCmd1: 
+UserCmd1Type: 0
+UserCmd2: 
+UserCmd2Type: 0
+SynProj: xst
+ReloadPbde: 0
+MainMhsEditor: 0
+InsertNoPads: 0
+HdlLang: VHDL
+Simulator: mti
+SimModel: BEHAVIORAL
+SimXLib: 
+SimEdkLib: 
+MixLangSim: 1
+UcfFile: data/system.ucf
+LockAddr: iocm_cntlr,C_BASEADDR
+LockAddr: iocm_cntlr,C_BASEADDR
+Processor: ppc405_0
+BootLoop: 1
+XmdStub: 0
+Processor: ppc405_1
+BootLoop: 0
+XmdStub: 0
+SwProj: TestApp_Memory
+Processor: ppc405_0
+Executable: TestApp_Memory/executable.elf
+Source: TestApp_Memory/src/TestApp_Memory.c
+DefaultInit: EXECUTABLE
+InitBram: 0
+Active: 1
+CompilerOptLevel: 2
+GlobPtrOpt: 0
+DebugSym: 1
+AsmOpt: 
+LinkOpt: 
+ProgStart: 
+StackSize: 
+HeapSize: 
+LinkerScript: TestApp_Memory/src/TestApp_Memory_LinkScr
+ProgCCFlags: 
+SwProj: TestApp_Peripheral
+Processor: ppc405_0
+Executable: TestApp_Peripheral/executable.elf
+Source: TestApp_Peripheral/src/TestApp_Peripheral.c
+Source: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.c
+Source: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb_selftest.c
+Header: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.h
+DefaultInit: EXECUTABLE
+InitBram: 0
+Active: 1
+CompilerOptLevel: 2
+GlobPtrOpt: 0
+DebugSym: 1
+AsmOpt: 
+LinkOpt: 
+ProgStart: 
+StackSize: 
+HeapSize: 
+LinkerScript: TestApp_Peripheral/src/TestApp_Peripheral_LinkScr
+ProgCCFlags: 
+SwProj: merge_sort64
+Processor: ppc405_0
+Executable: merge_sort64/executable.elf
+Source: merge_sort64/aes_core.c
+Source: merge_sort64/main.c
+Source: merge_sort64/msort.c
+Source: merge_sort64/sortrecord_hw_plb.c
+Source: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.c
+Source: drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.c
+Source: merge_sort64/recordio_tc.c
+Header: merge_sort64/aes_core.h
+Header: merge_sort64/msort.h
+Header: merge_sort64/sortrecord_hw_plb.h
+Header: merge_sort64/timer.h
+Header: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.h
+Header: drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.h
+Header: merge_sort64/recordio_tc.h
+DefaultInit: executable
+InitBram: 0
+Active: 1
+CompilerOptLevel: 2
+GlobPtrOpt: 0
+DebugSym: 1
+AsmOpt: 
+LinkOpt: 
+ProgStart: 
+StackSize: 
+HeapSize: 
+LinkerScript: merge_sort64_linker_script
+ProgCCFlags: 
+SwProj: metric
+Processor: ppc405_0
+Executable: metric/executable.elf
+Source: metric/aes_core.c
+Source: metric/main_tc.c
+Source: metric/recordio_tc.c
+Source: metric/msort.c
+Source: metric/sortrecord_hw_plb.c
+Source: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.c
+Source: drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.c
+Header: metric/aes_core.h
+Header: metric/recordio_tc.h
+Header: metric/timer.h
+Header: metric/sortrecord_hw_plb.h
+Header: metric/msort.h
+Header: drivers/accel_sort_plb_v1_00_a/src/accel_sort_plb.h
+Header: drivers/accel_sort_plb_v1_00_a/src/accel_sort_util.h
+DefaultInit: EXECUTABLE
+InitBram: 0
+Active: 1
+CompilerOptLevel: 3
+GlobPtrOpt: 1
+DebugSym: 0
+AsmOpt: 
+LinkOpt: 
+ProgStart: 
+StackSize: 
+HeapSize: 
+LinkerScript: metric_linker_script
+ProgCCFlags: 

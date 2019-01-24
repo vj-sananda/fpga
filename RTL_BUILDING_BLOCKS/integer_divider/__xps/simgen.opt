@@ -1,0 +1,1 @@
+ -p virtex2p -lang vhdl   $(PPC405_0_BOOTLOOP)  -s mti -X E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/ -E E:/work/FPGA_PROJECTS/BLOCKS/integer_divider/

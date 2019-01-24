@@ -1,0 +1,121 @@
+*/
+    i = index;
+    while ( i > 0 &&
+            table->stats[ index ].counts == table->stats[ i-1 ].counts )
+        i--;
+    if ( i != index )
+    {
+        temp = table->stats[ index ].symbol;
+        table->stats[ index ].symbol = table->stats[ i ].symbol;
+        table->stats[ i ].symbol = temp;
+        if ( table->links != NULL )
+        {
+            temp_ptr = table->links[ index ].next;
+            table->links[ index ].next = table->links[ i ].next;
+            table->links[ i ].next = temp_ptr;
+        }
+        index = i;
+    }
+/*
+ * The switch has been performed, now I can update the counts
+ */
+    table->stats[ index ].counts++;
+    if ( table->stats[ index ].counts == 255 )
+        rescale_table( table );
+}
+
+/*
+ * This routine is called when a given symbol needs to be encoded.
+ * It is the job of this routine to find the symbol in the context
+ * table associated with the current table, and return the low and
+ * high counts associated with that symbol, as well as the scale.
+ * Finding the table is simple.  Unfortunately, once I find the table,
+ * I have to build the table of cumulative counts, which is
+ * expensive, and is done elsewhere.  If the symbol is found in the
+ * table, the appropriate counts are returned.  If the symbols is
+ * not found, the ESCAPE symbol probabilities are returned, and
+ * the current order is reduced.  Note also the kludge to support
+ * the order -2 character set, which consists of negative numbers
+ * instead of unsigned chars.  This insures that no match will every
+ * be found for the EOF or FLUSH symbols in any "normal" table.
+ */
+int convert_int_to_symbol( int c, SYMBOL *s )
+{
+    int i;
+    CONTEXT *table;
+
+    table = contexts[ current_order ];
+    totalize_table( table );
+    s->scale = totals[ 0 ];
+    if ( current_order == -2 )
+        c = -c;
+    for ( i = 0 ; i <= table->max_index ; i++ )
+    {
+        if ( c == (int) table->stats[ i ].symbol )
+        {
+            if ( table->stats[ i ].counts == 0 )
+                break;
+            s->low_count = totals[ i+2 ];
+            s->high_count = totals[ i+1 ];
+            return( 0 );
+        }
+    }
+    s->low_count = totals[ 1 ];
+    s->high_count = totals[ 0 ];
+    current_order--;
+    return( 1 );
+}
+/*
+ * This routine is called when decoding an arithmetic number.  In
+ * order to decode the present symbol, the current scale in the
+ * model must be determined.  This requires looking up the current
+ * table, then building the totals table.  Once that is done, the
+ * cumulative total table has the symbol scale at element 0.
+ */
+void get_symbol_scale( SYMBOL *s )
+{
+    CONTEXT *table;
+
+    table = contexts[ current_order ];
+    totalize_table( table );
+    s->scale = totals[ 0 ];
+}
+
+/*
+ * This routine is called during decoding.  It is given a count that
+ * came out of the arithmetic decoder, and has to find the symbol that
+ * matches the count.  The cumulative totals are already stored in the
+ * totals[] table, form the call to get_symbol_scale, so this routine
+ * just has to look through that table.  Once the match is found,
+ * the appropriate character is returned to the caller.  Two possible
+ * complications.  First, the character might be the ESCAPE character,
+ * in which case the current_order has to be decremented.  The other
+ * complication is that the order might be -2, in which case we return
+ * the negative of the symbol so it isn't confused with a normal
+ * symbol.
+ */
+int convert_symbol_to_int( int count, SYMBOL *s)
+{
+    int c;
+    CONTEXT *table;
+
+    table = contexts[ current_order ];
+    for ( c = 0; count < totals[ c ] ; c++ )
+        ;
+    s->high_count = totals[ c-1 ];
+    s->low_count = totals[ c ];
+    if ( c == 1 )
+    {
+        current_order--;
+        return( ESCAPE );
+    }
+    if ( current_order < -1 )
+        return( (int) -table->stats[ c-2 ].symbol );
+    else
+        return( table->stats[ c-2 ].symbol );
+}
+
+
+/*
+ * After the model has been updated for a new character, this routine
+ * is called to "

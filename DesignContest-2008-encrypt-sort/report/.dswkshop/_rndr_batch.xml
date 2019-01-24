@@ -1,0 +1,40 @@
+
+<RENDERBATCH>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\ppc405_0.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\ppc405_0.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_ppc405_0.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\ppc405_1.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\ppc405_1.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_ppc405_1.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\jtagppc_0.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\jtagppc_0.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_jtagppc_0.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\reset_block.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\reset_block.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_reset_block.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\iocm.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\iocm.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_iocm.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\iocm_cntlr.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\iocm_cntlr.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_iocm_cntlr.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\isocm_bram.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\isocm_bram.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_isocm_bram.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\plb.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\plb.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_plb.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\opb.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\opb.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_opb.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\plb2opb.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\plb2opb.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_plb2opb.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\RS232_Uart_1.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\RS232_Uart_1.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_RS232_Uart_1.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\DDR_512MB_64Mx64_rank2_row13_col10_cl2_5.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\DDR_512MB_64Mx64_rank2_row13_col10_cl2_5.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_DDR_512MB_64Mx64_rank2_row13_col10_cl2_5.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\sysclk_inv.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\sysclk_inv.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_sysclk_inv.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\clk90_inv.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\clk90_inv.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_clk90_inv.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\ddr_clk90_inv.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\ddr_clk90_inv.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_ddr_clk90_inv.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\dcm_0.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\dcm_0.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_dcm_0.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\dcm_1.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\dcm_1.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_dcm_1.svg"/>
+
+  <RENDERIMG JPGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\accel_sort_plb_0.jpg" SVGNAME="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\imgs\accel_sort_plb_0.svg" TMPSVGFN="F:\fpga\proj\DesignContest08_vjs_64bit_blk4\report\.dswkshop\tmp_accel_sort_plb_0.svg"/>
+
+</RENDERBATCH>

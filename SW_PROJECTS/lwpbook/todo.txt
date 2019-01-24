@@ -1,0 +1,27 @@
+
+# Time-stamp: "2007-04-16 22:24:39 AKDT sburke@cpan.org"
+
+
+First-line indent ~some~ paragraphs?
+Ones after p's, h2s, but... not blockquotes or pre's?
+
+For screen, max-width the page a bit?  maybe
+p { max-width: 90% } ?
+
+
+Make the chapters on the mainpage have a "..." to expand to show their
+subpages?
+
+Rewrite the section on installing LWP?
+
+
+Hm, should I mark the index/*.htm pages to be, ironically, "noindex"
+for bots?  They're noisy pages.  Hm.
+
+
+Check all pages in Print Preview (or just PDF 'em all?)
+
+
+Generate a link-list of asides
+
+

@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Creating New Elements (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch10_05"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch10_05' class='lwp lwp_ch10_05' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">10.5. Creating New Elements</h2>
+
+<p>So far we haven't directly created any <a name="INDEX-602" class="ipoint"
+></a><a name="INDEX-603" class="ipoint"
+></a>new
+HTML::Element objects. All the elements that have appeared thus far
+were created by HTML::TreeBuilder as part of its delegated task of
+building whole trees. But suppose that we actually do need to add
+something to a tree that never existed elsewhere in that or any other
+tree. In the above section, we actually snuck in creating a new node
+in this statement:
+</p>
+
+<pre class="code">$template_title-&gt;push_content( 'No title' );</pre>
+
+<p>But that's hardly an amazing feat, because that node
+isn't a real object. You can actually create a new
+object by calling
+<tt class="literal">HTML::Element-&gt;new('</tt><em class="replaceable"><tt>tagname</tt></em><tt class="literal">')</tt>.
+So this would add an <tt class="literal">hr</tt> element to a given
+paragraph object:
+</p>
+
+<pre class="code">my $hr = HTML::Element-&gt;new('hr');
+$paragraph-&gt;push_content($hr);</pre>
+
+<p>And you could create a new <tt class="literal">img</tt> node with given
+attributes:
+</p>
+
+<pre class="code">my $img = HTML::Element-&gt;new('img');
+$img-&gt;attr('src', 'hooboy.png');
+$img-&gt;attr('alt', 'Lookit that!');
+$paragraph-&gt;push_content($img);</pre>
+
+<p>Incidentally, the setting of attributes can be done in the
+constructor call:
+</p>
+
+<pre class="code">my $img = HTML::Element-&gt;new('img',   # plus any key,value pairs...
+  'src' =&gt; 'hooboy.png',
+  'alt' =&gt; 'Lookit that!',
+);
+$paragraph-&gt;push_content($img);</pre>
+
+<p>This is simple enough, but it becomes rather annoying when you want
+to construct several linked nodes. For example, suppose you wanted to
+construct objects equivalent to what you'd get if
+you parsed this:
+</p>
+
+<pre class="code">&lt;li&gt;See &lt;b&gt;&lt;a href="page.html"&gt;here.&lt;/a&gt;&lt;/b&gt;!&lt;/li&gt;</pre>
+
+<p>Even this little treelet is fairly tedious to produce using normal
+constructor calls:
+</p>
+
+<pre class="code">use HTML::Element;
+ 
+my $li = HTML::Element-&gt;new('li');
+my $b  = HTML::Element-&gt;new('b');
+my $a  = HTML::Element-&gt;new('a', 'href' =&gt; 'page.html');
+$a-&gt;push_content('here.');
+$b-&gt;push_content($a);
+$li-&gt;push_content("See ", $b, "!");
+
+# Have a look:
+print $li-&gt;as_HTML, "\n";
+$li-&gt;dump;</pre>
+
+<p>That indeed shows us that we succeeded in constructing what we wanted:</p>
+
+<pre class="code">&lt;li&gt;See &lt;b&gt;&lt;a href="page.html"&gt;here.&lt;/a&gt;&lt;/b&gt;!
+
+&lt;li&gt; @0
+  "See "
+  &lt;b&gt; @0.1
+    &lt;a href="page.html"&gt; @0.1.0
+      "here."
+  "!"</pre>
+
+<a name="perllwp-CHP-10-SECT-5.1"></a><div class="sect2">
+<h3 class="sect2">10.5.1. Literals</h3>
+
+<p>If you try manually constructing <a name="INDEX-604" class="ipoint"
+></a><a name="INDEX-605" class="ipoint"
+></a>and
+linking every element in a larger structure such as a table, the code
+will be maddening. One solution is not to create the elements at all,
+but to create a single element, called a <tt class="literal">~literal</tt>
+pseudoelement, that contains the raw source you want to appear when
+that part of the tree is dumped. These sorts of objects are very much
+like the <tt class="literal">~comment</tt> pseudoelements we saw in the
+last section; their real content is in their <tt class="literal">text</tt>
+attribute:
+</p>
+
+<pre class="code">my $li = HTML::Element-&gt;new( '~literal',
+  'text', '&lt;li&gt;See &lt;b&gt;&lt;a href="page.html"&gt;here.&lt;/a&gt;&lt;/b&gt;!&lt;/li&gt;'
+);</pre>
+
+<p>This constructs something that will appear as that chunk of text when
+<tt class="literal">as_HTML(&#160;)</tt> is called on it, but
+it's nothing like a normal HTML element&#x2014;you
+can't put other elements or text under it, and you
+can't see it with <tt class="literal">look_down</tt> or
+<tt class="literal">find_by_tag_name(&#160;)</tt> (unless
+you're looking for a <tt class="literal">~literal</tt>
+element, which you're probably not).
+</p>
+
+</div>
+<a name="perllwp-CHP-10-SECT-5.2"></a><div class="sect2">
+<h3 class="sect2">10.5.2. New Nodes from Lists</h3>
+
+<p>Literals are fine for cases
+<a name="INDEX-606" class="ipoint"
+></a><a name="INDEX-607" class="ipoint"
+></a>where you just want to drop
+arbitrarily large amounts of undigested HTML source into a tree right
+before you call <tt class="literal">as_HTML(&#160;)</tt>. But when you want to
+really make new, full-fledged elements, you can do that with a
+friendlier syntax with the <tt class="literal">new_from_lol(&#160;)</tt>
+<a name="INDEX-608" class="ipoint"
+></a><a name="INDEX-609" class="ipoint"
+></a>constructor.
+</p>
+
+<p>With <tt class="literal">new_from_lol(&#160;)</tt>, you can specify an element
+with a list reference whose first item should be the tag name, which
+then specifies attributes with an optional hash reference, and then
+contains any other nodes, either as bits of text, preexisting element
+objects, or more list references. This is best shown by example:
+</p>
+
+<pre class="code">my $li = HTML::Element-&gt;new_from_lol(
+  [ 'li',
+          "See ",
+          [ 'b',
+                 [ 'a',
+                        {'href' =&gt; 'page.html'},
+                        "here."
+                 ]
+          ],
+          "!"
+  ]
+);    # or indent it however you prefer -- probably more concisely</pre>
+
+<p>And this produces exactly the same tree as when we called
+<tt class="literal">HTML::Element-&gt;new</tt> three times then linked up
+the resulting elements.
+</p>
+
+<p>The benefits of the <tt class="literal">new_from_lol(&#160;)</tt> approach are
+you can easily specify children at construction time, and
+it's very hard to produce mis-nested trees, because
+if the number of <tt class="literal">[</tt>'s above
+doesn't match the number of
+<tt class="literal">]</tt>'s, it won't
+parse as valid Perl. Moreover, it can actually be a relatively
+concise format. The above code, with some whitespace removed,
+basically fits happily on one line:
+</p>
+
+<pre class="code">my $li = HTML::Element-&gt;new_from_lol(
+  ['li',  "See ",  ['b', ['a', {'href' =&gt; 'page.html'}, "here." ] ], "!" ]
+);</pre>
+
+<p>So, for example, consider returning to the template-insertion problem
+in the previous section, and suppose that besides dumping the
+article's content into a template, we should also
+preface the content with something like this:
+</p>
+
+<pre class="code">&lt;p&gt;The original version of the following story is to found at:
+&lt;br&gt;&lt;a href="$orig_url"&gt;$orig_url&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;</pre>
+
+<p>This can be done by replacing:</p>
+
+<pre class="code">put_into_template( $good_td-&gt;content_list );</pre>
+
+<p>with this:</p>
+
+<pre class="code"># Assuming $orig_url has been set somewhere...
+
+put_into_template(
+  HTML::Element-&gt;new_from_lol(
+    ['p', "The original version of the following story is to found at:",
+      ['a', {'href', $orig_url}, $orig_url],
+    ]
+  ),
+  HTML::Element-&gt;new_from_lol(['hr']),
+  $good_td-&gt;content_list,
+);</pre>
+
+<p>If you find <tt class="literal">new_from_lol(&#160;)</tt> notation to be an
+unnecessary elaboration, you can still manually construct each
+element with <tt class="literal">HTML::Element-&gt;new</tt> and link them
+up before passing them to <tt class="literal">put_into_template(&#160;)</tt>. Or
+you could just as well create a <tt class="literal">~literal</tt>
+pseudoelement containing the raw source:
+</p>
+
+<pre class="code">put_into_template(
+  HTML::Element-&gt;new('~literal', 'text' =&gt; qq{
+      &lt;p&gt;The original version of the following story is to found at:
+      &lt;br&gt;&lt;a href="$orig_url"&gt;$orig_url&lt;/a&gt;&lt;/p&gt;
+      &lt;hr&gt;
+  }),
+  $good_td-&gt;content_list,
+);</pre>
+
+<p>While the <tt class="literal">new_from_lol(&#160;)</tt> syntax is an expressive
+shorthand for the general form of element construction, you may well
+prefer the directness of creating a single
+<tt class="literal">~literal</tt> or the simplicity of normal
+<tt class="literal">-&gt;new</tt> calls. As the Perl saying goes, there is
+<a name="INDEX-610" class="ipoint"
+></a><a name="INDEX-611" class="ipoint"
+></a>more
+than one way to do it.
+</p>
+
+
+ 
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

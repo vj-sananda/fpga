@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: BBC News (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch09_04"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:25:55 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch09_04' class='lwp lwp_ch09_04' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">9.4. Example: BBC News</h2>
+
+<p>In <a href="ch07_01.htm">Chapter 7, "HTML Processing with Tokens"</a>, we considered <a name="INDEX-557" class="ipoint"
+></a><a name="INDEX-558" class="ipoint"
+></a>the task of
+extracting the headline link URLs from the BBC News main page, and we
+implemented it in terms of HTML::TokeParser. Here,
+we'll consider the same problem from the perspective
+of HTML::TreeBuilder.
+</p>
+
+<p>To review the problem: when you look at the source of <a href="http://news.bbc.co.uk">http://news.bbc.co.uk</a>, you discover that each
+headline link is wrapped in one of two kinds of code. There are a lot
+of headlines expressed with code like this:
+</p>
+
+<pre class="code">&lt;B CLASS="h3"&gt;&lt;A href="/hi/english/business/newsid_1576000/1576290.stm"&gt;Bank
+of England mulls rate cut&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;
+  
+&lt;B CLASS="h3"&gt;&lt;A href="/hi/english/uk_politics/newsid_1576000/1576541.stm"&gt;Euro
+battle revived by Blair speech&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;</pre>
+
+<p>and some headlines expressed with code like this:</p>
+
+<pre class="code">&lt;A href="/hi/english/business/newsid_1576000/1576636.stm"&gt;
+  &lt;B class="h2"&gt; Swissair shares wiped out&lt;/B&gt;&lt;BR&gt;
+&lt;/A&gt;
+
+&lt;A href="/hi/english/world/middle_east/newsid_1576000/1576113.stm"&gt;
+  &lt;B class="h1"&gt;Mid-East blow to US anti-terror drive&lt;/B&gt;&lt;BR&gt;
+&lt;/A&gt;</pre>
+
+<p>(Note that in this second case, the <tt class="literal">B</tt>
+element's class value can be <tt class="literal">h1</tt>
+or <tt class="literal">h2</tt>.)
+</p>
+
+<p>In both cases, we can find what we want by first looking for
+<tt class="literal">B</tt> elements. We then look for the
+<tt class="literal">href</tt> attribute either on the <tt class="literal">A</tt>
+element that's a child of this <tt class="literal">B</tt>
+element, or on the <tt class="literal">A</tt> element
+that's this <tt class="literal">B</tt>
+element's parent. Whether we look for a parent
+<tt class="literal">A</tt> node or a child <tt class="literal">A</tt> node
+depends on the class attribute of the <tt class="literal">B</tt> element.
+To make sure we're on the right track, we can code
+up something to formalize our idea of what sorts of nodes we want,
+and call the <tt class="literal">dump</tt> method on each of them.
+</p>
+
+<pre class="code">use strict;
+use HTML::TreeBuilder 3;
+
+my $tree = HTML::TreeBuilder-&gt;new( );
+$tree-&gt;parse_file('bbc.html') || die $!;  # the saved source from BBC News
+scan_bbc_tree( $tree, 'http://news.bbc.co.uk/' );
+$tree-&gt;delete( );
+
+sub scan_bbc_tree {
+  my($root, $docbase) = @_;
+    # $docbase will be needed if we want to absolutize the URL
+  foreach my $b ($root-&gt;find_by_tag_name('b')) {
+    my $class = $b-&gt;attr('class') || next;
+    if($class eq 'h3') {
+      # expect one 'a' element as a child
+      print "Found a b-h3.  Dumping it:\n";
+      $b-&gt;dump;
+    } elsif($class eq 'h1' or $class eq 'h2') {
+      # expect the parent to be an 'a'
+      print "Found a b-h[1-2].  Dumping its parent:\n";
+      $b-&gt;parent-&gt;dump;
+    }
+  }
+  return;  
+}</pre>
+
+<p>When run on the full file, that program produces this output:</p>
+
+<pre class="code">Found a b-h3.  Dumping it:
+&lt;b class="h3"&gt; @0.1.2.2.0.0.3.2.0.3.0.0.0.0.6
+  &lt;a href="/sport/hi/english/in_depth/2001/england_in_zimbabwe/newsid_1574000/
+1574824.stm"&gt; @0.1.2.2.0.0.3.2.0.3.0.0.0.0.6.0
+    "Zimbabwe suffer treble blow"
+
+Found a b-h3.  Dumping it:
+&lt;b class="h3"&gt; @0.1.2.2.0.0.3.2.0.6.1.0
+  &lt;a href="/hi/english/business/newsid_1576000/1576546.stm"&gt; @0.1.2.2.0.0.3.2.0.6.1.0.0
+    "UK housing market stalls"
+
+Found a b-h[1-2].  Dumping its parent:
+&lt;a href="/hi/english/uk_politics/newsid_1576000/1576051.stm"&gt; @0.1.2.2.0.0.1.2.0.14.2
+  " "
+  &lt;b class="h1"&gt; @0.1.2.2.0.0.1.2.0.14.2.1
+    "UK hate crime laws to be tightened"
+  &lt;br&gt; @0.1.2.2.0.0.1.2.0.14.2.2
+
+Found a b-h[1-2].  Dumping its parent:
+&lt;a href="/hi/english/uk/newsid_1576000/1576379.stm"&gt; @0.1.2.2.0.0.1.2.0.18.2
+  " "
+  &lt;b class="h2"&gt; @0.1.2.2.0.0.1.2.0.18.2.1
+    "Leeds footballers' trial begins"
+  &lt;br&gt; @0.1.2.2.0.0.1.2.0.18.2.2
+
+[...and others just like those...]</pre>
+
+<p>This output shows all the sorts of nodes from which
+we'll want to extract data and contains no other
+kinds of nodes. With the situation we see in the first two cases, the
+<tt class="literal">b</tt> element with the <tt class="literal">class="h3"</tt>
+attribute indeed has only one child node, which is an
+<tt class="literal">a</tt> element whose <tt class="literal">href</tt> we want,
+and in the latter two cases, we need only look to the
+<tt class="literal">href</tt> attribute on the parent of the
+<tt class="literal">b</tt> element (which has a
+<tt class="literal">class="h1"</tt> or <tt class="literal">class="h2"</tt>
+attribute). So because we're identifying things
+correctly, we can go ahead and change our code so that instead of
+dumping nodes, it will actually pull the <tt class="literal">href</tt>s
+out, absolutize them, and print them:
+</p>
+
+<pre class="code">use URI;
+sub scan_bbc_tree {
+  my($root, $docbase) = @_;
+  foreach my $b ($root-&gt;find_by_tag_name('b')) {
+    my $class = $b-&gt;attr('class') || next;
+    if($class eq 'h3') {
+      # Expect one 'a' element as a child
+      my @children = $b-&gt;content_list;
+      if(@children == 1 and ref $children[0] and $children[0]-&gt;tag eq 'a') {
+        print URI-&gt;new_abs(
+          <tt class="userinput"><b>$children[0]-&gt;attr('href') || next</b></tt>,
+          $docbase
+        ), "\n";
+      }
+    } elsif($class eq 'h1' or $class eq 'h2') {
+      # Expect an 'a' element as a parent
+      my $parent = $b-&gt;parent;
+      if($parent and $parent-&gt;tag eq 'a') {
+        print URI-&gt;new_abs(
+          <tt class="userinput"><b>$parent-&gt;attr('href') || next,</b></tt>
+          $docbase
+        ), "\n";
+      }
+    }
+  }
+  return;  
+}</pre>
+
+<p>When run, this correctly reports all the URLs in the document:</p>
+
+<pre class="code">http://news.bbc.co.uk/sport/hi/english/in_depth/2001/england_in_zimbabwe/newsid_
+1574000/1574824.stm
+http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576546.stm
+http://news.bbc.co.uk/hi/english/uk_politics/newsid_1576000/1576051.stm
+http://news.bbc.co.uk/hi/english/uk/newsid_1576000/1576379.stm
+[...etc...]</pre>
+
+<p>If we want to make our program also capture the text inside the link,
+that's straightforward too; we need only change each
+occurrence of:
+</p>
+
+<pre class="code">print URI-&gt;new_abs(...</pre>
+
+<p>to:</p>
+
+<pre class="code">print $b-&gt;as_text( ), "\n  ", URI-&gt;new_abs(...</pre>
+
+<p>Then you'll get output like this:</p>
+
+<pre class="code">UK housing market stalls
+  http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576546.stm
+UK hate crime laws to be tightened
+  http://news.bbc.co.uk/hi/english/uk_politics/newsid_1576000/1576051.stm
+Leeds footballers' trial begins
+  http://news.bbc.co.uk/hi/english/uk/newsid_1576000/1576379.stm
+ Swissair shares wiped out
+  http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576636.stm
+[...]</pre>
+
+<p>Notice that in the fourth link there, we have a space at the start.
+Wanting to <em class="emphasis">not</em> have whitespace at the start or
+end of <tt class="literal">as_text(&#160;)</tt> is common enough that
+there's a method just for that:
+<tt class="literal">as_trimmed_text(&#160;)</tt>, which wraps around
+<tt class="literal">as_text(&#160;)</tt>, removes any whitespace at the start or
+end, and collapses any whitespace nodes on the inside.<a class='footnotylink' href="#FOOTNOTE-3">[3]</a> When we replace
+our calls to <tt class="literal">get_text(&#160;)</tt> with calls to
+<tt class="literal">get_trimmed_text(&#160;)</tt>, that last link changes to
+this:
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-3"></a>[3]
+This is exactly the same as the <tt class="literal">$stream-&gt;get_text(&nbsp;)</tt>
+versus <tt class="literal">$stream-&gt;get_trimmed_text(&#160;)</tt>
+distinction in HTML::TokeParser.</p> </blockquote>
+
+<pre class="code">[...]
+Swissair shares wiped out
+  http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576636.stm
+[...]</pre>
+
+<p>that is, without the space at the start of <a name="INDEX-559" class="ipoint"
+></a><a name="INDEX-560" class="ipoint"
+></a>the line.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

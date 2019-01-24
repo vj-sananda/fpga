@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Getting the Data (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch08_02"; var lwp_lastmod=
+  'Time-stamp: "2007-04-16 15:28:46 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch08_02' class='lwp lwp_ch08_02' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">8.2. Getting the Data</h2>
+
+<p>The first step is to figure out what web pages we need to request to
+get the data in any form. With the BBC extractor, it was just a
+matter of requesting the single page
+<em class="emphasis">http://news.bbc.co.uk</em>, but here
+there's no one page that lists all the data we want.
+Instead, you can view the program description for each show, one day
+at a time. Moreover, the URL for each such page looks like this,
+which displays the program info for July 2, 2001:
+</p>
+
+<pre class="code">http://freshair.npr.org/dayFA.cfm?todayDate=07%2F02%2F2001</pre>
+
+<p>It's relatively clear that the format for the bit
+after the equal sign is the two-digit month, <tt class="literal">%2F</tt>,
+the two-digit day, <tt class="literal">%2F</tt>, and the four-digit year.
+(It's even more clear when you consider that
+<tt class="literal">%2F</tt> is the <tt class="literal">/</tt> character encoded,
+so that the above means <tt class="literal">07/02/2001</tt>.) Harvesting
+all the data is a simple matter of iterating over all the days of the
+month (or whatever period you want to cover), skipping weekends
+(because the program listings are only for weekdays), substituting
+the proper date numbers into that URL. Once each page is harvested,
+the data can be extracted from it.
+</p>
+
+<p>Already the outlines of the program's design are
+becoming clear: there needs to be a loop that harvests the contents
+of a URL based on each date, then scans the returned content.
+Scanning the content isn't a distinct enough task
+that it has to be part of the same block of code as the code that
+actually harvests the URL. Instead, it can simply be a routine that is
+given a new stream from which it is expected to extract data.
+Moreover, that is the hard part of the program, so we might as well
+do that first (the stuff with date handling and URL interpolation is
+much less worrisome, and can be put off until last).
+</p>
+
+<p>So, to figure out the format of the data we want to harvest, consider
+a typical program listing page in its rendered form in a browser. We
+establish that this is a "typical"
+page (shown in <a href="ch08_02.htm#perllwp-CHP-8-FIG-1">Figure 8-1</a>) by flipping through the
+listings and finding that they all pretty much look like that. (That
+stands to reason, as the URL tells us that they're
+being served dynamically, and all through the same
+<em class="emphasis">.cfm</em>&#x2014;Cold Fusion&#x2014;file, such that
+having each day's bit of content poured into a
+common template is the easy way for the web site's
+designers to have implemented this.) So we have good reason to hope
+that whatever code we work up to extract successfully from one
+typical page, would hopefully work for all of them. The only
+remarkable difference is in the number of segments per show: here
+there's two, but there could be one, or four, or
+even more. Also, the descriptions can be several paragraphs,
+sometimes much shorter.
+</p>
+
+<a name="perllwp-CHP-8-FIG-1"></a><div class="figure"><img src="figs/plwp_0801.gif"
+  alt="Figure 8-1: Fresh Air web page"
+title="Figure 8-1: Fresh Air web page"
+/></div><h4 class="objtitle">Figure 8-1. Fresh Air web page</h4>
+
+<p>What we want to extract here is the link text that says
+"Monday - July 2, 2001,"
+"Editor and writer Walter Kirn,"
+and "Casting director and actress Joanna
+Merlin," and for each we also want the link URL as
+an absolute URL. We don't want the
+"Listen to" part, since
+it'd be pointlessly repetitive to have a whole
+month's worth of listings where every line starts
+with "Listen to".
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

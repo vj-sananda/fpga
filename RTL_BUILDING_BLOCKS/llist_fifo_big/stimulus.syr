@@ -1,0 +1,458 @@
+Release 7.1.02i - xst H.40
+Copyright (c) 1995-2005 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to __projnav
+CPU : 0.00 / 0.64 s | Elapsed : 0.00 / 1.00 s
+ 
+--> Parameter xsthdpdir set to ./xst
+CPU : 0.00 / 0.64 s | Elapsed : 0.00 / 1.00 s
+ 
+--> Reading design: stimulus.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) HDL Analysis
+  4) HDL Synthesis
+  5) Advanced HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Final Report
+     7.1) Device utilization summary
+     7.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "stimulus.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "stimulus"
+Output Format                      : NGC
+Target Device                      : xc2vp30-7-ff896
+
+---- Source Options
+Top Module Name                    : stimulus
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Equivalent register Removal        : YES
+Slice Packing                      : YES
+Pack IO Registers into IOBs        : auto
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : NO
+Global Optimization                : AllClockNets
+RTL Output                         : Yes
+Write Timing Constraints           : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+lso                                : stimulus.lso
+Read Cores                         : YES
+cross_clock_analysis               : NO
+verilog2001                        : YES
+safe_implementation                : No
+Optimize Instantiated Primitives   : NO
+tristate2logic                     : Yes
+use_clock_enable                   : Yes
+use_sync_set                       : Yes
+use_sync_reset                     : Yes
+enable_auto_floorplanning          : No
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "hfifo.v"
+Module <hfifo> compiled
+Compiling verilog file "mem.v"
+Module <mem> compiled
+Compiling verilog file "flist.v"
+Module <flist> compiled
+Compiling verilog file "stimulus.v"
+Module <stimulus> compiled
+No errors in compilation
+Analysis of file <"stimulus.prj"> succeeded.
+ 
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <stimulus>.
+Module <stimulus> is correct for synthesis.
+ 
+Analyzing module <hfifo>.
+	size = 16
+	pwidth = 4
+	swidth = 5
+	dwidth = 16
+Module <hfifo> is correct for synthesis.
+ 
+Analyzing module <flist>.
+	size = 65536
+	width = 16
+Module <flist> is correct for synthesis.
+ 
+Analyzing module <mem>.
+	dwidth = 16
+	awidth = 16
+	size = 65536
+WARNING:Xst:1464 - "mem.v" line 26: Exactly equal expression will be synthesized as an equal expression, simulation mismatch is possible.
+Module <mem> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <mem>.
+    Related source file is "mem.v".
+    Found 65536x16-bit single-port block RAM for signal <mem>.
+    -----------------------------------------------------------------------
+    | mode               | no-change                           |          |
+    | aspect ratio       | 65536-word x 16-bit                 |          |
+    | clock              | connected to signal <clk>           | rise     |
+    | write enable       | connected to signal <wr>            | high     |
+    | address            | connected to signal <addr>          |          |
+    | data in            | connected to signal <din>           |          |
+    | data out           | connected to signal <dout>          |          |
+    | ram_style          | Auto                                |          |
+    -----------------------------------------------------------------------
+    Summary:
+	inferred   1 RAM(s).
+Unit <mem> synthesized.
+
+
+Synthesizing Unit <flist>.
+    Related source file is "flist.v".
+WARNING:Xst:1780 - Signal <dealloc_s3> is never used or assigned.
+WARNING:Xst:1780 - Signal <mem_busy> is never used or assigned.
+    Found 1-bit register for signal <init_done>.
+    Found 16-bit register for signal <alloc_id>.
+    Found 1-bit register for signal <dealloc_ack>.
+    Found 1-bit register for signal <alloc_ack>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0005>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0009>.
+    Found 1-bit 4-to-1 multiplexer for signal <$n0020>.
+    Found 16-bit comparator equal for signal <$n0021> created at line 121.
+    Found 16-bit comparator equal for signal <$n0024> created at line 164.
+    Found 1-bit register for signal <alloc_req_pend>.
+    Found 1-bit register for signal <alloc_s2>.
+    Found 1-bit register for signal <alloc_s3>.
+    Found 1-bit register for signal <allow_alloc>.
+    Found 1-bit register for signal <allow_dealloc>.
+    Found 1-bit register for signal <dealloc_req_pend>.
+    Found 1-bit register for signal <dealloc_s2>.
+    Found 16-bit register for signal <head>.
+    Found 16-bit register for signal <init_addr>.
+    Found 16-bit up counter for signal <init_din>.
+    Found 1-bit register for signal <init_wr>.
+    Found 16-bit register for signal <m_addr>.
+    Found 16-bit register for signal <m_din>.
+    Found 1-bit register for signal <m_wr>.
+    Found 16-bit register for signal <tail>.
+    Found 1-bit register for signal <token>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  93 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   3 Multiplexer(s).
+Unit <flist> synthesized.
+
+
+Synthesizing Unit <hfifo>.
+    Related source file is "hfifo.v".
+    Found 1-bit 4-to-1 multiplexer for signal <not_full>.
+    Found 16-bit 16-to-1 multiplexer for signal <dout>.
+    Found 5-bit addsub for signal <$n0019>.
+    Found 5-bit register for signal <cnt>.
+    Found 256-bit register for signal <fmem>.
+    Found 1-bit 4-to-1 multiplexer for signal <not_empty>.
+    Found 4-bit up counter for signal <rd_ptr>.
+    Found 4-bit up counter for signal <wr_ptr>.
+INFO:Xst:738 - HDL ADVISOR - 256 flip-flops were inferred for signal <fmem>. You may be trying to describe a RAM in a way that is incompatible with block and distributed RAM resources available on Xilinx devices, or with a specific template that is not supported. Please review the Xilinx resources documentation and the XST user manual for coding guidelines. Taking advantage of RAM resources will lead to improved device usage and reduced synthesis time.
+    Summary:
+	inferred   2 Counter(s).
+	inferred 261 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred  18 Multiplexer(s).
+Unit <hfifo> synthesized.
+
+
+Synthesizing Unit <stimulus>.
+    Related source file is "stimulus.v".
+    Found 8-bit comparator greatequal for signal <$n0002> created at line 51.
+    Found 1-bit register for signal <alloc_req>.
+    Found 1-bit register for signal <clk_enable>.
+    Found 16-bit register for signal <dealloc_id>.
+    Found 1-bit register for signal <dealloc_req>.
+    Found 16-bit register for signal <din>.
+    Found 8-bit up counter for signal <div_count>.
+    Found 1-bit register for signal <pop>.
+    Found 1-bit register for signal <push>.
+    Found 1-bit register for signal <RESET>.
+    Found 1-bit register for signal <wait_for_alloc_ack>.
+    Found 1-bit register for signal <wait_for_dealloc_ack>.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  40 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <stimulus> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Advanced RAM inference ...
+Advanced multiplier inference ...
+Advanced Registered AddSub inference ...
+Dynamic shift register inference ...
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Block RAMs                       : 1
+ 65536x16-bit single-port block RAM: 1
+# Adders/Subtractors               : 1
+ 5-bit addsub                      : 1
+# Counters                         : 4
+ 16-bit up counter                 : 1
+ 4-bit up counter                  : 2
+ 8-bit up counter                  : 1
+# Registers                        : 46
+ 1-bit register                    : 21
+ 16-bit register                   : 24
+ 5-bit register                    : 1
+# Comparators                      : 3
+ 16-bit comparator equal           : 2
+ 8-bit comparator greatequal       : 1
+# Multiplexers                     : 6
+ 1-bit 4-to-1 multiplexer          : 5
+ 16-bit 16-to-1 multiplexer        : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <stimulus> ...
+
+Optimizing unit <flist> ...
+
+Optimizing unit <hfifo> ...
+Loading device for application Rf_Device from file '2vp30.nph' in environment C:/Xilinx.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block stimulus, actual ratio is 2.
+FlipFlop dut/flist_mem/Mram_mem_1 has been replicated 1 time(s)
+FlipFlop pop has been replicated 1 time(s)
+FlipFlop push has been replicated 1 time(s)
+FlipFlop dut/init_done has been replicated 1 time(s) to handle iob=true attribute.
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : stimulus.ngr
+Top Level Output File Name         : stimulus
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 5
+
+Macro Statistics :
+# RAM                              : 1
+#      65536x16-bit single-port block RAM: 1
+# Registers                        : 65
+#      1-bit register              : 37
+#      16-bit register             : 23
+#      4-bit register              : 4
+#      5-bit register              : 1
+# Multiplexers                     : 6
+#      1-bit 4-to-1 multiplexer    : 5
+#      16-bit 16-to-1 multiplexer  : 1
+# Comparators                      : 3
+#      16-bit comparator equal     : 2
+#      8-bit comparator greatequal : 1
+# Xors                             : 4
+#      1-bit xor3                  : 4
+
+Cell Usage :
+# BELS                             : 537
+#      GND                         : 1
+#      INV                         : 10
+#      LUT1                        : 2
+#      LUT1_L                      : 20
+#      LUT2                        : 13
+#      LUT2_D                      : 1
+#      LUT3                        : 60
+#      LUT3_D                      : 3
+#      LUT3_L                      : 178
+#      LUT4                        : 17
+#      LUT4_D                      : 2
+#      LUT4_L                      : 40
+#      MUXCY                       : 38
+#      MUXF5                       : 81
+#      MUXF6                       : 32
+#      MUXF7                       : 16
+#      VCC                         : 1
+#      XORCY                       : 22
+# FlipFlops/Latches                : 448
+#      FDC                         : 8
+#      FDCE                        : 68
+#      FDE                         : 343
+#      FDPE                        : 11
+#      FDR                         : 16
+#      FDRE                        : 2
+# RAMS                             : 64
+#      RAMB16_S1                   : 64
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 4
+#      OBUF                        : 4
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                     351  out of  13696     2%  
+ Number of Slice Flip Flops:           448  out of  27392     1%  
+ Number of 4 input LUTs:               336  out of  27392     1%  
+ Number of bonded IOBs:                  5  out of    556     0%  
+ Number of BRAMs:                       64  out of    136    47%  
+ Number of GCLKs:                        1  out of     16     6%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+SYSTEM_CLOCK                       | BUFGP                  | 448   |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 4.236ns (Maximum Frequency: 236.055MHz)
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: 4.415ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SYSTEM_CLOCK'
+  Clock period: 4.236ns (frequency: 236.055MHz)
+  Total number of paths / destination ports: 3513 / 874
+-------------------------------------------------------------------------
+Delay:               4.236ns (Levels of Logic = 12)
+  Source:            dut/flist_mem/Mram_mem_1_1 (FF)
+  Destination:       dut/allow_alloc (FF)
+  Source Clock:      SYSTEM_CLOCK rising
+  Destination Clock: SYSTEM_CLOCK rising
+
+  Data Path: dut/flist_mem/Mram_mem_1_1 to dut/allow_alloc
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             18   0.370   0.729  dut/flist_mem/Mram_mem_1_1 (dut/flist_mem/Mram_mem_1_1)
+     LUT3_L:I0->LO         1   0.275   0.000  dut/flist_mem/Mram_mem_inst_mux_f5_1611_G (N231)
+     MUXF5:I1->O           2   0.303   0.416  dut/flist_mem/Mram_mem_inst_mux_f5_1611 (dut/dout<1>)
+     LUT4_L:I3->LO         1   0.275   0.000  dut/Eq_stagelut8 (dut/N12)
+     MUXCY:S->O            1   0.334   0.000  dut/Eq_stagecy_rn_7 (dut/Eq_stage_cyo7)
+     MUXCY:CI->O           1   0.036   0.000  dut/Eq_stagecy_rn_8 (dut/Eq_stage_cyo8)
+     MUXCY:CI->O           1   0.036   0.000  dut/Eq_stagecy_rn_9 (dut/Eq_stage_cyo9)
+     MUXCY:CI->O           1   0.036   0.000  dut/Eq_stagecy_rn_10 (dut/Eq_stage_cyo10)
+     MUXCY:CI->O           1   0.036   0.000  dut/Eq_stagecy_rn_11 (dut/Eq_stage_cyo11)
+     MUXCY:CI->O           1   0.036   0.000  dut/Eq_stagecy_rn_12 (dut/Eq_stage_cyo12)
+     MUXCY:CI->O           1   0.036   0.000  dut/Eq_stagecy_rn_13 (dut/Eq_stage_cyo13)
+     MUXCY:CI->O           2   0.416   0.416  dut/Eq_stagecy_rn_14 (dut/_n0040<1>)
+     LUT4_L:I3->LO         1   0.275   0.000  dut/_n00051 (dut/_n0005)
+     FDPE:D                    0.208          dut/allow_alloc
+    ----------------------------------------
+    Total                      4.236ns (2.674ns logic, 1.562ns route)
+                                       (63.1% logic, 36.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SYSTEM_CLOCK'
+  Total number of paths / destination ports: 4 / 4
+-------------------------------------------------------------------------
+Offset:              4.415ns (Levels of Logic = 2)
+  Source:            RESET (FF)
+  Destination:       LED_3 (PAD)
+  Source Clock:      SYSTEM_CLOCK rising
+
+  Data Path: RESET to LED_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q            109   0.370   0.781  RESET (RESET)
+     INV:I->O              3   0.275   0.397  LED_31_INV_0 (LED_3_OBUF)
+     OBUF:I->O                 2.592          LED_3_OBUF (LED_3)
+    ----------------------------------------
+    Total                      4.415ns (3.237ns logic, 1.178ns route)
+                                       (73.3% logic, 26.7% route)
+
+=========================================================================
+CPU : 14.39 / 15.08 s | Elapsed : 14.00 / 15.00 s
+ 
+--> 
+
+Total memory usage is 159068 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    4 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+

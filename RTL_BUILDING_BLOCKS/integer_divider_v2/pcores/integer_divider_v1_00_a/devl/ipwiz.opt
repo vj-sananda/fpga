@@ -1,0 +1,12 @@
+-batch 
+-create integer_divider 
+-ver 1.00.a 
+-dir "E:\work\FPGA_PROJECTS\BLOCKS\integer_divider" 
+-lang verilog 
+-bus plbv46 s 
+-rfifo 1 512 
+-wfifo 1 512 
+-reg 2 
+-xps 
+-ise 
+-driver 

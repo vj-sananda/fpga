@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Using Extracted Text (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch07_06"; var lwp_lastmod=
+  'Time-stamp: "2007-03-27 18:06:44 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch07_06' class='lwp lwp_ch07_06' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">7.6. Using Extracted Text</h2>
+
+<p>Consider the BBC story-link <a name="INDEX-470" class="ipoint"
+></a><a name="INDEX-471" class="ipoint"
+></a>extractor introduced earlier. Its task was
+to find links to stories, in either of these kinds of patterns:
+</p>
+
+<pre class="code">&lt;B CLASS="h3"&gt;&lt;A href="/hi/english/business/newsid_1576000/1576290.stm"&gt;Bank
+  of England mulls rate cut&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;
+
+&lt;A href="/hi/english/world/middle_east/newsid_1576000/1576113.stm"&gt;
+  &lt;B class="h1"&gt;Mid-East blow to US anti-terror drive&lt;/B&gt;&lt;BR&gt;
+&lt;/A&gt;</pre>
+
+<p>and then to isolate the URL, absolutize it, and print it. But it
+ignores the actual link text, which starts with the next token in the
+stream. If we want that text, we could get the next token by calling
+<tt class="literal">get_text(&#160;)</tt>:
+</p>
+
+<pre class="code">print $stream-&gt;get_text( ), "\n  ",
+  URI-&gt;new_abs($next[0][2]{'href'}, $docbase), "\n";</pre>
+
+<p>That prints the text like this:</p>
+
+<pre class="code">Bank
+of England mulls rate cut
+  http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576290.stm</pre>
+
+<p>Note that the newline (and any indenting, if there was any) in the
+source hasn't been filtered out. For some
+applications, this makes no difference, but for neatness sake,
+let's keep headlines to one line each. Changing
+<tt class="literal">get_text(&#160;)</tt> to <tt class="literal">get_trimmed_text(
+)</tt> makes that happen:
+</p>
+
+<pre class="code">print $stream-&gt;get_trimmed_text( ), "\n  ",
+  URI-&gt;new_abs($next[0][2]{'href'}, $docbase), "\n";
+<b class="emphasis-bold">Bank of England mulls rate cut</b>
+<b class="emphasis-bold">  http://news.bbc.co.uk/hi/english/business/newsid_1576000/1576290.stm</b></pre>
+
+<p>If the headlines are potentially quite long, we can pass them through
+Text::Wrap, to wrap them at 72 columns.
+</p>
+
+<p>There's a trickier problem that occurs often with
+<tt class="literal">get_text(&#160;)</tt> or <tt class="literal">get_trimmed_text(
+)</tt>. What if the HTML we're parsing looks
+like this?
+</p>
+
+<pre class="code">&lt;B CLASS="h3"&gt;&lt;A href="/unlikely/2468.stm"&gt;Shatner &amp;amp; Kunis win Oscars
+  for &lt;cite&gt;American Psycho II&lt;/cite&gt; r&amp;ocirc;les&lt;/A&gt;&lt;/B&gt;&lt;BR&gt;</pre>
+
+<p>If we've just parsed the <tt class="literal">b</tt> and
+the <tt class="literal">a</tt>, the next token in the stream is a text
+token, <tt class="literal">Shatner</tt> <tt class="literal">&amp;</tt>
+<tt class="literal">Kunis</tt> <tt class="literal">win</tt>
+<tt class="literal">Oscars</tt> <tt class="literal">for</tt> ,
+that's what <tt class="literal">get_text(&#160;)</tt> returns
+(<tt class="literal">get_trimmed_text(&#160;)</tt> returns the same thing, minus
+the final space). But we don't want only the first
+text token in the headline, we want the whole headline. So instead of
+defining the headline as "the next text
+token," we could define it as "all
+the text tokens until the next
+<tt class="literal">&lt;/a&gt;</tt>." So the program
+changes to:
+</p>
+
+<pre class="code">print $stream-&gt;<tt class="userinput"><b>get_trimmed_text('/a')</b></tt>, "\n  ",
+  URI-&gt;new_abs($next[0][2]{'href'}, $docbase), "\n";</pre>
+
+<p>That happily prints:</p>
+
+<pre class="code"><b class="emphasis-bold">Shatner &amp; Kunis win Oscars for American Psycho II r&#xF4;les</b>
+  <b class="emphasis-bold">http://news.bbc.co.uk/unlikely/2468.stm</b></pre>
+
+<p>Note that the <tt class="literal">&amp;amp;</tt> and
+<tt class="literal">&amp;ocirc;</tt> entity references were resolved to
+<tt class="literal">&amp;</tt> and <tt class="literal">&#xF4;</tt>. If you
+were using such a program to spit out something other than plain text
+(such as XML or RTF), a bare <tt class="literal">&amp;</tt> and/or a bare
+high-bit character such as <tt class="literal">&#xF4;</tt> might be
+unacceptable, and might need escaping in some fashion. Even if you
+are emitting plain text, the <tt class="literal">\xA0</tt> (nonbreaking
+space) or <tt class="literal">\xAD</tt> (soft hyphen) characters may not be
+happily interpreted by whatever application you're
+reading the text with, in which case a <tt class="literal">tr/\xA0/</tt>
+<tt class="literal">/</tt> and <tt class="literal">tr/\xAD//d</tt> are called
+for. If you're taking the output of
+<tt class="literal">get_text(&#160;)</tt> or <tt class="literal">get_trimmed_text(
+)</tt> and sending it to a system that understands only U.S.
+ASCII, then passing the text through a module such as Text::Unidecode
+might be called for to turn the <tt class="literal">&#xF4;</tt> into
+an <tt class="literal">o</tt>. This is not really an HTML or
+HTML::TokeParser matter at all, but is the sort of problem that
+commonly arises when extracting content from HTML and putting it into
+other formats.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

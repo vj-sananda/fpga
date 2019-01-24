@@ -1,0 +1,12 @@
+run
+-opt_mode speed
+-p xc2vp30ff896-7
+-top accel_sort_plb_0_wrapper
+-ifmt MIXED
+-ifn accel_sort_plb_0_wrapper_xst.prj
+-ofn ../implementation/accel_sort_plb_0_wrapper/accel_sort_plb_0_wrapper.ngc
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-sd {../implementation/accel_sort_plb_0_wrapper}
+-vlgincdir {F:\fpga\proj\DesignContest08_vjs_64bit_blk4\pcores\accel_sort_plb_v1_00_a\hdl\verilog\ }

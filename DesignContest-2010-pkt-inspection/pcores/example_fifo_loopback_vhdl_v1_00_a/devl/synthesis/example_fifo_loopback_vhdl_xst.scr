@@ -1,0 +1,12 @@
+run
+-opt_level 2
+-opt_mode speed
+-ifmt mixed
+-ifn "E:\work\FPGA_PROJECTS\ML509\ml509_dpi\pcores\example_fifo_loopback_vhdl_v1_00_a\devl\synthesis\example_fifo_loopback_vhdl_xst.prj"
+-top example_fifo_loopback_vhdl
+-p virtex5
+-ofn "E:\work\FPGA_PROJECTS\ML509\ml509_dpi\pcores\example_fifo_loopback_vhdl_v1_00_a\devl\synthesis\example_fifo_loopback_vhdl_xst.ngc"
+-iobuf NO
+-rtlview YES
+-hierarchy_separator /
+-work_lib example_fifo_loopback_vhdl_v1_00_a

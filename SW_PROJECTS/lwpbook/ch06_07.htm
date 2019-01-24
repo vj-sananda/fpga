@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Example: Extracting Temperatures from Weather Underground (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch06_07"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:04:35 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch06_07' class='lwp lwp_ch06_07' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">6.7. Example: Extracting Temperatures from Weather Underground</h2>
+
+<p>The Weather Underground <a name="INDEX-398" class="ipoint"
+></a><a name="INDEX-399" class="ipoint"
+></a>web site
+(<a href="http://www.wunderground.com">http://www.wunderground.com</a>) is a great source
+of meteorological information. Let's write a program
+to tell us which of the two O'Reilly offices,
+Cambridge and Sebastopol, is warmer and by how many degrees.
+</p>
+
+<p>First, we fetch the pages with the temperatures. A quick look around
+the Weather Underground site indicates that the best way to get the
+temperature for a place is to fetch a URL like:
+</p>
+
+<pre class="code">http://www.wunderground.com/cgi-bin/findweather/getForecast?query=95472</pre>
+
+<p>95472 is the Zip Code for the Sebastopol office, while 02140 is the
+Zip Code for the Cambridge office. The program begins by fetching
+those pages:
+</p>
+
+<pre class="code">#!/usr/bin/perl -w
+  
+use strict;
+use LWP::Simple;
+  
+my $url = "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=";
+my $ca = get("${url}95472"); # Sebastopol, California
+my $ma = get("${url}02140"); # Cambridge, Massachusetts</pre>
+
+<p>Next, we need to extract the temperature from the HTML. Viewing the
+source to one of the pages reveals the relevant portion as:
+</p>
+
+<pre class="code">&lt;tr &gt;&lt;td&gt;Temperature&lt;/td&gt;
+&lt;td&gt;&lt;b&gt;52&amp;#176;&lt;/b&gt; F&lt;/td&gt;&lt;/tr&gt;</pre>
+
+<p>Because we need to extract the temperature from multiple pages, we
+define a subroutine that takes the HTML string and returns the
+temperature:
+</p>
+
+<pre class="code">sub current_temp {
+  local $_ = shift;
+  m{&lt;tr &gt;&lt;td&gt;Temperature&lt;/td&gt;\s+&lt;td&gt;&lt;b&gt;(\d+)} || die "No temp data?";
+  return $1;
+}</pre>
+
+<p>Now all that's left to do is extract the
+temperatures and display the message:
+</p>
+
+<pre class="code">my $ca_temp = current_temp($ca);
+my $ma_temp = current_temp($ma);
+my $diff = $ca_temp - $ma_temp;
+  
+print $diff &gt; 0 ? "California" : "Massachusetts";
+print " is warmer by ", abs($diff), " degrees F.\n";</pre>
+
+<p>When you run the program, you see something like:</p>
+
+<pre class="code">% ora-temps
+<b class="emphasis-bold">California is warmer by 21 degrees F</b>.</pre>
+
+<p>The complete program is <a name="INDEX-400" class="ipoint"
+></a>shown in <a href="ch06_07.htm#perllwp-CHP-6-EX-6">Example 6-6</a>. 
+</p>
+
+<a name="perllwp-CHP-6-EX-6"></a><div class="example">
+<h4 class="objtitle">Example 6-6. ora-temps </h4>
+<pre class="code">#!/usr/bin/perl -w
+
+use strict;
+use LWP::Simple;
+
+my $url = "http://www.wunderground.com/cgi-bin/findweather/getForecast?"
+        . "query=";
+my $ca = get("${url}95472"); # Sebastopol, California
+my $ma = get("${url}02140"); # Cambridge, Massachusetts
+
+my $ca_temp = current_temp($ca);
+my $ma_temp = current_temp($ma);
+my $diff = $ca_temp - $ma_temp;
+
+print $diff &gt; 0 ? "California" : "Massachusetts";
+print " is warmer by ", abs($diff), " degrees F.\n";
+
+sub current_temp {
+  local $_ = shift;
+  m{&lt;tr &gt;&lt;td&gt;Temperature&lt;/td&gt;\s+&lt;td&gt;&lt;b&gt;(\d+)} || die "No temp data?";
+  return $1;
+}</pre>
+</div>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

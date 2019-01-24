@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Modules with Object-Oriented Interfaces (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="appg_03"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 19:46:59 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='appg_03' class='lwp lwp_appg_03' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">G.3. Modules with Object-Oriented Interfaces</h2>
+
+<p>So suppose that one day you want to write a program that will
+automate the process of <tt class="literal">ftp</tt> ing a bunch of files
+from one server down to your local machine, and then off to another
+server.
+</p>
+
+<p>A quick browse through search.cpan.org turns up the module Net::FTP,
+which you can download and install using normal installation
+instructions (unless your sysadmin has already installed it, as many
+have).
+</p>
+
+<p>Like Text::Wrap or any other module with a familiarly functional
+interface, you start off using Net::FTP in your program by saying:
+</p>
+
+<pre class="code">use Net::FTP;</pre>
+
+<p>However, that's where the similarity ends. The first
+hint of difference is that the documentation for Net::FTP refers to
+it as a <em class="emphasis">class</em>. A class is a kind of module, but
+one that has an object-oriented interface.
+</p>
+
+<p>Whereas modules like Text::Wrap provide bits of useful code as
+<em class="emphasis">functions</em>, to be called like
+<tt class="literal">function(</tt><em class="replaceable"><tt>parameters</tt></em><tt class="literal">)</tt>
+or like
+<tt class="literal">PackageName::function(</tt><em class="replaceable"><tt>parameters</tt></em><tt class="literal">)</tt>,
+Net::FTP and other modules with object-oriented interfaces provide
+<em class="emphasis">methods</em>. Methods are sort of like functions in
+that they have a name and parameters; but methods look different, and
+are different, because you have to call them with a syntax that has a
+class name or an object as a special argument. I'll
+explain the syntax for method calls, and then later explain what they
+all mean.
+</p>
+
+<p>Some methods are meant to be called as <em class="emphasis">class
+methods</em>, with the class name (same as the module name) as
+a special argument. Class methods look like this:
+</p>
+
+<pre class="code">ClassName-&gt;methodname(parameter1, parameter2, ...)
+ClassName-&gt;methodname( )   # if no parameters
+ClassName-&gt;methodname     # same as above</pre>
+
+<p>which you will sometimes see written:</p>
+
+<pre class="code">methodname ClassName (parameter1, parameter2, ...)
+methodname ClassName      # if no parameters</pre>
+
+<p>Basically, all class methods are for making new objects, and methods
+that make objects are called <em class="emphasis">constructors</em> (and
+the process of making them is called
+"constructing" or
+"instantiating"). Constructor
+methods typically have the name
+"new," or something including
+"new"
+(<tt class="literal">new_from_file</tt>, etc.); but they can conceivably be
+named anything&#x2014;DBI's constructor method is
+named "connect," for example.
+</p>
+
+<p>The object that a constructor method returns is typically captured in
+a scalar variable:
+</p>
+
+<pre class="code">$object = ClassName-&gt;new(param1, param2...);</pre>
+
+<p>Once you have an object (more later on exactly what that is), you can
+use the other kind of method call syntax, the syntax for
+<em class="emphasis">object method</em> calls. Calling object methods is
+just like class methods, except that instead of the
+<tt class="literal">ClassName</tt> as the special argument, you use an
+expression that yields an <tt class="literal">object</tt>. Usually this is
+just a scalar variable that you earlier captured the output of the
+constructor in. Object method calls look like this:
+</p>
+
+<pre class="code">$object-&gt;methodname(parameter1, parameter2, ...);
+$object-&gt;methodname( )   # if no parameters
+$object-&gt;methodname     # same as above</pre>
+
+<p>which is occasionally written as:</p>
+
+<pre class="code">methodname $object (parameter1, parameter2, ...)
+methodname $object      # if no parameters</pre>
+
+<p>Examples of method calls are:</p>
+
+<pre class="code">my $session1 = Net::FTP-&gt;new("ftp.myhost.com");
+  # Calls a class method "new", from class Net::FTP,
+  #  with the single parameter "ftp.myhost.com",
+  #  and saves the return value (which is, as usual,
+  #  an object), in $session1.
+  # Could also be written:
+  #  new Net::FTP('ftp.myhost.com')
+$session1-&gt;login("sburke","aoeuaoeu")
+  || die "failed to login!\n";
+   # calling the object method "login"
+print "Dir:\n", $session1-&gt;dir( ), "\n";
+$session1-&gt;quit;
+  # same as $session1-&gt;quit( )
+print "Done\n";
+exit;</pre>
+
+<p>Incidentally, I suggest always using the syntaxes with parentheses
+and <tt class="literal">-&gt;</tt> in them,<a class='footnotylink' href="#FOOTNOTE-8">[8]</a> and avoiding the
+syntaxes that start out <tt class="literal">methodname</tt>
+<tt class="literal">$object</tt> or <tt class="literal">methodname</tt>
+<tt class="literal">ModuleName</tt>. When everything's
+going right, they all mean the same thing as the
+<tt class="literal">-&gt;</tt> variants, but the syntax with
+<tt class="literal">-&gt;</tt> is more visually distinct from function
+calls, as well as being immune to some kinds of rare but puzzling
+ambiguities that can arise when you're trying to
+call methods that have the same name as subroutines
+you've defined.
+</p>
+
+<blockquote class="footnote"><p><a name="FOOTNOTE-8"></a>[8] The
+character-pair <tt class="literal">-&gt;</tt> is supposed to look like an
+arrow, not "negative
+greater-than"!</p> </blockquote>
+
+<p>But, syntactic alternatives aside, all this talk of constructing
+objects and object methods begs the question&#x2014;what
+<em class="emphasis">is</em> an object? There are several angles to this
+question that the rest of this article will answer in turn: what can
+you do with objects? what's in an object?
+what's an object value? and why do some modules use
+objects at all?
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>

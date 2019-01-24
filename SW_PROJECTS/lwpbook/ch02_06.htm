@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>HTTP POST (Perl &amp; LWP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<script type="text/javascript">var lwp_pageid="ch02_06"; var lwp_lastmod=
+  'Time-stamp: "2007-03-28 20:18:23 AKDT sburke@cpan.org"';  </script>
+<link rel="stylesheet" type="text/css" href="lwpstyle.css" />
+</head>
+<body id='ch02_06' class='lwp lwp_ch02_06' lang='en-US' >
+<noscript><p align=center>^ <a href="./index.html">Perl and LWP</a> ^</p></noscript>
+<script type="text/javascript" src="./lwp_nav.js"></script>
+
+<h2 class="sect1">2.6. HTTP POST</h2>
+
+<p>Some forms use GET to submit their <a name="INDEX-93" class="ipoint"
+></a><a name="INDEX-94" class="ipoint"
+></a>parameters to the server, but many use
+POST. The difference is POST requests pass the parameters in the body
+of the request, whereas GET requests encode the parameters into the
+URL being requested.
+</p>
+
+<p>Babelfish (<a href="http://babelfish.altavista.com">http://babelfish.altavista.com</a>) is a service
+that lets you translate text from one human language into another. If
+you're accessing Babelfish from a browser, you see
+an HTML form where you paste in the text you want translated, specify
+the language you want it translated from and to, and hit Translate.
+After a few seconds, a new page appears, with your translation.
+</p>
+
+<p>Behind the scenes, the browser takes the key/value pairs in the form:</p>
+
+<pre class="code">urltext = I like pie
+lp = en_fr
+enc = utf8</pre>
+
+<p>and rolls them into a HTTP request:</p>
+
+<pre class="code">POST /translate.dyn HTTP/1.1
+Host: babelfish.altavista.com
+User-Agent: SuperDuperBrowser/14.6
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 40
+  
+urltext=I%20like%20pie&amp;lp=en_fr&amp;enc=utf8</pre>
+
+<p>Just as we used a <tt class="literal">do_GET(&#160;)</tt> function to automate a
+GET query, <a href="ch02_06.htm#perllwp-CHP-2-EX-7">Example 2-7</a> uses a <tt class="literal">do_POST(
+)</tt> function to automate POST queries.
+</p>
+
+<a name="perllwp-CHP-2-EX-7"></a><div class="example">
+<h4 class="objtitle">Example 2-7. The do_POST subroutine </h4>
+<pre class="code">use LWP;
+my $browser;
+sub do_POST {
+  # Parameters:
+  #  the URL,
+  #  an arrayref or hashref for the key/value pairs,
+  #  and then, optionally, any header lines: (key,value, key,value)
+  $browser = LWP::UserAgent-&gt;new( ) unless $browser;
+  my $resp = $browser-&gt;post(@_);
+  return ($resp-&gt;content, $resp-&gt;status_line, $resp-&gt;is_success, $resp)
+    if wantarray;
+  return unless $resp-&gt;is_success;
+  return $resp-&gt;content;
+}</pre>
+</div>
+
+<p>Use <tt class="literal">do_POST(&#160;)</tt> like this:</p>
+
+<pre class="code"><em class="replaceable"><tt>doc</em> = do_POST(<em class="replaceable">URL</em>, [<em class="replaceable">form_ref</em>, [<em class="replaceable">headers_ref</tt></em>]]);
+(<em class="replaceable"><tt>doc</em>, <em class="replaceable">status</em>, <em class="replaceable">success</em>, <em class="replaceable">resp</em>) = do_POST(<em class="replaceable">URL</em>, [<em class="replaceable">form_ref</em>, [<em class="replaceable">headers_ref</tt></em>]]);</pre>
+
+<p>The return values in scalar and list context are as for
+<tt class="literal">do_GET(&#160;)</tt>. The <em class="replaceable"><tt>form_ref</tt></em>
+parameter is a reference to a hash containing the form parameters.
+The <em class="replaceable"><tt>headers_ref</tt></em> parameter is a reference
+to a hash containing headers you want sent in the request.
+</p>
+
+<script type="text/javascript">endpage();</script>
+</body></html>
